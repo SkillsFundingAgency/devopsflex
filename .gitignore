@@ -41,6 +41,7 @@ Thumbs.db
 *.suo
 bin
 obj
+*.nupkg
 
 # Sensitive information files #
 ######################
