@@ -39,3 +39,5 @@ Thumbs.db
 # VS files #
 ######################
 *.suo
+bin
+obj
