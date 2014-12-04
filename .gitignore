@@ -41,3 +41,7 @@ Thumbs.db
 *.suo
 bin
 obj
+
+# Sensitive information files #
+######################
+*.publishsettings
