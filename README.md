@@ -15,5 +15,4 @@ working hours to reduce costs and at the same time because the VMs are still up,
 <br />
 <br />
 ### Code Quality Stack
-* Integration Tests
-
+* [Integration Tests](https://github.com/sfa-gov-uk/devopsflex/wiki/Integration-Tests)
