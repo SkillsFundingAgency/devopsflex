@@ -28,9 +28,7 @@
                               .Subscriptions.SingleOrDefault(s => s.Name == SubscriptionName);
 
             if(Data == null)
-                throw new ArgumentOutOfRangeException(
-                    "SubscriptionName",
-                    "Invalid SubscriptionName constant in the AzureSubscription class.");
+                throw new InvalidOperationException("Invalid SubscriptionName constant in the AzureSubscription class.");
         }
     }
 }

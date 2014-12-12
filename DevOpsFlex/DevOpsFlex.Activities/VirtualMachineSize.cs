@@ -14,7 +14,8 @@
         A6,
         A7,
         A8,
-        A9
+        A9,
+        Stop
     }
 
     public static class VirtualMachineSizeExtensions

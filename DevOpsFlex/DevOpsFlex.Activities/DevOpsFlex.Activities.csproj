@@ -110,6 +110,7 @@
     <Compile Include="PublishSettings\PublishProfile.cs" />
     <Compile Include="PublishSettings\Subscription.cs" />
     <Compile Include="VirtualMachineSize.cs" />
+    <Compile Include="VmScaleDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
