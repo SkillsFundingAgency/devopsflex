@@ -10,12 +10,13 @@
         private const string VmName = "devopsflex-test";
 
         [TestMethod, TestCategory("Integration")]
-        public void Test_Execute_UpscaleA2_LiveVM()
+        public void Test_Execute_UpscaleA2_NoWait_LiveVM()
         {
             var inputs = new Dictionary<string, object>
             {
                 {"SubscriptionId", AzureSubscription.SubscriptionId},
                 {"ManagementCertificate", AzureSubscription.ManagementCertificate},
+                {"WaitForVms", false},
                 {
                     "VirtualMachines",
                     new[]
@@ -33,12 +34,13 @@
         }
 
         [TestMethod, TestCategory("Integration")]
-        public void Test_Execute_DownscaleA1_LiveVM()
+        public void Test_Execute_DownscaleA1_NoWait_LiveVM()
         {
             var inputs = new Dictionary<string, object>
             {
                 {"SubscriptionId", AzureSubscription.SubscriptionId},
                 {"ManagementCertificate", AzureSubscription.ManagementCertificate},
+                {"WaitForVms", false},
                 {
                     "VirtualMachines",
                     new[]
@@ -56,12 +58,13 @@
         }
 
         [TestMethod, TestCategory("Integration")]
-        public void Test_Execute_ShutDown_LiveVM()
+        public void Test_Execute_ShutDown_NoWait_LiveVM()
         {
             var inputs = new Dictionary<string, object>
             {
                 {"SubscriptionId", AzureSubscription.SubscriptionId},
                 {"ManagementCertificate", AzureSubscription.ManagementCertificate},
+                {"WaitForVms", false},
                 {
                     "VirtualMachines",
                     new[]

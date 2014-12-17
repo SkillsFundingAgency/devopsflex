@@ -8,18 +8,50 @@
     using Microsoft.TeamFoundation.Build.Workflow.Tracking;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.Compute;
-    using Microsoft.WindowsAzure.Management.Compute.Models;
 
+    /// <summary>
+    /// A TFS Build Workflow activity that can be used to scale a set of VMs on a specific
+    /// Azure subscription. It supports multiple sizes, one per VM, and supports the ability
+    /// to wait for all VMs to be ready again.
+    /// </summary>
     [BuildActivity(HostEnvironmentOption.All)]
     [ActivityTracking(ActivityTrackingOption.ActivityOnly)]
     public sealed class AzureVmScaleActivity : CodeActivity
     {
+        /// <summary>
+        /// Gets and sets the subscription Id that this activity targets.
+        /// </summary>
         public InArgument<string> SubscriptionId { get; set; }
 
+        /// <summary>
+        /// Gets and sets the management certificate that this activity targets.
+        /// </summary>
         public InArgument<string> ManagementCertificate { get; set; }
 
+        /// <summary>
+        /// Gets and sets the list of Virtual Machines that we intend to scale.
+        /// </summary>
         public InArgument<VmScaleDefinition[]> VirtualMachines { get; set; }
 
+        /// <summary>
+        /// Gets and sets a boolean flag that indicates if we want to wait for all VMs
+        /// to be ready again before terminating the activity execution.
+        /// This is usefull if we want the build workflow to notify developers that the environment
+        /// is ready again, by tracking build notifications.
+        /// </summary>
+        public InArgument<bool> WaitForVms { get; set; }
+
+        /// <summary>
+        /// Gets and sets the timeout time in minutes that we are willing to wait for VMs. After this
+        /// period has elapsed, all Tasks awaiting VMs (one task per VM) will be canceled and the activity
+        /// execute will complete.
+        /// </summary>
+        public InArgument<int> TimeoutMinutes { get; set; }
+
+        /// <summary>
+        /// Performs the execution of the activity.
+        /// </summary>
+        /// <param name="context">The execution context under which the activity executes.</param>
         protected override void Execute(CodeActivityContext context)
         {
             var credentials = new CertificateCloudCredentials(
@@ -35,16 +67,7 @@
                         switch (vm.Size)
                         {
                             case VirtualMachineSize.Stop:
-
-                                client.VirtualMachines.Shutdown(
-                                    vm.Name,
-                                    vm.Name,
-                                    vm.Name,
-                                    new VirtualMachineShutdownParameters
-                                    {
-                                        PostShutdownAction = PostShutdownAction.StoppedDeallocated
-                                    });
-
+                                client.DeallocateVm(vm.Name);
                                 break;
 
                             case VirtualMachineSize.Small:
@@ -57,25 +80,12 @@
                             case VirtualMachineSize.A7:
                             case VirtualMachineSize.A8:
                             case VirtualMachineSize.A9:
+                                client.ResizeVm(vm.Name, vm.Size.ToAzureString());
 
-                                var currentVm = client.VirtualMachines.Get(vm.Name, vm.Name, vm.Name);
-
-                                client.VirtualMachines.Update(
-                                    vm.Name,
-                                    vm.Name,
-                                    vm.Name,
-                                    new VirtualMachineUpdateParameters(
-                                        currentVm.RoleName,
-                                        currentVm.OSVirtualHardDisk)
-                                    {
-                                        RoleSize = vm.Size.ToAzureString()
-                                    });
-
-                                if (client.Deployments.GetByName(vm.Name, vm.Name).Status == DeploymentStatus.Suspended)
+                                if (WaitForVms.Get(context))
                                 {
-                                    client.VirtualMachines.Start(vm.Name, vm.Name, vm.Name);
+                                    client.WaitForVmReady(vm.Name, TimeoutMinutes.Get(context));
                                 }
-
                                 break;
 
                             default:
