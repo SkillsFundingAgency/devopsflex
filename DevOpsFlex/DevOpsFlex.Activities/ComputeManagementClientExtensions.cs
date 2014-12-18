@@ -14,7 +14,17 @@
     public static class ComputeManagementClientExtensions
     {
         /// <summary>
-        /// Resizes the target VM into the new size. If the VM is deallocated with will start it
+        /// Defines the pooling interval to check for status while awaiting for a VM to be ready.
+        /// </summary>
+        private const int AwaitPoolInterval = 3000;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const int AwaitMinutesTransition = 3;
+
+        /// <summary>
+        /// Resizes the target VM into the new size. If the VM is deallocated it will start the VM
         /// after it resizes it.
         /// </summary>
         /// <param name="client">The <see cref="ComputeManagementClient"/> that we want to use to connect to the Azure subscription.</param>
@@ -37,7 +47,7 @@
             {
                 client.VirtualMachines.Start(name, name, name);
             }
-            
+
         }
 
         /// <summary>
@@ -54,37 +64,6 @@
                 {
                     PostShutdownAction = PostShutdownAction.StoppedDeallocated
                 });
-        }
-
-        /// <summary>
-        /// Waits for a VM to be ready again. It goes into an infite loop checking for <see cref="DeploymentStatus"/> to either be
-        /// <see cref="DeploymentStatus.Running"/> or <see cref="DeploymentStatus.Suspended"/>. It supports a timeout cancellation
-        /// policy, where it will stop waiting after the timeout period has elapsed.
-        /// </summary>
-        /// <param name="client">The <see cref="ComputeManagementClient"/> that we want to use to connect to the Azure subscription.</param>
-        /// <param name="name">The name of the VM that we want to resize.</param>
-        /// <param name="timeoutMinutes"></param>
-        public static void WaitForVmReady(this ComputeManagementClient client, string name, int timeoutMinutes = 0)
-        {
-            var tokenSource = new CancellationTokenSource();
-            var deployment = client.Deployments.GetByName(name, name);
-
-            if (timeoutMinutes > 0)
-            {
-                tokenSource.CancelAfter(TimeSpan.FromMinutes(timeoutMinutes));
-            }
-
-            Task.Factory
-                .StartNew(
-                    async () =>
-                    {
-                        while (deployment.Status != DeploymentStatus.Running ||
-                               deployment.Status != DeploymentStatus.Suspended)
-                        {
-                            await Task.Delay(5000, tokenSource.Token);
-                        }
-                    }, tokenSource.Token)
-                .Wait(tokenSource.Token);
         }
     }
 }
