@@ -107,6 +107,7 @@
     <Compile Include="ComputeManagementClientExtensions.cs" />
     <Compile Include="ManagementClientExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishSettings\AzureSubscription.cs" />
     <Compile Include="PublishSettings\PublishData.cs" />
     <Compile Include="PublishSettings\PublishProfile.cs" />
     <Compile Include="PublishSettings\Subscription.cs" />

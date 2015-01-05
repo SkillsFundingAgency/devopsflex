@@ -8,6 +8,7 @@
     using Microsoft.TeamFoundation.Build.Workflow.Tracking;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.Compute;
+    using PublishSettings;
 
     /// <summary>
     /// A TFS Build Workflow activity that can be used to scale a set of VMs on a specific
@@ -26,7 +27,7 @@
         /// <summary>
         /// Gets and sets the management certificate that this activity targets.
         /// </summary>
-        public InArgument<string> ManagementCertificate { get; set; }
+        public InArgument<string> SettingsPath { get; set; }
 
         /// <summary>
         /// Gets and sets the list of Virtual Machines that we intend to scale.
@@ -39,9 +40,11 @@
         /// <param name="context">The execution context under which the activity executes.</param>
         protected override void Execute(CodeActivityContext context)
         {
+            var azureSubscription = new AzureSubscription(SettingsPath.Get(context), SubscriptionId.Get(context));
+
             var credentials = new CertificateCloudCredentials(
                 SubscriptionId.Get(context),
-                new X509Certificate2(Convert.FromBase64String(ManagementCertificate.Get(context))));
+                new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate)));
 
             Parallel.ForEach(
                 VirtualMachines.Get(context),
