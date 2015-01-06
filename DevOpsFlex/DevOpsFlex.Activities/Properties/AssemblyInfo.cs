@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("DevOpsFlex")]
+[assembly: AssemblyTitle("DevOpsFlex.Activities")]
 [assembly: AssemblyDescription("DevOps support for TFS driven teams using TFS Build, Release Management and other components on the Microsoft Stack.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Skills Funding Agency (UK)")]
-[assembly: AssemblyProduct("DevOpsFlex")]
+[assembly: AssemblyProduct("DevOpsFlex.Activities")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
