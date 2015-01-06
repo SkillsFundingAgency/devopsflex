@@ -25,12 +25,12 @@
         /// <summary>
         /// Gets and sets the subscription Id that this activity targets.
         /// </summary>
-        public InArgument<string> SubscriptionId { get; set; }
+        public string SubscriptionId { get; set; }
 
         /// <summary>
         /// Gets and sets the management certificate that this activity targets.
         /// </summary>
-        public InArgument<string> SettingsPath { get; set; }
+        public string SettingsPath { get; set; }
 
         /// <summary>
         /// Gets and sets the list of Virtual Machines that we intend to scale.
@@ -48,10 +48,10 @@
         /// <param name="context">The execution context under which the activity executes.</param>
         protected override void Execute(CodeActivityContext context)
         {
-            var azureSubscription = new AzureSubscription(SettingsPath.Get(context), SubscriptionId.Get(context));
+            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
 
             var credentials = new CertificateCloudCredentials(
-                SubscriptionId.Get(context),
+                SubscriptionId,
                 new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate)));
 
             Parallel.ForEach(

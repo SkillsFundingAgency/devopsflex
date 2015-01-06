@@ -18,7 +18,7 @@
                                .Subscriptions.SingleOrDefault(s => s.Id == subscriptionId);
 
             if(_data == null)
-                throw new ArgumentException("Couldn't find the subscriptionId in the publish settings file", "subscriptionId");
+                throw new ArgumentException(@"Couldn't find the subscriptionId in the publish settings file", "subscriptionId");
         }
     }
 }

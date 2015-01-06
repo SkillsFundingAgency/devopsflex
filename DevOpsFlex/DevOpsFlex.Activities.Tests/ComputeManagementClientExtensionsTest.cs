@@ -5,6 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.Compute;
+    using PublishSettings;
 
     /// <summary>
     /// Contains tests that target the set of extensions written for the <see cref="ComputeManagementClient"/>.
@@ -19,6 +20,17 @@
         /// Specifies the name of the VM that we want to target in this set of Integration Tests.
         /// </summary>
         private const string VmName = "devopsflex-test";
+
+        /// <summary>
+        /// Specifies the relative or absolute path to the publish settings file for the target subscription.
+        /// </summary>
+        private const string SettingsPath = @"..\..\sfa_beta.publishsettings";
+
+        /// <summary>
+        /// Specifies the subscription Id that we want to target.
+        /// This subscription needs to be defined and found in the publish settings file.
+        /// </summary>
+        private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
 
         /// <summary>
         /// Tests the ResizeVm extension by upscaling a VM to A2.
@@ -68,9 +80,11 @@
         /// </returns>
         private static ComputeManagementClient CreateClient()
         {
+            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
+
             return new ComputeManagementClient(new CertificateCloudCredentials(
-                AzureSubscription.SubscriptionId,
-                new X509Certificate2(Convert.FromBase64String(AzureSubscription.ManagementCertificate))));
+                SubscriptionId,
+                new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
         }
     }
 }

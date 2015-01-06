@@ -18,16 +18,25 @@
         private const string VmName = "devopsflex-test";
 
         /// <summary>
+        /// Specifies the relative or absolute path to the publish settings file for the target subscription.
+        /// </summary>
+        private const string SettingsPath = @"..\..\sfa_beta.publishsettings";
+
+        /// <summary>
+        /// Specifies the subscription Id that we want to target.
+        /// This subscription needs to be defined and found in the publish settings file.
+        /// </summary>
+        private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
+
+        /// <summary>
         /// Tests the activity execution by upscaling a VM to A2 without awaiting for it to be ready.
         /// This test created a workflow and uses the <see cref="WorkflowInvoker"/> to execute it.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public void Test_Execute_UpscaleA2_NoWait_LiveVM()
+        public void Test_Execute_UpscaleA2_LiveVM()
         {
             var inputs = new Dictionary<string, object>
             {
-                {"SubscriptionId", AzureSubscription.SubscriptionId},
-                {"ManagementCertificate", AzureSubscription.ManagementCertificate},
                 {
                     "VirtualMachines",
                     new[]
@@ -41,7 +50,13 @@
                 }
             };
 
-            WorkflowInvoker.Invoke(new AzureVmScaleActivity(), inputs);
+            WorkflowInvoker.Invoke(
+                new AzureVmScaleActivity
+                {
+                    SubscriptionId = SubscriptionId,
+                    SettingsPath = SettingsPath
+                },
+                inputs);
         }
 
         /// <summary>
@@ -49,12 +64,10 @@
         /// This test created a workflow and uses the <see cref="WorkflowInvoker"/> to execute it.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public void Test_Execute_DownscaleA1_NoWait_LiveVM()
+        public void Test_Execute_DownscaleA1_LiveVM()
         {
             var inputs = new Dictionary<string, object>
             {
-                {"SubscriptionId", AzureSubscription.SubscriptionId},
-                {"ManagementCertificate", AzureSubscription.ManagementCertificate},
                 {
                     "VirtualMachines",
                     new[]
@@ -68,7 +81,13 @@
                 }
             };
 
-            WorkflowInvoker.Invoke(new AzureVmScaleActivity(), inputs);
+            WorkflowInvoker.Invoke(
+                new AzureVmScaleActivity
+                {
+                    SubscriptionId = SubscriptionId,
+                    SettingsPath = SettingsPath
+                },
+                inputs);
         }
 
         /// <summary>
@@ -76,12 +95,10 @@
         /// This test created a workflow and uses the <see cref="WorkflowInvoker"/> to execute it.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public void Test_Execute_ShutDown_NoWait_LiveVM()
+        public void Test_Execute_ShutDown_LiveVM()
         {
             var inputs = new Dictionary<string, object>
             {
-                {"SubscriptionId", AzureSubscription.SubscriptionId},
-                {"ManagementCertificate", AzureSubscription.ManagementCertificate},
                 {
                     "VirtualMachines",
                     new[]
@@ -95,7 +112,13 @@
                 }
             };
 
-            WorkflowInvoker.Invoke(new AzureVmScaleActivity(), inputs);
+            WorkflowInvoker.Invoke(
+                new AzureVmScaleActivity
+                {
+                    SubscriptionId = SubscriptionId,
+                    SettingsPath = SettingsPath
+                },
+                inputs);
         }
 
         #endregion

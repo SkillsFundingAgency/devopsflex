@@ -105,6 +105,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WPF.Glyphicons">
+      <HintPath>..\lib\WPF.Glyphicons.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureVmScaleActivity.cs" />

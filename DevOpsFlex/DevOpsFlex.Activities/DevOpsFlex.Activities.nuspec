@@ -14,10 +14,16 @@
     <releaseNotes>Initial Package release. Constains the Azure VM autoscaling build activity.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>DevOps TFS Azure</tags>
+    <references>
+      <reference file="WPF.Glyphicons.dll" />
+    </references>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="WindowsBase" />
       <frameworkAssembly assemblyName="PresentationCore" />
       <frameworkAssembly assemblyName="PresentationFramework" />
     </frameworkAssemblies>
   </metadata>
+  <files>
+    <file src="bin\$configuration$\WPF.Glyphicons.dll" target="lib\net451" />
+  </files>
 </package>
