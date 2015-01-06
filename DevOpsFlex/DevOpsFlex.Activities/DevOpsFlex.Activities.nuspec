@@ -14,5 +14,10 @@
     <releaseNotes>Initial Package release. Constains the Azure VM autoscaling build activity.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>DevOps TFS Azure</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="WindowsBase" />
+      <frameworkAssembly assemblyName="PresentationCore" />
+      <frameworkAssembly assemblyName="PresentationFramework" />
+    </frameworkAssemblies>
   </metadata>
 </package>

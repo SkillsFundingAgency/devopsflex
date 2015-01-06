@@ -2,8 +2,10 @@
 {
     using System;
     using System.Activities;
+    using System.ComponentModel;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
+    using Designer;
     using Microsoft.TeamFoundation.Build.Client;
     using Microsoft.TeamFoundation.Build.Workflow.Tracking;
     using Microsoft.WindowsAzure;
@@ -17,6 +19,7 @@
     /// </summary>
     [BuildActivity(HostEnvironmentOption.All)]
     [ActivityTracking(ActivityTrackingOption.ActivityOnly)]
+    [Designer(typeof(AzureVmScaleActivityDesigner))]
     public sealed class AzureVmScaleActivity : CodeActivity
     {
         /// <summary>
@@ -33,6 +36,11 @@
         /// Gets and sets the list of Virtual Machines that we intend to scale.
         /// </summary>
         public InArgument<VmScaleDefinition[]> VirtualMachines { get; set; }
+
+        /// <summary>
+        /// Gets and sets the current value of the visual checkbox in the activity designer to swap icons.
+        /// </summary>
+        public bool VisualCheck { get; set; }
 
         /// <summary>
         /// Performs the execution of the activity.
