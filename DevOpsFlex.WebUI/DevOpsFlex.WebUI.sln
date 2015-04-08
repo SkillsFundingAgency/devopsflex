@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.WebUI", "DevOpsFlex.WebUI\DevOpsFlex.WebUI.csproj", "{8ABCBC60-50A9-44BF-83E7-63C5714E5248}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.WebUI.Tests", "DevOpsFlex.WebUI.Tests\DevOpsFlex.WebUI.Tests.csproj", "{551E0642-C692-49E9-B29C-9D5A8B572555}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3A4341C4-9DBE-4B48-8FB8-D6D63250B2AE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E5A08419-C897-4E36-9591-0E12C6243C71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{52D5C1C9-B00E-459F-9333-AAEDC9B714A1}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "DevOpsFlex.WebUI.Azure.Deploy", "DevOpsFlex.WebUI.Azure.Deploy\DevOpsFlex.WebUI.Azure.Deploy.ccproj", "{811A60AF-827C-4133-9669-BED98D818BB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ABCBC60-50A9-44BF-83E7-63C5714E5248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ABCBC60-50A9-44BF-83E7-63C5714E5248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ABCBC60-50A9-44BF-83E7-63C5714E5248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ABCBC60-50A9-44BF-83E7-63C5714E5248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{551E0642-C692-49E9-B29C-9D5A8B572555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{551E0642-C692-49E9-B29C-9D5A8B572555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{551E0642-C692-49E9-B29C-9D5A8B572555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{551E0642-C692-49E9-B29C-9D5A8B572555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811A60AF-827C-4133-9669-BED98D818BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811A60AF-827C-4133-9669-BED98D818BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811A60AF-827C-4133-9669-BED98D818BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811A60AF-827C-4133-9669-BED98D818BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{551E0642-C692-49E9-B29C-9D5A8B572555} = {E5A08419-C897-4E36-9591-0E12C6243C71}
+		{811A60AF-827C-4133-9669-BED98D818BB5} = {52D5C1C9-B00E-459F-9333-AAEDC9B714A1}
+	EndGlobalSection
+EndGlobal
