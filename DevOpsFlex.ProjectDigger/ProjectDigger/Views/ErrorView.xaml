@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="ProjectDigger.Views.ErrorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="DarkRed">
+
+        <TextBlock x:Name="ErrorMessage"
+                   Foreground="White"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center" />
+    </Grid>
+</UserControl>

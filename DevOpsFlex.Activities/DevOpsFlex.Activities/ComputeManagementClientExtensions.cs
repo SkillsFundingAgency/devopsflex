@@ -1,8 +1,5 @@
 ﻿namespace DevOpsFlex.Activities
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.Compute.Models;
@@ -13,16 +10,6 @@
     /// </summary>
     public static class ComputeManagementClientExtensions
     {
-        /// <summary>
-        /// Defines the pooling interval to check for status while awaiting for a VM to be ready.
-        /// </summary>
-        private const int AwaitPoolInterval = 3000;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private const int AwaitMinutesTransition = 3;
-
         /// <summary>
         /// Resizes the target VM into the new size. If the VM is deallocated it will start the VM
         /// after it resizes it.
@@ -47,7 +34,6 @@
             {
                 client.VirtualMachines.Start(name, name, name);
             }
-
         }
 
         /// <summary>
