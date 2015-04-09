@@ -82,7 +82,7 @@
                             default:
                                 throw new ArgumentOutOfRangeException(
                                     "context",
-                                    "Unknown VM Size, this shouldn't happen, but the enumeration value isn't implemented in the acitivity switch");
+                                    @"Unknown VM Size, this shouldn't happen, but the enumeration value isn't implemented in the acitivity switch");
                         }
                     }
                 });
