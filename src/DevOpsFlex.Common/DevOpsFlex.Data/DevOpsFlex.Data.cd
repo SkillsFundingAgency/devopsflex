@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DevOpsFlex.Data.AzureCloudService">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AzureCloudService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DevOpsFlex.Data.AzureStorageContainer">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEA=</HashCode>
+      <FileName>AzureStorageContainer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Acl" />
+      <Property Name="ExternalAccess" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DevOpsFlex.Data.DevOpsComponent">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <AssociationLine Name="Dependencies" Type="DevOpsFlex.Data.DevOpsComponent" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9" Y="4.158" />
+        <Point X="9.729" Y="4.158" />
+        <Point X="9.479" Y="5.125" />
+        <Point X="9" Y="5.125" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAACAAAAACAQAIAAQAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>DevOpsComponent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dependant" />
+      <Property Name="System" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Dependencies" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DevOpsFlex.Data.DevOpsFlexDbContext">
+    <Position X="5.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>DevOpsFlexDbContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Components" />
+      <Property Name="Systems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DevOpsFlex.Data.DevOpsSystem">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAAAAIQAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DevOpsSystem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Components" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DevOpsFlex.Data.SqlAzureDb">
+    <Position X="10.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQIAAAAA=</HashCode>
+      <FileName>SqlAzureDb.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Edition" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DevOpsFlex.Data.AzureServiceBusNamespace">
+    <Position X="10.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AzureServiceBusNamespace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DevOpsFlex.Data.ContainerExternalAccess">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>AzureStorageContainer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DevOpsFlex.Data.ContainerAcl">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAgAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>AzureStorageContainer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DevOpsFlex.Data.SystemLocation">
+    <Position X="3.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DevOpsSystem.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DevOpsFlex.Data.SqlAzureEdition">
+    <Position X="13" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>SqlAzureDb.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
