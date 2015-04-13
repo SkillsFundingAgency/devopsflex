@@ -17,7 +17,8 @@ namespace DevOpsFlex.Data.Migrations
                 {
                     AfinityGroup = "FCTWest",
                     Location = SystemLocation.WestEurope,
-                    Name = "FCT"
+                    Name = "FCT",
+                    LogicalName = "FCT"
                 };
 
             context.Systems.AddOrUpdate(s => s.Name, fctSystem);

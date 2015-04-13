@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.Data", "..\DevOp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.Core", "..\DevOpsFlex.Common\DevOpsFlex.Core\DevOpsFlex.Core.csproj", "{FFEAB96F-1600-4853-A30D-3200B239212E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.Core.Tests", "..\DevOpsFlex.Common\Tests\DevOpsFlex.Core.Tests\DevOpsFlex.Core.Tests.csproj", "{9D7CE2F8-BFF0-4226-8693-E779A2C30A8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{FFEAB96F-1600-4853-A30D-3200B239212E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFEAB96F-1600-4853-A30D-3200B239212E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFEAB96F-1600-4853-A30D-3200B239212E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D7CE2F8-BFF0-4226-8693-E779A2C30A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D7CE2F8-BFF0-4226-8693-E779A2C30A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D7CE2F8-BFF0-4226-8693-E779A2C30A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D7CE2F8-BFF0-4226-8693-E779A2C30A8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +57,6 @@ Global
 		{B7E3D599-DC52-419A-AEAE-A5ADD095F03D} = {F2BEB49A-23D5-410E-BEDE-9BA79F0BA569}
 		{8D135DF6-D396-4191-A89A-953652BF3350} = {5DB8383F-EF2E-49F7-AC99-281B1F4DB177}
 		{FFEAB96F-1600-4853-A30D-3200B239212E} = {5DB8383F-EF2E-49F7-AC99-281B1F4DB177}
+		{9D7CE2F8-BFF0-4226-8693-E779A2C30A8C} = {F2BEB49A-23D5-410E-BEDE-9BA79F0BA569}
 	EndGlobalSection
 EndGlobal
