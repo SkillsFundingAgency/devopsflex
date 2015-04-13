@@ -14,7 +14,7 @@
         public virtual DevOpsSystem System { get; set; }
 
         [ForeignKey("Dependant")]
-        public int DependantId { get; set; }
+        public int? DependantId { get; set; }
         public virtual DevOpsComponent Dependant { get; set; }
 
         public virtual ICollection<DevOpsComponent> Dependencies { get; set; }
@@ -22,7 +22,7 @@
         [Required, MaxLength(200)]
         public string Name { get; set; }
 
-        [Required, MaxLength(6)]
+        [Required, MaxLength(100)]
         public string LogicalName { get; set; }
     }
 }

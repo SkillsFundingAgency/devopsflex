@@ -13,9 +13,9 @@ namespace DevOpsFlex.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         SystemId = c.Int(nullable: false),
-                        DependantId = c.Int(nullable: false),
+                        DependantId = c.Int(),
                         Name = c.String(nullable: false, maxLength: 200),
-                        LogicalName = c.String(nullable: false, maxLength: 6),
+                        LogicalName = c.String(nullable: false, maxLength: 100),
                         Label = c.String(maxLength: 200),
                         PublishProjectTfsPath = c.String(maxLength: 500),
                         SolutionTfsPath = c.String(maxLength: 500),
