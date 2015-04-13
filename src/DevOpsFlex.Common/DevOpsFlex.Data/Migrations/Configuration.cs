@@ -1,5 +1,6 @@
 namespace DevOpsFlex.Data.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DevOpsFlexDbContext>
@@ -26,27 +27,27 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureCloudService
                 {
                     System = fctSystem,
-                    Label = "Main NServiceBus role with most of the endpoints",
                     LogicalName = "ServiceBus",
                     Name = "CrossDomain.Integration NServiceBus role",
+                    Label = "Main NServiceBus role with most of the endpoints",
                     PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
                 },
                 new AzureCloudService
                 {
                     System = fctSystem,
-                    Label = "Organisation service",
                     LogicalName = "OrgService",
                     Name = "Organisation service",
+                    Label = "Organisation service",
                     PublishProjectTfsPath = "$/FCT/Main/OrganisationDomain/OrganisationDomain.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/OrganisationDomain/OrganisationDomain.sln"
                 },
                 new AzureCloudService
                 {
                     System = fctSystem,
-                    Label = "Funding Stream Config service",
                     LogicalName = "FundingStreamConfig",
                     Name = "Funding Stream Config service",
+                    Label = "Funding Stream Config service",
                     PublishProjectTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.sln"
                 },
@@ -85,6 +86,20 @@ namespace DevOpsFlex.Data.Migrations
                     Name = "Web Jobs hosting",
                     PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.Azure.WebJobsHostSite.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
+                },
+                new AzureServiceBusNamespace
+                {
+                    System = fctSystem,
+                    LogicalName = "ServiceBus",
+                    Name = "NServiceBus main namespace"
+                },
+                new AzureStorageContainer
+                {
+                    System = fctSystem,
+                    LogicalName = "DataBus",
+                    Name = "NServiceBus DataBus storage",
+                    ExternalAccess = ContainerExternalAccess.Private,
+                    Acl = ContainerAcl.Read | ContainerAcl.Write
                 });
         }
     }
