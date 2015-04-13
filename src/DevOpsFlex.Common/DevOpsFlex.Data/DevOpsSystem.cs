@@ -15,6 +15,9 @@
         [Required, MaxLength(200)]
         public string Name { get; set; }
 
+        [Required, MaxLength(3)]
+        public string LogicalName { get; set; }
+
         public SystemLocation Location { get; set; }
 
         [MaxLength(32)]
