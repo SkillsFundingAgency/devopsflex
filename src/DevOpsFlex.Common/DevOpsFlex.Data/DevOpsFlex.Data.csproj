@@ -89,6 +89,7 @@
     <Compile Include="AzureCloudService.cs" />
     <Compile Include="AzureServiceBusNamespace.cs" />
     <Compile Include="AzureStorageContainer.cs" />
+    <Compile Include="AzureWebSite.cs" />
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />
     <Compile Include="Migrations\201504131223030_InitialCreate.cs" />
