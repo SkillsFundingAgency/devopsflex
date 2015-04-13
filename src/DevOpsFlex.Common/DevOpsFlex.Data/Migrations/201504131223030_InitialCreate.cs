@@ -24,6 +24,7 @@ namespace DevOpsFlex.Data.Migrations
                         Edition = c.Short(),
                         MaximumDatabaseSizeInGB = c.Int(),
                         CollationName = c.String(maxLength: 200),
+                        DTUs = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)

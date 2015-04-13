@@ -49,7 +49,29 @@ namespace DevOpsFlex.Data.Migrations
                     Name = "Funding Stream Config service",
                     PublishProjectTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.sln"
+                },
+                new SqlAzureDb
+                {
+                    System = fctSystem,
+                    LogicalName = "ServiceBus",
+                    Name = "NServiceBus persistency database",
+                    Edition = SqlAzureEdition.Business,
+                    DTUs = 10,
+                    MaximumDatabaseSizeInGB = 10,
+                    CollationName = "SQL_Latin1_General_CP1_CI_AS"
+                },
+                new SqlAzureDb
+                {
+                    System = fctSystem,
+                    LogicalName = "Organisation",
+                    Name = "Organisation service persistency database",
+                    Edition = SqlAzureEdition.Business,
+                    DTUs = 10,
+                    MaximumDatabaseSizeInGB = 10,
+                    CollationName = "SQL_Latin1_General_CP1_CI_AS"
                 });
+
+
         }
     }
 }

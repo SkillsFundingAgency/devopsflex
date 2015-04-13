@@ -14,8 +14,8 @@
       <FileName>AzureStorageContainer.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Acl" />
       <Property Name="ExternalAccess" />
+      <Property Name="Acl" />
     </ShowAsAssociation>
   </Class>
   <Class Name="DevOpsFlex.Data.DevOpsComponent">
@@ -33,8 +33,8 @@
       <FileName>DevOpsComponent.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Dependant" />
       <Property Name="System" />
+      <Property Name="Dependant" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Dependencies" />
@@ -47,8 +47,8 @@
       <FileName>DevOpsFlexDbContext.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Components" />
       <Property Name="Systems" />
+      <Property Name="Components" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="DevOpsFlex.Data.DevOpsSystem">
@@ -67,7 +67,7 @@
   <Class Name="DevOpsFlex.Data.SqlAzureDb">
     <Position X="10.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQIAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAggAAAAAAAAAAAAAAQIAAAAA=</HashCode>
       <FileName>SqlAzureDb.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

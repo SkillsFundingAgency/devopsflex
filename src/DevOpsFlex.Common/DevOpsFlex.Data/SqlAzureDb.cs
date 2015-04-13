@@ -12,6 +12,8 @@
 
         [Required, MaxLength(200)]
         public string CollationName { get; set; }
+
+        public int DTUs { get; set; }
     }
 
     public enum SqlAzureEdition : short

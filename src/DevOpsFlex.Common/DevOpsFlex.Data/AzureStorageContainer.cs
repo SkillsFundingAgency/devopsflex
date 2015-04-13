@@ -18,8 +18,8 @@
     [Flags]
     public enum ContainerAcl : short
     {
-        Read    = 1 << 1,
-        Write   = 1 << 2,
-        Manage  = 1 << 3
+        Read    = 1 << 0,
+        Write   = 1 << 1,
+        Manage  = 1 << 2
     }
 }
