@@ -69,9 +69,23 @@ namespace DevOpsFlex.Data.Migrations
                     DTUs = 10,
                     MaximumDatabaseSizeInGB = 10,
                     CollationName = "SQL_Latin1_General_CP1_CI_AS"
+                },
+                new AzureWebSite
+                {
+                    System = fctSystem,
+                    LogicalName = "Mocks",
+                    Name = "Mocks services (Stubs)",
+                    PublishProjectTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.publish.proj",
+                    SolutionTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.sln"
+                },
+                new AzureWebSite
+                {
+                    System = fctSystem,
+                    LogicalName = "WebJobs",
+                    Name = "Web Jobs hosting",
+                    PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.Azure.WebJobsHostSite.publish.proj",
+                    SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
                 });
-
-
         }
     }
 }
