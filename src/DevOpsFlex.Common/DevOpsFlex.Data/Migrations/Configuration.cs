@@ -11,18 +11,45 @@ namespace DevOpsFlex.Data.Migrations
 
         protected override void Seed(DevOpsFlexDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var fctSystem =
+                new DevOpsSystem
+                {
+                    AfinityGroup = "FCTWest",
+                    Location = SystemLocation.WestEurope,
+                    Name = "FCT"
+                };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Systems.AddOrUpdate(s => s.Name, fctSystem);
+
+            context.Components.AddOrUpdate(
+                c => c.LogicalName,
+                new AzureCloudService
+                {
+                    System = fctSystem,
+                    Label = "Main NServiceBus role with most of the endpoints",
+                    LogicalName = "ServiceBus",
+                    Name = "CrossDomain.Integration NServiceBus role",
+                    PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.publish.proj",
+                    SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
+                },
+                new AzureCloudService
+                {
+                    System = fctSystem,
+                    Label = "Organisation service",
+                    LogicalName = "OrgService",
+                    Name = "Organisation service",
+                    PublishProjectTfsPath = "$/FCT/Main/OrganisationDomain/OrganisationDomain.publish.proj",
+                    SolutionTfsPath = "$/FCT/Main/OrganisationDomain/OrganisationDomain.sln"
+                },
+                new AzureCloudService
+                {
+                    System = fctSystem,
+                    Label = "Funding Stream Config service",
+                    LogicalName = "FundingStreamConfig",
+                    Name = "Funding Stream Config service",
+                    PublishProjectTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.publish.proj",
+                    SolutionTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.sln"
+                });
         }
     }
 }
