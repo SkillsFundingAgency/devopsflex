@@ -33,6 +33,7 @@ Thumbs.db
 bin
 obj
 *.nupkg
+TestResults
 
 # Sensitive information files #
 ######################
