@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using System.Threading.Tasks;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.Compute.Models;
@@ -75,9 +76,9 @@
                 return client.Deployments.GetBySlot(serviceName, slot);
 
             }
-            catch (CloudException ex)
+            catch (CloudException cex)
             {
-                if (ex.Error.Code == "ResourceNotFound")
+                if (cex.Error.Code == "ResourceNotFound")
                 {
                     return null;
                 }
@@ -101,6 +102,33 @@
                                  .Where(d => d != null && d.Roles.Count > 0)
                                  .SelectMany(d => d.Roles.Where(r => r.RoleType == VirtualMachineRoleType.PersistentVMRole.ToString()))
                                  .Select(r => r.RoleName);
+        }
+
+        /// <summary>
+        /// Checks for the existence of a specific Cloud Service, if it doesn't exist it will create it.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
+        /// <param name="parameters">The <see cref="HostedServiceCreateParameters"/> that define the service we want to create.</param>
+        /// <returns>The async <see cref="Task"/> wrapper.</returns>
+        public static async Task CheckCreateCloudService(this ComputeManagementClient client, HostedServiceCreateParameters parameters)
+        {
+            Contract.Requires(client != null);
+            Contract.Requires(parameters != null);
+
+            HostedServiceGetResponse service = null;
+
+            try
+            {
+                service = await client.HostedServices.GetAsync(parameters.ServiceName);
+            }
+            catch (CloudException cex)
+            {
+                if (cex.Error.Code != "ResourceNotFound") throw;
+            }
+
+            if (service != null) return;
+
+            await client.HostedServices.CreateAsync(parameters);
         }
     }
 }

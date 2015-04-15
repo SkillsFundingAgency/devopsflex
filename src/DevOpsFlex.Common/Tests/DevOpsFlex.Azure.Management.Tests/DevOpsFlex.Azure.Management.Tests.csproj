@@ -59,6 +59,9 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\..\..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Management">
+      <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.4.1.1\lib\net40\Microsoft.WindowsAzure.Management.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management.Compute">
       <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.Compute.11.2.1\lib\net40\Microsoft.WindowsAzure.Management.Compute.dll</HintPath>
     </Reference>
