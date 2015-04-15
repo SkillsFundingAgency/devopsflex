@@ -2,10 +2,11 @@
 {
     using System;
     using System.Security.Cryptography.X509Certificates;
+    using Azure.Management;
+    using Azure.Management.PublishSettings;
+    using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.Compute;
-    using PublishSettings;
 
     /// <summary>
     /// Contains tests that target the set of extensions written for the <see cref="ComputeManagementClient"/>.
