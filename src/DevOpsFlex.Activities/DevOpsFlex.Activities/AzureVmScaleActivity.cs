@@ -5,12 +5,13 @@
     using System.ComponentModel;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
+    using Azure.Management;
+    using Azure.Management.PublishSettings;
     using Designer;
+    using Microsoft.Azure;
     using Microsoft.TeamFoundation.Build.Client;
     using Microsoft.TeamFoundation.Build.Workflow.Tracking;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.Compute;
-    using PublishSettings;
 
     /// <summary>
     /// A TFS Build Workflow activity that can be used to scale a set of VMs on a specific
