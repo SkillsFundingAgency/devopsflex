@@ -1,10 +1,12 @@
 ﻿namespace DevOpsFlex.Data.Naming
 {
+    using Core;
+
     /// <summary>
-    /// Names <see cref="DevOpsComponent"/> so that Azure resource names can be generated.
+    /// Default naming strategy for dev ops components.
     /// </summary>
     /// <typeparam name="T">The type of the component that we are naming.</typeparam>
-    public interface IName<in T>
+    public class DefaultNaming<T> : IName<T>
         where T : DevOpsComponent
     {
         /// <summary>
@@ -12,6 +14,9 @@
         /// </summary>
         /// <param name="component">The component that we want the generate the slot name for.</param>
         /// <returns>The slot name.</returns>
-        string GetSlotName(T component);
+        public string GetSlotName(T component)
+        {
+            return component.System.LogicalName.ToLower() + "-" + component.LogicalName.ToLower();
+        }
     }
 }
