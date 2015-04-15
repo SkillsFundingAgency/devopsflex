@@ -3,6 +3,7 @@
     using System;
     using System.Activities;
     using System.Collections.Generic;
+    using Azure.Management;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

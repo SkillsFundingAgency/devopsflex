@@ -31,6 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>DevOpsFlex.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hyak.Common">
       <HintPath>..\..\..\packages\Hyak.Common.1.0.2\lib\net45\Hyak.Common.dll</HintPath>
@@ -97,7 +103,6 @@
   <ItemGroup>
     <Compile Include="AzureVmScaleActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VirtualMachineSize.cs" />
     <Compile Include="VmScaleDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +110,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="DevOpsFlex.Activities.nuspec" />
+    <None Include="DevOpsFlex.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,8 @@
-﻿namespace DevOpsFlex.Activities.Tests
+﻿namespace DevOpsFlex.Azure.Management.Tests
 {
     using System;
     using System.Security.Cryptography.X509Certificates;
-    using Azure.Management;
-    using Azure.Management.PublishSettings;
+    using PublishSettings;
     using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Compute;

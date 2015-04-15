@@ -29,6 +29,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>DevOpsFlex.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hyak.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,8 +94,10 @@
     <Compile Include="PublishSettings\PublishData.cs" />
     <Compile Include="PublishSettings\PublishProfile.cs" />
     <Compile Include="PublishSettings\Subscription.cs" />
+    <Compile Include="VirtualMachineSize.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DevOpsFlex.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
