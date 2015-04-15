@@ -1,6 +1,7 @@
 ﻿namespace DevOpsFlex.Azure.Management.PublishSettings
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Linq;
 
     public class AzureSubscription
@@ -13,6 +14,9 @@
 
         public AzureSubscription(string settingsPath, string subscriptionId)
         {
+            Contract.Requires(!string.IsNullOrWhiteSpace(settingsPath));
+            Contract.Requires(!string.IsNullOrWhiteSpace(subscriptionId));
+
             _data = PublishData.FromFile(settingsPath)
                                .PublishProfiles.First()
                                .Subscriptions.SingleOrDefault(s => s.Id == subscriptionId);

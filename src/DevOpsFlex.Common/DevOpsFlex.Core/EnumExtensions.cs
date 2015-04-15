@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Contains methods that extend the enum struct with utility and mapping methods.
@@ -16,6 +17,8 @@
         /// <returns>The value of the description attribute present in this enum value.</returns>
         public static string GetEnumDescription(this Enum value)
         {
+            Contract.Requires(value != null);
+
             var attributes =
                 (DescriptionAttribute[]) value.GetType()
                                               .GetField(value.ToString())

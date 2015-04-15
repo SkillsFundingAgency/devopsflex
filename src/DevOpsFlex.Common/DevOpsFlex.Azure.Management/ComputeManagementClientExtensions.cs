@@ -1,6 +1,7 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Compute;
@@ -21,6 +22,8 @@
         /// <param name="size">The target size for the VM.</param>
         public static void ResizeVm(this ComputeManagementClient client, string name, string size)
         {
+            Contract.Requires(client != null);
+
             var currentVm = client.VirtualMachines.Get(name, name, name);
 
             client.VirtualMachines.Update(
@@ -46,6 +49,8 @@
         /// <param name="name">The name of the VM that we want to resize.</param>
         public static void DeallocateVm(this ComputeManagementClient client, string name)
         {
+            Contract.Requires(client != null);
+
             client.VirtualMachines.Shutdown(
                 name, name, name,
                 new VirtualMachineShutdownParameters
@@ -63,6 +68,8 @@
         /// <returns>The cloud service deployment.</returns>
         public static DeploymentGetResponse GetAzureDeyployment(this ComputeManagementClient client, string serviceName, DeploymentSlot slot)
         {
+            Contract.Requires(client != null);
+
             try
             {
                 return client.Deployments.GetBySlot(serviceName, slot);
@@ -86,6 +93,8 @@
         /// <returns>The full list of VMs in the subscription.</returns>
         public static IEnumerable<string> GetVms(this ComputeManagementClient client)
         {
+            Contract.Requires(client != null);
+
             var hostedServices = client.HostedServices.List();
 
             return hostedServices.Select(s => client.GetAzureDeyployment(s.ServiceName, DeploymentSlot.Production))
