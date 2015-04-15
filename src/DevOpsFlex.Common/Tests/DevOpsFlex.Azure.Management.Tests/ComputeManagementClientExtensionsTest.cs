@@ -1,11 +1,15 @@
 ﻿namespace DevOpsFlex.Azure.Management.Tests
 {
     using System;
+    using System.Linq;
     using System.Security.Cryptography.X509Certificates;
+    using System.Threading.Tasks;
     using PublishSettings;
     using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Compute;
+    using Microsoft.WindowsAzure.Management.Compute.Models;
+    using Microsoft.WindowsAzure.Management.Models;
 
     /// <summary>
     /// Contains tests that target the set of extensions written for the <see cref="ComputeManagementClient"/>.
@@ -24,7 +28,7 @@
         /// <summary>
         /// Specifies the relative or absolute path to the publish settings file for the target subscription.
         /// </summary>
-        private const string SettingsPath = @"..\..\sfa_beta.publishsettings";
+        private const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
 
         /// <summary>
         /// Specifies the subscription Id that we want to target.
@@ -65,6 +69,64 @@
             using (var client = CreateClient())
             {
                 client.DeallocateVm(VmName);
+            }
+        }
+
+        /// <summary>
+        /// Tests the creation of a Cloud Service that doesn't exist (puts a Guid part in the service name).
+        /// </summary>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_CheckCreateCloudService_WithNewService()
+        {
+            using (var client = CreateClient())
+            {
+                var parameters =
+                    new HostedServiceCreateParameters
+                    {
+                        Label = "Integration Test",
+                        Location = LocationNames.NorthEurope,
+                        ServiceName = "fct-" + Guid.NewGuid().ToString().Split('-').Last()
+                    };
+
+                try
+                {
+                    await client.CheckCreateCloudService(parameters);
+
+                    var service = await client.HostedServices.GetAsync(parameters.ServiceName);
+                    Assert.IsNotNull(service);
+                }
+                finally
+                {
+                    client.HostedServices.Delete(parameters.ServiceName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Tests the creation of a Cloud Service that doesn't exist (puts a Guid part in the service name).
+        /// </summary>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_CheckCreateCloudService_WithExistingService()
+        {
+            using (var client = CreateClient())
+            {
+                var parameters =
+                    new HostedServiceCreateParameters
+                    {
+                        Label = "Integration Test",
+                        Location = LocationNames.NorthEurope,
+                        ServiceName = "fct-" + Guid.NewGuid().ToString().Split('-').Last()
+                    };
+
+                try
+                {
+                    await client.HostedServices.CreateAsync(parameters);
+                    await client.CheckCreateCloudService(parameters);
+                }
+                finally
+                {
+                    client.HostedServices.Delete(parameters.ServiceName);
+                }
             }
         }
 
