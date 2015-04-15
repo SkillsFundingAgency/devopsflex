@@ -1,4 +1,4 @@
-﻿namespace DevOpsFlex.Activities
+﻿namespace DevOpsFlex.Azure.Management
 {
     using System;
     using Microsoft.WindowsAzure.Management.Compute.Models;

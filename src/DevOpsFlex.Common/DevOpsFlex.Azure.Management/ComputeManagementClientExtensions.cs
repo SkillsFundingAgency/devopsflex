@@ -54,6 +54,13 @@
                 });
         }
 
+        /// <summary>
+        /// Gets the AzureDeployment for a specifc slot on a cloud service.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
+        /// <param name="serviceName">The name of the cloud service.</param>
+        /// <param name="slot">The name of the Cloud Service slot.</param>
+        /// <returns>The cloud service deployment.</returns>
         public static DeploymentGetResponse GetAzureDeyployment(this ComputeManagementClient client, string serviceName, DeploymentSlot slot)
         {
             try
@@ -72,6 +79,11 @@
             }
         }
 
+        /// <summary>
+        /// Gets a list of VMs in the target subscription.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
+        /// <returns>The full list of VMs in the subscription.</returns>
         public static IEnumerable<string> GetVms(this ComputeManagementClient client)
         {
             var hostedServices = client.HostedServices.List();
