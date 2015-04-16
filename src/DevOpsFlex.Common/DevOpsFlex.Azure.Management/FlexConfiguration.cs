@@ -9,6 +9,9 @@
     /// </summary>
     public static class FlexConfiguration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private static IChooseWebPlan _webPlanChooser = new DefaultWebPlanChooser();
 
         /// <summary>
@@ -33,11 +36,18 @@
             return FlexDataConfiguration.GetNaming<T>();
         }
 
+        /// <summary>
+        /// Overrides the <see cref="IChooseWebPlan"/> object in configuration.
+        /// </summary>
+        /// <param name="chooser"></param>
         public static void UseWebPlanChooser(IChooseWebPlan chooser)
         {
             _webPlanChooser = chooser;
         }
 
+        /// <summary>
+        /// Gets the <see cref="IChooseWebPlan"/> object in configuration.
+        /// </summary>
         public static IChooseWebPlan WebPlanChooser
         {
             get { return _webPlanChooser; }
