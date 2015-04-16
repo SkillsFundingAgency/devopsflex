@@ -101,15 +101,6 @@
             }
         }
 
-        [TestMethod]
-        public void Foo()
-        {
-            using (var client = CreateClient())
-            {
-                var foo = client.WebHostingPlans.List(WebSpaceNames.NorthEuropeWebSpace);
-            }
-        }
-
         /// <summary>
         /// Creates a standard <see cref="ComputeManagementClient"/> that targets the Azure subscription
         /// specified in the <see cref="AzureSubscription"/> static class.

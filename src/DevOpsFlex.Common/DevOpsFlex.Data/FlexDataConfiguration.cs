@@ -12,7 +12,7 @@
         /// <summary>
         /// Holds a <see cref="Type"/> map being objects being named and the naming types.
         /// </summary>
-        private static readonly Dictionary<Type, dynamic> NamingMap = new Dictionary<Type, dynamic>();
+        internal static readonly Dictionary<Type, dynamic> NamingMap = new Dictionary<Type, dynamic>();
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
