@@ -184,7 +184,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Choosing\DefaultWebPlanChooser.cs" />
+    <Compile Include="Choosing\IChooseWebPlan.cs" />
     <Compile Include="ComputeManagementClientExtensions.cs" />
+    <Compile Include="FlexConfiguration.cs" />
     <Compile Include="WebSiteManagementClientExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishSettings\AzureSubscription.cs" />

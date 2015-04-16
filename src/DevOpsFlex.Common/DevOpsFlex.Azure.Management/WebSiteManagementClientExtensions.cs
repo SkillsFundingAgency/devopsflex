@@ -1,6 +1,5 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
-    using System;
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Microsoft.WindowsAzure;
@@ -39,15 +38,7 @@
 
             if (service != null) return;
 
-            try
-            {
-                await client.WebSites.CreateAsync(webSpace, parameters);
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            await client.WebSites.CreateAsync(webSpace, parameters);
         }
     }
 }

@@ -39,7 +39,7 @@
                     new WebSiteCreateParameters
                     {
                         Name = "fct-" + Guid.NewGuid().ToString().Split('-').Last(),
-                        ServerFarm = "Default1"
+                        ServerFarm = await FlexConfiguration.WebPlanChooser.Choose(client, webspace)
                     };
 
                 try
@@ -78,7 +78,7 @@
                     new WebSiteCreateParameters
                     {
                         Name = "fct-" + Guid.NewGuid().ToString().Split('-').Last(),
-                        ServerFarm = "Default1"
+                        ServerFarm = await FlexConfiguration.WebPlanChooser.Choose(client, webspace)
                     };
 
                 try
@@ -98,6 +98,15 @@
                             DeleteMetrics = true
                         });
                 }
+            }
+        }
+
+        [TestMethod]
+        public void Foo()
+        {
+            using (var client = CreateClient())
+            {
+                var foo = client.WebHostingPlans.List(WebSpaceNames.NorthEuropeWebSpace);
             }
         }
 

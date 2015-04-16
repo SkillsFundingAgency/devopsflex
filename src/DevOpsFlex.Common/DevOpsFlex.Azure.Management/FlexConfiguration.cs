@@ -1,18 +1,15 @@
-﻿namespace DevOpsFlex.Data
+﻿namespace DevOpsFlex.Azure.Management
 {
-    using System;
-    using System.Collections.Generic;
-    using Naming;
+    using Choosing;
+    using Data;
+    using Data.Naming;
 
     /// <summary>
     /// Allows for configuration of the Naming pipeline for <see cref="DevOpsComponent"/>.
     /// </summary>
-    public static class FlexDataConfiguration
+    public static class FlexConfiguration
     {
-        /// <summary>
-        /// Holds a <see cref="Type"/> map being objects being named and the naming types.
-        /// </summary>
-        private static readonly Dictionary<Type, dynamic> NamingMap = new Dictionary<Type, dynamic>();
+        private static IChooseWebPlan _webPlanChooser = new DefaultWebPlanChooser();
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
@@ -22,7 +19,7 @@
         public static void UseNaming<T>(IName<T> naming)
             where T : DevOpsComponent
         {
-            NamingMap[typeof(T)] = naming;
+            FlexDataConfiguration.UseNaming(naming);
         }
 
         /// <summary>
@@ -33,9 +30,17 @@
         public static IName<T> GetNaming<T>()
             where T : DevOpsComponent
         {
-            return NamingMap.ContainsKey(typeof (T)) ?
-                (IName<T>) NamingMap[typeof (T)] :
-                new DefaultNaming<T>();
+            return FlexDataConfiguration.GetNaming<T>();
+        }
+
+        public static void UseWebPlanChooser(IChooseWebPlan chooser)
+        {
+            _webPlanChooser = chooser;
+        }
+
+        public static IChooseWebPlan WebPlanChooser
+        {
+            get { return _webPlanChooser; }
         }
     }
 }
