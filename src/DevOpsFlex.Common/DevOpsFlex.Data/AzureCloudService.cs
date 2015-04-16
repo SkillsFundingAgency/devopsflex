@@ -25,7 +25,7 @@
                 {
                     Label = Label,
                     Location = System.Location.GetEnumDescription(),
-                    ServiceName = DataConfiguration.GetNaming<AzureCloudService>().GetSlotName(this)
+                    ServiceName = FlexDataConfiguration.GetNaming<AzureCloudService>().GetSlotName(this)
                 };
             }
         }

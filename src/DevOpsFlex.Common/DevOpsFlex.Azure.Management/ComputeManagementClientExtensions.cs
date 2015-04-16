@@ -10,7 +10,7 @@
 
     /// <summary>
     /// Extends the <see cref="ComputeManagementClient"/> with usefull extensions that the devopsflex
-    /// activities need in order to achieve their execution.
+    /// activities and commandlets need in order to achieve their execution.
     /// </summary>
     public static class ComputeManagementClientExtensions
     {
@@ -74,7 +74,6 @@
             try
             {
                 return client.Deployments.GetBySlot(serviceName, slot);
-
             }
             catch (CloudException cex)
             {

@@ -21,6 +21,8 @@ namespace DevOpsFlex.Data.Migrations
                         SolutionTfsPath = c.String(maxLength: 500),
                         ExternalAccess = c.Short(),
                         Acl = c.Short(),
+                        PublishProjectTfsPath1 = c.String(maxLength: 500),
+                        SolutionTfsPath1 = c.String(maxLength: 500),
                         Edition = c.Short(),
                         MaximumDatabaseSizeInGB = c.Int(),
                         CollationName = c.String(maxLength: 200),
@@ -31,7 +33,8 @@ namespace DevOpsFlex.Data.Migrations
                 .ForeignKey("dbo.DevOpsComponents", t => t.DependantId)
                 .ForeignKey("dbo.DevOpsSystems", t => t.SystemId, cascadeDelete: true)
                 .Index(t => t.SystemId)
-                .Index(t => t.DependantId);
+                .Index(t => t.DependantId)
+                .Index(t => t.LogicalName, unique: true);
             
             CreateTable(
                 "dbo.DevOpsSystems",
@@ -39,10 +42,13 @@ namespace DevOpsFlex.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 200),
+                        LogicalName = c.String(nullable: false, maxLength: 3),
                         Location = c.Short(nullable: false),
+                        WebSpace = c.Int(nullable: false),
                         AfinityGroup = c.String(maxLength: 32),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.LogicalName, unique: true);
             
         }
         
@@ -50,6 +56,8 @@ namespace DevOpsFlex.Data.Migrations
         {
             DropForeignKey("dbo.DevOpsComponents", "SystemId", "dbo.DevOpsSystems");
             DropForeignKey("dbo.DevOpsComponents", "DependantId", "dbo.DevOpsComponents");
+            DropIndex("dbo.DevOpsSystems", new[] { "LogicalName" });
+            DropIndex("dbo.DevOpsComponents", new[] { "LogicalName" });
             DropIndex("dbo.DevOpsComponents", new[] { "DependantId" });
             DropIndex("dbo.DevOpsComponents", new[] { "SystemId" });
             DropTable("dbo.DevOpsSystems");

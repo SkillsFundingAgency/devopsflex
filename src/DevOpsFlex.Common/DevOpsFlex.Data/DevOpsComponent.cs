@@ -22,7 +22,7 @@
         [Required, MaxLength(200)]
         public string Name { get; set; }
 
-        [Required, MaxLength(100)]
+        [Required, Index(IsUnique = true), MaxLength(100)]
         public string LogicalName { get; set; }
     }
 }
