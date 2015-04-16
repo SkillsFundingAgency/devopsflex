@@ -147,6 +147,12 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Common">
+      <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Common.1.3.0\lib\net45\Microsoft.WindowsAzure.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Common.NetFramework">
+      <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Common.1.3.0\lib\net45\Microsoft.WindowsAzure.Common.NetFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management">
       <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Management.4.1.1\lib\net40\Microsoft.WindowsAzure.Management.dll</HintPath>
     </Reference>
@@ -158,6 +164,9 @@
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management.Storage">
       <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Management.Storage.5.1.1\lib\net40\Microsoft.WindowsAzure.Management.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Management.WebSites">
+      <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Management.WebSites.4.0.0\lib\net40\Microsoft.WindowsAzure.Management.WebSites.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -186,12 +195,12 @@
     <Compile Include="AzureServiceBusNamespace.cs" />
     <Compile Include="AzureStorageContainer.cs" />
     <Compile Include="AzureWebSite.cs" />
-    <Compile Include="DataConfiguration.cs" />
+    <Compile Include="FlexDataConfiguration.cs" />
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />
-    <Compile Include="Migrations\201504131223030_InitialCreate.cs" />
-    <Compile Include="Migrations\201504131223030_InitialCreate.Designer.cs">
-      <DependentUpon>201504131223030_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504160945435_InitialCreate.cs" />
+    <Compile Include="Migrations\201504160945435_InitialCreate.Designer.cs">
+      <DependentUpon>201504160945435_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Naming\DefaultNaming.cs" />
@@ -207,15 +216,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504131223030_InitialCreate.resx">
-      <DependentUpon>201504131223030_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DevOpsFlex.Core\DevOpsFlex.Core.csproj">
       <Project>{ffeab96f-1600-4853-a30d-3200b239212e}</Project>
       <Name>DevOpsFlex.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201504160945435_InitialCreate.resx">
+      <DependentUpon>201504160945435_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

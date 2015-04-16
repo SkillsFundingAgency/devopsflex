@@ -13,7 +13,7 @@ namespace DevOpsFlex.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201504131223030_InitialCreate"; }
+            get { return "201504160945435_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

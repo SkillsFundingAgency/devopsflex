@@ -17,6 +17,7 @@ namespace DevOpsFlex.Data.Migrations
                 {
                     AfinityGroup = "FCTWest",
                     Location = SystemLocation.WestEurope,
+                    WebSpace = SystemWebSpace.WestEurope,
                     Name = "FCT",
                     LogicalName = "FCT"
                 };
@@ -55,7 +56,7 @@ namespace DevOpsFlex.Data.Migrations
                 new SqlAzureDb
                 {
                     System = fctSystem,
-                    LogicalName = "ServiceBus",
+                    LogicalName = "ServiceBusDb",
                     Name = "NServiceBus persistency database",
                     Edition = SqlAzureEdition.Business,
                     DTUs = 10,
@@ -65,7 +66,7 @@ namespace DevOpsFlex.Data.Migrations
                 new SqlAzureDb
                 {
                     System = fctSystem,
-                    LogicalName = "Organisation",
+                    LogicalName = "OrganisationDb",
                     Name = "Organisation service persistency database",
                     Edition = SqlAzureEdition.Business,
                     DTUs = 10,
@@ -75,7 +76,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureWebSite
                 {
                     System = fctSystem,
-                    LogicalName = "Mocks",
+                    LogicalName = "MocksSite",
                     Name = "Mocks services (Stubs)",
                     PublishProjectTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.sln"
@@ -83,7 +84,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureWebSite
                 {
                     System = fctSystem,
-                    LogicalName = "WebJobs",
+                    LogicalName = "WebJobsSite",
                     Name = "Web Jobs hosting",
                     PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.Azure.WebJobsHostSite.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
@@ -91,13 +92,13 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureServiceBusNamespace
                 {
                     System = fctSystem,
-                    LogicalName = "ServiceBus",
+                    LogicalName = "IntegrationSb",
                     Name = "NServiceBus main namespace"
                 },
                 new AzureStorageContainer
                 {
                     System = fctSystem,
-                    LogicalName = "DataBus",
+                    LogicalName = "DataBusStorage",
                     Name = "NServiceBus DataBus storage",
                     ExternalAccess = ContainerExternalAccess.Private,
                     Acl = ContainerAcl.Read | ContainerAcl.Write
