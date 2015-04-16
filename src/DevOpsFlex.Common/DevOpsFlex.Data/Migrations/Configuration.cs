@@ -1,6 +1,5 @@
 namespace DevOpsFlex.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DevOpsFlexDbContext>
