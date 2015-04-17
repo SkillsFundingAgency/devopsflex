@@ -1,4 +1,4 @@
-﻿namespace DevOpsFlex.Azure.Management.PublishSettings
+﻿namespace DevOpsFlex.Data.PublishSettings
 {
     using System;
     using System.Diagnostics.Contracts;

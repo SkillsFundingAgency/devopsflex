@@ -1,0 +1,63 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Net.Http" #>
+<#@ Assembly Name="$(ProjectDir)$(OutDir)Microsoft.Azure.Common.dll" #>
+<#@ Assembly Name="$(ProjectDir)$(OutDir)Microsoft.Azure.Common.NetFramework.dll" #>
+<#@ Assembly Name="$(ProjectDir)$(OutDir)Hyak.Common.dll" #>
+<#@ Assembly Name="$(ProjectDir)$(OutDir)Microsoft.WindowsAzure.Management.ServiceBus.dll" #>
+<#@ Assembly Name="$(ProjectDir)$(OutDir)DevOpsFlex.Data.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Security.Cryptography.X509Certificates" #>
+<#@ import namespace="DevOpsFlex.Data.PublishSettings" #>
+<#@ import namespace="Microsoft.Azure" #>
+<#@ import namespace="Microsoft.WindowsAzure.Management.ServiceBus" #><#
+
+// ****************************************************************************************
+// * This template was created, because at the time that this was created, the ServiceBus
+// * management assembly didn't contain region names either as constants or as an enum.
+// * When this gets added to the MAML, this template can be removed from the project.
+// *
+// * This requires a settings file with a valid subscription on it to properly work.
+// *
+// * DO NOT SET THIS T4 TO RUN ON BUILD. IT'S CLUNKY AS HELL AND SHOULD BE RUN MANUALLY ONLY.
+// ****************************************************************************************
+
+using(var client = CreateClient())
+{
+    var regions = client.GetServiceBusRegions();
+#>
+namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint")#>
+{
+    using System.ComponentModel;
+
+    public enum ServiceBusRegions
+    {
+<#	foreach(var region in regions) { #>
+        [Description("<#= region.FullName #>")] <#= region.FullName.Replace(" ", "") #>,
+<#	} #>
+    }
+}
+<#
+}
+#>
+<#+ 
+private const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
+private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
+
+private static ServiceBusManagementClient CreateClient()
+{
+    var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
+
+    return new ServiceBusManagementClient(
+        new CertificateCloudCredentials(
+            SubscriptionId,
+            new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
+}
+
+#>

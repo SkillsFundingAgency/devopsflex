@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
-    using PublishSettings;
+    using Data.PublishSettings;
     using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Compute;
@@ -144,9 +144,10 @@
         {
             var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
 
-            return new ComputeManagementClient(new CertificateCloudCredentials(
-                SubscriptionId,
-                new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
+            return new ComputeManagementClient(
+                new CertificateCloudCredentials(
+                    SubscriptionId,
+                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
         }
     }
 }

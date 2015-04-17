@@ -4,12 +4,11 @@
     using System.Linq;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
+    using Data.PublishSettings;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure;
-    using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.WebSites;
     using Microsoft.WindowsAzure.Management.WebSites.Models;
-    using PublishSettings;
 
     [TestClass]
     public class WebSiteManagementClientExtensionsTest
@@ -26,7 +25,7 @@
         private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
 
         /// <summary>
-        /// Tests the creation of a Cloud Service that doesn't exist (puts a Guid part in the service name).
+        /// Tests the creation of a Web Site that doesn't exist (puts a Guid part in the site name).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateWebSite_WithNewSite()
@@ -65,7 +64,7 @@
         }
 
         /// <summary>
-        /// Tests the creation of a Cloud Service that doesn't exist (puts a Guid part in the service name).
+        /// Tests the creation of a Web Site that doesn't exist (puts a Guid part in the site name).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateWebSite_WithExistingSite()
@@ -102,20 +101,21 @@
         }
 
         /// <summary>
-        /// Creates a standard <see cref="ComputeManagementClient"/> that targets the Azure subscription
+        /// Creates a standard <see cref="WebSiteManagementClient"/> that targets the Azure subscription
         /// specified in the <see cref="AzureSubscription"/> static class.
         /// </summary>
         /// <returns>
-        /// A standard <see cref="ComputeManagementClient"/> that targets the Azure subscription
+        /// A standard <see cref="WebSiteManagementClient"/> that targets the Azure subscription
         /// specified in the <see cref="AzureSubscription"/> static class.
         /// </returns>
         private static WebSiteManagementClient CreateClient()
         {
             var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
 
-            return new WebSiteManagementClient(new CertificateCloudCredentials(
-                SubscriptionId,
-                new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
+            return new WebSiteManagementClient(
+                new CertificateCloudCredentials(
+                    SubscriptionId,
+                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
         }
     }
 }

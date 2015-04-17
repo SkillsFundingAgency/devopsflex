@@ -71,6 +71,9 @@
     <Reference Include="Microsoft.WindowsAzure.Management.Compute">
       <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.Compute.11.2.1\lib\net40\Microsoft.WindowsAzure.Management.Compute.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Management.ServiceBus">
+      <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.ServiceBus.0.17.1-preview\lib\net40\Microsoft.WindowsAzure.Management.ServiceBus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management.WebSites">
       <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.WebSites.4.0.0\lib\net40\Microsoft.WindowsAzure.Management.WebSites.dll</HintPath>
     </Reference>
@@ -104,6 +107,7 @@
   <ItemGroup>
     <Compile Include="ComputeManagementClientExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceBusManagementClientExtensionsTest.cs" />
     <Compile Include="WebSiteManagementClientExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +118,10 @@
     <ProjectReference Include="..\..\DevOpsFlex.Azure.Management\DevOpsFlex.Azure.Management.csproj">
       <Project>{eda5e76d-6a16-4861-a923-f0c2cb63cfae}</Project>
       <Name>DevOpsFlex.Azure.Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DevOpsFlex.Core\DevOpsFlex.Core.csproj">
+      <Project>{FFEAB96F-1600-4853-A30D-3200B239212E}</Project>
+      <Name>DevOpsFlex.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DevOpsFlex.Data\DevOpsFlex.Data.csproj">
       <Project>{8d135df6-d396-4191-a89a-953652bf3350}</Project>

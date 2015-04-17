@@ -92,7 +92,8 @@ namespace DevOpsFlex.Data.Migrations
                 {
                     System = fctSystem,
                     LogicalName = "IntegrationSb",
-                    Name = "NServiceBus main namespace"
+                    Name = "NServiceBus main namespace",
+                    Region = ServiceBusRegions.NorthEurope
                 },
                 new AzureStorageContainer
                 {
