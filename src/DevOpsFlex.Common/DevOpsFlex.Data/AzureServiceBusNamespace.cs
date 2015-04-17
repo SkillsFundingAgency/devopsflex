@@ -2,5 +2,6 @@
 {
     public class AzureServiceBusNamespace : DevOpsComponent
     {
+        public ServiceBusRegions Region { get; set; }
     }
 }

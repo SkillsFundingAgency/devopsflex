@@ -6,7 +6,7 @@
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
     using Azure.Management;
-    using Azure.Management.PublishSettings;
+    using Data.PublishSettings;
     using Designer;
     using Microsoft.Azure;
     using Microsoft.TeamFoundation.Build.Client;
