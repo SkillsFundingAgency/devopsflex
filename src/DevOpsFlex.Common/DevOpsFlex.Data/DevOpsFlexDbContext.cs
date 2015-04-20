@@ -4,8 +4,10 @@
 
     public class DevOpsFlexDbContext : DbContext
     {
-        public DbSet<DevOpsSystem> Systems { get; set; }
-
         public DbSet<DevOpsComponent> Components { get; set; }
+
+        public DbSet<SqlFirewallRule> SqlFirewallRules { get; set; }
+
+        public DbSet<DevOpsSystem> Systems { get; set; }
     }
 }

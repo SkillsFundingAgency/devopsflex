@@ -19,7 +19,7 @@
     public enum SqlAzureEdition : short
     {
         [Description(DatabaseEditions.Basic)]       Basic       = 1,
-        [Description(DatabaseEditions.Business)]    Business    = 2,
+        [Description(DatabaseEditions.Standard)]    Standard    = 2,
         [Description(DatabaseEditions.Premium)]     Premium     = 3
     }
 }

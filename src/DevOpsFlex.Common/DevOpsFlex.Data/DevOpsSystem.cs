@@ -14,6 +14,8 @@
 
         public virtual ICollection<DevOpsComponent> Components { get; set; }
 
+        public virtual ICollection<SqlFirewallRule> SqlFirewallRules { get; set; }
+
         [Required, MaxLength(200)]
         public string Name { get; set; }
 

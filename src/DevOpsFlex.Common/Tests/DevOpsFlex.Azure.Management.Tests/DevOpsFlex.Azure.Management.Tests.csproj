@@ -74,6 +74,9 @@
     <Reference Include="Microsoft.WindowsAzure.Management.ServiceBus">
       <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.ServiceBus.0.17.1-preview\lib\net40\Microsoft.WindowsAzure.Management.ServiceBus.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Management.Sql">
+      <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.Sql.5.1.0\lib\net40\Microsoft.WindowsAzure.Management.Sql.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management.WebSites">
       <HintPath>..\..\..\..\packages\Microsoft.WindowsAzure.Management.WebSites.4.0.0\lib\net40\Microsoft.WindowsAzure.Management.WebSites.dll</HintPath>
     </Reference>
@@ -108,6 +111,7 @@
     <Compile Include="ComputeManagementClientExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBusManagementClientExtensionsTest.cs" />
+    <Compile Include="SqlManagementClientExtensionsTest.cs" />
     <Compile Include="WebSiteManagementClientExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
