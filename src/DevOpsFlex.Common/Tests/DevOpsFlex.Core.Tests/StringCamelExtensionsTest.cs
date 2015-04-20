@@ -1,6 +1,7 @@
 ﻿namespace DevOpsFlex.Core.Tests
 {
     using System;
+    using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -47,15 +48,9 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesNull()
         {
-            try
-            {
-                StringCamelExtensions.GetUpperConcat(null);
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual(ex.GetType().Name, "ContractException");
-                StringAssert.Contains(ex.Message.ToLower(), "precondition failed:");
-            }
+            AssertionExtensions.ShouldThrow<Exception>(() => StringCamelExtensions.GetUpperConcat(null))
+                               .Where(e => e.GetType().Name == "ContractException")
+                               .Which.Message.ToLower().Should().Contain("precondition failed:");
         }
 
         /// <summary>
@@ -67,15 +62,9 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesEmpty()
         {
-            try
-            {
-                "".GetUpperConcat();
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual(ex.GetType().Name, "ContractException");
-                StringAssert.Contains(ex.Message.ToLower(), "precondition failed:");
-            }
+            AssertionExtensions.ShouldThrow<Exception>(() => "".GetUpperConcat())
+                               .Where(e => e.GetType().Name == "ContractException")
+                               .Which.Message.ToLower().Should().Contain("precondition failed:");
         }
 
         /// <summary>
@@ -87,15 +76,9 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesWhiteSpace()
         {
-            try
-            {
-                " ".GetUpperConcat();
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual(ex.GetType().Name, "ContractException");
-                StringAssert.Contains(ex.Message.ToLower(), "precondition failed:");
-            }
+            AssertionExtensions.ShouldThrow<Exception>(() => " ".GetUpperConcat())
+                               .Where(e => e.GetType().Name == "ContractException")
+                               .Which.Message.ToLower().Should().Contain("precondition failed:");
         }
 
         /// <summary>
@@ -107,15 +90,9 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesBlankReturn()
         {
-            try
-            {
-                "fsc".GetUpperConcat();
-            }
-            catch (Exception ex)
-            {
-                Assert.AreEqual(ex.GetType().Name, "ContractException");
-                StringAssert.Contains(ex.Message.ToLower(), "postcondition failed:");
-            }
+            AssertionExtensions.ShouldThrow<Exception>(() => "fsc".GetUpperConcat())
+                               .Where(e => e.GetType().Name == "ContractException")
+                               .Which.Message.ToLower().Should().Contain("postcondition failed:");
         }
 
         #endregion
