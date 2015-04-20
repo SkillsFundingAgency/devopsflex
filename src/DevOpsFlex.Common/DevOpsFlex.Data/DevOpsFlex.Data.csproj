@@ -220,6 +220,7 @@
       <DependentUpon>ServiceBusRegions.tt</DependentUpon>
     </Compile>
     <Compile Include="SqlAzureDb.cs" />
+    <Compile Include="SqlFirewallRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
