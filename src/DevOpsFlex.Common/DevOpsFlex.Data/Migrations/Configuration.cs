@@ -114,6 +114,14 @@ namespace DevOpsFlex.Data.Migrations
                     Name = "NServiceBus DataBus storage",
                     ExternalAccess = ContainerExternalAccess.Private,
                     Acl = ContainerAcl.Read | ContainerAcl.Write
+                },
+                new AzureStorageContainer
+                {
+                    System = system,
+                    LogicalName = "DocumentTemplates",
+                    Name = "Document Templates for the document domain",
+                    ExternalAccess = ContainerExternalAccess.Private,
+                    Acl = ContainerAcl.Read | ContainerAcl.Write
                 });
         }
 
