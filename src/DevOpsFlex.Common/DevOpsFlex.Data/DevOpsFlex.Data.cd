@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="DevOpsFlex.Data.AzureCloudService">
-    <Position X="10.25" Y="2.25" Width="1.5" />
+    <Position X="10.25" Y="2.25" Width="1.75" />
+    <Members>
+      <Property Name="AzureParameters" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>BAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAAAAAAAEAAAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AzureCloudService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DevOpsFlex.Data.AzureStorageContainer">
-    <Position X="10.25" Y="0.5" Width="1.5" />
+    <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEA=</HashCode>
       <FileName>AzureStorageContainer.cs</FileName>
@@ -43,29 +46,32 @@
   <Class Name="DevOpsFlex.Data.DevOpsFlexDbContext">
     <Position X="5.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAgAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>DevOpsFlexDbContext.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Systems" />
       <Property Name="Components" />
+      <Property Name="Systems" />
+      <Property Name="SqlFirewallRules" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="DevOpsFlex.Data.DevOpsSystem">
-    <Position X="3.5" Y="3.5" Width="1.5" />
+    <Position X="2.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAIAAAAIQAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAiAAAAAAAAAIAAAAIQAAQAIgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DevOpsSystem.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Location" />
+      <Property Name="WebSpace" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Components" />
+      <Property Name="SqlFirewallRules" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="DevOpsFlex.Data.SqlAzureDb">
-    <Position X="10.25" Y="4.25" Width="1.5" />
+    <Position X="10.25" Y="4.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAggAAAAAAAAAAAAAAQIAAAAA=</HashCode>
       <FileName>SqlAzureDb.cs</FileName>
@@ -77,12 +83,22 @@
   <Class Name="DevOpsFlex.Data.AzureServiceBusNamespace">
     <Position X="10.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AzureServiceBusNamespace.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DevOpsFlex.Data.SqlFirewallRule">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAAAAAQAAQAQIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SqlFirewallRule.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="System" />
+    </ShowAsAssociation>
+  </Class>
   <Enum Name="DevOpsFlex.Data.ContainerExternalAccess">
-    <Position X="13" Y="2" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>AzureStorageContainer.cs</FileName>
@@ -96,17 +112,24 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="DevOpsFlex.Data.SystemLocation">
-    <Position X="3.5" Y="6" Width="1.5" />
+    <Position X="2.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAACAIAAAAAAAAAAAAAAAAAIAAAABCAAAgCAA=</HashCode>
       <FileName>DevOpsSystem.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="DevOpsFlex.Data.SqlAzureEdition">
-    <Position X="13" Y="4.75" Width="1.5" />
+    <Position X="13.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAIAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>SqlAzureDb.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DevOpsFlex.Data.SystemWebSpace">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAACAIAAAAAAAAAAAAAAAAAIAAAAACAAAACAA=</HashCode>
+      <FileName>DevOpsSystem.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
