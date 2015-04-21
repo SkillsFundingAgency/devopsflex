@@ -201,9 +201,9 @@
     <Compile Include="FlexDataConfiguration.cs" />
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />
-    <Compile Include="Migrations\201504160945435_InitialCreate.cs" />
-    <Compile Include="Migrations\201504160945435_InitialCreate.Designer.cs">
-      <DependentUpon>201504160945435_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504211403291_InitialCreate.cs" />
+    <Compile Include="Migrations\201504211403291_InitialCreate.Designer.cs">
+      <DependentUpon>201504211403291_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Naming\DefaultNaming.cs" />
@@ -239,12 +239,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504160945435_InitialCreate.resx">
-      <DependentUpon>201504160945435_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\201504211403291_InitialCreate.resx">
+      <DependentUpon>201504211403291_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

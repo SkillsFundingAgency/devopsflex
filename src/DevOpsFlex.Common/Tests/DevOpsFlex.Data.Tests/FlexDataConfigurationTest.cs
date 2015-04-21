@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Migrations;
     using Moq;
     using Naming;
 
@@ -60,5 +61,6 @@
         }
 
         #endregion
+
     }
 }

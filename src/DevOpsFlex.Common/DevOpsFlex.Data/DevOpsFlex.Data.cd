@@ -51,8 +51,8 @@
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="Components" />
-      <Property Name="Systems" />
       <Property Name="SqlFirewallRules" />
+      <Property Name="Systems" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="DevOpsFlex.Data.DevOpsSystem">
@@ -88,9 +88,13 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DevOpsFlex.Data.SqlFirewallRule">
-    <Position X="2.75" Y="0.75" Width="1.5" />
+    <Position X="1" Y="0.75" Width="1.5" />
+    <Members>
+      <Method Name="GetExclusions" Hidden="true" />
+      <Method Name="SetExclusions" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAACAAAAAIAAAAAAAAAAAAQAAQAQIAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAgAAAIAAAAAAAAAAAAQAAUAQIAAAAAAAACAAAgA=</HashCode>
       <FileName>SqlFirewallRule.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
