@@ -1,8 +1,7 @@
 ﻿namespace DevOpsFlex.Core.Tests
 {
-    using System;
-    using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using UnitTests.Common;
 
     /// <summary>
     /// Constains tests that target the camel casing string extensions class.
@@ -48,9 +47,7 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesNull()
         {
-            AssertionExtensions.ShouldThrow<Exception>(() => StringCamelExtensions.GetUpperConcat(null))
-                               .Where(e => e.GetType().Name == "ContractException")
-                               .Which.Message.ToLower().Should().Contain("precondition failed:");
+            FluentAssertionExtensions.ShouldThrowPreContract(() => StringCamelExtensions.GetUpperConcat(null));
         }
 
         /// <summary>
@@ -62,9 +59,7 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesEmpty()
         {
-            AssertionExtensions.ShouldThrow<Exception>(() => "".GetUpperConcat())
-                               .Where(e => e.GetType().Name == "ContractException")
-                               .Which.Message.ToLower().Should().Contain("precondition failed:");
+            FluentAssertionExtensions.ShouldThrowPreContract(() => "".GetUpperConcat());
         }
 
         /// <summary>
@@ -76,9 +71,7 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesWhiteSpace()
         {
-            AssertionExtensions.ShouldThrow<Exception>(() => " ".GetUpperConcat())
-                               .Where(e => e.GetType().Name == "ContractException")
-                               .Which.Message.ToLower().Should().Contain("precondition failed:");
+            FluentAssertionExtensions.ShouldThrowPreContract(() => " ".GetUpperConcat());
         }
 
         /// <summary>
@@ -90,9 +83,7 @@
         [TestMethod, TestCategory("Unit")]
         public void Ensure_GetUpperConcat_ValidatesBlankReturn()
         {
-            AssertionExtensions.ShouldThrow<Exception>(() => "fsc".GetUpperConcat())
-                               .Where(e => e.GetType().Name == "ContractException")
-                               .Which.Message.ToLower().Should().Contain("postcondition failed:");
+            FluentAssertionExtensions.ShouldThrowPostContract(() => "fsc".GetUpperConcat());
         }
 
         #endregion
