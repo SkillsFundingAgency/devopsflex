@@ -1,7 +1,5 @@
 ﻿namespace DevOpsFlex.Data.Naming
 {
-    using Core;
-
     /// <summary>
     /// Default naming strategy for dev ops components.
     /// </summary>

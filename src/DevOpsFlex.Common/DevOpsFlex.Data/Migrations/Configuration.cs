@@ -1,5 +1,6 @@
 namespace DevOpsFlex.Data.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DevOpsFlexDbContext>
@@ -127,22 +128,42 @@ namespace DevOpsFlex.Data.Migrations
 
         private static void SeedFirewallRules(DevOpsFlexDbContext context, DevOpsSystem system)
         {
-            context.SqlFirewallRules.AddOrUpdate(
-                r => r.Name,
+            var sfaRule =
                 new SqlFirewallRule
                 {
                     System = system,
                     Name = "SFA LAN",
                     StartIp = "193.240.137.225",
                     EndIp = "193.240.137.254"
-                },
+                };
+            sfaRule.SetExclusions(FctEnvironments.Tr | FctEnvironments.Oat | FctEnvironments.Release);
+
+            var capRule =
                 new SqlFirewallRule
                 {
                     System = system,
                     Name = "Cap UK",
                     StartIp = "212.167.5.1",
-                    EndIp = "212.167.5.255"
-                });
+                    EndIp = "212.167.5.255",
+                };
+            capRule.SetExclusions(FctEnvironments.Tr | FctEnvironments.Oat | FctEnvironments.Release);
+
+            context.SqlFirewallRules.AddOrUpdate(
+                r => r.Name,
+                sfaRule,
+                capRule);
         }
+    }
+
+    [Flags]
+    public enum FctEnvironments : uint
+    {
+        Ci = 1,
+        At = 1 << 1,
+        Mo = 1 << 2,
+        Pub = 1 << 3,
+        Tr = 1 << 4,
+        Oat = 1 << 5,
+        Release = 1 << 6,
     }
 }
