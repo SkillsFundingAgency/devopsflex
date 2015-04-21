@@ -2,15 +2,18 @@
 {
     using System;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
+    using System.Threading;
     using System.Threading.Tasks;
+    using Choosing;
     using Core;
     using Data;
-    using Data.PublishSettings;
-    using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Sql;
 
+    /// <summary>
+    /// Contains tests that target the <see cref="SqlManagementClientExtensions"/> extension class
+    /// for the <see cref="SqlManagementClient"/>.
+    /// </summary>
     [TestClass]
     public class SqlManagementClientExtensionsTest
     {
@@ -18,43 +21,35 @@
         #region Integration Tests
 
         /// <summary>
-        /// Specifies the relative or absolute path to the publish settings file for the target subscription.
+        /// Tests CheckCreateDatabase with the creation of a new database that doesn't exist in the server.
         /// </summary>
-        private const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
-
-        /// <summary>
-        /// Specifies the subscription Id that we want to target.
-        /// This subscription needs to be defined and found in the publish settings file.
-        /// </summary>
-        private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
-
         [TestMethod]
-        public async Task Foo()
+        public async Task Test_CheckCreateDatabase_WithNewDatabase()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateSqlClient())
             {
-                await client.CheckCreateDatabase("acx03vg6p0", "fct-db123", SqlAzureEdition.Standard.GetEnumDescription(), "SQL_Latin1_General_CP1_CI_AS", 5);
+                var dbName = "fct-" + Guid.NewGuid().ToString().Split('-').Last();
+
+                var chooser = new DefaultAzureSqlServerChooser();
+
+                var server = await chooser.Choose(client, SystemLocation.WestEurope.GetEnumDescription());
+                Assert.IsFalse(string.IsNullOrWhiteSpace(server));
+
+                try
+                {
+                    await client.CheckCreateDatabase(server, dbName, SqlAzureEdition.Standard.GetEnumDescription(), "SQL_Latin1_General_CP1_CI_AS", 5);
+
+                    var webSite = await client.Databases.GetAsync(server, dbName, new CancellationToken());
+                    Assert.IsNotNull(webSite);
+                }
+                finally
+                {
+                    client.Databases.Delete(server, dbName);
+                }
             }
         }
 
         #endregion
 
-        /// <summary>
-        /// Creates a standard <see cref="SqlManagementClient"/> that targets the Azure subscription
-        /// specified in the <see cref="AzureSubscription"/> static class.
-        /// </summary>
-        /// <returns>
-        /// A standard <see cref="SqlManagementClient"/> that targets the Azure subscription
-        /// specified in the <see cref="AzureSubscription"/> static class.
-        /// </returns>
-        private static SqlManagementClient CreateClient()
-        {
-            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
-
-            return new SqlManagementClient(
-                new CertificateCloudCredentials(
-                    SubscriptionId,
-                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
-        }
     }
 }

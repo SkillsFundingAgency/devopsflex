@@ -153,6 +153,9 @@
     <Reference Include="Microsoft.WindowsAzure.Common.NetFramework">
       <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Common.1.3.0\lib\net45\Microsoft.WindowsAzure.Common.NetFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Management">
+      <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Management.4.1.1\lib\net40\Microsoft.WindowsAzure.Management.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Management.Compute, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.WindowsAzure.Management.Compute.11.2.1\lib\net40\Microsoft.WindowsAzure.Management.Compute.dll</HintPath>
@@ -190,7 +193,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Choosing\DefaultAzureSqlServerChooser.cs" />
     <Compile Include="Choosing\DefaultWebPlanChooser.cs" />
+    <Compile Include="Choosing\IChooseSqlServer.cs" />
     <Compile Include="Choosing\IChooseWebPlan.cs" />
     <Compile Include="SqlManagementClientExtensions.cs" />
     <Compile Include="ServiceBusManagementClientExtensions.cs" />

@@ -2,10 +2,7 @@
 {
     using System;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
-    using Data.PublishSettings;
-    using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.Compute.Models;
@@ -26,23 +23,12 @@
         private const string VmName = "devopsflex-test";
 
         /// <summary>
-        /// Specifies the relative or absolute path to the publish settings file for the target subscription.
-        /// </summary>
-        private const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
-
-        /// <summary>
-        /// Specifies the subscription Id that we want to target.
-        /// This subscription needs to be defined and found in the publish settings file.
-        /// </summary>
-        private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
-
-        /// <summary>
         /// Tests the ResizeVm extension by upscaling a VM to A2.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public void Test_ResizeVm_UpscaleA2_LiveVM()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateComputeClient())
             {
                 client.ResizeVm(VmName, VirtualMachineSize.Medium.ToAzureString());
             }
@@ -54,7 +40,7 @@
         [TestMethod, TestCategory("Integration")]
         public void Test_ResizeVm_DownscaleA1_LiveVM()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateComputeClient())
             {
                 client.ResizeVm(VmName, VirtualMachineSize.Small.ToAzureString());
             }
@@ -66,7 +52,7 @@
         [TestMethod, TestCategory("Integration")]
         public void Test_DeallocateVm_LiveVM()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateComputeClient())
             {
                 client.DeallocateVm(VmName);
             }
@@ -78,7 +64,7 @@
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateCloudService_WithNewService()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateComputeClient())
             {
                 var parameters =
                     new HostedServiceCreateParameters
@@ -108,7 +94,7 @@
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateCloudService_WithExistingService()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateComputeClient())
             {
                 var parameters =
                     new HostedServiceCreateParameters
@@ -132,22 +118,5 @@
 
         #endregion
 
-        /// <summary>
-        /// Creates a standard <see cref="ComputeManagementClient"/> that targets the Azure subscription
-        /// specified in the <see cref="AzureSubscription"/> static class.
-        /// </summary>
-        /// <returns>
-        /// A standard <see cref="ComputeManagementClient"/> that targets the Azure subscription
-        /// specified in the <see cref="AzureSubscription"/> static class.
-        /// </returns>
-        private static ComputeManagementClient CreateClient()
-        {
-            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
-
-            return new ComputeManagementClient(
-                new CertificateCloudCredentials(
-                    SubscriptionId,
-                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
-        }
     }
 }

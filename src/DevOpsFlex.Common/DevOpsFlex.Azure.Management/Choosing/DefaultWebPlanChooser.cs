@@ -7,7 +7,7 @@
     using Microsoft.WindowsAzure.Management.WebSites.Models;
 
     /// <summary>
-    /// Provides a default WebPlan chooser object.
+    /// Provides a default Web Plan chooser object.
     /// </summary>
     public class DefaultWebPlanChooser : IChooseWebPlan
     {
@@ -16,7 +16,7 @@
         /// </summary>
         /// <param name="client">The <see cref="WebSiteManagementClient"/> that is performing the operation.</param>
         /// <param name="webSpace">The name of the Web Space where the site should be.</param>
-        /// <returns>A suitable web plan if one is found, null otherwise.</returns>
+        /// <returns>A suitable web plan name if one is found, null otherwise.</returns>
         public async Task<string> Choose(WebSiteManagementClient client, string webSpace)
         {
             var webPlan = (await client.WebHostingPlans.ListAsync(webSpace, new CancellationToken())).FirstOrDefault(p => p.SKU == SkuOptions.Standard);
