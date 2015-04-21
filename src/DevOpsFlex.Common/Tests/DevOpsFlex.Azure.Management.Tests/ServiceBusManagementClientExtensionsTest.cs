@@ -2,16 +2,17 @@
 {
     using System;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
     using Core;
     using Data;
-    using Data.PublishSettings;
-    using Microsoft.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.ServiceBus;
 
+    /// <summary>
+    /// Contains tests that target the <see cref="ServiceBusManagementClientExtensions"/> extension class
+    /// for the <see cref="ServiceBusManagementClient"/>.
+    /// </summary>
     [TestClass]
     public class ServiceBusManagementClientExtensionsTest
     {
@@ -19,23 +20,12 @@
         #region Integration Tests
 
         /// <summary>
-        /// Specifies the relative or absolute path to the publish settings file for the target subscription.
-        /// </summary>
-        private const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
-
-        /// <summary>
-        /// Specifies the subscription Id that we want to target.
-        /// This subscription needs to be defined and found in the publish settings file.
-        /// </summary>
-        private const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
-
-        /// <summary>
         /// Tests the creation of a Service Bus namespace that doesn't exist (puts a Guid part in the namespace name).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateNamespace_WithNewNamespace()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateServiceBusClient())
             {
                 var region = ServiceBusRegions.NorthEurope.GetEnumDescription();
                 var nsName = "fct-" + Guid.NewGuid().ToString().Split('-').Last();
@@ -60,7 +50,7 @@
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateNamespace_WithExistingNamespace()
         {
-            using (var client = CreateClient())
+            using (var client = ManagementClient.CreateServiceBusClient())
             {
                 var region = ServiceBusRegions.NorthEurope.GetEnumDescription();
                 var nsName = "fct-" + Guid.NewGuid().ToString().Split('-').Last();
@@ -108,22 +98,5 @@
 
         #endregion
 
-        /// <summary>
-        /// Creates a standard <see cref="ServiceBusManagementClient"/> that targets the Azure subscription
-        /// specified in the <see cref="AzureSubscription"/> static class.
-        /// </summary>
-        /// <returns>
-        /// A standard <see cref="ServiceBusManagementClient"/> that targets the Azure subscription
-        /// specified in the <see cref="AzureSubscription"/> static class.
-        /// </returns>
-        private static ServiceBusManagementClient CreateClient()
-        {
-            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
-
-            return new ServiceBusManagementClient(
-                new CertificateCloudCredentials(
-                    SubscriptionId,
-                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
-        }
     }
 }

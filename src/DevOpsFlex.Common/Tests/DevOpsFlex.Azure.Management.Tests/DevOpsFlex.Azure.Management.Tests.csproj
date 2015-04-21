@@ -109,9 +109,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ComputeManagementClientExtensionsTest.cs" />
+    <Compile Include="ManagementClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBusManagementClientExtensionsTest.cs" />
     <Compile Include="SqlManagementClientExtensionsTest.cs" />
+    <Compile Include="DefaultAzureSqlServerChooserTest.cs" />
     <Compile Include="WebSiteManagementClientExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
