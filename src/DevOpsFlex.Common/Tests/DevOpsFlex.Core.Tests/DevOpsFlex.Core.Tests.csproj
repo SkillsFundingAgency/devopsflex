@@ -74,6 +74,10 @@
       <Project>{ffeab96f-1600-4853-a30d-3200b239212e}</Project>
       <Name>DevOpsFlex.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UnitTests.Common\UnitTests.Common.csproj">
+      <Project>{6edbfbfc-a0a0-4650-a92e-b9a686c967fe}</Project>
+      <Name>UnitTests.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="DevOpsFlex.snk" />
