@@ -198,12 +198,14 @@
     <Compile Include="AzureServiceBusNamespace.cs" />
     <Compile Include="AzureStorageContainer.cs" />
     <Compile Include="AzureWebSite.cs" />
+    <Compile Include="BuildConfiguration.cs" />
+    <Compile Include="CodeBranch.cs" />
     <Compile Include="FlexDataConfiguration.cs" />
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />
-    <Compile Include="Migrations\201504211403291_InitialCreate.cs" />
-    <Compile Include="Migrations\201504211403291_InitialCreate.Designer.cs">
-      <DependentUpon>201504211403291_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504221315209_InitalCreate.cs" />
+    <Compile Include="Migrations\201504221315209_InitalCreate.Designer.cs">
+      <DependentUpon>201504221315209_InitalCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Naming\DefaultNaming.cs" />
@@ -214,6 +216,8 @@
     <Compile Include="PublishSettings\PublishData.cs" />
     <Compile Include="PublishSettings\PublishProfile.cs" />
     <Compile Include="PublishSettings\Subscription.cs" />
+    <Compile Include="RelFirewallRuleExclusion.cs" />
+    <Compile Include="RelComponentExclusion.cs" />
     <Compile Include="ServiceBusRegions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -242,8 +246,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504211403291_InitialCreate.resx">
-      <DependentUpon>201504211403291_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504221315209_InitalCreate.resx">
+      <DependentUpon>201504221315209_InitalCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

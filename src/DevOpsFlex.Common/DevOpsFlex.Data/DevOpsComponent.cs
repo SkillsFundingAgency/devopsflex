@@ -19,6 +19,8 @@
 
         public virtual ICollection<DevOpsComponent> Dependencies { get; set; }
 
+        public virtual ICollection<RelComponentExclusion> Exclusions { get; set; }
+
         [Required, MaxLength(200)]
         public string Name { get; set; }
 
