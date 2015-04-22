@@ -3,10 +3,38 @@ namespace DevOpsFlex.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitalCreate : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.CodeBranches",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 100),
+                        SlotPart = c.String(nullable: false, maxLength: 10),
+                        TfsPath = c.String(nullable: false, maxLength: 200),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.RelComponentExclusions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ComponentId = c.Int(nullable: false),
+                        ConfigurationId = c.Int(nullable: false),
+                        BranchId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CodeBranches", t => t.BranchId)
+                .ForeignKey("dbo.DevOpsComponents", t => t.ComponentId, cascadeDelete: true)
+                .ForeignKey("dbo.BuildConfigurations", t => t.ConfigurationId, cascadeDelete: true)
+                .Index(t => t.ComponentId)
+                .Index(t => t.ConfigurationId)
+                .Index(t => t.BranchId);
+            
             CreateTable(
                 "dbo.DevOpsComponents",
                 c => new
@@ -60,27 +88,69 @@ namespace DevOpsFlex.Data.Migrations
                         Name = c.String(nullable: false, maxLength: 100),
                         StartIp = c.String(nullable: false, maxLength: 15),
                         EndIp = c.String(nullable: false, maxLength: 15),
-                        RawExclusions = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DevOpsSystems", t => t.SystemId, cascadeDelete: true)
                 .Index(t => t.SystemId);
             
+            CreateTable(
+                "dbo.BuildConfigurations",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Configuration = c.String(nullable: false, maxLength: 20),
+                        Platform = c.String(nullable: false, maxLength: 20),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.RelFirewallRuleExclusions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirewallRuleId = c.Int(nullable: false),
+                        ConfigurationId = c.Int(nullable: false),
+                        BranchId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CodeBranches", t => t.BranchId)
+                .ForeignKey("dbo.BuildConfigurations", t => t.ConfigurationId, cascadeDelete: true)
+                .ForeignKey("dbo.SqlFirewallRules", t => t.FirewallRuleId, cascadeDelete: true)
+                .Index(t => t.FirewallRuleId)
+                .Index(t => t.ConfigurationId)
+                .Index(t => t.BranchId);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.RelComponentExclusions", "ConfigurationId", "dbo.BuildConfigurations");
+            DropForeignKey("dbo.RelFirewallRuleExclusions", "FirewallRuleId", "dbo.SqlFirewallRules");
+            DropForeignKey("dbo.RelFirewallRuleExclusions", "ConfigurationId", "dbo.BuildConfigurations");
+            DropForeignKey("dbo.RelFirewallRuleExclusions", "BranchId", "dbo.CodeBranches");
+            DropForeignKey("dbo.RelComponentExclusions", "ComponentId", "dbo.DevOpsComponents");
             DropForeignKey("dbo.DevOpsComponents", "SystemId", "dbo.DevOpsSystems");
             DropForeignKey("dbo.SqlFirewallRules", "SystemId", "dbo.DevOpsSystems");
             DropForeignKey("dbo.DevOpsComponents", "DependantId", "dbo.DevOpsComponents");
+            DropForeignKey("dbo.RelComponentExclusions", "BranchId", "dbo.CodeBranches");
+            DropIndex("dbo.RelFirewallRuleExclusions", new[] { "BranchId" });
+            DropIndex("dbo.RelFirewallRuleExclusions", new[] { "ConfigurationId" });
+            DropIndex("dbo.RelFirewallRuleExclusions", new[] { "FirewallRuleId" });
             DropIndex("dbo.SqlFirewallRules", new[] { "SystemId" });
             DropIndex("dbo.DevOpsSystems", new[] { "LogicalName" });
             DropIndex("dbo.DevOpsComponents", new[] { "LogicalName" });
             DropIndex("dbo.DevOpsComponents", new[] { "DependantId" });
             DropIndex("dbo.DevOpsComponents", new[] { "SystemId" });
+            DropIndex("dbo.RelComponentExclusions", new[] { "BranchId" });
+            DropIndex("dbo.RelComponentExclusions", new[] { "ConfigurationId" });
+            DropIndex("dbo.RelComponentExclusions", new[] { "ComponentId" });
+            DropTable("dbo.RelFirewallRuleExclusions");
+            DropTable("dbo.BuildConfigurations");
             DropTable("dbo.SqlFirewallRules");
             DropTable("dbo.DevOpsSystems");
             DropTable("dbo.DevOpsComponents");
+            DropTable("dbo.RelComponentExclusions");
+            DropTable("dbo.CodeBranches");
         }
     }
 }
