@@ -210,6 +210,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DevOpsFlex.Core\DevOpsFlex.Core.csproj">
+      <Project>{ffeab96f-1600-4853-a30d-3200b239212e}</Project>
+      <Name>DevOpsFlex.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DevOpsFlex.Data\DevOpsFlex.Data.csproj">
       <Project>{8d135df6-d396-4191-a89a-953652bf3350}</Project>
       <Name>DevOpsFlex.Data</Name>
