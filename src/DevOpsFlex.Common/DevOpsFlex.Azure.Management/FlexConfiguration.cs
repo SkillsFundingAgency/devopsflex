@@ -10,9 +10,14 @@
     public static class FlexConfiguration
     {
         /// <summary>
-        /// 
+        /// Holds a static reference to the current web plan chooser object.
         /// </summary>
         private static IChooseWebPlan _webPlanChooser = new DefaultWebPlanChooser();
+
+        /// <summary>
+        /// Holds a static reference to the current azure sql server chooser object.
+        /// </summary>
+        private static IChooseSqlServer _sqlServerChooser = new DefaultAzureSqlServerChooser();
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
@@ -39,7 +44,7 @@
         /// <summary>
         /// Overrides the <see cref="IChooseWebPlan"/> object in configuration.
         /// </summary>
-        /// <param name="chooser"></param>
+        /// <param name="chooser">The current web plan chooser object.</param>
         public static void UseWebPlanChooser(IChooseWebPlan chooser)
         {
             _webPlanChooser = chooser;
@@ -51,6 +56,23 @@
         public static IChooseWebPlan WebPlanChooser
         {
             get { return _webPlanChooser; }
+        }
+
+        /// <summary>
+        /// Overrides the <see cref="IChooseSqlServer"/> object in configuration.
+        /// </summary>
+        /// <param name="chooser">The current azure sql server chooser object.</param>
+        public static void UseSqlServerChooser(IChooseSqlServer chooser)
+        {
+            _sqlServerChooser = chooser;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="IChooseSqlServer"/> object in configuration.
+        /// </summary>
+        public static IChooseSqlServer SqlServerChooser
+        {
+            get { return _sqlServerChooser; }
         }
     }
 }
