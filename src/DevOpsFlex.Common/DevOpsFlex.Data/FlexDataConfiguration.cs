@@ -10,7 +10,7 @@
     public static class FlexDataConfiguration
     {
         /// <summary>
-        /// Does static initialization for <see cref="FlexDataConfiguration"/>.
+        /// Handles static initialization for <see cref="FlexDataConfiguration"/>.
         /// </summary>
         static FlexDataConfiguration()
         {
