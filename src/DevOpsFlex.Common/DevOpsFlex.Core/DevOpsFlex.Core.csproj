@@ -148,7 +148,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Events\BuildEvent.cs" />
     <Compile Include="Events\ProgressBuildEvent.cs" />
