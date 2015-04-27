@@ -10,6 +10,8 @@
         [MaxLength(200)]
         public string Label { get; set; }
 
+        public bool ReserveIp { get; set; }
+
         [Required, MaxLength(500)]
         public string PublishProjectTfsPath { get; set; }
 
