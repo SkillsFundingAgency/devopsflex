@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="FlexDataConfigurationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DefaultNamingTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DevOpsFlex.Data\DevOpsFlex.Data.csproj">

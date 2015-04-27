@@ -76,7 +76,11 @@
 
             await client.CheckCreateDatabase(
                 await FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription()),
-                FlexConfiguration.GetNaming<SqlAzureDb>().GetSlotName(model),
+                FlexConfiguration.GetNaming<SqlAzureDb>()
+                                 .GetSlotName(
+                                     model,
+                                     FlexDataConfiguration.Branch,
+                                     FlexDataConfiguration.Configuration),
                 model.Edition.GetEnumDescription(),
                 model.CollationName,
                 model.MaximumDatabaseSizeInGB);

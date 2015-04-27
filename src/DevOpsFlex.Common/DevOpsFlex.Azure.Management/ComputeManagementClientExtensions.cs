@@ -4,6 +4,7 @@
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.Compute.Models;
@@ -128,6 +129,20 @@
             if (service != null) return;
 
             await client.HostedServices.CreateAsync(parameters);
+        }
+
+        /// <summary>
+        /// Checks for the existence of a specific Cloud Service, if it doesn't exist it will create it.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
+        /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this cloud service spec.</param>
+        /// <returns>The async <see cref="Task"/> wrapper.</returns>
+        public static async Task CheckCreateCloudService(this ComputeManagementClient client, AzureCloudService model)
+        {
+            Contract.Requires(client != null);
+            Contract.Requires(model != null);
+
+            await client.CheckCreateCloudService(model.AzureParameters);
         }
     }
 }

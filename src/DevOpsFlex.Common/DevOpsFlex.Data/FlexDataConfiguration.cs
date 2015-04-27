@@ -10,9 +10,32 @@
     public static class FlexDataConfiguration
     {
         /// <summary>
+        /// Does static initialization for <see cref="FlexDataConfiguration"/>.
+        /// </summary>
+        static FlexDataConfiguration()
+        {
+            RootBranch = "Main";
+        }
+
+        /// <summary>
         /// Holds a <see cref="Type"/> map being objects being named and the naming types.
         /// </summary>
         internal static readonly Dictionary<Type, dynamic> NamingMap = new Dictionary<Type, dynamic>();
+
+        /// <summary>
+        /// Gets and sets the current deployment branch.
+        /// </summary>
+        public static string Branch { get; set; }
+
+        /// <summary>
+        /// Gets and sets the current deployment configuration.
+        /// </summary>
+        public static string Configuration { get; set; }
+
+        /// <summary>
+        /// Gets and sets the project's root branch for which we want a specific naming.
+        /// </summary>
+        public static string RootBranch { get; set; }
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
