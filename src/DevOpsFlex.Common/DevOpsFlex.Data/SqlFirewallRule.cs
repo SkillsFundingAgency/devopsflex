@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.WindowsAzure.Management.Sql.Models;
 
     public class SqlFirewallRule
     {
@@ -20,5 +21,19 @@
 
         [Required, MinLength(7), MaxLength(15)]
         public string EndIp { get; set; }
+
+        public FirewallRuleCreateParameters AzureParameters
+        {
+            get
+            {
+                return
+                    new FirewallRuleCreateParameters
+                    {
+                        Name = Name,
+                        StartIPAddress = StartIp,
+                        EndIPAddress = EndIp
+                    };
+            }
+        }
     }
 }
