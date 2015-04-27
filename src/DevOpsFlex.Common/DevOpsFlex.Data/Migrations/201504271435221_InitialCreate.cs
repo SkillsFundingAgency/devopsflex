@@ -3,7 +3,7 @@ namespace DevOpsFlex.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitalCreate : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -45,6 +45,7 @@ namespace DevOpsFlex.Data.Migrations
                         Name = c.String(nullable: false, maxLength: 200),
                         LogicalName = c.String(nullable: false, maxLength: 100),
                         Label = c.String(maxLength: 200),
+                        ReserveIp = c.Boolean(),
                         PublishProjectTfsPath = c.String(maxLength: 500),
                         SolutionTfsPath = c.String(maxLength: 500),
                         Region = c.Int(),
@@ -94,16 +95,6 @@ namespace DevOpsFlex.Data.Migrations
                 .Index(t => t.SystemId);
             
             CreateTable(
-                "dbo.BuildConfigurations",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Configuration = c.String(nullable: false, maxLength: 20),
-                        Platform = c.String(nullable: false, maxLength: 20),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.RelFirewallRuleExclusions",
                 c => new
                     {
@@ -120,17 +111,27 @@ namespace DevOpsFlex.Data.Migrations
                 .Index(t => t.ConfigurationId)
                 .Index(t => t.BranchId);
             
+            CreateTable(
+                "dbo.BuildConfigurations",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Configuration = c.String(nullable: false, maxLength: 20),
+                        Platform = c.String(nullable: false, maxLength: 20),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.RelComponentExclusions", "ConfigurationId", "dbo.BuildConfigurations");
-            DropForeignKey("dbo.RelFirewallRuleExclusions", "FirewallRuleId", "dbo.SqlFirewallRules");
-            DropForeignKey("dbo.RelFirewallRuleExclusions", "ConfigurationId", "dbo.BuildConfigurations");
-            DropForeignKey("dbo.RelFirewallRuleExclusions", "BranchId", "dbo.CodeBranches");
             DropForeignKey("dbo.RelComponentExclusions", "ComponentId", "dbo.DevOpsComponents");
             DropForeignKey("dbo.DevOpsComponents", "SystemId", "dbo.DevOpsSystems");
             DropForeignKey("dbo.SqlFirewallRules", "SystemId", "dbo.DevOpsSystems");
+            DropForeignKey("dbo.RelFirewallRuleExclusions", "FirewallRuleId", "dbo.SqlFirewallRules");
+            DropForeignKey("dbo.RelFirewallRuleExclusions", "ConfigurationId", "dbo.BuildConfigurations");
+            DropForeignKey("dbo.RelFirewallRuleExclusions", "BranchId", "dbo.CodeBranches");
             DropForeignKey("dbo.DevOpsComponents", "DependantId", "dbo.DevOpsComponents");
             DropForeignKey("dbo.RelComponentExclusions", "BranchId", "dbo.CodeBranches");
             DropIndex("dbo.RelFirewallRuleExclusions", new[] { "BranchId" });
@@ -144,8 +145,8 @@ namespace DevOpsFlex.Data.Migrations
             DropIndex("dbo.RelComponentExclusions", new[] { "BranchId" });
             DropIndex("dbo.RelComponentExclusions", new[] { "ConfigurationId" });
             DropIndex("dbo.RelComponentExclusions", new[] { "ComponentId" });
-            DropTable("dbo.RelFirewallRuleExclusions");
             DropTable("dbo.BuildConfigurations");
+            DropTable("dbo.RelFirewallRuleExclusions");
             DropTable("dbo.SqlFirewallRules");
             DropTable("dbo.DevOpsSystems");
             DropTable("dbo.DevOpsComponents");

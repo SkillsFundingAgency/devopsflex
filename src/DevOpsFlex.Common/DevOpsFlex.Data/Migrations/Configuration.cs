@@ -44,6 +44,7 @@ namespace DevOpsFlex.Data.Migrations
                     LogicalName = "ServiceBus",
                     Name = "CrossDomain.Integration NServiceBus role",
                     Label = "Main NServiceBus role with most of the endpoints",
+                    ReserveIp = true,
                     PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
                 },
@@ -53,6 +54,7 @@ namespace DevOpsFlex.Data.Migrations
                     LogicalName = "OrgService",
                     Name = "Organisation service",
                     Label = "Organisation service",
+                    ReserveIp = true,
                     PublishProjectTfsPath = "$/FCT/Main/OrganisationDomain/OrganisationDomain.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/OrganisationDomain/OrganisationDomain.sln"
                 },
@@ -62,6 +64,7 @@ namespace DevOpsFlex.Data.Migrations
                     LogicalName = "FundingStreamConfig",
                     Name = "Funding Stream Config service",
                     Label = "Funding Stream Config service",
+                    ReserveIp = true,
                     PublishProjectTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.sln"
                 },
