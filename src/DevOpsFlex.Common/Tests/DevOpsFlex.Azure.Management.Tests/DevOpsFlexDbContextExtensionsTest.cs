@@ -15,13 +15,13 @@
         /// Tests the ProvisionAll on <see cref="AzureCloudService"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Foo()
+        public async Task Test_AzureCloudService_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "djfr";
 
             using (var client = ManagementClient.CreateComputeClient())
-            using(var context = new DevOpsFlexDbContext())
+            using (var context = new DevOpsFlexDbContext())
             {
                 await context.Components.OfType<AzureCloudService>().ProvisionAll(client);
             }
