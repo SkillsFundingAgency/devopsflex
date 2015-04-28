@@ -26,5 +26,21 @@
                 await context.Components.OfType<AzureCloudService>().ProvisionAll(client);
             }
         }
+
+        /// <summary>
+        /// Tests the ReserveAllIps on <see cref="AzureCloudService"/> with real SQL Db data (seed).
+        /// </summary>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_AzureCloudService_ReserveAllIps_End2End()
+        {
+            FlexDataConfiguration.Branch = "Main";
+            FlexDataConfiguration.Configuration = "djfr";
+
+            using (var client = ManagementClient.CreateNetworkClient())
+            using (var context = new DevOpsFlexDbContext())
+            {
+                await context.Components.OfType<AzureCloudService>().ReserveAllIps(client);
+            }
+        }
     }
 }

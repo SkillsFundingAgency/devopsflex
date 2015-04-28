@@ -5,6 +5,7 @@
     using Data.PublishSettings;
     using Microsoft.Azure;
     using Microsoft.WindowsAzure.Management.Compute;
+    using Microsoft.WindowsAzure.Management.Network;
     using Microsoft.WindowsAzure.Management.ServiceBus;
     using Microsoft.WindowsAzure.Management.Sql;
     using Microsoft.WindowsAzure.Management.WebSites;
@@ -92,6 +93,24 @@
             var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
 
             return new SqlManagementClient(
+                new CertificateCloudCredentials(
+                    SubscriptionId,
+                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
+        }
+
+        /// <summary>
+        /// Creates a standard <see cref="NetworkManagementClient"/> that targets the Azure subscription
+        /// specified in the <see cref="AzureSubscription"/> static class.
+        /// </summary>
+        /// <returns>
+        /// A standard <see cref="NetworkManagementClient"/> that targets the Azure subscription
+        /// specified in the <see cref="AzureSubscription"/> static class.
+        /// </returns>
+        internal static NetworkManagementClient CreateNetworkClient()
+        {
+            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
+
+            return new NetworkManagementClient(
                 new CertificateCloudCredentials(
                     SubscriptionId,
                     new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
