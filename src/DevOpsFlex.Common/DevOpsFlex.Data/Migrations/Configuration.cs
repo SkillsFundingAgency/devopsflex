@@ -61,7 +61,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureCloudService
                 {
                     System = system,
-                    LogicalName = "FundingStreamConfig",
+                    LogicalName = "FSC",
                     Name = "Funding Stream Config service",
                     Label = "Funding Stream Config service",
                     ReserveIp = true,

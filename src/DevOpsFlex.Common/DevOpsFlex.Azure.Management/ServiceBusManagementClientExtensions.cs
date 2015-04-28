@@ -2,6 +2,8 @@
 {
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
+    using Core;
+    using Data;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.ServiceBus;
     using Microsoft.WindowsAzure.Management.ServiceBus.Models;
@@ -16,20 +18,20 @@
         /// Checks for the existence of a specific Azure Web Site, if it doesn't exist it will create it.
         /// </summary>
         /// <param name="client">The <see cref="ServiceBusManagementClient"/> that is performing the operation.</param>
-        /// <param name="nsName">The name of the namespace we want to create.</param>
+        /// <param name="sbName">The name of the namespace we want to create.</param>
         /// <param name="region">The region where we want to create the namespace.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateNamespace(this ServiceBusManagementClient client, string nsName, string region)
+        public static async Task CheckCreateNamespace(this ServiceBusManagementClient client, string sbName, string region)
         {
             Contract.Requires(client != null);
-            Contract.Requires(!string.IsNullOrWhiteSpace(nsName));
+            Contract.Requires(!string.IsNullOrWhiteSpace(sbName));
             Contract.Requires(!string.IsNullOrWhiteSpace(region));
 
-            ServiceBusNamespaceResponse ns = null;
+            ServiceBusNamespaceResponse sb = null;
 
             try
             {
-                ns = await client.Namespaces.GetAsync(nsName);
+                sb = await client.Namespaces.GetAsync(sbName);
             }
             catch (CloudException cex)
             {
@@ -39,9 +41,29 @@
                 if (!cex.Message.Contains("Request to a downlevel service failed.")) throw;
             }
 
-            if (ns != null) return;
+            if (sb != null) return;
 
-            await client.Namespaces.CreateAsync(nsName, region);
+            await client.Namespaces.CreateAsync(sbName, region);
+        }
+
+        /// <summary>
+        /// Checks for the existence of a specific Azure Web Site, if it doesn't exist it will create it.
+        /// </summary>
+        /// <param name="client">The <see cref="ServiceBusManagementClient"/> that is performing the operation.</param>
+        /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this service bus spec.</param>
+        /// <returns>The async <see cref="Task"/> wrapper.</returns>
+        public static async Task CheckCreateNamespace(this ServiceBusManagementClient client, AzureServiceBusNamespace model)
+        {
+            Contract.Requires(client != null);
+            Contract.Requires(model != null);
+
+            await client.CheckCreateNamespace(
+                FlexDataConfiguration.GetNaming<AzureServiceBusNamespace>()
+                                     .GetSlotName(
+                                         model,
+                                         FlexDataConfiguration.Branch,
+                                         FlexDataConfiguration.Configuration),
+                model.Region.GetEnumDescription());
         }
     }
 }

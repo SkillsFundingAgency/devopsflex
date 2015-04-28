@@ -20,7 +20,6 @@
         /// <summary>
         /// Tests CheckCreateReservedIp with the creation of a new Reserved IP that doesn't exist in the subscription.
         /// </summary>
-        /// <returns></returns>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateReservedIp_WithNewReservedIp()
         {
@@ -47,7 +46,6 @@
         /// <summary>
         /// Tests CheckCreateReservedIp with the creation of a new Reserved IP that already exists in the subscription.
         /// </summary>
-        /// <returns></returns>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateReservedIp_WithExistingReservedIp()
         {
