@@ -210,6 +210,7 @@
     <Compile Include="Choosing\DefaultWebPlanChooser.cs" />
     <Compile Include="Choosing\IChooseSqlServer.cs" />
     <Compile Include="Choosing\IChooseWebPlan.cs" />
+    <Compile Include="DevOpsAzureDatabase.cs" />
     <Compile Include="DevOpsFlexDbContextExtensions.cs" />
     <Compile Include="NetworkManagementClientExtensions.cs" />
     <Compile Include="SqlManagementClientExtensions.cs" />

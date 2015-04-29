@@ -1,5 +1,6 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
+    using System;
     using Choosing;
     using Data;
     using Data.Naming;
@@ -18,6 +19,58 @@
         /// Holds a static reference to the current azure sql server chooser object.
         /// </summary>
         private static IChooseSqlServer _sqlServerChooser = new DefaultAzureSqlServerChooser();
+
+        /// <summary>
+        /// Holds the environment variable name for the Azure SQL database SA username.
+        /// </summary>
+        internal const string EnvFlexSaUser = "FlexSaUser";
+
+        /// <summary>
+        /// Holds the environment variable name for the Azure SQL database SA user password.
+        /// </summary>
+        internal const string EnvFlexSaPwd = "FlexSaPwd";
+
+        /// <summary>
+        /// Holds the environment variable name for the Azure SQL database application user username.
+        /// </summary>
+        internal const string EnvFlexAppUser = "FlexAppUser";
+
+        /// <summary>
+        /// Holds the environment variable name for the Azure SQL database application user password.
+        /// </summary>
+        internal const string EnvFlexAppPwd = "FlexAppPwd";
+
+        /// <summary>
+        /// Gets the Azure SQL database SA username.
+        /// </summary>
+        public static string FlexSaUser
+        {
+            get { return Environment.GetEnvironmentVariable(EnvFlexSaUser); }
+        }
+
+        /// <summary>
+        /// Gets the Azure SQL database SA user password.
+        /// </summary>
+        public static string FlexSaPwd
+        {
+            get { return Environment.GetEnvironmentVariable(EnvFlexSaPwd); }
+        }
+
+        /// <summary>
+        /// Gets the Azure SQL database application user username.
+        /// </summary>
+        public static string FlexAppUser
+        {
+            get { return Environment.GetEnvironmentVariable(EnvFlexAppUser); }
+        }
+
+        /// <summary>
+        /// Gets the Azure SQL database application user password.
+        /// </summary>
+        public static string FlexAppPwd
+        {
+            get { return Environment.GetEnvironmentVariable(EnvFlexAppPwd); }
+        }
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
