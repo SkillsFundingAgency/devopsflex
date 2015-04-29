@@ -151,7 +151,6 @@
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Events\BuildEvent.cs" />
     <Compile Include="Events\ProgressBuildEvent.cs" />
-    <Compile Include="FlexCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringCamelExtensions.cs" />
     <Compile Include="XElementExtensions.cs" />

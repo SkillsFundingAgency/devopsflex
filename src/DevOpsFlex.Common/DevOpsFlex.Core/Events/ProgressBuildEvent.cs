@@ -26,10 +26,7 @@
         /// </summary>
         public IObservable<int> ProgressStream
         {
-            get
-            {
-                return _progressSubject.AsObservable();
-            }
+            get { return _progressSubject.AsObservable(); }
         }
 
         /// <summary>
