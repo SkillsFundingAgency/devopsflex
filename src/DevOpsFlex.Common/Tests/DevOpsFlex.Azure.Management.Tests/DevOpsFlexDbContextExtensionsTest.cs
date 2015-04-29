@@ -13,7 +13,7 @@
     public class DevOpsFlexDbContextExtensionsTest
     {
         /// <summary>
-        /// Tests the ProvisionAll on <see cref="AzureCloudService"/> with real SQL Db data (seed).
+        /// Tests the ProvisionAllAsync on <see cref="AzureCloudService"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_AzureCloudService_ProvisionAll_End2End()
@@ -24,12 +24,12 @@
             using (var client = ManagementClient.CreateComputeClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureCloudService>().ProvisionAll(client);
+                await context.Components.OfType<AzureCloudService>().ProvisionAllAsync(client);
             }
         }
 
         /// <summary>
-        /// Tests the ReserveAllIps on <see cref="AzureCloudService"/> with real SQL Db data (seed).
+        /// Tests the ReserveAllIpsAsync on <see cref="AzureCloudService"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_AzureCloudService_ReserveAllIps_End2End()
@@ -40,12 +40,12 @@
             using (var client = ManagementClient.CreateNetworkClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureCloudService>().ReserveAllIps(client);
+                await context.Components.OfType<AzureCloudService>().ReserveAllIpsAsync(client);
             }
         }
 
         /// <summary>
-        /// Tests the ProvisionAll on <see cref="AzureServiceBusNamespace"/> with real SQL Db data (seed).
+        /// Tests the ProvisionAllAsync on <see cref="AzureServiceBusNamespace"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_AzureServiceBusNamespace_ProvisionAll_End2End()
@@ -57,7 +57,7 @@
             using (var client = ManagementClient.CreateServiceBusClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureServiceBusNamespace>().ProvisionAll(client);
+                await context.Components.OfType<AzureServiceBusNamespace>().ProvisionAllAsync(client);
             }
         }
     }

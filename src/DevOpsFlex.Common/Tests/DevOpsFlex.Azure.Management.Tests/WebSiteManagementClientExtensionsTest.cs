@@ -37,7 +37,7 @@
 
                 try
                 {
-                    await client.CheckCreateWebSite(webspace, parameters);
+                    await client.CheckCreateWebSiteAsync(webspace, parameters);
 
                     var webSite = await client.WebSites.GetAsync(webspace, parameters.Name, null);
                     Assert.IsNotNull(webSite);
@@ -77,7 +77,7 @@
                 try
                 {
                     await client.WebSites.CreateAsync(webspace, parameters);
-                    await client.CheckCreateWebSite(webspace, parameters);
+                    await client.CheckCreateWebSiteAsync(webspace, parameters);
                 }
                 finally
                 {
