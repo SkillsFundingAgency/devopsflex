@@ -129,6 +129,7 @@
     <Compile Include="DefaultAzureSqlServerChooserTest.cs" />
     <Compile Include="DevOpsFlexDbContextExtensionsTest.cs" />
     <Compile Include="NetworkManagementClientExtensionsTest.cs" />
+    <Compile Include="Admin\EnvironmentVariables.cs" />
     <Compile Include="WebSiteManagementClientExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
