@@ -11,6 +11,9 @@
     /// </summary>
     public sealed class ProgressBuildEvent : BuildEvent, IDisposable
     {
+        /// <summary>
+        /// Keeps track of when this object has been disposed of.
+        /// </summary>
         private bool _disposed = false;
 
         /// <summary>
