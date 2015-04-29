@@ -1,6 +1,7 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
     using System.Data.Entity;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Threading.Tasks;
     using Data;
@@ -27,6 +28,9 @@
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public static async Task ProvisionAllAsync(this IQueryable<AzureCloudService> services, ComputeManagementClient client)
         {
+            Contract.Requires(services != null);
+            Contract.Requires(client != null);
+
             var tasks = (await services.ToListAsync())
                 .Select(
                     async s =>
@@ -45,6 +49,9 @@
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public static async Task ReserveAllIpsAsync(this IQueryable<AzureCloudService> services, NetworkManagementClient client)
         {
+            Contract.Requires(services != null);
+            Contract.Requires(client != null);
+
             var tasks = (await services.Where(s => s.ReserveIp).ToListAsync())
                 .Select(
                     async s =>
@@ -63,6 +70,9 @@
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public static async Task ProvisionAllAsync(this IQueryable<AzureServiceBusNamespace> namespaces, ServiceBusManagementClient client)
         {
+            Contract.Requires(namespaces != null);
+            Contract.Requires(client != null);
+
             var tasks = (await namespaces.ToListAsync())
                 .Select(
                     async n =>
@@ -81,6 +91,9 @@
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public static async Task ProvisionAllAsync(this IQueryable<SqlAzureDb> databases, SqlManagementClient client)
         {
+            Contract.Requires(databases != null);
+            Contract.Requires(client != null);
+
             var tasks = (await databases.ToListAsync())
                 .Select(
                     async d =>
@@ -99,6 +112,9 @@
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public static async Task ProvisionAllAsync(this IQueryable<SqlFirewallRule> rules, SqlManagementClient client)
         {
+            Contract.Requires(rules != null);
+            Contract.Requires(client != null);
+
             var tasks = (await rules.ToListAsync())
                 .Select(
                     async r =>
