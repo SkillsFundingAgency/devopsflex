@@ -1,5 +1,6 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
+    using System;
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Core;
@@ -74,16 +75,19 @@
             Contract.Requires(client != null);
             Contract.Requires(model != null);
 
-            await client.CheckCreateDatabaseAsync(
-                await FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription()),
-                FlexConfiguration.GetNaming<SqlAzureDb>()
-                                 .GetSlotName(
-                                     model,
-                                     FlexDataConfiguration.Branch,
-                                     FlexDataConfiguration.Configuration),
-                model.Edition.GetEnumDescription(),
-                model.CollationName,
-                model.MaximumDatabaseSizeInGB);
+            var serverName = await FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription());
+            var dbName = FlexConfiguration.GetNaming<SqlAzureDb>()
+                                          .GetSlotName(
+                                              model,
+                                              FlexDataConfiguration.Branch,
+                                              FlexDataConfiguration.Configuration);
+
+            await client.CheckCreateDatabaseAsync(serverName, dbName, model.Edition.GetEnumDescription(), model.CollationName, model.MaximumDatabaseSizeInGB);
+
+            using (var adb = new DevOpsAzureDatabase(serverName, dbName, FlexConfiguration.FlexSaUser, FlexConfiguration.FlexSaPwd))
+            {
+                await adb.CreateDatabaseUserAsync(FlexConfiguration.FlexAppUser, FlexConfiguration.FlexAppUser, "dbo");
+            }
         }
 
         /// <summary>

@@ -15,10 +15,10 @@
         [TestMethod, TestCategory("Administration")]
         public void Set_Flex_Database_EnvironmentVariables()
         {
-            Environment.SetEnvironmentVariable("FlexSaUser", "flexsa");
-            Environment.SetEnvironmentVariable("FlexSaPwd", "PASSWORD");
-            Environment.SetEnvironmentVariable("FlexAppUser", "flexapp");
-            Environment.SetEnvironmentVariable("FlexAppPwd", "PASSWORD");
+            Environment.SetEnvironmentVariable(FlexConfiguration.EnvFlexSaUser, "flexsa");
+            Environment.SetEnvironmentVariable(FlexConfiguration.EnvFlexSaPwd, "PASSWORD");
+            Environment.SetEnvironmentVariable(FlexConfiguration.EnvFlexAppUser, "flexapp");
+            Environment.SetEnvironmentVariable(FlexConfiguration.EnvFlexAppPwd, "PASSWORD");
         }
     }
 }
