@@ -60,6 +60,22 @@
                 await context.Components.OfType<AzureServiceBusNamespace>().ProvisionAllAsync(client);
             }
         }
+
+        /// <summary>
+        /// Tests the ProvisionAllAsync on <see cref="SqlFirewallRule"/> with real SQL Db data (seed).
+        /// </summary>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_SqlFirewallRule_ProvisionAll_End2End()
+        {
+            FlexDataConfiguration.Branch = "Main";
+            FlexDataConfiguration.Configuration = "MO";
+
+            using (var client = ManagementClient.CreateSqlClient())
+            using (var context = new DevOpsFlexDbContext())
+            {
+                await context.SqlFirewallRules.ProvisionAllAsync(client);
+            }
+        }
     }
 
     /// <summary>

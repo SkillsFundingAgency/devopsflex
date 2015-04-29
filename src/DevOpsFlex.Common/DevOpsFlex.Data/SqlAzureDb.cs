@@ -8,6 +8,7 @@
     {
         public SqlAzureEdition Edition { get; set; }
 
+        [Range(1, 250)]
         public int MaximumDatabaseSizeInGB { get; set; }
 
         [Required, MaxLength(200)]
