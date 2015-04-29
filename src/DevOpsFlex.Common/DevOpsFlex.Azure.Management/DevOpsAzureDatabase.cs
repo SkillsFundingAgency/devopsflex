@@ -4,6 +4,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -12,6 +13,14 @@
     /// </summary>
     public class DevOpsAzureDatabase : IDisposable
     {
+        /// <summary>
+        /// Keeps track of when this object has been disposed of.
+        /// </summary>
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Holds the connection to SQL.
+        /// </summary>
         private readonly SqlConnection _sqlConnection;
 
         /// <summary>
@@ -44,6 +53,12 @@
         /// <param name="password">The password of the SQL user for the connection string.</param>
         public DevOpsAzureDatabase(string serverName, string databaseName, string username, string password)
         {
+            Contract.Requires(!string.IsNullOrWhiteSpace(serverName));
+            Contract.Requires(!serverName.Contains("database.windows.net"));
+            Contract.Requires(!string.IsNullOrWhiteSpace(databaseName));
+            Contract.Requires(!string.IsNullOrWhiteSpace(username));
+            Contract.Requires(!string.IsNullOrWhiteSpace(password));
+
             ServerName = serverName + ".database.windows.net";
             DatabaseName = databaseName;
             Username = username;
@@ -61,6 +76,10 @@
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public async Task CreateDatabaseUserAsync(string loginName, string userName, string defaultSchema)
         {
+            Contract.Requires(!string.IsNullOrWhiteSpace(loginName));
+            Contract.Requires(!string.IsNullOrWhiteSpace(userName));
+            Contract.Requires(!string.IsNullOrWhiteSpace(defaultSchema));
+
             await _sqlConnection.OpenAsync();
 
             try
@@ -103,7 +122,7 @@
         [ExcludeFromCodeCoverage]
         private void Dispose(bool disposing)
         {
-            if (!disposing)
+            if (_disposed || !disposing)
             {
                 return;
             }
@@ -117,6 +136,8 @@
 
                 _sqlConnection.Dispose();
             }
+
+            _disposed = true;
         }
     }
 }
