@@ -21,7 +21,7 @@
         /// <param name="sbName">The name of the namespace we want to create.</param>
         /// <param name="region">The region where we want to create the namespace.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateNamespace(this ServiceBusManagementClient client, string sbName, string region)
+        public static async Task CheckCreateNamespaceAsync(this ServiceBusManagementClient client, string sbName, string region)
         {
             Contract.Requires(client != null);
             Contract.Requires(!string.IsNullOrWhiteSpace(sbName));
@@ -52,12 +52,12 @@
         /// <param name="client">The <see cref="ServiceBusManagementClient"/> that is performing the operation.</param>
         /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this service bus spec.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateNamespace(this ServiceBusManagementClient client, AzureServiceBusNamespace model)
+        public static async Task CheckCreateNamespaceAsync(this ServiceBusManagementClient client, AzureServiceBusNamespace model)
         {
             Contract.Requires(client != null);
             Contract.Requires(model != null);
 
-            await client.CheckCreateNamespace(
+            await client.CheckCreateNamespaceAsync(
                 FlexDataConfiguration.GetNaming<AzureServiceBusNamespace>()
                                      .GetSlotName(
                                          model,

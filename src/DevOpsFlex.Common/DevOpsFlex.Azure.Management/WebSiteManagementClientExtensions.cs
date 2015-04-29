@@ -19,7 +19,7 @@
         /// <param name="webSpace">The name of the Web Space where the site should be.</param>
         /// <param name="parameters">The <see cref="WebSiteCreateParameters"/> that define the site we want to create.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateWebSite(this WebSiteManagementClient client, string webSpace, WebSiteCreateParameters parameters)
+        public static async Task CheckCreateWebSiteAsync(this WebSiteManagementClient client, string webSpace, WebSiteCreateParameters parameters)
         {
             Contract.Requires(client != null);
             Contract.Requires(!string.IsNullOrWhiteSpace(webSpace));
