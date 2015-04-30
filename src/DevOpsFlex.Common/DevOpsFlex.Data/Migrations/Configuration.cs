@@ -25,6 +25,7 @@ namespace DevOpsFlex.Data.Migrations
                     AfinityGroup = "FCTWest",
                     Location = SystemLocation.WestEurope,
                     WebSpace = SystemWebSpace.WestEurope,
+                    StorageType = StorageType.LocalRedundant,
                     Name = "FCT",
                     LogicalName = "FCT"
                 };

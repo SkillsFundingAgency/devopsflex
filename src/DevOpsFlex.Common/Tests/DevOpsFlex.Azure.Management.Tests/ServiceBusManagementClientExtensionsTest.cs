@@ -32,7 +32,7 @@
 
                 try
                 {
-                    await client.CheckCreateNamespaceAsync(nsName, region);
+                    await client.CreateNamespaceIfNotExistsAsync(nsName, region);
 
                     var ns = await client.Namespaces.GetAsync(nsName);
                     Assert.IsNotNull(ns);
@@ -58,7 +58,7 @@
                 try
                 {
                     await client.Namespaces.CreateAsync(nsName, region);
-                    await client.CheckCreateNamespaceAsync(nsName, region);
+                    await client.CreateNamespaceIfNotExistsAsync(nsName, region);
 
                     var ns = await client.Namespaces.GetAsync(nsName);
                     Assert.IsNotNull(ns);

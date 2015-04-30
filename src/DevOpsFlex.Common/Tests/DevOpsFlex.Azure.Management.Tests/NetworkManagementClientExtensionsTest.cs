@@ -18,7 +18,7 @@
     public class NetworkManagementClientExtensionsTest
     {
         /// <summary>
-        /// Tests CheckCreateReservedIpAsync with the creation of a new Reserved IP that doesn't exist in the subscription.
+        /// Tests ReserveIpIfNotReservedAsync with the creation of a new Reserved IP that doesn't exist in the subscription.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateReservedIp_WithNewReservedIp()
@@ -31,7 +31,7 @@
 
                 try
                 {
-                    await client.CheckCreateReservedIpAsync(ipName, location);
+                    await client.ReserveIpIfNotReservedAsync(ipName, location);
 
                     var reservedIp = await client.ReservedIPs.GetAsync(ipName, new CancellationToken());
                     Assert.IsNotNull(reservedIp);
@@ -44,7 +44,7 @@
         }
 
         /// <summary>
-        /// Tests CheckCreateReservedIpAsync with the creation of a new Reserved IP that already exists in the subscription.
+        /// Tests ReserveIpIfNotReservedAsync with the creation of a new Reserved IP that already exists in the subscription.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateReservedIp_WithExistingReservedIp()

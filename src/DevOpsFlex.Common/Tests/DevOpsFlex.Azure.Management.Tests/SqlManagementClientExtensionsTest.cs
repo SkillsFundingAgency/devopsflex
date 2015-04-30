@@ -22,7 +22,7 @@
         #region Integration Tests
 
         /// <summary>
-        /// Tests CheckCreateDatabaseAsync with the creation of a new database that doesn't exist in the server.
+        /// Tests CreateDatabaseIfNotExistsAsync with the creation of a new database that doesn't exist in the server.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateDatabase_WithNewDatabase()
@@ -42,7 +42,7 @@
 
                 try
                 {
-                    await client.CheckCreateDatabaseAsync(server, dbName, dbEdition, dbCollation, dbSize);
+                    await client.CreateDatabaseIfNotExistsAsync(server, dbName, dbEdition, dbCollation, dbSize);
 
                     var webSite = await client.Databases.GetAsync(server, dbName, new CancellationToken());
                     Assert.IsNotNull(webSite);
@@ -55,7 +55,7 @@
         }
 
         /// <summary>
-        /// Tests CheckCreateDatabaseAsync with the creation of a new database that already exists in the server.
+        /// Tests CreateDatabaseIfNotExistsAsync with the creation of a new database that already exists in the server.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
         public async Task Test_CheckCreateDatabase_WithExistingDatabase()
@@ -86,7 +86,7 @@
 
                         });
 
-                    await client.CheckCreateDatabaseAsync(server, dbName, dbEdition, dbCollation, dbSize);
+                    await client.CreateDatabaseIfNotExistsAsync(server, dbName, dbEdition, dbCollation, dbSize);
                 }
                 finally
                 {
@@ -96,7 +96,7 @@
         }
 
         /// <summary>
-        /// Tests CheckCreateFirewallRuleAsync with the creation of a new firewall rule that doesn't exist in the server.
+        /// Tests CreateFirewallRuleIfNotExistsAsync with the creation of a new firewall rule that doesn't exist in the server.
         /// </summary>
         /// <returns></returns>
         [TestMethod, TestCategory("Integration")]
@@ -116,7 +116,7 @@
 
                 try
                 {
-                    await client.CheckCreateFirewallRuleAsync(
+                    await client.CreateFirewallRuleIfNotExistsAsync(
                         server,
                         new FirewallRuleCreateParameters
                         {
@@ -136,7 +136,7 @@
         }
 
         /// <summary>
-        /// Tests CheckCreateFirewallRuleAsync with the creation of a new firewall rule that already exists in the server.
+        /// Tests CreateFirewallRuleIfNotExistsAsync with the creation of a new firewall rule that already exists in the server.
         /// </summary>
         /// <returns></returns>
         [TestMethod, TestCategory("Integration")]
@@ -165,7 +165,7 @@
                             EndIPAddress = endIp
                         });
 
-                    await client.CheckCreateFirewallRuleAsync(
+                    await client.CreateFirewallRuleIfNotExistsAsync(
                         server,
                         new FirewallRuleCreateParameters
                         {

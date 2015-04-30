@@ -35,7 +35,7 @@
                 .Select(
                     async s =>
                     {
-                        await client.CheckCreateCloudServiceAsync(s);
+                        await client.CreateServiceIfNotExistsAsync(s);
                     });
 
             await Task.WhenAll(tasks);
@@ -56,7 +56,7 @@
                 .Select(
                     async s =>
                     {
-                        await client.CheckCreateReservedIpAsync(s);
+                        await client.ReserveIpIfNotReservedAsync(s);
                     });
 
             await Task.WhenAll(tasks);
@@ -77,7 +77,7 @@
                 .Select(
                     async n =>
                     {
-                        await client.CheckCreateNamespaceAsync(n);
+                        await client.CreateNamespaceIfNotExistsAsync(n);
                     });
 
             await Task.WhenAll(tasks);
@@ -98,7 +98,7 @@
                 .Select(
                     async d =>
                     {
-                        await client.CheckCreateDatabaseAsync(d);
+                        await client.CreateDatabaseIfNotExistsAsync(d);
                     });
 
             await Task.WhenAll(tasks);
@@ -119,7 +119,7 @@
                 .Select(
                     async r =>
                     {
-                        await client.CheckCreateFirewallRuleAsync(r);
+                        await client.CreateFirewallRuleIfNotExistsAsync(r);
                     });
 
             await Task.WhenAll(tasks);

@@ -8,6 +8,7 @@
     using Microsoft.WindowsAzure.Management.Network;
     using Microsoft.WindowsAzure.Management.ServiceBus;
     using Microsoft.WindowsAzure.Management.Sql;
+    using Microsoft.WindowsAzure.Management.Storage;
     using Microsoft.WindowsAzure.Management.WebSites;
 
     /// <summary>
@@ -111,6 +112,24 @@
             var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
 
             return new NetworkManagementClient(
+                new CertificateCloudCredentials(
+                    SubscriptionId,
+                    new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
+        }
+
+        /// <summary>
+        /// Creates a standard <see cref="StorageManagementClient"/> that targets the Azure subscription
+        /// specified in the <see cref="AzureSubscription"/> static class.
+        /// </summary>
+        /// <returns>
+        /// A standard <see cref="StorageManagementClient"/> that targets the Azure subscription
+        /// specified in the <see cref="AzureSubscription"/> static class.
+        /// </returns>
+        internal static StorageManagementClient CreateStorageClient()
+        {
+            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
+
+            return new StorageManagementClient(
                 new CertificateCloudCredentials(
                     SubscriptionId,
                     new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));

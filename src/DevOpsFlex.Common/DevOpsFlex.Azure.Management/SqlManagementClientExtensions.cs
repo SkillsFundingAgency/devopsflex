@@ -1,6 +1,5 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
-    using System;
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Core;
@@ -25,7 +24,7 @@
         /// <param name="collationName">The database collation name.</param>
         /// <param name="sizeInGb">The maximum database size in GB.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateDatabaseAsync(
+        public static async Task CreateDatabaseIfNotExistsAsync(
             this SqlManagementClient client,
             string serverName,
             string databaseName,
@@ -70,7 +69,7 @@
         /// <param name="client">The <see cref="SqlManagementClient"/> that is performing the operation.</param>
         /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this database spec.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateDatabaseAsync(this SqlManagementClient client, SqlAzureDb model)
+        public static async Task CreateDatabaseIfNotExistsAsync(this SqlManagementClient client, SqlAzureDb model)
         {
             Contract.Requires(client != null);
             Contract.Requires(model != null);
@@ -82,7 +81,7 @@
                                               FlexDataConfiguration.Branch,
                                               FlexDataConfiguration.Configuration);
 
-            await client.CheckCreateDatabaseAsync(serverName, dbName, model.Edition.GetEnumDescription(), model.CollationName, model.MaximumDatabaseSizeInGB);
+            await client.CreateDatabaseIfNotExistsAsync(serverName, dbName, model.Edition.GetEnumDescription(), model.CollationName, model.MaximumDatabaseSizeInGB);
 
             using (var adb = new DevOpsAzureDatabase(serverName, dbName, FlexConfiguration.FlexSaUser, FlexConfiguration.FlexSaPwd))
             {
@@ -97,7 +96,7 @@
         /// <param name="serverName">The name of the server that we want to use to create the database.</param>
         /// <param name="parameters">The <see cref="FirewallRuleCreateParameters"/> set of parameters for the rule.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateFirewallRuleAsync(this SqlManagementClient client, string serverName, FirewallRuleCreateParameters parameters)
+        public static async Task CreateFirewallRuleIfNotExistsAsync(this SqlManagementClient client, string serverName, FirewallRuleCreateParameters parameters)
         {
             Contract.Requires(client != null);
             Contract.Requires(!string.IsNullOrWhiteSpace(serverName));
@@ -128,12 +127,12 @@
         /// <param name="client">The <see cref="SqlManagementClient"/> that is performing the operation.</param>
         /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this database spec.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateFirewallRuleAsync(this SqlManagementClient client, SqlFirewallRule model)
+        public static async Task CreateFirewallRuleIfNotExistsAsync(this SqlManagementClient client, SqlFirewallRule model)
         {
             Contract.Requires(client != null);
             Contract.Requires(model != null);
 
-            await client.CheckCreateFirewallRuleAsync(
+            await client.CreateFirewallRuleIfNotExistsAsync(
                 await FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription()),
                 model.AzureParameters);
         }
