@@ -110,7 +110,7 @@
         /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
         /// <param name="parameters">The <see cref="HostedServiceCreateParameters"/> that define the service we want to create.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateCloudServiceAsync(this ComputeManagementClient client, HostedServiceCreateParameters parameters)
+        public static async Task CreateServiceIfNotExistsAsync(this ComputeManagementClient client, HostedServiceCreateParameters parameters)
         {
             Contract.Requires(client != null);
             Contract.Requires(parameters != null);
@@ -137,12 +137,12 @@
         /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
         /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this cloud service spec.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateCloudServiceAsync(this ComputeManagementClient client, AzureCloudService model)
+        public static async Task CreateServiceIfNotExistsAsync(this ComputeManagementClient client, AzureCloudService model)
         {
             Contract.Requires(client != null);
             Contract.Requires(model != null);
 
-            await client.CheckCreateCloudServiceAsync(model.AzureParameters);
+            await client.CreateServiceIfNotExistsAsync(model.AzureParameters);
         }
     }
 }

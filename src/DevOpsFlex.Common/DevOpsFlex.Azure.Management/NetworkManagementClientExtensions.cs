@@ -22,7 +22,7 @@
         /// <param name="ipName">The name of the Reserved IP.</param>
         /// <param name="location">The Azure location of the Reserved IP.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateReservedIpAsync(this NetworkManagementClient client, string ipName, string location)
+        public static async Task ReserveIpIfNotReservedAsync(this NetworkManagementClient client, string ipName, string location)
         {
             Contract.Requires(client != null);
             Contract.Requires(!string.IsNullOrWhiteSpace(ipName));
@@ -55,7 +55,7 @@
         /// <param name="client">The <see cref="NetworkManagementClient"/> that is performing the operation.</param>
         /// <param name="model">The DevOpsFlex rich model object that contains everything there is to know about this cloud service spec.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CheckCreateReservedIpAsync(this NetworkManagementClient client, AzureCloudService model)
+        public static async Task ReserveIpIfNotReservedAsync(this NetworkManagementClient client, AzureCloudService model)
         {
             Contract.Requires(client != null);
             Contract.Requires(model != null);
@@ -68,7 +68,7 @@
                                                   FlexDataConfiguration.Configuration)
                          + "-rip";
 
-            await client.CheckCreateReservedIpAsync(ipName, model.System.Location.GetEnumDescription());
+            await client.ReserveIpIfNotReservedAsync(ipName, model.System.Location.GetEnumDescription());
         }
     }
 }

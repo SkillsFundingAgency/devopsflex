@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using Microsoft.WindowsAzure.Management.Models;
+    using Microsoft.WindowsAzure.Management.Storage.Models;
     using Microsoft.WindowsAzure.Management.WebSites.Models;
 
     public class DevOpsSystem
@@ -26,6 +27,8 @@
 
         public SystemWebSpace WebSpace { get; set; }
 
+        public StorageType StorageType { get; set; }
+
         [MaxLength(32)]
         public string AfinityGroup { get; set; }
     }
@@ -42,7 +45,7 @@
         [Description(LocationNames.SoutheastAsia)]  SoutheastAsia   = 8
     }
 
-    public enum SystemWebSpace
+    public enum SystemWebSpace : short
     {
         [Description(WebSpaceNames.WestEuropeWebSpace)]     WestEurope      = 1,
         [Description(WebSpaceNames.NorthEuropeWebSpace)]    NorthEurope     = 2,
@@ -50,5 +53,13 @@
         [Description(WebSpaceNames.NorthCentralUSWebSpace)] NorthCentralUS  = 4,
         [Description(WebSpaceNames.WestUSWebSpace)]         WestUS          = 6,
         [Description(WebSpaceNames.EastAsiaWebSpace)]       EastAsia        = 7
+    }
+
+    public enum StorageType
+    {
+        [Description(StorageAccountTypes.StandardGRS)]      GeoRedundant    = 1,
+        [Description(StorageAccountTypes.StandardLRS)]      LocalRedundant  = 2,
+        [Description(StorageAccountTypes.StandardRAGRS)]    RegionRedundant = 3,
+        [Description(StorageAccountTypes.StandardZRS)]      ZoneRedundant   = 4
     }
 }

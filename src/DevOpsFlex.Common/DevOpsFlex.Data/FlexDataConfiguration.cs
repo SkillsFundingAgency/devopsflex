@@ -15,6 +15,7 @@
         static FlexDataConfiguration()
         {
             RootBranch = "Main";
+            StoraAccountString = "appstorage";
         }
 
         /// <summary>
@@ -36,6 +37,11 @@
         /// Gets and sets the project's root branch for which we want a specific naming.
         /// </summary>
         public static string RootBranch { get; set; }
+
+        /// <summary>
+        /// Gets and sets the substring to look for when search for a storage account during container creation.
+        /// </summary>
+        public static string StoraAccountString { get; set; }
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.

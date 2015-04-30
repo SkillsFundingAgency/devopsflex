@@ -76,7 +76,7 @@
 
                 try
                 {
-                    await client.CheckCreateCloudServiceAsync(parameters);
+                    await client.CreateServiceIfNotExistsAsync(parameters);
 
                     var service = await client.HostedServices.GetAsync(parameters.ServiceName);
                     Assert.IsNotNull(service);
@@ -107,7 +107,7 @@
                 try
                 {
                     await client.HostedServices.CreateAsync(parameters);
-                    await client.CheckCreateCloudServiceAsync(parameters);
+                    await client.CreateServiceIfNotExistsAsync(parameters);
                 }
                 finally
                 {
