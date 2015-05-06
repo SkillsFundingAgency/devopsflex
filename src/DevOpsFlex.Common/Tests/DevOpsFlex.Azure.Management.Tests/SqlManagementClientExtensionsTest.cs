@@ -181,6 +181,20 @@
             }
         }
 
+        [TestMethod]
+        public async Task Foo()
+        {
+            using (var client = ManagementClient.CreateSqlClient())
+            {
+                var foo = await client.ServiceObjectives.ListAsync("acx03vg6p0");
+
+                foreach (var f in foo.ServiceObjectives.Select(o => o.DimensionSettings.First()))
+                {
+                    //f.
+                }
+            }
+        }
+
         #endregion
 
     }

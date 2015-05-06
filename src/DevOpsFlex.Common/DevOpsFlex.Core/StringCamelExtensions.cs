@@ -2,6 +2,7 @@
 {
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Contains string extension methods that help with camel case naming conventions.
@@ -38,6 +39,23 @@
             return (value.ToCharArray().FirstOrDefault(char.IsLetter).ToString() +
                     value.ToCharArray().FirstOrDefault(char.IsDigit))
                 .Replace("\0", "");
+        }
+
+        /// <summary>
+        /// Gets the Sql ServiceObjective part of Azure Sql Servers DTU targets
+        /// from a dimension string.
+        /// </summary>
+        /// <param name="value">The dimension string.</param>
+        /// <returns>The Sql ServiceObjective part of Azure Sql Servers.</returns>
+        public static string GetSqlServiceObjective(this string value)
+        {
+            Contract.Requires(!string.IsNullOrWhiteSpace(value));
+
+            var match = Regex.Match(value, "\\s[A-Z][0-9]+\\s");
+
+            return match.Success ?
+                match.Value.Trim() :
+                null;
         }
     }
 }

@@ -218,6 +218,11 @@
     <Compile Include="PublishSettings\Subscription.cs" />
     <Compile Include="RelFirewallRuleExclusion.cs" />
     <Compile Include="RelComponentExclusion.cs" />
+    <Compile Include="SqlServiceObjectives.cs">
+      <DependentUpon>SqlServiceObjectives.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ServiceBusRegions.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,6 +236,10 @@
     <None Include="DevOpsFlex.Data.cd" />
     <None Include="DevOpsFlex.snk" />
     <None Include="packages.config" />
+    <None Include="SqlServiceObjectives.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SqlServiceObjectives.cs</LastGenOutput>
+    </None>
     <None Include="ServiceBusRegions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ServiceBusRegions.cs</LastGenOutput>

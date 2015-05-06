@@ -59,7 +59,7 @@
                     Name = databaseName,
                     Edition = databaseEdition,
                     CollationName = collationName,
-                    MaximumDatabaseSizeInGB = sizeInGb
+                    MaximumDatabaseSizeInGB = sizeInGb,
                 });
         }
 
