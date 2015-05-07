@@ -56,7 +56,7 @@ namespace DevOpsFlex.Data.Migrations
                         Edition = c.Short(),
                         MaximumDatabaseSizeInGB = c.Int(),
                         CollationName = c.String(maxLength: 200),
-                        DTUs = c.Int(),
+                        ServiceObjective = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -74,7 +74,8 @@ namespace DevOpsFlex.Data.Migrations
                         Name = c.String(nullable: false, maxLength: 200),
                         LogicalName = c.String(nullable: false, maxLength: 3),
                         Location = c.Short(nullable: false),
-                        WebSpace = c.Int(nullable: false),
+                        WebSpace = c.Short(nullable: false),
+                        StorageType = c.Int(nullable: false),
                         AfinityGroup = c.String(maxLength: 32),
                     })
                 .PrimaryKey(t => t.Id)

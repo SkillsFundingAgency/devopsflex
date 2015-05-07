@@ -1,6 +1,5 @@
 namespace DevOpsFlex.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DevOpsFlexDbContext>
@@ -75,7 +74,7 @@ namespace DevOpsFlex.Data.Migrations
                     LogicalName = "ServiceBusDb",
                     Name = "NServiceBus persistency database",
                     Edition = SqlAzureEdition.Standard,
-                    DTUs = 10,
+                    ServiceObjective = SqlServiceObjectives.S1,
                     MaximumDatabaseSizeInGB = 10,
                     CollationName = "SQL_Latin1_General_CP1_CI_AS"
                 },
@@ -85,7 +84,7 @@ namespace DevOpsFlex.Data.Migrations
                     LogicalName = "OrganisationDb",
                     Name = "Organisation service persistency database",
                     Edition = SqlAzureEdition.Standard,
-                    DTUs = 10,
+                    ServiceObjective = SqlServiceObjectives.S1,
                     MaximumDatabaseSizeInGB = 10,
                     CollationName = "SQL_Latin1_General_CP1_CI_AS"
                 },
