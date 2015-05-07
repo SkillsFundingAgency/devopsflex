@@ -18,7 +18,7 @@
 <#@ import namespace="Microsoft.Azure" #>
 <#@ import namespace="Microsoft.WindowsAzure.Management.ServiceBus" #><#
 
-// ****************************************************************************************
+// ******************************************************************************************
 // * This template was created, because at the time that this was created, the ServiceBus
 // * management assembly didn't contain region names either as constants or as an enum.
 // * When this gets added to the MAML, this template can be removed from the project.
@@ -26,13 +26,13 @@
 // * This requires a settings file with a valid subscription on it to properly work.
 // *
 // * DO NOT SET THIS T4 TO RUN ON BUILD. IT'S CLUNKY AS HELL AND SHOULD BE RUN MANUALLY ONLY.
-// ****************************************************************************************
+// ******************************************************************************************
 
 using(var client = CreateClient())
 {
     var regions = client.GetServiceBusRegions();
 #>
-namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint")#>
+namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint") #>
 {
     using System.ComponentModel;
 
