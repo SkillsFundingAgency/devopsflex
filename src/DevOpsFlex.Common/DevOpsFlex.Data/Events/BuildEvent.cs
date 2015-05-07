@@ -1,5 +1,7 @@
-﻿namespace DevOpsFlex.Core.Events
+﻿namespace DevOpsFlex.Data.Events
 {
+    using System.ComponentModel.DataAnnotations;
+
     /// <summary>
     /// Represents a build event that got fired by a build action that was called
     /// by a high level build activity, either a PowerShell commandlet or a TFS build activity.
@@ -19,6 +21,9 @@
             Message = message;
         }
 
+        [Key]
+        public int Id { get; set; }
+
         /// <summary>
         /// Gets the <see cref="BuildEventType"/> of the event.
         /// </summary>
@@ -32,23 +37,25 @@
         /// <summary>
         /// Gets the text message that describes the event.
         /// </summary>
+        [Required, MaxLength(500)]
         public string Message { get; private set; }
     }
 
     /// <summary>
     /// Describes the type of build events that can happen.
     /// </summary>
-    public enum BuildEventType
+    public enum BuildEventType : short
     {
         Information,
         Warning,
-        Error
+        Error,
+        Key
     }
 
     /// <summary>
     /// Describes the importance of build events.
     /// </summary>
-    public enum BuildEventImportance
+    public enum BuildEventImportance : short
     {
         High,
         Medium,

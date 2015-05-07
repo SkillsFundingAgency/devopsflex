@@ -49,8 +49,8 @@ namespace DevOpsFlex.Data.Migrations
                         PublishProjectTfsPath = c.String(maxLength: 500),
                         SolutionTfsPath = c.String(maxLength: 500),
                         Region = c.Int(),
-                        ExternalAccess = c.Short(),
-                        Acl = c.Short(),
+                        PublicAccess = c.Int(),
+                        Acl = c.Int(),
                         PublishProjectTfsPath1 = c.String(maxLength: 500),
                         SolutionTfsPath1 = c.String(maxLength: 500),
                         Edition = c.Short(),
@@ -122,6 +122,21 @@ namespace DevOpsFlex.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id);
             
+            CreateTable(
+                "dbo.BuildEvents",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Type = c.Short(nullable: false),
+                        Importance = c.Short(nullable: false),
+                        Message = c.String(nullable: false, maxLength: 500),
+                        Account = c.String(maxLength: 100),
+                        Container = c.String(maxLength: 100),
+                        Key = c.String(maxLength: 100),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
@@ -146,6 +161,7 @@ namespace DevOpsFlex.Data.Migrations
             DropIndex("dbo.RelComponentExclusions", new[] { "BranchId" });
             DropIndex("dbo.RelComponentExclusions", new[] { "ConfigurationId" });
             DropIndex("dbo.RelComponentExclusions", new[] { "ComponentId" });
+            DropTable("dbo.BuildEvents");
             DropTable("dbo.BuildConfigurations");
             DropTable("dbo.RelFirewallRuleExclusions");
             DropTable("dbo.SqlFirewallRules");

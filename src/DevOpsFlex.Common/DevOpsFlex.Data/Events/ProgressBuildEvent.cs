@@ -1,6 +1,7 @@
-﻿namespace DevOpsFlex.Core.Events
+﻿namespace DevOpsFlex.Data.Events
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Diagnostics.CodeAnalysis;
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
@@ -24,6 +25,7 @@
         /// <summary>
         /// Gets the Progress event stream as a Rx <see cref="IObservable{T}"/>.
         /// </summary>
+        [NotMapped]
         public IObservable<int> ProgressStream
         {
             get { return _progressSubject.AsObservable(); }
