@@ -1,11 +1,7 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
     using System;
-    using System.Reactive;
-    using System.Reactive.Linq;
-    using System.Reactive.Subjects;
     using Choosing;
-    using Core.Events;
     using Data;
     using Data.Naming;
 
@@ -14,11 +10,6 @@
     /// </summary>
     public static class FlexConfiguration
     {
-        /// <summary>
-        /// Holds a static reference to the build event stream.
-        /// </summary>
-        private static readonly Subject<BuildEvent> BuildEventStream = new Subject<BuildEvent>();
-
         /// <summary>
         /// Holds a static reference to the current web plan chooser object.
         /// </summary>
@@ -48,22 +39,6 @@
         /// Holds the environment variable name for the Azure SQL database application user password.
         /// </summary>
         internal const string EnvFlexAppPwd = "FlexAppPwd";
-
-        /// <summary>
-        /// Gets the build event stream as an <see cref="IObserver{T}"/>.
-        /// </summary>
-        public static IObserver<BuildEvent> BuildEventsObserver
-        {
-            get { return BuildEventStream.AsObserver(); }
-        }
-
-        /// <summary>
-        /// Gets the build event stream as an <see cref="IObservable{T}"/>.
-        /// </summary>
-        public static IObservable<BuildEvent> BuildEventsObservable
-        {
-            get { return BuildEventStream.AsObservable(); }
-        }
 
         /// <summary>
         /// Gets the Azure SQL database SA username.

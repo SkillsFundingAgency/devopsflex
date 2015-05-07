@@ -1,6 +1,7 @@
 ﻿namespace DevOpsFlex.Data
 {
     using System.Data.Entity;
+    using Events;
 
     public class DevOpsFlexDbContext : DbContext
     {
@@ -11,6 +12,8 @@
         public DbSet<RelComponentExclusion> ComponentExclusions { get; set; }
 
         public DbSet<RelFirewallRuleExclusion> FirewallRulesExclusions { get; set; }
+
+        public DbSet<BuildEvent> BuildEvents { get; set; }
 
         public DbSet<DevOpsComponent> Components { get; set; }
 

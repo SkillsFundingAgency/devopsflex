@@ -257,6 +257,7 @@
     <Compile Include="Choosing\IChooseWebPlan.cs" />
     <Compile Include="DevOpsAzureDatabase.cs" />
     <Compile Include="DevOpsFlexDbContextExtensions.cs" />
+    <Compile Include="FlexStreams.cs" />
     <Compile Include="NetworkManagementClientExtensions.cs" />
     <Compile Include="SqlManagementClientExtensions.cs" />
     <Compile Include="ServiceBusManagementClientExtensions.cs" />

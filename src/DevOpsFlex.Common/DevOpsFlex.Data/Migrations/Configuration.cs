@@ -1,6 +1,7 @@
 namespace DevOpsFlex.Data.Migrations
 {
     using System.Data.Entity.Migrations;
+    using Microsoft.WindowsAzure.Storage.Blob;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DevOpsFlexDbContext>
     {
@@ -116,16 +117,16 @@ namespace DevOpsFlex.Data.Migrations
                     System = system,
                     LogicalName = "DataBusStorage",
                     Name = "NServiceBus DataBus storage",
-                    ExternalAccess = ContainerExternalAccess.Private,
-                    Acl = ContainerAcl.Read | ContainerAcl.Write
+                    PublicAccess = BlobContainerPublicAccessType.Off,
+                    Acl = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List
                 },
                 new AzureStorageContainer
                 {
                     System = system,
                     LogicalName = "DocumentTemplates",
                     Name = "Document Templates for the document domain",
-                    ExternalAccess = ContainerExternalAccess.Private,
-                    Acl = ContainerAcl.Read | ContainerAcl.Write
+                    PublicAccess = BlobContainerPublicAccessType.Off,
+                    Acl = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List
                 });
         }
 
