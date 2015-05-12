@@ -1,7 +1,6 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
     using System.Diagnostics.Contracts;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core;
     using Data;
@@ -41,11 +40,11 @@
 
             var key = (await client.StorageAccounts.GetKeysAsync(accountName)).PrimaryKey;
 
-            var storageAccount = CloudStorageAccount.Parse(string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", accountName, key));
+            var storageAccount = CloudStorageAccount.Parse($"DefaultEndpointsProtocol=https;AccountName={accountName};AccountKey={key}");
             var container = storageAccount.CreateCloudBlobClient().GetContainerReference(containerName);
-            container.SetPermissions(new BlobContainerPermissions {PublicAccess = publicAccess});
 
             await container.CreateIfNotExistsAsync();
+            await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = publicAccess });
 
             var acl = container.GetSharedAccessSignature(new SharedAccessBlobPolicy {Permissions = permissions});
             FlexStreams.BuildEventsObserver.OnNext(new StorageKeyEvent(accountName, containerName, acl));
@@ -65,15 +64,18 @@
             Contract.Requires(model != null);
             Contract.Requires(model.System != null);
 
-            string accountName;
+            var accountName = await FlexConfiguration.StorageAccountChooser.Choose(client, model.System.StorageType.GetEnumDescription());
+            StorageAccountGetResponse account = null;
 
-            var account = (await client.StorageAccounts.ListAsync())
-                .FirstOrDefault(a => a.Name.Contains(FlexDataConfiguration.StoraAccountString) &&
-                                     a.Properties.AccountType == model.System.StorageType.GetEnumDescription());
+            try
+            {
+                account = (await client.StorageAccounts.GetAsync(accountName));
+            }
+            catch { }
 
             if (account == null)
             {
-                accountName = model.System.LogicalName + "-" + FlexDataConfiguration.StoraAccountString;
+                accountName = model.System.LogicalName + FlexDataConfiguration.StoraAccountString + FlexDataConfiguration.Branch;
 
                 await client.StorageAccounts.CreateAsync(
                     new StorageAccountCreateParameters
@@ -85,7 +87,7 @@
             }
             else
             {
-                accountName = account.Name;
+                accountName = account.StorageAccount.Name;
             }
 
             await client.CreateContainerIfNotExistsAsync(

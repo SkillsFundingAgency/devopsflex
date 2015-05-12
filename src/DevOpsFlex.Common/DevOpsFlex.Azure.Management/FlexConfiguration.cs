@@ -11,16 +11,6 @@
     public static class FlexConfiguration
     {
         /// <summary>
-        /// Holds a static reference to the current web plan chooser object.
-        /// </summary>
-        private static IChooseWebPlan _webPlanChooser = new DefaultWebPlanChooser();
-
-        /// <summary>
-        /// Holds a static reference to the current azure sql server chooser object.
-        /// </summary>
-        private static IChooseSqlServer _sqlServerChooser = new DefaultAzureSqlServerChooser();
-
-        /// <summary>
         /// Holds the environment variable name for the Azure SQL database SA username.
         /// </summary>
         internal const string EnvFlexSaUser = "FlexSaUser";
@@ -43,34 +33,22 @@
         /// <summary>
         /// Gets the Azure SQL database SA username.
         /// </summary>
-        public static string FlexSaUser
-        {
-            get { return Environment.GetEnvironmentVariable(EnvFlexSaUser); }
-        }
+        public static string FlexSaUser => Environment.GetEnvironmentVariable(EnvFlexSaUser);
 
         /// <summary>
         /// Gets the Azure SQL database SA user password.
         /// </summary>
-        public static string FlexSaPwd
-        {
-            get { return Environment.GetEnvironmentVariable(EnvFlexSaPwd); }
-        }
+        public static string FlexSaPwd => Environment.GetEnvironmentVariable(EnvFlexSaPwd);
 
         /// <summary>
         /// Gets the Azure SQL database application user username.
         /// </summary>
-        public static string FlexAppUser
-        {
-            get { return Environment.GetEnvironmentVariable(EnvFlexAppUser); }
-        }
+        public static string FlexAppUser => Environment.GetEnvironmentVariable(EnvFlexAppUser);
 
         /// <summary>
         /// Gets the Azure SQL database application user password.
         /// </summary>
-        public static string FlexAppPwd
-        {
-            get { return Environment.GetEnvironmentVariable(EnvFlexAppPwd); }
-        }
+        public static string FlexAppPwd => Environment.GetEnvironmentVariable(EnvFlexAppPwd);
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
@@ -100,16 +78,13 @@
         /// <param name="chooser">The current web plan chooser object.</param>
         public static void UseWebPlanChooser(IChooseWebPlan chooser)
         {
-            _webPlanChooser = chooser;
+            WebPlanChooser = chooser;
         }
 
         /// <summary>
         /// Gets the <see cref="IChooseWebPlan"/> object in configuration.
         /// </summary>
-        public static IChooseWebPlan WebPlanChooser
-        {
-            get { return _webPlanChooser; }
-        }
+        public static IChooseWebPlan WebPlanChooser { get; private set; } = new DefaultWebPlanChooser();
 
         /// <summary>
         /// Overrides the <see cref="IChooseSqlServer"/> object in configuration.
@@ -117,15 +92,26 @@
         /// <param name="chooser">The current azure sql server chooser object.</param>
         public static void UseSqlServerChooser(IChooseSqlServer chooser)
         {
-            _sqlServerChooser = chooser;
+            SqlServerChooser = chooser;
         }
 
         /// <summary>
         /// Gets the <see cref="IChooseSqlServer"/> object in configuration.
         /// </summary>
-        public static IChooseSqlServer SqlServerChooser
+        public static IChooseSqlServer SqlServerChooser { get; private set; } = new DefaultAzureSqlServerChooser();
+
+        /// <summary>
+        /// Overrides the <see cref="IChooseSqlServer"/> object in configuration.
+        /// </summary>
+        /// <param name="chooser">The current azure sql server chooser object.</param>
+        public static void UseStorageAccountChooser(IChooseStorageAccount chooser)
         {
-            get { return _sqlServerChooser; }
+            StorageAccountChooser = chooser;
         }
+
+        /// <summary>
+        /// Gets the <see cref="IChooseSqlServer"/> object in configuration.
+        /// </summary>
+        public static IChooseStorageAccount StorageAccountChooser { get; private set; } = new DefaultStorageAccountChooser();
     }
 }

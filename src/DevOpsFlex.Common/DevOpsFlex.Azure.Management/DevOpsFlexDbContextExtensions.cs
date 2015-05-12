@@ -9,6 +9,7 @@
     using Microsoft.WindowsAzure.Management.Network;
     using Microsoft.WindowsAzure.Management.ServiceBus;
     using Microsoft.WindowsAzure.Management.Sql;
+    using Microsoft.WindowsAzure.Management.Storage;
 
     /// <summary>
     /// Extends the <see cref="DevOpsFlexDbContext"/> with usefull extensions that the devopsflex
@@ -120,6 +121,27 @@
                     async r =>
                     {
                         await client.CreateFirewallRuleIfNotExistsAsync(r);
+                    });
+
+            await Task.WhenAll(tasks);
+        }
+
+        /// <summary>
+        /// Provisions all the storage containers in the <see cref="IQueryable{T}"/> of <see cref="AzureStorageContainer"/>.
+        /// </summary>
+        /// <param name="containers">The list of <see cref="AzureStorageContainer"/> to provision.</param>
+        /// <param name="client">The <see cref="StorageManagementClient"/> that is performing the operation.</param>
+        /// <returns>The async <see cref="Task"/> wrapper.</returns>
+        public static async Task ProvisionAllAsync(this IQueryable<AzureStorageContainer> containers, StorageManagementClient client)
+        {
+            Contract.Requires(containers != null);
+            Contract.Requires(client != null);
+
+            var tasks = (await containers.ToListAsync())
+                .Select(
+                    async c =>
+                    {
+                        await client.CreateContainerIfNotExistsAsync(c);
                     });
 
             await Task.WhenAll(tasks);
