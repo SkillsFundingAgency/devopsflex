@@ -10,15 +10,6 @@
     public static class FlexDataConfiguration
     {
         /// <summary>
-        /// Handles static initialization for <see cref="FlexDataConfiguration"/>.
-        /// </summary>
-        static FlexDataConfiguration()
-        {
-            RootBranch = "Main";
-            StoraAccountString = "appstorage";
-        }
-
-        /// <summary>
         /// Holds a <see cref="Type"/> map being objects being named and the naming types.
         /// </summary>
         internal static readonly Dictionary<Type, dynamic> NamingMap = new Dictionary<Type, dynamic>();
@@ -36,12 +27,12 @@
         /// <summary>
         /// Gets and sets the project's root branch for which we want a specific naming.
         /// </summary>
-        public static string RootBranch { get; set; }
+        public static string RootBranch { get; set; } = "Main";
 
         /// <summary>
         /// Gets and sets the substring to look for when search for a storage account during container creation.
         /// </summary>
-        public static string StoraAccountString { get; set; }
+        public static string StoraAccountString { get; set; } = "appstorage";
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.

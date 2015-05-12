@@ -1,6 +1,5 @@
 ﻿namespace DevOpsFlex.Activities.Tests
 {
-    using System;
     using System.Activities;
     using System.Collections.Generic;
     using Azure.Management;

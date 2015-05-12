@@ -252,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Choosing\DefaultAzureSqlServerChooser.cs" />
+    <Compile Include="Choosing\DefaultStorageAccountChooser.cs" />
     <Compile Include="Choosing\DefaultWebPlanChooser.cs" />
     <Compile Include="Choosing\IChooseSqlServer.cs" />
     <Compile Include="Choosing\IChooseStorageAccount.cs" />
