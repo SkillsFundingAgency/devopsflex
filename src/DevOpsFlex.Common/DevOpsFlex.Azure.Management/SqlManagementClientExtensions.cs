@@ -1,6 +1,9 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core;
     using Data;
@@ -47,7 +50,7 @@
             }
             catch (CloudException cex)
             {
-                if (!cex.Error.Message.Contains(string.Format("Resource with the name '{0}' does not exist", databaseName))) throw;
+                if (!cex.Error.Message.Contains($"Resource with the name '{databaseName}' does not exist")) throw;
             }
 
             if (ns != null) return;
@@ -61,6 +64,11 @@
                     CollationName = collationName,
                     MaximumDatabaseSizeInGB = sizeInGb,
                 });
+
+            using (var adb = new DevOpsAzureDatabase(serverName, databaseName, FlexConfiguration.FlexSaUser, FlexConfiguration.FlexSaPwd))
+            {
+                await adb.CreateDatabaseUserAsync(FlexConfiguration.FlexAppUser, FlexConfiguration.FlexAppUser, "dbo");
+            }
         }
 
         /// <summary>
@@ -75,6 +83,45 @@
             Contract.Requires(model != null);
 
             var serverName = await FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription());
+
+            if (serverName == null)
+            {
+                string serverMaxVersion = null;
+
+                try
+                {
+                    await client.Servers.CreateAsync(new ServerCreateParameters
+                    {
+                        AdministratorUserName = FlexConfiguration.FlexSaUser,
+                        AdministratorPassword = FlexConfiguration.FlexSaPwd,
+                        Location = model.System.Location.GetEnumDescription(),
+                        Version = "100.0" // This needs to be an invalid version number
+                    });
+                }
+                catch (CloudException ex)
+                {
+                    if (ex.Error.Code == "40856") // SQL Version doesn't exist in the target location
+                    {
+                        var serverVersions = Regex.Match(ex.Error.Message, "server versions: '([^']*)'.").Groups[1].Value.Split(',');
+                        var maxVersion = serverVersions.Max((s => decimal.Parse(s)));
+                        serverMaxVersion = serverVersions.First(s => s.Contains(maxVersion.ToString("F1", CultureInfo.InvariantCulture)));
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                serverName = (await client.Servers.CreateAsync(
+                    new ServerCreateParameters
+                    {
+                        AdministratorUserName = FlexConfiguration.FlexSaUser,
+                        AdministratorPassword = FlexConfiguration.FlexSaPwd,
+                        Location = model.System.Location.GetEnumDescription(),
+                        Version = serverMaxVersion
+                    })).ServerName;
+            }
+
             var dbName = FlexConfiguration.GetNaming<SqlAzureDb>()
                                           .GetSlotName(
                                               model,
@@ -82,11 +129,6 @@
                                               FlexDataConfiguration.Configuration);
 
             await client.CreateDatabaseIfNotExistsAsync(serverName, dbName, model.Edition.GetEnumDescription(), model.CollationName, model.MaximumDatabaseSizeInGB);
-
-            using (var adb = new DevOpsAzureDatabase(serverName, dbName, FlexConfiguration.FlexSaUser, FlexConfiguration.FlexSaPwd))
-            {
-                await adb.CreateDatabaseUserAsync(FlexConfiguration.FlexAppUser, FlexConfiguration.FlexAppUser, "dbo");
-            }
         }
 
         /// <summary>
@@ -113,7 +155,7 @@
             }
             catch (CloudException cex)
             {
-                if (!cex.Error.Message.Contains(string.Format("Resource with the name '{0}' does not exist", parameters.Name))) throw;
+                if (!cex.Error.Message.Contains($"Resource with the name '{parameters.Name}' does not exist")) throw;
             }
 
             if (rule != null) return;

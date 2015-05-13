@@ -35,15 +35,15 @@
         /// <returns>The slot name.</returns>
         public string GetSlotName(T component, string branch, string configuration)
         {
-            var branchName = String.Equals(branch, FlexDataConfiguration.RootBranch, StringComparison.CurrentCultureIgnoreCase) ?
+            var branchName = string.Equals(branch, FlexDataConfiguration.RootBranch, StringComparison.CurrentCultureIgnoreCase) ?
                 "" :
                 branch.GetOneCharOneDigit().ToLower();
 
             return string.Concat(component.System.LogicalName.ToLower().Take(MaxSystemLength)) +
-                   branchName +
                    "-" +
                    string.Concat(component.LogicalName.ToLower().Take(MaxComponentLength)) +
                    "-" +
+                   branchName +
                    string.Concat(configuration.ToLower().Take(MaxConfigurationLength));
         }
     }
