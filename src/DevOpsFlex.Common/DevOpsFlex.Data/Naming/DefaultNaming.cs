@@ -19,7 +19,7 @@
         /// <summary>
         /// Defines the maximum length for the component logical name;
         /// </summary>
-        internal const int MaxComponentLength = 10;
+        internal const int MaxComponentLength = 15;
 
         /// <summary>
         /// Defines the maximum length for the configuration name;

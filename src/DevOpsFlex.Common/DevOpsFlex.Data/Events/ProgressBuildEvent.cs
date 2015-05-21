@@ -26,10 +26,7 @@
         /// Gets the Progress event stream as a Rx <see cref="IObservable{T}"/>.
         /// </summary>
         [NotMapped]
-        public IObservable<int> ProgressStream
-        {
-            get { return _progressSubject.AsObservable(); }
-        }
+        public IObservable<int> ProgressStream => _progressSubject.AsObservable();
 
         /// <summary>
         /// Initializes a new instance of <see cref="ProgressBuildEvent"/>.
