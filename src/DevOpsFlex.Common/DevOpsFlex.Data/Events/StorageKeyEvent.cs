@@ -14,7 +14,7 @@
         /// <param name="container">The name of the storage container that this key was created in.</param>
         /// <param name="key">The value of this key (ACL).</param>
         public StorageKeyEvent(string account, string container, string key)
-            : base(BuildEventType.Key, BuildEventImportance.High, string.Format("Key created in account [{0}] for container [{1}]: {2}", container, account, key))
+            : base(BuildEventType.Key, BuildEventImportance.High, $"Key created in account [{container}] for container [{account}]: {key}")
         {
             Account = account;
             Container = container;

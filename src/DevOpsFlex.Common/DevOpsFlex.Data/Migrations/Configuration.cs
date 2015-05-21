@@ -92,7 +92,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureWebSite
                 {
                     System = system,
-                    LogicalName = "MocksSite",
+                    LogicalName = "Mocks",
                     Name = "Mocks services (Stubs)",
                     PublishProjectTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.sln"
@@ -100,7 +100,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureWebSite
                 {
                     System = system,
-                    LogicalName = "WebJobsSite",
+                    LogicalName = "WebJobs",
                     Name = "Web Jobs hosting",
                     PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.Azure.WebJobsHostSite.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.sln"
@@ -115,7 +115,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureStorageContainer
                 {
                     System = system,
-                    LogicalName = "DataBusStorage",
+                    LogicalName = "DataBus",
                     Name = "NServiceBus DataBus storage",
                     PublicAccess = BlobContainerPublicAccessType.Off,
                     Acl = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List
