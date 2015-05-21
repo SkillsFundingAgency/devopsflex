@@ -1,15 +1,12 @@
 ﻿namespace DevOpsFlex.Azure.Management.Tests
 {
     using System;
-    using System.Globalization;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Threading.Tasks;
     using Choosing;
     using Core;
     using Data;
-    using Hyak.Common;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Sql;
     using Microsoft.WindowsAzure.Management.Sql.Models;

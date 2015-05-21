@@ -4,6 +4,94 @@
         <name>Microsoft.WindowsAzure.Management.WebSites</name>
     </assembly>
     <members>
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperations">
+            <summary>
+            Operations for invoking commands.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.ICommandsOperations">
+            <summary>
+            Operations for invoking commands.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ICommandsOperations.InvokeAsync(Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters,System.Threading.CancellationToken)">
+            <summary>
+            Invoke a command on the website's VM.
+            </summary>
+            <param name='parameters'>
+            The invoke command parameters.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The invoke command operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperations.#ctor(Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient)">
+            <summary>
+            Initializes a new instance of the CommandsOperations class.
+            </summary>
+            <param name='client'>
+            Reference to the service client.
+            </param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperations.InvokeAsync(Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters,System.Threading.CancellationToken)">
+            <summary>
+            Invoke a command on the website's VM.
+            </summary>
+            <param name='parameters'>
+            Required. The invoke command parameters.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The invoke command operation response.
+            </returns>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperations.Client">
+            <summary>
+            Gets a reference to the
+            Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperationsExtensions">
+            <summary>
+            The websites extensions client manages the web sites deployments, web
+            jobs and other extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperationsExtensions.Invoke(Microsoft.WindowsAzure.WebSitesExtensions.ICommandsOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters)">
+            <summary>
+            Invoke a command on the website's VM.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.WebSitesExtensions.ICommandsOperations.
+            </param>
+            <param name='parameters'>
+            Required. The invoke command parameters.
+            </param>
+            <returns>
+            The invoke command operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.CommandsOperationsExtensions.InvokeAsync(Microsoft.WindowsAzure.WebSitesExtensions.ICommandsOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters)">
+            <summary>
+            Invoke a command on the website's VM.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.WebSitesExtensions.ICommandsOperations.
+            </param>
+            <param name='parameters'>
+            Required. The invoke command parameters.
+            </param>
+            <returns>
+            The invoke command operation response.
+            </returns>
+        </member>
         <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperations">
             <summary>
             Operations for managing continuous WebJobs.
@@ -322,13 +410,13 @@
             Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Delete a continuous job.
             </summary>
@@ -344,7 +432,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Delete a continuous job.
             </summary>
@@ -360,7 +448,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Get a continuous WebJob.
             </summary>
@@ -375,7 +463,7 @@
             The get continuous WebJob Operation Response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Get a continuous WebJob.
             </summary>
@@ -390,7 +478,7 @@
             The get continuous WebJob Operation Response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.GetSettings(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.GetSettings(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Get the settings of a continuous WebJob.
             </summary>
@@ -405,7 +493,7 @@
             The continuous WebJob settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.GetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.GetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Get the settings of a continuous WebJob.
             </summary>
@@ -420,7 +508,7 @@
             The continuous WebJob settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations)">
             <summary>
             List the continuous web jobs.
             </summary>
@@ -432,7 +520,7 @@
             The list of continuous WebJobs operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations)">
             <summary>
             List the continuous web jobs.
             </summary>
@@ -444,7 +532,7 @@
             The list of continuous WebJobs operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.SetSettings(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.ContinuousWebJobSettingsUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.SetSettings(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.ContinuousWebJobSettingsUpdateParameters)">
             <summary>
             Set the settings of a continuous WebJob (will replace the current
             settings of the WebJob).
@@ -464,7 +552,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.SetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.ContinuousWebJobSettingsUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.SetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.ContinuousWebJobSettingsUpdateParameters)">
             <summary>
             Set the settings of a continuous WebJob (will replace the current
             settings of the WebJob).
@@ -484,7 +572,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.Start(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.Start(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Start a continuous WebJob.
             </summary>
@@ -500,7 +588,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.StartAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.StartAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Start a continuous WebJob.
             </summary>
@@ -516,7 +604,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.Stop(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.Stop(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Stop a continuous WebJob.
             </summary>
@@ -532,7 +620,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.StopAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.StopAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String)">
             <summary>
             Stop a continuous WebJob.
             </summary>
@@ -548,7 +636,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.UploadFile(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.UploadFile(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a continuous WebJob with a script file (.exe,
             .bat, .php, .js...).
@@ -571,7 +659,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.UploadFileAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.UploadFileAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a continuous WebJob with a script file (.exe,
             .bat, .php, .js...).
@@ -594,7 +682,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.UploadZip(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.UploadZip(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a continuous WebJob with a zip file (containing
             the WebJob binaries).
@@ -617,7 +705,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.ContinuousWebJobOperationsExtensions.UploadZipAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.ContinuousWebJobOperationsExtensions.UploadZipAsync(Microsoft.WindowsAzure.WebSitesExtensions.IContinuousWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a continuous WebJob with a zip file (containing
             the WebJob binaries).
@@ -818,13 +906,13 @@
             Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.DeploymentOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
             <summary>
             Gets a deployment for a website.
             </summary>
@@ -839,7 +927,7 @@
             The deployment information operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
             <summary>
             Gets a deployment for a website.
             </summary>
@@ -854,7 +942,7 @@
             The deployment information operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.GetLog(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.GetLog(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,System.String)">
             <summary>
             Gets a deployment log for a website.
             </summary>
@@ -872,7 +960,7 @@
             The get log for a deployments operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.GetLogAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.GetLogAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,System.String)">
             <summary>
             Gets a deployment log for a website.
             </summary>
@@ -890,7 +978,7 @@
             The get log for a deployments operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
             <summary>
             List the deployments for a website.
             </summary>
@@ -905,7 +993,7 @@
             The list of deployments operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
             <summary>
             List the deployments for a website.
             </summary>
@@ -920,7 +1008,7 @@
             The list of deployments operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.ListLogs(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.ListLogs(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
             <summary>
             List the logs for a deployment for a website.
             </summary>
@@ -938,7 +1026,7 @@
             The list of deployments operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.ListLogsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.ListLogsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.DeploymentListParameters)">
             <summary>
             List the logs for a deployment for a website.
             </summary>
@@ -956,7 +1044,7 @@
             The list of deployments operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.Redeploy(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.Redeploy(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
             <summary>
             Redeploys a specific website deployment.
             </summary>
@@ -972,7 +1060,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DeploymentOperationsExtensions.RedeployAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DeploymentOperationsExtensions.RedeployAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDeploymentOperations,System.String)">
             <summary>
             Redeploys a specific website deployment.
             </summary>
@@ -1064,13 +1152,13 @@
             Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.DiagnosticOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.DiagnosticOperationsExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DiagnosticOperationsExtensions.GetSettings(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DiagnosticOperationsExtensions.GetSettings(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations)">
             <summary>
             Get diagnostics settings.
             </summary>
@@ -1082,7 +1170,7 @@
             The get diagnostic settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DiagnosticOperationsExtensions.GetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DiagnosticOperationsExtensions.GetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations)">
             <summary>
             Get diagnostics settings.
             </summary>
@@ -1094,7 +1182,7 @@
             The get diagnostic settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DiagnosticOperationsExtensions.UpdateSettings(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DiagnosticUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DiagnosticOperationsExtensions.UpdateSettings(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DiagnosticUpdateParameters)">
             <summary>
             Update diagnostics settings.
             </summary>
@@ -1110,7 +1198,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.DiagnosticOperationsExtensions.UpdateSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DiagnosticUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.DiagnosticOperationsExtensions.UpdateSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.IDiagnosticOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.DiagnosticUpdateParameters)">
             <summary>
             Update diagnostics settings.
             </summary>
@@ -1534,6 +1622,11 @@
             The site name.
             </summary>
         </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.IWebSiteExtensionsClient.Commands">
+            <summary>
+            Operations for invoking commands.
+            </summary>
+        </member>
         <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.IWebSiteExtensionsClient.ContinuousWebJobs">
             <summary>
             Operations for managing continuous WebJobs.
@@ -1682,6 +1775,24 @@
             more information)
             </summary>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.ApplySlotConfigurationAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='targetSwapSlot'>
+            The name of the target slot to be swapped with.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.BackupAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest,System.Threading.CancellationToken)">
             <summary>
             Backups a site on-demand.
@@ -1751,6 +1862,26 @@
             The Create Web Site operation response.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.CreateHybridConnectionAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters,System.Threading.CancellationToken)">
+            <summary>
+            Creates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='siteName'>
+            The name of the web site.
+            </param>
+            <param name='parameters'>
+            Parameters supplied to the Create Hybrid Connection operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The Create Hybrid Connection operation response.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.CreateRepositoryAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             A web site repository is essentially a Git repository that you can
@@ -1791,6 +1922,27 @@
             </param>
             <param name='parameters'>
             Parameters supplied to the Delete Web Site operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.DeleteHybridConnectionAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a hybrid connection on a specific site.
+            </summary>
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            The name of the hybrid connection entity
             </param>
             <param name='cancellationToken'>
             Cancellation token.
@@ -1955,6 +2107,27 @@
             The Get Historical Usage Metrics Web Site operation response.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.GetHybridConnectionAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a particular hybrid connection that belongs to a specific
+            site.
+            </summary>
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            The name of the hybrid connection entity
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The Get Hybrid Connection operation response.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.GetInstanceIdsAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             You can retrieve the list of active instances by ids for a web site
@@ -2017,6 +2190,21 @@
             The Get Repository Web Site operation response.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.GetSlotConfigNamesAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.GetUsageMetricsAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             You can retrieve current usage metrics for a site by issuing an
@@ -2069,6 +2257,38 @@
             </param>
             <returns>
             List of backups for the website.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.ListHybridConnectionsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a list of all hybrid connections on a specific web site.
+            </summary>
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The List Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.ResetSlotConfigurationAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
             </returns>
         </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.RestartAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -2222,6 +2442,45 @@
             </param>
             <param name='parameters'>
             Parameters supplied to the Update Configuration Web Site operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.UpdateHybridConnectionAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters,System.Threading.CancellationToken)">
+            <summary>
+            Updates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='siteName'>
+            The name of the web site.
+            </param>
+            <param name='parameters'>
+            Parameters supplied to the Create Hybrid Connection operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.UpdateSlotConfigNamesAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            The name of the web site.
+            </param>
+            <param name='parameters'>
+            The parameters.
             </param>
             <param name='cancellationToken'>
             Cancellation token.
@@ -2533,6 +2792,31 @@
             <summary>
             Optional. When this schedule should start backing up the site. Null
             means immediately.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.Models.CommandResult">
+            <summary>
+            The invoke command result.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.Models.CommandResult.#ctor">
+            <summary>
+            Initializes a new instance of the CommandResult class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.Models.CommandResult.Error">
+            <summary>
+            Optional. The error.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.Models.CommandResult.ExitCode">
+            <summary>
+            Optional. The exit code
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.Models.CommandResult.Output">
+            <summary>
+            Optional. The output.
             </summary>
         </member>
         <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.Models.ContinuousWebJob">
@@ -3132,14 +3416,259 @@
             Optional. Value of the metric sample for the time taken.
             </summary>
         </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection">
+            <summary>
+            Describes a Biztalk Hybrid Connection for a web site.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.#ctor">
+            <summary>
+            Initializes a new instance of the HybridConnection class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.BiztalkUri">
+            <summary>
+            Optional. The resource uri of the biztalk service. This field is
+            optional; Without it the Azure Portal will not be able to display
+            the biztalk service for this connection properly.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.EntityConnectionString">
+            <summary>
+            Optional. The biztalk application connection string for this
+            connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.EntityName">
+            <summary>
+            Optional. The unique name for this connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.Hostname">
+            <summary>
+            Optional. The hostname of the target on-premise resource
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.Port">
+            <summary>
+            Optional. The port of the target on-premise resource
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.ResourceConnectionString">
+            <summary>
+            Optional. Reserved for future use. The connection string for the
+            resource. This field is optional.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnection.ResourceType">
+            <summary>
+            Optional. Reserved for future use. The type of resource to be
+            connected. This field is optional.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters">
+            <summary>
+            Parameters supplied to the Create Hybrid Connection operation
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.#ctor">
+            <summary>
+            Initializes a new instance of the HybridConnectionCreateParameters
+            class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.BiztalkUri">
+            <summary>
+            Required. The resource uri of the biztalk service. This field can
+            be left empty; Without it the Azure Portal will not be able to
+            display the biztalk service for this connection properly.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.EntityConnectionString">
+            <summary>
+            Required. The biztalk application connection string for this
+            connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.EntityName">
+            <summary>
+            Required. The unique name for this connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.Hostname">
+            <summary>
+            Required. The hostname of the target on-premise resource
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.Port">
+            <summary>
+            Required. The port of the target on-premise resource
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.ResourceConnectionString">
+            <summary>
+            Required. Reserved for future use. The connection string for the
+            resource. This field can be left empty.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters.ResourceType">
+            <summary>
+            Required. Reserved for future use. The type of resource to be
+            connected. This field can be left empty.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateResponse">
+            <summary>
+            The Create Hybrid Connection operation response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateResponse.#ctor">
+            <summary>
+            Initializes a new instance of the HybridConnectionCreateResponse
+            class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateResponse.HybridConnection">
+            <summary>
+            Optional. Details for the requested hybrid connection
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionGetResponse">
+            <summary>
+            The Get Hybrid Connection operation response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionGetResponse.#ctor">
+            <summary>
+            Initializes a new instance of the HybridConnectionGetResponse class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionGetResponse.HybridConnection">
+            <summary>
+            Optional. Details for the requested hybrid connection
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionListResponse">
+            <summary>
+            The List Hybrid Connection operation response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionListResponse.#ctor">
+            <summary>
+            Initializes a new instance of the HybridConnectionListResponse
+            class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionListResponse.GetEnumerator">
+            <summary>
+            Gets the sequence of HybridConnections.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionListResponse.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Gets the sequence of HybridConnections.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionListResponse.HybridConnections">
+            <summary>
+            Optional. Details for the hybrid connections.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters">
+            <summary>
+            Parameters supplied to the Create Hybrid Connection operation
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.#ctor">
+            <summary>
+            Initializes a new instance of the HybridConnectionUpdateParameters
+            class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the HybridConnectionUpdateParameters
+            class with required arguments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.BiztalkUri">
+            <summary>
+            Optional. The resource uri of the biztalk service. This field can
+            be left empty; Without it the Azure Portal will not be able to
+            display the biztalk service for this connection properly.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.EntityConnectionString">
+            <summary>
+            Optional. The biztalk application connection string for this
+            connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.EntityName">
+            <summary>
+            Required. The unique name for this connection
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.Hostname">
+            <summary>
+            Optional. The hostname of the target on-premise resource
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.Port">
+            <summary>
+            Optional. The port of the target on-premise resource
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.ResourceConnectionString">
+            <summary>
+            Optional. Reserved for future use. The connection string for the
+            resource. This field can be left empty.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters.ResourceType">
+            <summary>
+            Optional. Reserved for future use. The type of resource to be
+            connected. This field can be left empty.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters">
+            <summary>
+            The invoke command parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters.#ctor">
+            <summary>
+            Initializes a new instance of the InvokeCommandParameters class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters.Command">
+            <summary>
+            Optional. The command to invoke.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandParameters.Directory">
+            <summary>
+            Optional. The directory to invoke command in.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandResponse">
+            <summary>
+            The invoke command operation response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandResponse.#ctor">
+            <summary>
+            Initializes a new instance of the InvokeCommandResponse class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.Models.InvokeCommandResponse.CommandResult">
+            <summary>
+            Optional. The invoke command result.
+            </summary>
+        </member>
         <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.Models.LogEntryType">
             <summary>
             The log entry type.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.ManagedPipelineMode">
-            <summary>
-            The managed pipeline mode of a web site.
             </summary>
         </member>
         <member name="F:Microsoft.WindowsAzure.Management.WebSites.Models.ManagedPipelineMode.Integrated">
@@ -3223,11 +3752,6 @@
             <summary>
             Optional. A number that contains percentage of the traffic to be
             re-reouted.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.RemoteDebuggingVersion">
-            <summary>
-            The remote debugging version.
             </summary>
         </member>
         <member name="F:Microsoft.WindowsAzure.Management.WebSites.Models.RemoteDebuggingVersion.VS2012">
@@ -3328,9 +3852,90 @@
             Optional. The setting values.
             </summary>
         </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.SiteAuthSettings">
+            <summary>
+            The Authentication / Authorization settings of a web site.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.SiteAuthSettings.#ctor">
+            <summary>
+            Initializes a new instance of the SiteAuthSettings class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.SiteAuthSettings.AADClientId">
+            <summary>
+            Optional. Gets or sets the OpenID Connection client_id value for
+            the web site.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.SiteAuthSettings.OpenIdIssuer">
+            <summary>
+            Optional. Gets or sets the OpenID Connect issuer URL value for the
+            web site.
+            </summary>
+        </member>
         <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.SkuOptions">
             <summary>
             Usage of a web site's quota.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNames">
+            <summary>
+            A standard service response including an HTTP status code and request
+            ID.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNames.#ctor">
+            <summary>
+            Initializes a new instance of the SlotConfigNames class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNames.AppSettingNames">
+            <summary>
+            Optional. One or more string elements that list the name of the app
+            setting that will not be moved durig site swap. For example, if
+            slot named staging has setting EnableVerboseLogging=1, it
+            shouldn't be moved when swapped with production slot but should
+            take the current value from production.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNames.ConnectionStringNames">
+            <summary>
+            Optional. One or more string elements that list the name of the
+            connection string setting that will not be moved durig site swap.
+            For example, if slot named staging has connection UsersDatabase
+            that points to staging test database, it shouldn't be moved when
+            swapped with production slot but should take the current value
+            from production.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate">
+            <summary>
+            The parameters supplied to update slot config names.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate.#ctor">
+            <summary>
+            Initializes a new instance of the SlotConfigNamesUpdate class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate.AppSettingNames">
+            <summary>
+            Optional. One or more string elements that list the name of the app
+            setting that will not be moved durig site swap. For example, if
+            slot named staging has setting EnableVerboseLogging=1, it
+            shouldn't be moved when swapped with production slot but should
+            take the current value from production.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate.ConnectionStringNames">
+            <summary>
+            Optional. One or more string elements that list the name of the
+            connection string setting that will not be moved durig site swap.
+            For example, if slot named staging has connection UsersDatabase
+            that points to staging test database, it shouldn't be moved when
+            swapped with production slot but should take the current value
+            from production.
             </summary>
         </member>
         <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.Models.TriggeredWebJob">
@@ -3529,6 +4134,12 @@
             Initializes a new instance of the WebHostingPlan class.
             </summary>
         </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlan.AdminSiteName">
+            <summary>
+            Optional. The admin site. The admin site is used to deploy site
+            extensions or contents shared by all site in the plan.
+            </summary>
+        </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlan.Name">
             <summary>
             Optional. Name of the Web hosting plan.
@@ -3566,6 +4177,12 @@
             <summary>
             Initializes a new instance of the WebHostingPlanCreateParameters
             class with required arguments.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanCreateParameters.AdminSiteName">
+            <summary>
+            Optional. The admin site. The admin site is used to deploy site
+            extensions or contents shared by all site in the plan.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanCreateParameters.Name">
@@ -3726,6 +4343,12 @@
             <summary>
             Initializes a new instance of the WebHostingPlanUpdateParameters
             class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanUpdateParameters.AdminSiteName">
+            <summary>
+            Optional. The admin site. The admin site is used to deploy site
+            extensions or contents shared by all site in the plan.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanUpdateParameters.NumberOfWorkers">
@@ -4180,6 +4803,12 @@
             settings for a web site.
             </summary>
         </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.AutoSwapSlotName">
+            <summary>
+            Optional. Gets the slot name to swap with after successful
+            deployment.
+            </summary>
+        </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.ConnectionStrings">
             <summary>
             Optional. The connection strings for database and other external
@@ -4215,6 +4844,30 @@
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.HttpLoggingEnabled">
             <summary>
             Optional. Indicates if HTTP error logging is enabled.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.JavaContainer">
+            <summary>
+            Optional. The web site Java Container. Supported values are TOMCAT,
+            JETTY
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.JavaContainerVersion">
+            <summary>
+            Optional. The web site Java Container Version. Supported values are
+            7.0.50 if Java Container is TOMCAT and 9.1.0.20131115 if Java
+            Container is JETTY
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.JavaVersion">
+            <summary>
+            Optional. The web site JDK version. Supported values are an empty
+            string (an empty string disables Java), 1.7.0_51
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.Limits">
+            <summary>
+            Optional. The per site limits.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.LogsDirectorySizeLimit">
@@ -4297,6 +4950,18 @@
             been set up for the web site, this value is None.
             </summary>
         </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteAuthEnabled">
+            <summary>
+            Optional. Gets or sets a value indicating whether the site's
+            Authentication / Authorization feature is enabled.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteAuthSettings">
+            <summary>
+            Optional. Gets or sets the Authentication / Authorization settings
+            of a web site.
+            </summary>
+        </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.Use32BitWorkerProcess">
             <summary>
             Optional. Indicates if 32-bit mode is enabled.
@@ -4364,6 +5029,31 @@
             Optional. The absolute path to the location of the executable
             file that will handle the files specified in the
             SiteConfig.HandlerMappings.HandlerMapping.Extension element.
+            </summary>
+        </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteLimits">
+            <summary>
+            Per site limits
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteLimits.#ctor">
+            <summary>
+            Initializes a new instance of the SiteLimits class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteLimits.MaxDiskSizeInMb">
+            <summary>
+            Optional. Maximum disk size allowed in MB
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteLimits.MaxMemoryInMb">
+            <summary>
+            Optional. Maximum memory allowed in MB
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetConfigurationResponse.SiteLimits.MaxPercentageCpu">
+            <summary>
+            Optional. The name of the pair.
             </summary>
         </member>
         <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetHistoricalUsageMetricsParameters">
@@ -4992,11 +5682,6 @@
             Optional. OperationId for the restore operation.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteRuntimeAvailabilityState">
-            <summary>
-            The runtime availability of a website.
-            </summary>
-        </member>
         <member name="F:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteRuntimeAvailabilityState.Normal">
             <summary>
             The web site is running correctly.
@@ -5012,11 +5697,6 @@
             <summary>
             Due to an unexpected issue, the site has been excluded from
             provisioning. This typically occurs only for free sites.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteSslState">
-            <summary>
-            A web site's SSL state.
             </summary>
         </member>
         <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters">
@@ -5039,6 +5719,12 @@
             <summary>
             Optional. A set of name/value pairs that contain application
             settings for a web site.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.AutoSwapSlotName">
+            <summary>
+            Optional. Sets the slot name to swap with after successful
+            deployment.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.ConnectionStrings">
@@ -5076,6 +5762,30 @@
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.HttpLoggingEnabled">
             <summary>
             Optional. Indicates if HTTP error logging is enabled.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.JavaContainer">
+            <summary>
+            Optional. The web site Java Container. Supported values are TOMCAT,
+            JETTY
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.JavaContainerVersion">
+            <summary>
+            Optional. The web site Java Container Version. Supported values are
+            7.0.50 if Java Container is TOMCAT and 9.1.0.20131115 if Java
+            Container is JETTY
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.JavaVersion">
+            <summary>
+            Optional. The web site JDK version. Supported values are an empty
+            string (an empty string disables Java), 1.7.0_51
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.Limits">
+            <summary>
+            Optional. The per site limits.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.LogsDirectorySizeLimit">
@@ -5143,6 +5853,18 @@
             Optional. The source control method that the web site is using (for
             example, Local Git). If deployment from source control has not
             been set up for the web site, this value is None.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteAuthEnabled">
+            <summary>
+            Optional. Gets or sets a value indicating whether the site's
+            Authentication / Authorization feature is enabled.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteAuthSettings">
+            <summary>
+            Optional. Gets or sets the Authentication / Authorization settings
+            of a web site.
             </summary>
         </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.Use32BitWorkerProcess">
@@ -5214,6 +5936,31 @@
             SiteConfig.HandlerMappings.HandlerMapping.Extension element.
             </summary>
         </member>
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteLimits">
+            <summary>
+            Per site limits
+            </summary>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteLimits.#ctor">
+            <summary>
+            Initializes a new instance of the SiteLimits class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteLimits.MaxDiskSizeInMb">
+            <summary>
+            Optional. Maximum disk size allowed in MB
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteLimits.MaxMemoryInMb">
+            <summary>
+            Optional. Maximum memory allowed in MB
+            </summary>
+        </member>
+        <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters.SiteLimits.MaxPercentageCpu">
+            <summary>
+            Optional. The name of the pair.
+            </summary>
+        </member>
         <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters">
             <summary>
             Parameters supplied to the Update Web Site operation.
@@ -5262,7 +6009,7 @@
             Initializes a new instance of the WebSiteHostNameSslState class.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters.WebSiteHostNameSslState.#ctor(System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteSslState,System.Boolean)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters.WebSiteHostNameSslState.#ctor(System.String,System.Nullable{Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteSslState},System.Boolean)">
             <summary>
             Initializes a new instance of the WebSiteHostNameSslState class
             with required arguments.
@@ -5303,16 +6050,6 @@
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateResponse.WebSite">
             <summary>
             Optional. Details of the updated web site.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUsageState">
-            <summary>
-            Usage of a web site's quota.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSpaceAvailabilityState">
-            <summary>
-            The availability of a web space.
             </summary>
         </member>
         <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSpacePlanNames">
@@ -5675,16 +6412,6 @@
             The status of a web space.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WebSpaceWorkerSize">
-            <summary>
-            The size of a web space worker.
-            </summary>
-        </member>
-        <member name="T:Microsoft.WindowsAzure.Management.WebSites.Models.WorkerSizeOptions">
-            <summary>
-            The size of a web worker.
-            </summary>
-        </member>
         <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.RepositoryOperations">
             <summary>
             Operations for managing the repository.
@@ -5716,13 +6443,13 @@
             Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.RepositoryOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.RepositoryOperationsExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.RepositoryOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.IRepositoryOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.RepositoryOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.IRepositoryOperations)">
             <summary>
             Deletes the repository.
             </summary>
@@ -5735,7 +6462,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.RepositoryOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.IRepositoryOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.RepositoryOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.IRepositoryOperations)">
             <summary>
             Deletes the repository.
             </summary>
@@ -5822,13 +6549,13 @@
             Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.SettingsOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
             <summary>
             Gets a setting.
             </summary>
@@ -5844,7 +6571,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
             <summary>
             Gets a setting.
             </summary>
@@ -5860,7 +6587,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
             <summary>
             Gets a setting.
             </summary>
@@ -5875,7 +6602,7 @@
             The get setting operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,System.String)">
             <summary>
             Gets a setting.
             </summary>
@@ -5890,7 +6617,7 @@
             The get setting operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations)">
             <summary>
             Lists the settings.
             </summary>
@@ -5902,7 +6629,7 @@
             The list settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations)">
             <summary>
             Lists the settings.
             </summary>
@@ -5914,7 +6641,7 @@
             The list settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.Update(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.SettingsUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.Update(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.SettingsUpdateParameters)">
             <summary>
             Updates a setting.
             </summary>
@@ -5930,7 +6657,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.SettingsOperationsExtensions.UpdateAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.SettingsUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.SettingsOperationsExtensions.UpdateAsync(Microsoft.WindowsAzure.WebSitesExtensions.ISettingsOperations,Microsoft.WindowsAzure.WebSitesExtensions.Models.SettingsUpdateParameters)">
             <summary>
             Updates a setting.
             </summary>
@@ -6128,13 +6855,13 @@
             Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.Delete(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Delete a triggered WebJob.
             </summary>
@@ -6150,7 +6877,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Delete a triggered WebJob.
             </summary>
@@ -6166,7 +6893,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.Get(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Get a triggered web job.
             </summary>
@@ -6181,7 +6908,7 @@
             The get triggered WebJob Operation Response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.GetAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Get a triggered web job.
             </summary>
@@ -6196,7 +6923,7 @@
             The get triggered WebJob Operation Response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.GetRun(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.GetRun(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String)">
             <summary>
             Get a web job run.
             </summary>
@@ -6214,7 +6941,7 @@
             The get triggered WebJob Run operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.GetRunAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.GetRunAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String)">
             <summary>
             Get a web job run.
             </summary>
@@ -6232,7 +6959,7 @@
             The get triggered WebJob Run operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.GetSettings(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.GetSettings(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Get the settings of a triggered WebJob.
             </summary>
@@ -6247,7 +6974,7 @@
             The triggered WebJob settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.GetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.GetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Get the settings of a triggered WebJob.
             </summary>
@@ -6262,7 +6989,7 @@
             The triggered WebJob settings operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.List(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations)">
             <summary>
             List the triggered WebJobs.
             </summary>
@@ -6274,7 +7001,7 @@
             The list of triggered WebJobs operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.ListAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations)">
             <summary>
             List the triggered WebJobs.
             </summary>
@@ -6286,7 +7013,7 @@
             The list of triggered WebJobs operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.ListRuns(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.ListRuns(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             List the triggered WebJob runs.
             </summary>
@@ -6301,7 +7028,7 @@
             The triggered WebJob run list operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.ListRunsAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.ListRunsAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             List the triggered WebJob runs.
             </summary>
@@ -6316,7 +7043,7 @@
             The triggered WebJob run list operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.Run(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.Run(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Run a triggered WebJob.
             </summary>
@@ -6332,7 +7059,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.RunAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.RunAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String)">
             <summary>
             Run a triggered WebJob.
             </summary>
@@ -6348,7 +7075,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.SetSettings(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.TriggeredWebJobSettingsUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.SetSettings(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.TriggeredWebJobSettingsUpdateParameters)">
             <summary>
             Set the settings of a triggered WebJob (will replace the current
             settings of the WebJob).
@@ -6368,7 +7095,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.SetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.TriggeredWebJobSettingsUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.SetSettingsAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,Microsoft.WindowsAzure.WebSitesExtensions.Models.TriggeredWebJobSettingsUpdateParameters)">
             <summary>
             Set the settings of a triggered WebJob (will replace the current
             settings of the WebJob).
@@ -6388,7 +7115,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.UploadFile(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.UploadFile(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a triggered WebJob with a script file (.exe,
             .bat, .php, .js...).
@@ -6411,7 +7138,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.UploadFileAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.UploadFileAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a triggered WebJob with a script file (.exe,
             .bat, .php, .js...).
@@ -6434,7 +7161,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.UploadZip(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.UploadZip(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a triggered WebJob with a zip file (containing
             the WebJob binaries).
@@ -6457,7 +7184,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.TriggeredWebJobOperationsExtensions.UploadZipAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.TriggeredWebJobOperationsExtensions.UploadZipAsync(Microsoft.WindowsAzure.WebSitesExtensions.ITriggeredWebJobOperations,System.String,System.String,System.IO.Stream)">
             <summary>
             Create or replace a triggered WebJob with a zip file (containing
             the WebJob binaries).
@@ -6622,7 +7349,7 @@
             Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions">
             <summary>
             The Web Sites Management API provides a RESTful set of web services
             that interact with the Windows Azure Web Sites service to manage your
@@ -6632,7 +7359,7 @@
             more information)
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.Create(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanCreateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.Create(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanCreateParameters)">
             <summary>
             Creates a new Web Hosting Plan.  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6652,7 +7379,7 @@
             The Create Web Web Hosting Plan operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.CreateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanCreateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.CreateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanCreateParameters)">
             <summary>
             Creates a new Web Hosting Plan.  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6672,7 +7399,7 @@
             The Create Web Web Hosting Plan operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.Delete(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.Delete(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
             <summary>
             Deletes a Web Hosting Plan  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6693,7 +7420,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
             <summary>
             Deletes a Web Hosting Plan  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6714,7 +7441,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.Get(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.Get(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
             <summary>
             Gets details of an existing Web Hosting Plan  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6734,7 +7461,7 @@
             The Get Web Hosting Plan operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.GetAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.GetAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String)">
             <summary>
             Gets details of an existing Web Hosting Plan  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6754,7 +7481,7 @@
             The Get Web Hosting Plan operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.GetHistoricalUsageMetrics(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanGetHistoricalUsageMetricsParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.GetHistoricalUsageMetrics(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanGetHistoricalUsageMetricsParameters)">
             <summary>
             You can retrieve historical usage metrics for a site by issuing an
             HTTP GET request.  (see
@@ -6780,7 +7507,7 @@
             response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.GetHistoricalUsageMetricsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanGetHistoricalUsageMetricsParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.GetHistoricalUsageMetricsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanGetHistoricalUsageMetricsParameters)">
             <summary>
             You can retrieve historical usage metrics for a site by issuing an
             HTTP GET request.  (see
@@ -6806,7 +7533,7 @@
             response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.List(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.List(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String)">
             <summary>
             You can list the web spaces under the current subscription by
             issuing a GET request.  (see
@@ -6824,7 +7551,7 @@
             The List Web Hosting Plans operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.ListAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.ListAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String)">
             <summary>
             You can list the web spaces under the current subscription by
             issuing a GET request.  (see
@@ -6842,7 +7569,7 @@
             The List Web Hosting Plans operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.Update(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.Update(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanUpdateParameters)">
             <summary>
             Updates an existing Web Hosting Plan.  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -6866,7 +7593,7 @@
             The Create Web Hosting Plan operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebHostingPlanOperationsExtensions.UpdateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebHostingPlanOperationsExtensions.UpdateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebHostingPlanOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebHostingPlanUpdateParameters)">
             <summary>
             Updates an existing Web Hosting Plan.  (see
             http://azure.microsoft.com/en-us/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
@@ -7298,7 +8025,7 @@
             Initializes a new instance of the WebSiteExtensionsClient class.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Microsoft.WindowsAzure.BasicAuthenticationCloudCredentials,System.Uri)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Hyak.Common.BasicAuthenticationCloudCredentials,System.Uri)">
             <summary>
             Initializes a new instance of the WebSiteExtensionsClient class.
             </summary>
@@ -7309,11 +8036,11 @@
             Required. TBD.
             </param>
             <param name='baseUri'>
-            Required. Gets the URI used as the base for all cloud service
+            Optional. Gets the URI used as the base for all cloud service
             requests.
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Microsoft.WindowsAzure.BasicAuthenticationCloudCredentials)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Hyak.Common.BasicAuthenticationCloudCredentials)">
             <summary>
             Initializes a new instance of the WebSiteExtensionsClient class.
             </summary>
@@ -7332,7 +8059,7 @@
             The Http client
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Microsoft.WindowsAzure.BasicAuthenticationCloudCredentials,System.Uri,System.Net.Http.HttpClient)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Hyak.Common.BasicAuthenticationCloudCredentials,System.Uri,System.Net.Http.HttpClient)">
             <summary>
             Initializes a new instance of the WebSiteExtensionsClient class.
             </summary>
@@ -7343,14 +8070,14 @@
             Required. TBD.
             </param>
             <param name='baseUri'>
-            Required. Gets the URI used as the base for all cloud service
+            Optional. Gets the URI used as the base for all cloud service
             requests.
             </param>
             <param name='httpClient'>
             The Http client
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Microsoft.WindowsAzure.BasicAuthenticationCloudCredentials,System.Net.Http.HttpClient)">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.#ctor(System.String,Hyak.Common.BasicAuthenticationCloudCredentials,System.Net.Http.HttpClient)">
             <summary>
             Initializes a new instance of the WebSiteExtensionsClient class.
             </summary>
@@ -7364,7 +8091,7 @@
             The Http client
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.Clone(Microsoft.WindowsAzure.Common.ServiceClient{Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient})">
+        <member name="M:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.Clone(Hyak.Common.ServiceClient{Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient})">
             <summary>
             Clones properties from current instance to another
             WebSiteExtensionsClient instance
@@ -7425,6 +8152,11 @@
             The site name.
             </summary>
         </member>
+        <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.Commands">
+            <summary>
+            Operations for invoking commands.
+            </summary>
+        </member>
         <member name="P:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClient.ContinuousWebJobs">
             <summary>
             Operations for managing continuous WebJobs.
@@ -7455,7 +8187,7 @@
             Operations for managing Triggered WebJobs.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.WebSiteExtensionsClientExtensions">
+        <member name="T:Microsoft.WindowsAzure.WebSitesExtensions.WebSiteExtensionsClientExtensions">
             <summary>
             The websites extensions client manages the web sites deployments, web
             jobs and other extensions.
@@ -7476,7 +8208,7 @@
             Initializes a new instance of the WebSiteManagementClient class.
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.WindowsAzure.SubscriptionCloudCredentials,System.Uri)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.Azure.SubscriptionCloudCredentials,System.Uri)">
             <summary>
             Initializes a new instance of the WebSiteManagementClient class.
             </summary>
@@ -7486,11 +8218,11 @@
             the URI for every service call.
             </param>
             <param name='baseUri'>
-            Required. Gets the URI used as the base for all cloud service
+            Optional. Gets the URI used as the base for all cloud service
             requests.
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.WindowsAzure.SubscriptionCloudCredentials)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.Azure.SubscriptionCloudCredentials)">
             <summary>
             Initializes a new instance of the WebSiteManagementClient class.
             </summary>
@@ -7508,7 +8240,7 @@
             The Http client
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.WindowsAzure.SubscriptionCloudCredentials,System.Uri,System.Net.Http.HttpClient)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.Azure.SubscriptionCloudCredentials,System.Uri,System.Net.Http.HttpClient)">
             <summary>
             Initializes a new instance of the WebSiteManagementClient class.
             </summary>
@@ -7518,14 +8250,14 @@
             the URI for every service call.
             </param>
             <param name='baseUri'>
-            Required. Gets the URI used as the base for all cloud service
+            Optional. Gets the URI used as the base for all cloud service
             requests.
             </param>
             <param name='httpClient'>
             The Http client
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.WindowsAzure.SubscriptionCloudCredentials,System.Net.Http.HttpClient)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.#ctor(Microsoft.Azure.SubscriptionCloudCredentials,System.Net.Http.HttpClient)">
             <summary>
             Initializes a new instance of the WebSiteManagementClient class.
             </summary>
@@ -7538,7 +8270,7 @@
             The Http client
             </param>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.Clone(Microsoft.WindowsAzure.Common.ServiceClient{Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient})">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.Clone(Hyak.Common.ServiceClient{Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient})">
             <summary>
             Clones properties from current instance to another
             WebSiteManagementClient instance
@@ -7546,6 +8278,50 @@
             <param name='client'>
             Instance of WebSiteManagementClient to clone to
             </param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ParseConnectionStringType(System.String)">
+            <summary>
+            Parse enum values for type ConnectionStringType.
+            </summary>
+            <param name='value'>
+            The value to parse.
+            </param>
+            <returns>
+            The enum value.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ConnectionStringTypeToString(Microsoft.WindowsAzure.Management.WebSites.Models.ConnectionStringType)">
+            <summary>
+            Convert an enum of type ConnectionStringType to a string.
+            </summary>
+            <param name='value'>
+            The value to convert to a string.
+            </param>
+            <returns>
+            The enum value as a string.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ParseManagedPipelineMode(System.String)">
+            <summary>
+            Parse enum values for type ManagedPipelineMode.
+            </summary>
+            <param name='value'>
+            The value to parse.
+            </param>
+            <returns>
+            The enum value.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ManagedPipelineModeToString(Microsoft.WindowsAzure.Management.WebSites.Models.ManagedPipelineMode)">
+            <summary>
+            Convert an enum of type ManagedPipelineMode to a string.
+            </summary>
+            <param name='value'>
+            The value to convert to a string.
+            </param>
+            <returns>
+            The enum value as a string.
+            </returns>
         </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.GetOperationStatusAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
@@ -7604,50 +8380,6 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ParseConnectionStringType(System.String)">
-            <summary>
-            Parse enum values for type ConnectionStringType.
-            </summary>
-            <param name='value'>
-            The value to parse.
-            </param>
-            <returns>
-            The enum value.
-            </returns>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ConnectionStringTypeToString(Microsoft.WindowsAzure.Management.WebSites.Models.ConnectionStringType)">
-            <summary>
-            Convert an enum of type ConnectionStringType to a string.
-            </summary>
-            <param name='value'>
-            The value to convert to a string.
-            </param>
-            <returns>
-            The enum value as a string.
-            </returns>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ParseManagedPipelineMode(System.String)">
-            <summary>
-            Parse enum values for type ManagedPipelineMode.
-            </summary>
-            <param name='value'>
-            The value to parse.
-            </param>
-            <returns>
-            The enum value.
-            </returns>
-        </member>
-        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ManagedPipelineModeToString(Microsoft.WindowsAzure.Management.WebSites.Models.ManagedPipelineMode)">
-            <summary>
-            Convert an enum of type ManagedPipelineMode to a string.
-            </summary>
-            <param name='value'>
-            The value to convert to a string.
-            </param>
-            <returns>
-            The enum value as a string.
-            </returns>
-        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.ManagedPipelineModeToString(System.Nullable{Microsoft.WindowsAzure.Management.WebSites.Models.ManagedPipelineMode})">
             <summary>
             Convert an enum of type ManagedPipelineMode to a string.
@@ -7704,7 +8436,7 @@
             Operations for managing web spaces beneath your subscription.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.WebSiteManagementClientExtensions">
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions">
             <summary>
             The Web Sites Management API provides a RESTful set of web services
             that interact with the Windows Azure Web Sites service to manage your
@@ -7714,7 +8446,7 @@
             more information)
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteManagementClientExtensions.GetOperationStatus(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient,System.String,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions.GetOperationStatus(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient,System.String,System.String,System.String)">
             <summary>
             The Get Operation Status operation returns the status of the
             specified operation. After calling a long-running operation, you
@@ -7748,7 +8480,7 @@
             response body includes error information regarding the failure.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteManagementClientExtensions.GetOperationStatusAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient,System.String,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions.GetOperationStatusAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient,System.String,System.String,System.String)">
             <summary>
             The Get Operation Status operation returns the status of the
             specified operation. After calling a long-running operation, you
@@ -7782,7 +8514,7 @@
             response body includes error information regarding the failure.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteManagementClientExtensions.RegisterSubscription(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions.RegisterSubscription(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
             <summary>
             Register your subscription to use Azure Web Sites.
             </summary>
@@ -7795,7 +8527,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteManagementClientExtensions.RegisterSubscriptionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions.RegisterSubscriptionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
             <summary>
             Register your subscription to use Azure Web Sites.
             </summary>
@@ -7808,7 +8540,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteManagementClientExtensions.UnregisterSubscription(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions.UnregisterSubscription(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
             <summary>
             Unregister your subscription to use Azure Web Sites.
             </summary>
@@ -7821,7 +8553,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteManagementClientExtensions.UnregisterSubscriptionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClientExtensions.UnregisterSubscriptionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteManagementClient)">
             <summary>
             Unregister your subscription to use Azure Web Sites.
             </summary>
@@ -7848,6 +8580,24 @@
             <param name='client'>
             Reference to the service client.
             </param>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.ApplySlotConfigurationAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='targetSwapSlot'>
+            Required. The name of the target slot to be swapped with.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
         </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.BackupAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest,System.Threading.CancellationToken)">
             <summary>
@@ -7919,6 +8669,27 @@
             The Create Web Site operation response.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.CreateHybridConnectionAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters,System.Threading.CancellationToken)">
+            <summary>
+            Creates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='siteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. Parameters supplied to the Create Hybrid Connection
+            operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The Create Hybrid Connection operation response.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.CreateRepositoryAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             A web site repository is essentially a Git repository that you can
@@ -7959,6 +8730,27 @@
             </param>
             <param name='parameters'>
             Required. Parameters supplied to the Delete Web Site operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.DeleteHybridConnectionAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a hybrid connection on a specific site.
+            </summary>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            Required. The name of the hybrid connection entity
             </param>
             <param name='cancellationToken'>
             Cancellation token.
@@ -8123,6 +8915,27 @@
             The Get Historical Usage Metrics Web Site operation response.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.GetHybridConnectionAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a particular hybrid connection that belongs to a specific
+            site.
+            </summary>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            Required. The name of the hybrid connection entity
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The Get Hybrid Connection operation response.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.GetInstanceIdsAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             You can retrieve the list of active instances by ids for a web site
@@ -8185,6 +8998,21 @@
             The Get Repository Web Site operation response.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.GetSlotConfigNamesAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.GetUsageMetricsAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             You can retrieve current usage metrics for a site by issuing an
@@ -8237,6 +9065,38 @@
             </param>
             <returns>
             List of backups for the website.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.ListHybridConnectionsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a list of all hybrid connections on a specific web site.
+            </summary>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            The List Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.ResetSlotConfigurationAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
             </returns>
         </member>
         <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.RestartAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -8401,13 +9261,53 @@
             request ID.
             </returns>
         </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.UpdateHybridConnectionAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters,System.Threading.CancellationToken)">
+            <summary>
+            Updates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='siteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. Parameters supplied to the Create Hybrid Connection
+            operation.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.UpdateSlotConfigNamesAsync(System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate,System.Threading.CancellationToken)">
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. The parameters.
+            </param>
+            <param name='cancellationToken'>
+            Cancellation token.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
         <member name="P:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperations.Client">
             <summary>
             Gets a reference to the
             Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.WebSiteOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions">
             <summary>
             The Web Sites Management API provides a RESTful set of web services
             that interact with the Windows Azure Web Sites service to manage your
@@ -8417,7 +9317,45 @@
             more information)
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Backup(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ApplySlotConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='targetSwapSlot'>
+            Required. The name of the target slot to be swapped with.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ApplySlotConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='targetSwapSlot'>
+            Required. The name of the target slot to be swapped with.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Backup(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
             <summary>
             Backups a site on-demand.
             </summary>
@@ -8438,7 +9376,7 @@
             The backup record created based on the backup request.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.BackupAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.BackupAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
             <summary>
             Backups a site on-demand.
             </summary>
@@ -8459,7 +9397,7 @@
             The backup record created based on the backup request.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.BeginSwappingSlots(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.BeginSwappingSlots(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
             <summary>
             You can swap a web site from one slot to another slot.
             </summary>
@@ -8489,7 +9427,7 @@
             response body includes error information regarding the failure.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.BeginSwappingSlotsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.BeginSwappingSlotsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
             <summary>
             You can swap a web site from one slot to another slot.
             </summary>
@@ -8519,7 +9457,7 @@
             response body includes error information regarding the failure.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Create(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteCreateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Create(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteCreateParameters)">
             <summary>
             You can create a web site by using a POST request that includes the
             name of the web site and other information in the request body.
@@ -8541,7 +9479,7 @@
             The Create Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.CreateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteCreateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.CreateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteCreateParameters)">
             <summary>
             You can create a web site by using a POST request that includes the
             name of the web site and other information in the request body.
@@ -8563,7 +9501,51 @@
             The Create Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.CreateRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.CreateHybridConnection(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters)">
+            <summary>
+            Creates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='siteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. Parameters supplied to the Create Hybrid Connection
+            operation.
+            </param>
+            <returns>
+            The Create Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.CreateHybridConnectionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionCreateParameters)">
+            <summary>
+            Creates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='siteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. Parameters supplied to the Create Hybrid Connection
+            operation.
+            </param>
+            <returns>
+            The Create Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.CreateRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -8587,7 +9569,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.CreateRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.CreateRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -8611,7 +9593,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Delete(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteDeleteParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Delete(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteDeleteParameters)">
             <summary>
             You can delete a web site by issuing an HTTP DELETE request. If the
             web site being deleted is the only site remaining in a server
@@ -8638,7 +9620,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteDeleteParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.DeleteAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteDeleteParameters)">
             <summary>
             You can delete a web site by issuing an HTTP DELETE request. If the
             web site being deleted is the only site remaining in a server
@@ -8665,7 +9647,51 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.DeleteRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.DeleteHybridConnection(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String)">
+            <summary>
+            Deletes a hybrid connection on a specific site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            Required. The name of the hybrid connection entity
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.DeleteHybridConnectionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String)">
+            <summary>
+            Deletes a hybrid connection on a specific site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            Required. The name of the hybrid connection entity
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.DeleteRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -8688,7 +9714,7 @@
             The Delete Repository Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.DeleteRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.DeleteRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -8711,7 +9737,7 @@
             The Delete Repository Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Discover(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Discover(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
             <summary>
             Scans a backup in a storage account and returns database
             information etc. Should be called before calling Restore to
@@ -8735,7 +9761,7 @@
             account.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.DiscoverAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.DiscoverAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
             <summary>
             Scans a backup in a storage account and returns database
             information etc. Should be called before calling Restore to
@@ -8759,7 +9785,7 @@
             account.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GeneratePassword(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GeneratePassword(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can generate a new random password for publishing a site by
             issuing an HTTP POST request. Tip: If you want to verify that the
@@ -8786,7 +9812,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GeneratePasswordAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GeneratePasswordAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can generate a new random password for publishing a site by
             issuing an HTTP POST request. Tip: If you want to verify that the
@@ -8813,7 +9839,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Get(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Get(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetParameters)">
             <summary>
             You can retrieve details for a web site by issuing an HTTP GET
             request.  (see
@@ -8837,7 +9863,7 @@
             The Get Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetParameters)">
             <summary>
             You can retrieve details for a web site by issuing an HTTP GET
             request.  (see
@@ -8861,7 +9887,7 @@
             The Get Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetBackupConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetBackupConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             Gets a schedule configuration for site backups.
             </summary>
@@ -8879,7 +9905,7 @@
             Scheduled backup definition.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetBackupConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetBackupConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             Gets a schedule configuration for site backups.
             </summary>
@@ -8897,7 +9923,7 @@
             Scheduled backup definition.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve the config settings for a web site by issuing an
             HTTP GET request.  (see
@@ -8918,7 +9944,7 @@
             The Get Configuration Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve the config settings for a web site by issuing an
             HTTP GET request.  (see
@@ -8939,7 +9965,7 @@
             The Get Configuration Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetHistoricalUsageMetrics(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetHistoricalUsageMetricsParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetHistoricalUsageMetrics(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetHistoricalUsageMetricsParameters)">
             <summary>
             You can retrieve historical usage metrics for a site by issuing an
             HTTP GET request.  (see
@@ -8964,7 +9990,7 @@
             The Get Historical Usage Metrics Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetHistoricalUsageMetricsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetHistoricalUsageMetricsParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetHistoricalUsageMetricsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteGetHistoricalUsageMetricsParameters)">
             <summary>
             You can retrieve historical usage metrics for a site by issuing an
             HTTP GET request.  (see
@@ -8989,7 +10015,51 @@
             The Get Historical Usage Metrics Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetInstanceIds(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetHybridConnection(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String)">
+            <summary>
+            Retrieves a particular hybrid connection that belongs to a specific
+            site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            Required. The name of the hybrid connection entity
+            </param>
+            <returns>
+            The Get Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetHybridConnectionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String)">
+            <summary>
+            Retrieves a particular hybrid connection that belongs to a specific
+            site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='hybridConnectionName'>
+            Required. The name of the hybrid connection entity
+            </param>
+            <returns>
+            The Get Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetInstanceIds(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve the list of active instances by ids for a web site
             by issuing an HTTP GET request.  (see
@@ -9010,7 +10080,7 @@
             The web site instance ids response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetInstanceIdsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetInstanceIdsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve the list of active instances by ids for a web site
             by issuing an HTTP GET request.  (see
@@ -9031,7 +10101,7 @@
             The web site instance ids response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetPublishProfile(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetPublishProfile(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve the publish settings information for a web site by
             issuing an HTTP GET request.  (see
@@ -9052,7 +10122,7 @@
             The Get Publish Profile Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetPublishProfileAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetPublishProfileAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve the publish settings information for a web site by
             issuing an HTTP GET request.  (see
@@ -9073,7 +10143,7 @@
             The Get Publish Profile Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -9096,7 +10166,7 @@
             The Get Repository Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -9119,7 +10189,39 @@
             The Get Repository Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetUsageMetrics(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetSlotConfigNames(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetSlotConfigNamesAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetUsageMetrics(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve current usage metrics for a site by issuing an
             HTTP GET request. The metrics returned include CPU Time, Data In,
@@ -9143,7 +10245,7 @@
             The Get Usage Metrics Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.GetUsageMetricsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.GetUsageMetricsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can retrieve current usage metrics for a site by issuing an
             HTTP GET request. The metrics returned include CPU Time, Data In,
@@ -9167,7 +10269,7 @@
             The Get Usage Metrics Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.IsHostnameAvailable(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.IsHostnameAvailable(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String)">
             <summary>
             Determines if a host name is available.
             </summary>
@@ -9182,7 +10284,7 @@
             The Is Hostname Available Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.IsHostnameAvailableAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.IsHostnameAvailableAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String)">
             <summary>
             Determines if a host name is available.
             </summary>
@@ -9197,7 +10299,7 @@
             The Is Hostname Available Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.ListBackups(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ListBackups(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             Returns list of all backups which are tracked by the system.
             </summary>
@@ -9215,7 +10317,7 @@
             List of backups for the website.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.ListBackupsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ListBackupsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             Returns list of all backups which are tracked by the system.
             </summary>
@@ -9233,7 +10335,75 @@
             List of backups for the website.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Restart(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ListHybridConnections(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+            <summary>
+            Retrieves a list of all hybrid connections on a specific web site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <returns>
+            The List Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ListHybridConnectionsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+            <summary>
+            Retrieves a list of all hybrid connections on a specific web site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <returns>
+            The List Hybrid Connection operation response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ResetSlotConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.ResetSlotConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Restart(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can restart a web site by issuing an HTTP POST request.  (see
             http://msdn.microsoft.com/en-us/library/windowsazure/dn236425.aspx
@@ -9254,7 +10424,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.RestartAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.RestartAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             You can restart a web site by issuing an HTTP POST request.  (see
             http://msdn.microsoft.com/en-us/library/windowsazure/dn236425.aspx
@@ -9275,7 +10445,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Restore(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Restore(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
             <summary>
             Restores a site to either a new site or existing site (Overwrite
             flag has to be set to true for that).
@@ -9297,7 +10467,7 @@
             Restore operation information.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.RestoreAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.RestoreAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.RestoreRequest)">
             <summary>
             Restores a site to either a new site or existing site (Overwrite
             flag has to be set to true for that).
@@ -9319,7 +10489,7 @@
             Restore operation information.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.SwapSlots(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.SwapSlots(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
             <summary>
             You can swap a web site from one slot to another slot.
             </summary>
@@ -9349,7 +10519,7 @@
             response body includes error information regarding the failure.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.SwapSlotsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.SwapSlotsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,System.String,System.String)">
             <summary>
             You can swap a web site from one slot to another slot.
             </summary>
@@ -9379,7 +10549,7 @@
             response body includes error information regarding the failure.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.SyncRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.SyncRepository(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -9403,7 +10573,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.SyncRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.SyncRepositoryAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String)">
             <summary>
             A web site repository is essentially a Git repository that you can
             use to manage your web site content. By using Git source control
@@ -9427,7 +10597,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.Update(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.Update(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters)">
             <summary>
             You can update the settings for a web site by using the HTTP PUT
             method and by specifying the settings in the request body.  (see
@@ -9451,7 +10621,7 @@
             The Update Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.UpdateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateParameters)">
             <summary>
             You can update the settings for a web site by using the HTTP PUT
             method and by specifying the settings in the request body.  (see
@@ -9475,7 +10645,7 @@
             The Update Web Site operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.UpdateBackupConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateBackupConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
             <summary>
             Updates a backup schedule for a site.
             </summary>
@@ -9497,7 +10667,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.UpdateBackupConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateBackupConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.BackupRequest)">
             <summary>
             Updates a backup schedule for a site.
             </summary>
@@ -9519,7 +10689,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.UpdateConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateConfiguration(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters)">
             <summary>
             You can update the config settings for a web site by issuing an
             HTTP PUT with a request body containing the updated settings.
@@ -9545,7 +10715,7 @@
             request ID.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSiteOperationsExtensions.UpdateConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateConfigurationAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteUpdateConfigurationParameters)">
             <summary>
             You can update the config settings for a web site by issuing an
             HTTP PUT with a request body containing the updated settings.
@@ -9565,6 +10735,90 @@
             <param name='parameters'>
             Required. Parameters supplied to the Update Configuration Web Site
             operation.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateHybridConnection(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters)">
+            <summary>
+            Updates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='siteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. Parameters supplied to the Create Hybrid Connection
+            operation.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateHybridConnectionAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.HybridConnectionUpdateParameters)">
+            <summary>
+            Updates an association to a hybrid connection for a web site.
+            </summary>
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='siteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. Parameters supplied to the Create Hybrid Connection
+            operation.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateSlotConfigNames(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. The parameters.
+            </param>
+            <returns>
+            A standard service response including an HTTP status code and
+            request ID.
+            </returns>
+        </member>
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSiteOperationsExtensions.UpdateSlotConfigNamesAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.SlotConfigNamesUpdate)">
+            <param name='operations'>
+            Reference to the
+            Microsoft.WindowsAzure.Management.WebSites.IWebSiteOperations.
+            </param>
+            <param name='webSpaceName'>
+            Required. The name of the web space.
+            </param>
+            <param name='webSiteName'>
+            Required. The name of the web site.
+            </param>
+            <param name='parameters'>
+            Required. The parameters.
             </param>
             <returns>
             A standard service response including an HTTP status code and
@@ -9696,7 +10950,7 @@
             Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient.
             </summary>
         </member>
-        <member name="T:Microsoft.WindowsAzure.WebSpaceOperationsExtensions">
+        <member name="T:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions">
             <summary>
             The Web Sites Management API provides a RESTful set of web services
             that interact with the Windows Azure Web Sites service to manage your
@@ -9706,7 +10960,7 @@
             more information)
             </summary>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.CreatePublishingUser(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSpacesCreatePublishingUserParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.CreatePublishingUser(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSpacesCreatePublishingUserParameters)">
             <summary>
             Creates a source control user with permissions to publish to this
             web space.
@@ -9729,7 +10983,7 @@
             The Create Publishing User operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.CreatePublishingUserAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSpacesCreatePublishingUserParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.CreatePublishingUserAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSpacesCreatePublishingUserParameters)">
             <summary>
             Creates a source control user with permissions to publish to this
             web space.
@@ -9752,7 +11006,7 @@
             The Create Publishing User operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.Get(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.Get(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String)">
             <summary>
             You can retrieve details for a specified web space name by issuing
             an HTTP GET request.  (see
@@ -9770,7 +11024,7 @@
             The Get Web Space Details operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.GetAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.GetAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String)">
             <summary>
             You can retrieve details for a specified web space name by issuing
             an HTTP GET request.  (see
@@ -9788,7 +11042,7 @@
             The Get Web Space Details operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.GetDnsSuffix(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.GetDnsSuffix(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             Get the DNS Suffix for this subscription.
             </summary>
@@ -9800,7 +11054,7 @@
             The Get DNS Suffix operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.GetDnsSuffixAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.GetDnsSuffixAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             Get the DNS Suffix for this subscription.
             </summary>
@@ -9812,7 +11066,7 @@
             The Get DNS Suffix operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.List(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.List(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             You can list the web spaces under the current subscription by
             issuing a GET request.  (see
@@ -9827,7 +11081,7 @@
             The List Web Spaces operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             You can list the web spaces under the current subscription by
             issuing a GET request.  (see
@@ -9842,7 +11096,7 @@
             The List Web Spaces operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListGeoRegions(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListGeoRegions(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             Get the available geo regions for this web space.
             </summary>
@@ -9854,7 +11108,7 @@
             The List Geo Regions operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListGeoRegionsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListGeoRegionsAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             Get the available geo regions for this web space.
             </summary>
@@ -9866,7 +11120,7 @@
             The List Geo Regions operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListPublishingUsers(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListPublishingUsers(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             Get the source control users allowed to publish to this web space.
             </summary>
@@ -9878,7 +11132,7 @@
             The List Publishing Users operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListPublishingUsersAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListPublishingUsersAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations)">
             <summary>
             Get the source control users allowed to publish to this web space.
             </summary>
@@ -9890,7 +11144,7 @@
             The List Publishing Users operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListWebSites(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteListParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListWebSites(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteListParameters)">
             <summary>
             You can retrieve a list of all web sites in a web space by issuing
             an HTTP GET request.  (see
@@ -9911,7 +11165,7 @@
             The List Web Sites operation response.
             </returns>
         </member>
-        <member name="M:Microsoft.WindowsAzure.WebSpaceOperationsExtensions.ListWebSitesAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteListParameters)">
+        <member name="M:Microsoft.WindowsAzure.Management.WebSites.WebSpaceOperationsExtensions.ListWebSitesAsync(Microsoft.WindowsAzure.Management.WebSites.IWebSpaceOperations,System.String,Microsoft.WindowsAzure.Management.WebSites.Models.WebSiteListParameters)">
             <summary>
             You can retrieve a list of all web sites in a web space by issuing
             an HTTP GET request.  (see

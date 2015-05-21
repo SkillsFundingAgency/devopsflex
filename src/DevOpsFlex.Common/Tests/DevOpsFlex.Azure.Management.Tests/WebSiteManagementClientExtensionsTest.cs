@@ -2,15 +2,17 @@
 {
     using System;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
+    using Core;
+    using Data;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Management.WebSites;
     using Microsoft.WindowsAzure.Management.WebSites.Models;
 
     /// <summary>
-    /// Contains tests that target the <see cref="WebSiteManagementClientExtensions"/> extension class
-    /// for the <see cref="WebSiteManagementClient"/>.
+    /// Contains tests that target the <see cref="Management.WebSiteManagementClientExtensions"/> extension class
+    /// for the <see cref="Microsoft.WindowsAzure.Management.WebSites.WebSiteManagementClient"/>.
     /// </summary>
     [TestClass]
     public class WebSiteManagementClientExtensionsTest
@@ -39,7 +41,7 @@
                 {
                     await client.CreateWebSiteIfNotExistsAsync(webspace, parameters);
 
-                    var webSite = await client.WebSites.GetAsync(webspace, parameters.Name, null);
+                    var webSite = await client.WebSites.GetAsync(webspace, parameters.Name, null, new CancellationToken());
                     Assert.IsNotNull(webSite);
                 }
                 finally
@@ -91,6 +93,23 @@
                             DeleteMetrics = true
                         });
                 }
+            }
+        }
+
+        [TestMethod]
+        public async Task Foo()
+        {
+            using (var client = ManagementClient.CreateWebSiteClient())
+            {
+                await client.WebHostingPlans.CreateAsync(
+                    SystemWebSpace.WestEurope.GetEnumDescription(),
+                    new WebHostingPlanCreateParameters
+                    {
+                        Name = "fct-webplan-djfr",
+                        NumberOfWorkers = 1,
+                        SKU = SkuOptions.Standard,
+                        WorkerSize = WorkerSizeOptions.Small
+                    });
             }
         }
 

@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Hyak.Common;
     using Microsoft.WindowsAzure.Management.WebSites;
     using Microsoft.WindowsAzure.Management.WebSites.Models;
 
@@ -19,11 +20,18 @@
         /// <returns>A suitable web plan name if one is found, null otherwise.</returns>
         public async Task<string> Choose(WebSiteManagementClient client, string webSpace)
         {
-            var webPlan = (await client.WebHostingPlans.ListAsync(webSpace, new CancellationToken())).FirstOrDefault(p => p.SKU == SkuOptions.Standard);
+            try
+            {
+                return (await client.WebHostingPlans.ListAsync(webSpace, new CancellationToken()))
+                    .FirstOrDefault(p => p.SKU == SkuOptions.Standard)?
+                    .Name;
+            }
+            catch (CloudException cex)
+            {
+                if (cex.Error.Code != "NotFound") throw;
 
-            return webPlan == null ?
-                null :
-                webPlan.Name;
+                return null;
+            }
         }
     }
 }
