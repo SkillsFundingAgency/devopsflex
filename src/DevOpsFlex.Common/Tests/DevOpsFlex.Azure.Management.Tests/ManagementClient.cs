@@ -58,7 +58,7 @@
             var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
 
             return new WebSiteManagementClient(
-                new Microsoft.WindowsAzure.CertificateCloudCredentials(
+                new CertificateCloudCredentials(
                     SubscriptionId,
                     new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate))));
         }

@@ -1,7 +1,10 @@
 ﻿namespace DevOpsFlex.Azure.Management.Tests
 {
+    using System;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
+    using Core;
     using Data;
     using Data.Naming;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -106,6 +109,22 @@
             using (var context = new DevOpsFlexDbContext())
             {
                 await context.Components.OfType<AzureStorageContainer>().ProvisionAllAsync(client);
+            }
+        }
+
+        /// <summary>
+        /// Tests the ProvisionAllAsync on <see cref="AzureWebSite"/> with real SQL Db data (seed).
+        /// </summary>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_AzureWebSite_ProvisionAll_End2End()
+        {
+            FlexDataConfiguration.Branch = "Main";
+            FlexDataConfiguration.Configuration = "djfr";
+
+            using (var client = ManagementClient.CreateWebSiteClient())
+            using (var context = new DevOpsFlexDbContext())
+            {
+                await context.Components.OfType<AzureWebSite>().ProvisionAllAsync(client);
             }
         }
     }

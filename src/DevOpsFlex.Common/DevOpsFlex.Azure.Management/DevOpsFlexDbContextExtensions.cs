@@ -10,6 +10,7 @@
     using Microsoft.WindowsAzure.Management.ServiceBus;
     using Microsoft.WindowsAzure.Management.Sql;
     using Microsoft.WindowsAzure.Management.Storage;
+    using Microsoft.WindowsAzure.Management.WebSites;
 
     /// <summary>
     /// Extends the <see cref="DevOpsFlexDbContext"/> with usefull extensions that the devopsflex
@@ -142,6 +143,27 @@
                     async c =>
                     {
                         await client.CreateContainerIfNotExistsAsync(c);
+                    });
+
+            await Task.WhenAll(tasks);
+        }
+
+        /// <summary>
+        /// Provisions all the web sites in the <see cref="IQueryable{T}"/> of <see cref="AzureWebSite"/>.
+        /// </summary>
+        /// <param name="sites">The list of <see cref="AzureWebSite"/> to provision.</param>
+        /// <param name="client">The <see cref="WebSiteManagementClient"/> that is performing the operation.</param>
+        /// <returns>The async <see cref="Task"/> wrapper.</returns>
+        public static async Task ProvisionAllAsync(this IQueryable<AzureWebSite> sites, WebSiteManagementClient client)
+        {
+            Contract.Requires(sites != null);
+            Contract.Requires(client != null);
+
+            var tasks = (await sites.ToListAsync())
+                .Select(
+                    async s =>
+                    {
+                        await client.CreateWebSiteIfNotExistsAsync(s);
                     });
 
             await Task.WhenAll(tasks);
