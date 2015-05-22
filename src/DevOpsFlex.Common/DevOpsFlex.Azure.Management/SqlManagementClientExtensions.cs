@@ -18,6 +18,11 @@
     public static class SqlManagementClientExtensions
     {
         /// <summary>
+        /// Gate object for the sql server choosing process.
+        /// </summary>
+        private static readonly object SqlServerGate = new object();
+
+        /// <summary>
         /// Checks for the existence of a specific Azure Sql Database, if it doesn't exist it will create it.
         /// </summary>
         /// <param name="client">The <see cref="SqlManagementClient"/> that is performing the operation.</param>
@@ -82,44 +87,50 @@
             Contract.Requires(client != null);
             Contract.Requires(model != null);
 
-            var serverName = await FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription());
+            string serverName;
 
-            if (serverName == null)
+            lock (SqlServerGate)
             {
-                string serverMaxVersion = null;
+                serverName = FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription()).Result;
 
-                try
+                if (serverName == null)
                 {
-                    await client.Servers.CreateAsync(new ServerCreateParameters
+                    string serverMaxVersion = null;
+
+                    try
                     {
-                        AdministratorUserName = FlexConfiguration.FlexSaUser,
-                        AdministratorPassword = FlexConfiguration.FlexSaPwd,
-                        Location = model.System.Location.GetEnumDescription(),
-                        Version = "100.0" // This needs to be an invalid version number
-                    });
-                }
-                catch (CloudException ex)
-                {
-                    if (ex.Error.Code == "40856") // SQL Version doesn't exist in the target location
-                    {
-                        var serverVersions = Regex.Match(ex.Error.Message, "server versions: '([^']*)'.").Groups[1].Value.Split(',');
-                        var maxVersion = serverVersions.Max((s => decimal.Parse(s)));
-                        serverMaxVersion = serverVersions.First(s => s.Contains(maxVersion.ToString("F1", CultureInfo.InvariantCulture)));
+                        client.Servers.CreateAsync(new ServerCreateParameters
+                        {
+                            AdministratorUserName = FlexConfiguration.FlexSaUser,
+                            AdministratorPassword = FlexConfiguration.FlexSaPwd,
+                            Location = model.System.Location.GetEnumDescription(),
+                            Version = "100.0" // This needs to be an invalid version number
+                        }).Wait();
                     }
-                    else
+                    catch (CloudException ex)
                     {
-                        throw;
+                        if (ex.Error.Code == "40856") // SQL Version doesn't exist in the target location
+                        {
+                            var serverVersions = Regex.Match(ex.Error.Message, "server versions: '([^']*)'.").Groups[1].Value.Split(',');
+                            var maxVersion = serverVersions.Max((s => decimal.Parse(s)));
+                            serverMaxVersion = serverVersions.First(s => s.Contains(maxVersion.ToString("F1", CultureInfo.InvariantCulture)));
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+
+                    serverName = client.Servers.CreateAsync(
+                        new ServerCreateParameters
+                        {
+                            AdministratorUserName = FlexConfiguration.FlexSaUser,
+                            AdministratorPassword = FlexConfiguration.FlexSaPwd,
+                            Location = model.System.Location.GetEnumDescription(),
+                            Version = serverMaxVersion
+                        }).Result.ServerName;
                 }
 
-                serverName = (await client.Servers.CreateAsync(
-                    new ServerCreateParameters
-                    {
-                        AdministratorUserName = FlexConfiguration.FlexSaUser,
-                        AdministratorPassword = FlexConfiguration.FlexSaPwd,
-                        Location = model.System.Location.GetEnumDescription(),
-                        Version = serverMaxVersion
-                    })).ServerName;
             }
 
             var dbName = FlexConfiguration.GetNaming<SqlAzureDb>()

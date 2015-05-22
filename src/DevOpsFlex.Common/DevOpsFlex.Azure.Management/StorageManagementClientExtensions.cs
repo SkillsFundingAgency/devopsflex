@@ -17,6 +17,11 @@
     public static class StorageManagementClientExtensions
     {
         /// <summary>
+        /// Gate object for the storage account choosing process.
+        /// </summary>
+        private static readonly object StorageAccountGate = new object();
+
+        /// <summary>
         /// Checks for the existence of a specific storage container, if it doesn't exist it will create it.
         /// </summary>
         /// <param name="client">The <see cref="StorageManagementClient"/> that is performing the operation.</param>
@@ -46,7 +51,7 @@
             await container.CreateIfNotExistsAsync();
             await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = publicAccess });
 
-            var acl = container.GetSharedAccessSignature(new SharedAccessBlobPolicy {Permissions = permissions});
+            var acl = container.GetSharedAccessSignature(new SharedAccessBlobPolicy { Permissions = permissions });
             FlexStreams.BuildEventsObserver.OnNext(new StorageKeyEvent(accountName, containerName, acl));
         }
 
@@ -64,30 +69,39 @@
             Contract.Requires(model != null);
             Contract.Requires(model.System != null);
 
-            var accountName = await FlexConfiguration.StorageAccountChooser.Choose(client, model.System.StorageType.GetEnumDescription());
-            StorageAccountGetResponse account = null;
+            string accountName;
 
-            try
+            lock (StorageAccountGate)
             {
-                account = (await client.StorageAccounts.GetAsync(accountName));
-            }
-            catch { }
 
-            if (account == null)
-            {
-                accountName = model.System.LogicalName + FlexDataConfiguration.StoraAccountString + FlexDataConfiguration.Branch;
+                accountName = FlexConfiguration.StorageAccountChooser.Choose(client, model.System.StorageType.GetEnumDescription()).Result;
+                StorageAccountGetResponse account = null;
 
-                await client.StorageAccounts.CreateAsync(
-                    new StorageAccountCreateParameters
-                    {
-                        Name = accountName,
-                        Location = model.System.Location.GetEnumDescription(),
-                        AccountType = model.System.StorageType.GetEnumDescription()
-                    });
-            }
-            else
-            {
-                accountName = account.StorageAccount.Name;
+                try
+                {
+                    account = client.StorageAccounts.GetAsync(accountName).Result;
+                }
+                catch
+                {
+                    // ignored
+                }
+
+                if (account == null)
+                {
+                    accountName = model.System.LogicalName + FlexDataConfiguration.StoraAccountString + FlexDataConfiguration.Branch;
+
+                    client.StorageAccounts.CreateAsync(
+                        new StorageAccountCreateParameters
+                        {
+                            Name = accountName,
+                            Location = model.System.Location.GetEnumDescription(),
+                            AccountType = model.System.StorageType.GetEnumDescription()
+                        }).Wait();
+                }
+                else
+                {
+                    accountName = account.StorageAccount.Name;
+                }
             }
 
             await client.CreateContainerIfNotExistsAsync(

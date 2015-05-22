@@ -14,7 +14,10 @@
     /// </summary>
     public static class WebSiteManagementClientExtensions
     {
-        private static object _hostingPlanGate = new object();
+        /// <summary>
+        /// Gate object for the hosting plan choosing process.
+        /// </summary>
+        private static readonly object HostingPlanGate = new object();
 
         /// <summary>
         /// Checks for the existence of a specific Azure Web Site, if it doesn't exist it will create it.
@@ -59,7 +62,7 @@
             var webSpace = model.System.WebSpace.GetEnumDescription();
             string webPlan;
 
-            lock (_hostingPlanGate)
+            lock (HostingPlanGate)
             {
                 webPlan = FlexConfiguration.WebPlanChooser.Choose(client, webSpace).Result;
 
