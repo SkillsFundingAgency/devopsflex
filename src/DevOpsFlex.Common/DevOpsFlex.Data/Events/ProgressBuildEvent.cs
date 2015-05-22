@@ -44,8 +44,10 @@
         /// <param name="percent">The progress percentage that this tick represents.</param>
         public void Tick(int percent)
         {
-            _progressSubject.OnNext(percent);
+            if(percent < 100) _progressSubject.OnNext(percent);
+            else _progressSubject.OnCompleted();
         }
+
         /// <summary>
         /// Defines a method to release allocated resources.
         /// </summary>
@@ -68,10 +70,7 @@
                 return;
             }
 
-            if (_progressSubject != null)
-            {
-                _progressSubject.Dispose();
-            }
+            _progressSubject?.Dispose();
 
             _disposed = true;
         }

@@ -127,6 +127,21 @@
                 await context.Components.OfType<AzureWebSite>().ProvisionAllAsync(client);
             }
         }
+
+        /// <summary>
+        /// Tests the ProvisionAllAsync on <see cref="AzureWebSite"/> with real SQL Db data (seed).
+        /// </summary>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_DbContext_ProvisionAll_End2End()
+        {
+            FlexDataConfiguration.Branch = "Main";
+            FlexDataConfiguration.Configuration = "djfr";
+
+            using (var context = new DevOpsFlexDbContext())
+            {
+                await context.ProvisionAllAsync(ManagementClient.SubscriptionId, ManagementClient.SettingsPath);
+            }
+        }
     }
 
     /// <summary>

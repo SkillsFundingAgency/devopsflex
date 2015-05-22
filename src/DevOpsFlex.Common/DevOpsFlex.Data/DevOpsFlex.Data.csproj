@@ -251,6 +251,7 @@
     <Compile Include="FlexDataConfiguration.cs" />
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />
+    <Compile Include="FlexStreams.cs" />
     <Compile Include="Migrations\201505071545541_InitialCreate.cs" />
     <Compile Include="Migrations\201505071545541_InitialCreate.Designer.cs">
       <DependentUpon>201505071545541_InitialCreate.cs</DependentUpon>

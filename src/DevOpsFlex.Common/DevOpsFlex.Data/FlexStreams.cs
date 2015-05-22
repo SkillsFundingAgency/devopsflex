@@ -1,10 +1,10 @@
-﻿namespace DevOpsFlex.Azure.Management
+﻿namespace DevOpsFlex.Data
 {
     using System;
     using System.Reactive;
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
-    using Data.Events;
+    using Events;
 
     /// <summary>
     /// Central point in DevOpsFlex to hold all the event streams.
@@ -19,18 +19,11 @@
         /// <summary>
         /// Gets the build event stream as an <see cref="IObserver{T}"/>.
         /// </summary>
-        public static IObserver<BuildEvent> BuildEventsObserver
-        {
-            get { return BuildEventStream.AsObserver(); }
-        }
+        public static IObserver<BuildEvent> BuildEventsObserver => BuildEventStream.AsObserver();
 
         /// <summary>
         /// Gets the build event stream as an <see cref="IObservable{T}"/>.
         /// </summary>
-        public static IObservable<BuildEvent> BuildEventsObservable
-        {
-            get { return BuildEventStream.AsObservable(); }
-        }
-
+        public static IObservable<BuildEvent> BuildEventsObservable => BuildEventStream.AsObservable();
     }
 }
