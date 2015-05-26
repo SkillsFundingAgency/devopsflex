@@ -1,6 +1,5 @@
 ﻿namespace DevOpsFlex.Data.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Naming;
@@ -28,7 +27,7 @@
         }
 
         /// <summary>
-        /// Tests UseNaming by overriding the same <see cref="Type"/> twice.
+        /// Tests UseNaming by overriding the same <see cref="System.Type"/> twice.
         /// Ensures that only the last override is matched.
         /// </summary>
         [TestMethod, TestCategory("Unit")]
