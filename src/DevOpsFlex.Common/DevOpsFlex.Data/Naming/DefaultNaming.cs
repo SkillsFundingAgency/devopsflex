@@ -40,10 +40,10 @@
                 branch.GetOneCharOneDigit().ToLower();
 
             return string.Concat(component.System.LogicalName.ToLower().Take(MaxSystemLength)) +
+                   branchName +
                    "-" +
                    string.Concat(component.LogicalName.ToLower().Take(MaxComponentLength)) +
                    "-" +
-                   branchName +
                    string.Concat(configuration.ToLower().Take(MaxConfigurationLength));
         }
     }

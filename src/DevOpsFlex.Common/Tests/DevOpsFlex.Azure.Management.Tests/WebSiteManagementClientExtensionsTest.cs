@@ -96,23 +96,6 @@
             }
         }
 
-        [TestMethod]
-        public async Task Foo()
-        {
-            using (var client = ManagementClient.CreateWebSiteClient())
-            {
-                await client.WebHostingPlans.CreateAsync(
-                    SystemWebSpace.WestEurope.GetEnumDescription(),
-                    new WebHostingPlanCreateParameters
-                    {
-                        Name = "fct-webplan-djfr",
-                        NumberOfWorkers = 1,
-                        SKU = SkuOptions.Standard,
-                        WorkerSize = WorkerSizeOptions.Small
-                    });
-            }
-        }
-
         #endregion
 
     }
