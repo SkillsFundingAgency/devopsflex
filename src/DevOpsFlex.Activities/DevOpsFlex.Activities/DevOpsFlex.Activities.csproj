@@ -201,6 +201,7 @@
     <Compile Include="VmScaleDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="DevOpsFlex.Activities.nuspec" />
     <None Include="DevOpsFlex.snk" />
     <None Include="packages.config" />
