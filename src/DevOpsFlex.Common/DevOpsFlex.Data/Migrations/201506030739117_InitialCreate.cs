@@ -57,6 +57,7 @@ namespace DevOpsFlex.Data.Migrations
                         MaximumDatabaseSizeInGB = c.Int(),
                         CollationName = c.String(maxLength: 200),
                         ServiceObjective = c.Int(),
+                        CreateAppUser = c.Boolean(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -130,6 +131,12 @@ namespace DevOpsFlex.Data.Migrations
                         Type = c.Short(nullable: false),
                         Importance = c.Short(nullable: false),
                         Message = c.String(nullable: false, maxLength: 500),
+                        ResourceType = c.Int(),
+                        ResourceName = c.String(),
+                        ResourceType1 = c.Int(),
+                        ResourceName1 = c.String(),
+                        ResourceType2 = c.Int(),
+                        ResourceName2 = c.String(),
                         Account = c.String(maxLength: 100),
                         Container = c.String(maxLength: 100),
                         Key = c.String(maxLength: 100),

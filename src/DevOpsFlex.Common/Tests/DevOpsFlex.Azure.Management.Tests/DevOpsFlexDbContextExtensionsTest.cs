@@ -134,8 +134,8 @@
         [TestMethod, TestCategory("Integration")]
         public async Task Test_DbContext_ProvisionAll_End2End()
         {
-            FlexDataConfiguration.Branch = "Main";
-            FlexDataConfiguration.Configuration = "djfr";
+            FlexDataConfiguration.Branch = "Dev";
+            FlexDataConfiguration.Configuration = "DJ";
 
             using (var context = new DevOpsFlexDbContext())
             {

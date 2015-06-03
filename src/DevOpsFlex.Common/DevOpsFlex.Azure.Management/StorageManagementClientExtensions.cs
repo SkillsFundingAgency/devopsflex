@@ -50,6 +50,7 @@
 
             await container.CreateIfNotExistsAsync();
             await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = publicAccess });
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.StorageContainer, containerName));
 
             var acl = container.GetSharedAccessSignature(new SharedAccessBlobPolicy { Permissions = permissions });
             FlexStreams.BuildEventsObserver.OnNext(new StorageKeyEvent(accountName, containerName, acl));
@@ -73,13 +74,13 @@
 
             lock (StorageAccountGate)
             {
-
                 accountName = FlexConfiguration.StorageAccountChooser.Choose(client, model.System.StorageType.GetEnumDescription()).Result;
                 StorageAccountGetResponse account = null;
 
                 try
                 {
-                    account = client.StorageAccounts.GetAsync(accountName).Result;
+                    FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.StorageAccount, accountName));
+                    account = client.StorageAccounts.Get(accountName);
                 }
                 catch
                 {
@@ -88,19 +89,22 @@
 
                 if (account == null)
                 {
-                    accountName = model.System.LogicalName + FlexDataConfiguration.StoraAccountString + FlexDataConfiguration.Branch;
+                    accountName = (model.System.LogicalName + FlexDataConfiguration.StorageAccountString + FlexDataConfiguration.Branch).ToLower();
 
-                    client.StorageAccounts.CreateAsync(
+                    client.StorageAccounts.Create(
                         new StorageAccountCreateParameters
                         {
                             Name = accountName,
                             Location = model.System.Location.GetEnumDescription(),
                             AccountType = model.System.StorageType.GetEnumDescription()
-                        }).Wait();
+                        });
+
+                    FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.StorageAccount, accountName));
                 }
                 else
                 {
                     accountName = account.StorageAccount.Name;
+                    FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.StorageAccount, accountName));
                 }
             }
 
