@@ -1,5 +1,6 @@
 ﻿namespace DevOpsFlex.Data.Events
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
@@ -60,5 +61,13 @@
         High,
         Medium,
         Low
+    }
+
+    public enum AzureResource
+    {
+        [Description("Storage Account")]    StorageAccount,
+        [Description("Storage Container")]  StorageContainer,
+        [Description("Hosting Plan")]       HostingPlan,
+        [Description("Web Site")]           WebSite,
     }
 }

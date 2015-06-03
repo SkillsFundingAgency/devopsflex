@@ -21,7 +21,7 @@
         /// <summary>
         /// Specifies the relative or absolute path to the publish settings file for the target subscription.
         /// </summary>
-        private const string SettingsPath = @"..\..\sfa_beta.publishsettings";
+        private const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
 
         /// <summary>
         /// Specifies the subscription Id that we want to target.

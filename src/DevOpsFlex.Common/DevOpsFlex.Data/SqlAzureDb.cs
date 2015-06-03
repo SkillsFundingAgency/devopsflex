@@ -15,6 +15,8 @@
         public string CollationName { get; set; }
 
         public SqlServiceObjectives ServiceObjective { get; set; }
+
+        public bool CreateAppUser { get; set; }
     }
 
     public enum SqlAzureEdition : short

@@ -19,7 +19,7 @@
         public async Task<string> Choose(StorageManagementClient client, string storageType)
         {
             return (await client.StorageAccounts.ListAsync())
-                .FirstOrDefault(a => a.Name.Contains(FlexDataConfiguration.StoraAccountString) &&
+                .FirstOrDefault(a => a.Name.Contains(FlexDataConfiguration.StorageAccountString) &&
                                      a.Properties.AccountType == storageType)?
                 .Name;
         }

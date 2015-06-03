@@ -56,8 +56,9 @@
             const string branch = "Release10";
             const string configuration = "TEST";
 
-            var expected = string.Concat(systemName.ToLower().Take(DefaultNaming<AzureCloudService>.MaxSystemLength)) + "r1" + "-" +
+            var expected = string.Concat(systemName.ToLower().Take(DefaultNaming<AzureCloudService>.MaxSystemLength)) + "-" +
                            string.Concat(logicalName.ToLower().Take(DefaultNaming<AzureCloudService>.MaxComponentLength)) + "-" +
+                           "r1" +
                            string.Concat(configuration.ToLower().Take(DefaultNaming<AzureCloudService>.MaxConfigurationLength));
 
             FlexDataConfiguration.RootBranch = "Main";

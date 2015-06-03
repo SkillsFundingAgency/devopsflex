@@ -77,7 +77,8 @@ namespace DevOpsFlex.Data.Migrations
                     Edition = SqlAzureEdition.Standard,
                     ServiceObjective = SqlServiceObjectives.S1,
                     MaximumDatabaseSizeInGB = 10,
-                    CollationName = "SQL_Latin1_General_CP1_CI_AS"
+                    CollationName = "SQL_Latin1_General_CP1_CI_AS",
+                    CreateAppUser = false
                 },
                 new SqlAzureDb
                 {
@@ -87,7 +88,8 @@ namespace DevOpsFlex.Data.Migrations
                     Edition = SqlAzureEdition.Standard,
                     ServiceObjective = SqlServiceObjectives.S1,
                     MaximumDatabaseSizeInGB = 10,
-                    CollationName = "SQL_Latin1_General_CP1_CI_AS"
+                    CollationName = "SQL_Latin1_General_CP1_CI_AS",
+                    CreateAppUser = false
                 },
                 new AzureWebSite
                 {
@@ -123,7 +125,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureStorageContainer
                 {
                     System = system,
-                    LogicalName = "DocumentTemplates",
+                    LogicalName = "DocTemplates",
                     Name = "Document Templates for the document domain",
                     PublicAccess = BlobContainerPublicAccessType.Off,
                     Acl = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List
@@ -147,7 +149,7 @@ namespace DevOpsFlex.Data.Migrations
                     System = system,
                     Name = "Cap UK",
                     StartIp = "212.167.5.1",
-                    EndIp = "212.167.5.255",
+                    EndIp = "212.167.5.255"
                 };
 
             context.SqlFirewallRules.AddOrUpdate(

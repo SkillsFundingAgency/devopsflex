@@ -31,6 +31,7 @@
         /// <param name="databaseEdition">The edition of the database we are creating.</param>
         /// <param name="collationName">The database collation name.</param>
         /// <param name="sizeInGb">The maximum database size in GB.</param>
+        /// <param name="createAppUser"></param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
         public static async Task CreateDatabaseIfNotExistsAsync(
             this SqlManagementClient client,
@@ -38,7 +39,8 @@
             string databaseName,
             string databaseEdition,
             string collationName,
-            int sizeInGb)
+            int sizeInGb,
+            bool createAppUser)
         {
             Contract.Requires(client != null);
             Contract.Requires(!string.IsNullOrWhiteSpace(serverName));
@@ -70,6 +72,8 @@
                     MaximumDatabaseSizeInGB = sizeInGb,
                 });
 
+            if (!createAppUser) return;
+
             using (var adb = new DevOpsAzureDatabase(serverName, databaseName, FlexConfiguration.FlexSaUser, FlexConfiguration.FlexSaPwd))
             {
                 await adb.CreateDatabaseUserAsync(FlexConfiguration.FlexAppUser, FlexConfiguration.FlexAppUser, "dbo");
@@ -99,13 +103,14 @@
 
                     try
                     {
-                        client.Servers.CreateAsync(new ServerCreateParameters
-                        {
-                            AdministratorUserName = FlexConfiguration.FlexSaUser,
-                            AdministratorPassword = FlexConfiguration.FlexSaPwd,
-                            Location = model.System.Location.GetEnumDescription(),
-                            Version = "100.0" // This needs to be an invalid version number
-                        }).Wait();
+                        client.Servers.Create(
+                            new ServerCreateParameters
+                            {
+                                AdministratorUserName = FlexConfiguration.FlexSaUser,
+                                AdministratorPassword = FlexConfiguration.FlexSaPwd,
+                                Location = model.System.Location.GetEnumDescription(),
+                                Version = "100.0" // This needs to be an invalid version number
+                            });
                     }
                     catch (CloudException ex)
                     {
@@ -121,14 +126,14 @@
                         }
                     }
 
-                    serverName = client.Servers.CreateAsync(
+                    serverName = client.Servers.Create(
                         new ServerCreateParameters
                         {
                             AdministratorUserName = FlexConfiguration.FlexSaUser,
                             AdministratorPassword = FlexConfiguration.FlexSaPwd,
                             Location = model.System.Location.GetEnumDescription(),
                             Version = serverMaxVersion
-                        }).Result.ServerName;
+                        }).ServerName;
                 }
 
             }
@@ -139,7 +144,7 @@
                                               FlexDataConfiguration.Branch,
                                               FlexDataConfiguration.Configuration);
 
-            await client.CreateDatabaseIfNotExistsAsync(serverName, dbName, model.Edition.GetEnumDescription(), model.CollationName, model.MaximumDatabaseSizeInGB);
+            await client.CreateDatabaseIfNotExistsAsync(serverName, dbName, model.Edition.GetEnumDescription(), model.CollationName, model.MaximumDatabaseSizeInGB, model.CreateAppUser);
         }
 
         /// <summary>

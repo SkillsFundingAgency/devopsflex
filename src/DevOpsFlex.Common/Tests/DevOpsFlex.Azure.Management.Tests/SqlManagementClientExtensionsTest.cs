@@ -42,7 +42,7 @@
 
                 try
                 {
-                    await client.CreateDatabaseIfNotExistsAsync(server, dbName, dbEdition, dbCollation, dbSize);
+                    await client.CreateDatabaseIfNotExistsAsync(server, dbName, dbEdition, dbCollation, dbSize, true);
 
                     var webSite = await client.Databases.GetAsync(server, dbName, new CancellationToken());
                     Assert.IsNotNull(webSite);
@@ -86,7 +86,7 @@
 
                         });
 
-                    await client.CreateDatabaseIfNotExistsAsync(server, dbName, dbEdition, dbCollation, dbSize);
+                    await client.CreateDatabaseIfNotExistsAsync(server, dbName, dbEdition, dbCollation, dbSize, true);
                 }
                 finally
                 {

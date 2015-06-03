@@ -32,7 +32,7 @@
         /// <summary>
         /// Gets and sets the substring to look for when search for a storage account during container creation.
         /// </summary>
-        public static string StoraAccountString { get; set; } = "appstorage";
+        public static string StorageAccountString { get; set; } = "app";
 
         /// <summary>
         /// Overrides the <see cref="DefaultNaming{T}"/> for a specific <see cref="DevOpsComponent"/>.
