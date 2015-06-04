@@ -69,5 +69,8 @@
         [Description("Storage Container")]  StorageContainer,
         [Description("Hosting Plan")]       HostingPlan,
         [Description("Web Site")]           WebSite,
+        [Description("SQL Server")]         SqlServer,
+        [Description("SQL Database")]       SqlDatabase,
+        [Description("Firewall Rule")]      FirewallRule,
     }
 }

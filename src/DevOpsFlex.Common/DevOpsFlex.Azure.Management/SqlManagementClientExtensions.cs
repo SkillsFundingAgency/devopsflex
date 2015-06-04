@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Core;
     using Data;
+    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Sql;
     using Microsoft.WindowsAzure.Management.Sql.Models;
@@ -50,6 +51,7 @@
             Contract.Requires(sizeInGb > 0 && sizeInGb <= 250);
 
             DatabaseGetResponse ns = null;
+            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.SqlDatabase, databaseName));
 
             try
             {
@@ -60,7 +62,11 @@
                 if (!cex.Error.Message.Contains($"Resource with the name '{databaseName}' does not exist")) throw;
             }
 
-            if (ns != null) return;
+            if (ns != null)
+            {
+                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.SqlDatabase, databaseName));
+                return;
+            }
 
             await client.Databases.CreateAsync(
                 serverName,
@@ -71,6 +77,8 @@
                     CollationName = collationName,
                     MaximumDatabaseSizeInGB = sizeInGb,
                 });
+
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.SqlDatabase, databaseName));
 
             if (!createAppUser) return;
 
@@ -95,6 +103,7 @@
 
             lock (SqlServerGate)
             {
+                FlexStreams.BuildEventsObserver.OnNext(new CheckForParentResourceEvent(AzureResource.SqlServer, AzureResource.SqlDatabase, model.Name));
                 serverName = FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription()).Result;
 
                 if (serverName == null)
@@ -134,8 +143,13 @@
                             Location = model.System.Location.GetEnumDescription(),
                             Version = serverMaxVersion
                         }).ServerName;
-                }
 
+                    FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.SqlServer, serverName));
+                }
+                else
+                {
+                    FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.SqlServer, serverName));
+                }
             }
 
             var dbName = FlexConfiguration.GetNaming<SqlAzureDb>()
@@ -164,6 +178,7 @@
             Contract.Requires(!string.IsNullOrWhiteSpace(parameters.EndIPAddress));
 
             FirewallRuleGetResponse rule = null;
+            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.FirewallRule, parameters.Name));
 
             try
             {
@@ -174,9 +189,14 @@
                 if (!cex.Error.Message.Contains($"Resource with the name '{parameters.Name}' does not exist")) throw;
             }
 
-            if (rule != null) return;
+            if (rule != null)
+            {
+                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.FirewallRule, parameters.Name));
+                return;
+            }
 
             await client.FirewallRules.CreateAsync(serverName, parameters);
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.FirewallRule, parameters.Name));
         }
 
         /// <summary>
