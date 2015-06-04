@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Data;
+    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.Compute.Models;
@@ -120,6 +121,7 @@
             Contract.Requires(parameters != null);
 
             HostedServiceGetResponse service = null;
+            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.CloudService, parameters.ServiceName));
 
             try
             {
@@ -130,9 +132,14 @@
                 if (cex.Error.Code != "ResourceNotFound") throw;
             }
 
-            if (service != null) return;
+            if (service != null)
+            {
+                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.CloudService, parameters.ServiceName));
+                return;
+            }
 
             await client.HostedServices.CreateAsync(parameters);
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.CloudService, parameters.ServiceName));
         }
 
         /// <summary>
