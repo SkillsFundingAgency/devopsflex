@@ -1,10 +1,7 @@
 ﻿namespace DevOpsFlex.Azure.Management.Tests
 {
-    using System;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Core;
     using Data;
     using Data.Naming;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -6,6 +6,7 @@
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
     using Azure.Management;
+    using Core;
     using Data.PublishSettings;
     using Designer;
     using Microsoft.Azure;
@@ -77,12 +78,12 @@
                             case VirtualMachineSize.A7:
                             case VirtualMachineSize.A8:
                             case VirtualMachineSize.A9:
-                                client.ResizeVm(vm.Name, vm.Size.ToAzureString());
+                                client.ResizeVm(vm.Name, vm.Size.GetEnumDescription());
                                 break;
 
                             default:
                                 throw new ArgumentOutOfRangeException(
-                                    "context",
+                                    nameof(context),
                                     @"Unknown VM Size, this shouldn't happen, but the enumeration value isn't implemented in the acitivity switch");
                         }
                     }

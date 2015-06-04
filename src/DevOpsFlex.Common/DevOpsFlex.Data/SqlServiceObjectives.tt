@@ -8,17 +8,13 @@
 <#@ Assembly Name="$(ProjectDir)$(OutDir)Microsoft.WindowsAzure.Management.Sql.dll" #>
 <#@ Assembly Name="$(ProjectDir)$(OutDir)DevOpsFlex.Data.dll" #>
 <#@ Assembly Name="$(ProjectDir)$(OutDir)DevOpsFlex.Core.dll" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="Microsoft.WindowsAzure.Management.Sql" #>
 <#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Runtime.Remoting.Messaging" #>
 <#@ import namespace="System.Security.Cryptography.X509Certificates" #>
-<#@ import namespace="DevOpsFlex.Core" #>
 <#@ import namespace="DevOpsFlex.Data.PublishSettings" #>
 <#@ import namespace="Microsoft.Azure" #>
-<#@ import namespace="Microsoft.WindowsAzure.Management.Sql" #><#
+<#
 
 // ******************************************************************************************
 // * This requires a settings file with a valid subscription on it to properly work.
@@ -32,7 +28,7 @@ using(var client = CreateSqlClient())
 {
     var objectives = client.ServiceObjectives.List(serverName);
 #>
-namespace <#= System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint") #>
+namespace <#= CallContext.LogicalGetData("NamespaceHint") #>
 {
     using System.ComponentModel;
 

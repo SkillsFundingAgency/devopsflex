@@ -1,35 +1,23 @@
 ﻿namespace DevOpsFlex.Azure.Management
 {
-    using System;
+    using System.ComponentModel;
     using Microsoft.WindowsAzure.Management.Compute.Models;
 
+    /// <summary>
+    /// Defines a VM size enumeration with a direct map to the Azure SDK constants.
+    /// </summary>
     public enum VirtualMachineSize
     {
-        Small,
-        ExtraSmall,
-        Large,
-        Medium,
-        ExtraLarge,
-        A5,
-        A6,
-        A7,
-        A8,
-        A9,
+        [Description(VirtualMachineRoleSize.Small)]         Small,
+        [Description(VirtualMachineRoleSize.ExtraSmall)]    ExtraSmall,
+        [Description(VirtualMachineRoleSize.Large)]         Large,
+        [Description(VirtualMachineRoleSize.Medium)]        Medium,
+        [Description(VirtualMachineRoleSize.ExtraLarge)]    ExtraLarge,
+        [Description(VirtualMachineRoleSize.A5)]            A5,
+        [Description(VirtualMachineRoleSize.A6)]            A6,
+        [Description(VirtualMachineRoleSize.A7)]            A7,
+        [Description(VirtualMachineRoleSize.A8)]            A8,
+        [Description(VirtualMachineRoleSize.A9)]            A9,
         Stop
-    }
-
-    public static class VirtualMachineSizeExtensions
-    {
-        public static string ToAzureString(this VirtualMachineSize size)
-        {
-            var field = typeof(VirtualMachineRoleSize).GetField(size.ToString());
-
-            if (field == null)
-                throw new ArgumentOutOfRangeException(
-                    "size",
-                    "The Size used as part of the enumeration isn't supported in the Azure SDK. Please check the VirtualMachineRoleSize static class and make sure the VirtualMachineSize enum maps it.");
-
-            return field.GetRawConstantValue().ToString();
-        }
     }
 }
