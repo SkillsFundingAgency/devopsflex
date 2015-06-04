@@ -74,5 +74,6 @@
         [Description("Firewall Rule")]      FirewallRule,
         [Description("Service Bus")]        ServiceBus,
         [Description("Reserved IP")]        ReservedIp,
+        [Description("Cloud Service")]      CloudService,
     }
 }
