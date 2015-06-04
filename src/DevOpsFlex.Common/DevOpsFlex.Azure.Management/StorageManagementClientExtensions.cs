@@ -74,12 +74,12 @@
 
             lock (StorageAccountGate)
             {
+                FlexStreams.BuildEventsObserver.OnNext(new CheckForParentResourceEvent(AzureResource.StorageAccount, AzureResource.StorageContainer, model.Name));
                 accountName = FlexConfiguration.StorageAccountChooser.Choose(client, model.System.StorageType.GetEnumDescription()).Result;
                 StorageAccountGetResponse account = null;
 
                 try
                 {
-                    FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.StorageAccount, accountName));
                     account = client.StorageAccounts.Get(accountName);
                 }
                 catch
