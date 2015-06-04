@@ -60,6 +60,21 @@
         }
 
         /// <summary>
+        /// Tests the ListVmsAsync against a subscription that needs VMs on it by asserting it returns at least one.
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod, TestCategory("Integration")]
+        public async Task Test_ListVmsAsync_LiveSubscription()
+        {
+            using (var client = ManagementClient.CreateComputeClient())
+            {
+                var vms = (await client.ListVmsAsync()).ToList();
+
+                Assert.IsTrue(vms.Any());
+            }
+        }
+
+        /// <summary>
         /// Tests the creation of a Cloud Service that doesn't exist (puts a Guid part in the service name).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
