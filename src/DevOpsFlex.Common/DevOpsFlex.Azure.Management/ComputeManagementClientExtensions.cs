@@ -22,13 +22,13 @@
         /// <param name="client">The <see cref="ComputeManagementClient"/> that we want to use to connect to the Azure subscription.</param>
         /// <param name="name">The name of the VM that we want to resize.</param>
         /// <param name="size">The target size for the VM.</param>
-        public static void ResizeVm(this ComputeManagementClient client, string name, string size)
+        public static async Task ResizeVmAsync(this ComputeManagementClient client, string name, string size)
         {
             Contract.Requires(client != null);
 
-            var currentVm = client.VirtualMachines.Get(name, name, name);
+            var currentVm = await client.VirtualMachines.GetAsync(name, name, name);
 
-            client.VirtualMachines.Update(
+            await client.VirtualMachines.UpdateAsync(
                 name, name, name,
                 new VirtualMachineUpdateParameters(
                     currentVm.RoleName,
@@ -39,7 +39,7 @@
 
             if (client.Deployments.GetByName(name, name).Status == DeploymentStatus.Suspended)
             {
-                client.VirtualMachines.Start(name, name, name);
+                await client.VirtualMachines.StartAsync(name, name, name);
             }
         }
 
@@ -49,11 +49,11 @@
         /// </summary>
         /// <param name="client">The <see cref="ComputeManagementClient"/> that we want to use to connect to the Azure subscription.</param>
         /// <param name="name">The name of the VM that we want to resize.</param>
-        public static void DeallocateVm(this ComputeManagementClient client, string name)
+        public static async Task DeallocateVmAsync(this ComputeManagementClient client, string name)
         {
             Contract.Requires(client != null);
 
-            client.VirtualMachines.Shutdown(
+            await client.VirtualMachines.ShutdownAsync(
                 name, name, name,
                 new VirtualMachineShutdownParameters
                 {
