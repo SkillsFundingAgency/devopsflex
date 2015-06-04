@@ -68,13 +68,13 @@
         /// <param name="serviceName">The name of the cloud service.</param>
         /// <param name="slot">The name of the Cloud Service slot.</param>
         /// <returns>The cloud service deployment.</returns>
-        public static DeploymentGetResponse GetAzureDeyployment(this ComputeManagementClient client, string serviceName, DeploymentSlot slot)
+        public static async Task<DeploymentGetResponse> GetAzureDeyploymentAsync(this ComputeManagementClient client, string serviceName, DeploymentSlot slot)
         {
             Contract.Requires(client != null);
 
             try
             {
-                return client.Deployments.GetBySlot(serviceName, slot);
+                return await client.Deployments.GetBySlotAsync(serviceName, slot);
             }
             catch (CloudException cex)
             {
@@ -92,16 +92,20 @@
         /// </summary>
         /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
         /// <returns>The full list of VMs in the subscription.</returns>
-        public static IEnumerable<string> GetVms(this ComputeManagementClient client)
+        /// <remarks>
+        /// While debugging the enumeration might not be visible if tasks haven't all completed.
+        /// To change this behaviour just force the enumeration after calling this by using the <see cref="Enumerable.ToList{T}(IEnumerable{T})"/>.
+        /// </remarks>
+        public static async Task<IEnumerable<string>> ListVmsAsync(this ComputeManagementClient client)
         {
             Contract.Requires(client != null);
 
-            var hostedServices = client.HostedServices.List();
-
-            return hostedServices.Select(s => client.GetAzureDeyployment(s.ServiceName, DeploymentSlot.Production))
-                                 .Where(d => d != null && d.Roles.Count > 0)
-                                 .SelectMany(d => d.Roles.Where(r => r.RoleType == VirtualMachineRoleType.PersistentVMRole.ToString()))
-                                 .Select(r => r.RoleName);
+            return (await client.HostedServices.ListAsync())
+                .Select(async s => await client.GetAzureDeyploymentAsync(s.ServiceName, DeploymentSlot.Production))
+                .Select(t => t.Result)
+                .Where(d => d != null && d.Roles.Count > 0)
+                .SelectMany(d => d.Roles.Where(r => r.RoleType == VirtualMachineRoleType.PersistentVMRole.ToString()))
+                .Select(r => r.RoleName);
         }
 
         /// <summary>
