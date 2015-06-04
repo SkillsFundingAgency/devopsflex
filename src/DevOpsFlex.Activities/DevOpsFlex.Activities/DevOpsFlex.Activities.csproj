@@ -211,6 +211,10 @@
       <Project>{eda5e76d-6a16-4861-a923-f0c2cb63cfae}</Project>
       <Name>DevOpsFlex.Azure.Management</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DevOpsFlex.Common\DevOpsFlex.Core\DevOpsFlex.Core.csproj">
+      <Project>{FFEAB96F-1600-4853-A30D-3200B239212E}</Project>
+      <Name>DevOpsFlex.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DevOpsFlex.Common\DevOpsFlex.Data\DevOpsFlex.Data.csproj">
       <Project>{8d135df6-d396-4191-a89a-953652bf3350}</Project>
       <Name>DevOpsFlex.Data</Name>

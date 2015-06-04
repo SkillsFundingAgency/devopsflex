@@ -68,13 +68,14 @@
 
                 if (webPlan == null)
                 {
-                    var response = client.WebHostingPlans.CreateAsync(webSpace, new WebHostingPlanCreateParameters
-                    {
-                        Name = model.System.LogicalName + "-" + webSpace,
-                        NumberOfWorkers = 1,
-                        SKU = SkuOptions.Standard,
-                        WorkerSize = WorkerSizeOptions.Medium
-                    }).Result;
+                    var response = client.WebHostingPlans.Create(webSpace,
+                        new WebHostingPlanCreateParameters
+                        {
+                            Name = model.System.LogicalName + "-" + webSpace,
+                            NumberOfWorkers = 1,
+                            SKU = SkuOptions.Standard,
+                            WorkerSize = WorkerSizeOptions.Medium
+                        });
 
                     webPlan = response.WebHostingPlan.Name;
                 }

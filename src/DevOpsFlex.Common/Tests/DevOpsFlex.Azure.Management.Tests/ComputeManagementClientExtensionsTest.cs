@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.Compute;
     using Microsoft.WindowsAzure.Management.Compute.Models;
@@ -30,7 +31,7 @@
         {
             using (var client = ManagementClient.CreateComputeClient())
             {
-                client.ResizeVm(VmName, VirtualMachineSize.Medium.ToAzureString());
+                client.ResizeVm(VmName, VirtualMachineSize.Medium.GetEnumDescription());
             }
         }
 
@@ -42,7 +43,7 @@
         {
             using (var client = ManagementClient.CreateComputeClient())
             {
-                client.ResizeVm(VmName, VirtualMachineSize.Small.ToAzureString());
+                client.ResizeVm(VmName, VirtualMachineSize.Small.GetEnumDescription());
             }
         }
 

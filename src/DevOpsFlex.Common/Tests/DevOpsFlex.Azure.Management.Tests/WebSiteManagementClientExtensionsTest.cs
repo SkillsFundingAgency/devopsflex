@@ -4,8 +4,6 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Core;
-    using Data;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Management.WebSites;
     using Microsoft.WindowsAzure.Management.WebSites.Models;

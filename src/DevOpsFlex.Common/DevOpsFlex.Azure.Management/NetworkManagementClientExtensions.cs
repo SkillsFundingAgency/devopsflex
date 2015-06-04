@@ -2,7 +2,6 @@
 {
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
-    using System.Xml.XPath;
     using Core;
     using Data;
     using Hyak.Common;
