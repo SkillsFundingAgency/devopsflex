@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core;
     using Data;
+    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Network;
     using Microsoft.WindowsAzure.Management.Network.Models;
@@ -28,6 +29,7 @@
             Contract.Requires(!string.IsNullOrWhiteSpace(location));
 
             NetworkReservedIPGetResponse service = null;
+            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.ReservedIp, ipName));
 
             try
             {
@@ -38,7 +40,11 @@
                 if (cex.Error.Code != "ResourceNotFound") throw;
             }
 
-            if (service != null) return;
+            if (service != null)
+            {
+                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.ReservedIp, ipName));
+                return;
+            }
 
             await client.ReservedIPs.CreateAsync(
                 new NetworkReservedIPCreateParameters
@@ -46,6 +52,8 @@
                     Name = ipName,
                     Location = location
                 });
+
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.ReservedIp, ipName));
         }
 
         /// <summary>

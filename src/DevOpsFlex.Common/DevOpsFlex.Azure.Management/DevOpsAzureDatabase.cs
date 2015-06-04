@@ -16,7 +16,7 @@
         /// <summary>
         /// Keeps track of when this object has been disposed of.
         /// </summary>
-        private bool _disposed = false;
+        private bool _disposed;
 
         /// <summary>
         /// Holds the connection to SQL.
@@ -26,22 +26,22 @@
         /// <summary>
         /// Gets the name of the SQL Server that we are connecting to.
         /// </summary>
-        public string ServerName { get; private set; }
+        public string ServerName { get; }
 
         /// <summary>
         /// Gets the name of the SQL Database that we are connecting to.
         /// </summary>
-        public string DatabaseName { get; private set; }
+        public string DatabaseName { get; }
 
         /// <summary>
         /// Gets the SQL User username to connect to the SQL server.
         /// </summary>
-        public string Username { get; private set; }
+        public string Username { get; }
 
         /// <summary>
         /// Gets the SQL User password to connect to the SQL server.
         /// </summary>
-        public string Password { get; private set; }
+        public string Password { get; }
 
         /// <summary>
         /// Initializes an instance of <see cref="DevOpsAzureDatabase"/> based on a SQL User and pointing to the
@@ -64,7 +64,7 @@
             Username = username;
             Password = password;
 
-            _sqlConnection = new SqlConnection(string.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", ServerName, DatabaseName, Username, Password));
+            _sqlConnection = new SqlConnection($"Data Source={ServerName};Initial Catalog={DatabaseName};User Id={Username};Password={Password}");
         }
 
         /// <summary>
@@ -89,12 +89,12 @@
                     cmd.Connection = _sqlConnection;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.CommandText = string.Format("CREATE USER {0} FOR LOGIN {1} WITH DEFAULT_SCHEMA = {2}", userName, loginName, defaultSchema);
+                    cmd.CommandText = $"CREATE USER {userName} FOR LOGIN {loginName} WITH DEFAULT_SCHEMA = {defaultSchema}";
                     await cmd.ExecuteNonQueryAsync();
 
                     if (defaultSchema == "dbo")
                     {
-                        cmd.CommandText = string.Format("EXEC sp_addrolemember N'db_owner', N'{0}'", userName);
+                        cmd.CommandText = $"EXEC sp_addrolemember N'db_owner', N'{userName}'";
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
