@@ -72,5 +72,6 @@
         [Description("SQL Server")]         SqlServer,
         [Description("SQL Database")]       SqlDatabase,
         [Description("Firewall Rule")]      FirewallRule,
+        [Description("Service Bus")]        ServiceBus,
     }
 }

@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core;
     using Data;
+    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.ServiceBus;
     using Microsoft.WindowsAzure.Management.ServiceBus.Models;
@@ -28,6 +29,7 @@
             Contract.Requires(!string.IsNullOrWhiteSpace(region));
 
             ServiceBusNamespaceResponse sb = null;
+            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.ServiceBus, sbName));
 
             try
             {
@@ -41,9 +43,14 @@
                 if (!cex.Message.Contains("Request to a downlevel service failed.")) throw;
             }
 
-            if (sb != null) return;
+            if (sb != null)
+            {
+                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.ServiceBus, sbName));
+                return;
+            }
 
             await client.Namespaces.CreateAsync(sbName, region);
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.ServiceBus, sbName));
         }
 
         /// <summary>
