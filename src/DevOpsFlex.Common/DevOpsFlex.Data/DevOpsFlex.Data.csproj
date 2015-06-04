@@ -264,6 +264,7 @@
     <Compile Include="BuildConfiguration.cs" />
     <Compile Include="CodeBranch.cs" />
     <Compile Include="Events\BuildEvent.cs" />
+    <Compile Include="Events\CheckForParentResourceEvent.cs" />
     <Compile Include="Events\FoundExistingEvent.cs" />
     <Compile Include="Events\CheckIfExistsEvent.cs" />
     <Compile Include="Events\ProgressBuildEvent.cs" />

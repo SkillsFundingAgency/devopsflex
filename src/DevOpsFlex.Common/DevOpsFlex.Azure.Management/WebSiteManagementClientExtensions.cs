@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Core;
     using Data;
+    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.WebSites;
     using Microsoft.WindowsAzure.Management.WebSites.Models;
@@ -33,6 +34,7 @@
             Contract.Requires(parameters != null);
 
             WebSiteGetResponse service = null;
+            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.WebSite, parameters.Name));
 
             try
             {
@@ -43,9 +45,14 @@
                 if (cex.Error.Code != "NotFound") throw;
             }
 
-            if (service != null) return;
+            if (service != null)
+            {
+                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.WebSite, parameters.Name));
+                return;
+            }
 
             await client.WebSites.CreateAsync(webSpace, parameters);
+            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.WebSite, parameters.Name));
         }
 
         /// <summary>
@@ -64,6 +71,7 @@
 
             lock (HostingPlanGate)
             {
+                FlexStreams.BuildEventsObserver.OnNext(new CheckForParentResourceEvent(AzureResource.HostingPlan, AzureResource.WebSite, model.Name));
                 webPlan = FlexConfiguration.WebPlanChooser.Choose(client, webSpace).Result;
 
                 if (webPlan == null)
@@ -78,6 +86,11 @@
                         });
 
                     webPlan = response.WebHostingPlan.Name;
+                    FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.HostingPlan, webPlan));
+                }
+                else
+                {
+                    FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.HostingPlan, webPlan));
                 }
             }
 
