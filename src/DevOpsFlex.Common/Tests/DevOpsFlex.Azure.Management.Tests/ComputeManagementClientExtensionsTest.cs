@@ -24,38 +24,38 @@
         private const string VmName = "devopsflex-test";
 
         /// <summary>
-        /// Tests the ResizeVm extension by upscaling a VM to A2.
+        /// Tests the ResizeVmAsync extension by upscaling a VM to A2.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public void Test_ResizeVm_UpscaleA2_LiveVM()
+        public async Task Test_ResizeVm_UpscaleA2_LiveVM()
         {
             using (var client = ManagementClient.CreateComputeClient())
             {
-                client.ResizeVm(VmName, VirtualMachineSize.Medium.GetEnumDescription());
+                await client.ResizeVmAsync(VmName, VirtualMachineSize.Medium.GetEnumDescription());
             }
         }
 
         /// <summary>
-        /// Tests the ResizeVm extension by downscaling a VM to A1.
+        /// Tests the ResizeVmAsync extension by downscaling a VM to A1.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public void Test_ResizeVm_DownscaleA1_LiveVM()
+        public async Task Test_ResizeVm_DownscaleA1_LiveVM()
         {
             using (var client = ManagementClient.CreateComputeClient())
             {
-                client.ResizeVm(VmName, VirtualMachineSize.Small.GetEnumDescription());
+                await client.ResizeVmAsync(VmName, VirtualMachineSize.Small.GetEnumDescription());
             }
         }
 
         /// <summary>
-        /// Tests the DeallocateVm extension by stopping a VM in deallocated mode.
+        /// Tests the DeallocateVmAsync extension by stopping a VM in deallocated mode.
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public void Test_DeallocateVm_LiveVM()
+        public async Task Test_DeallocateVm_LiveVM()
         {
             using (var client = ManagementClient.CreateComputeClient())
             {
-                client.DeallocateVm(VmName);
+                await client.DeallocateVmAsync(VmName);
             }
         }
 

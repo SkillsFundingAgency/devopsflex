@@ -3,6 +3,7 @@
     using System;
     using System.Activities;
     using System.ComponentModel;
+    using System.Linq;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
     using Azure.Management;
@@ -56,16 +57,15 @@
                 SubscriptionId,
                 new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate)));
 
-            Parallel.ForEach(
-                VirtualMachines.Get(context),
-                vm =>
+            var tasks = VirtualMachines.Get(context).Select(
+                async vm =>
                 {
                     using (var client = new ComputeManagementClient(credentials))
                     {
                         switch (vm.Size)
                         {
                             case VirtualMachineSize.Stop:
-                                client.DeallocateVm(vm.Name);
+                                await client.DeallocateVmAsync(vm.Name);
                                 break;
 
                             case VirtualMachineSize.Small:
@@ -78,7 +78,7 @@
                             case VirtualMachineSize.A7:
                             case VirtualMachineSize.A8:
                             case VirtualMachineSize.A9:
-                                client.ResizeVm(vm.Name, vm.Size.GetEnumDescription());
+                                await client.ResizeVmAsync(vm.Name, vm.Size.GetEnumDescription());
                                 break;
 
                             default:
@@ -88,6 +88,8 @@
                         }
                     }
                 });
+
+            Task.WhenAll(tasks);
         }
     }
 }
