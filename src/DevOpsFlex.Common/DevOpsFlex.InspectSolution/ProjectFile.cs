@@ -41,11 +41,11 @@
         {
             get
             {
-                if(Solution.ResharperProject == null) return false;
+                if (Solution.ResharperProject == null) return false;
 
                 return Solution.ResharperProject.InspectCode.Projects
-                               .Select(p => p.ToLowerInvariant())
-                               .Contains(ProjectName.ToLowerInvariant());
+                    .Select(p => p.ToLowerInvariant())
+                    .Contains(ProjectName.ToLowerInvariant());
             }
         }
 
@@ -64,12 +64,12 @@
             get
             {
                 var projectGuids = ProjectRoot.Descendants()
-                                  .SingleOrDefault(e => e.Name.LocalName == "ProjectTypeGuids");
-                                  
-                if(projectGuids == null) return false;
+                    .SingleOrDefault(e => e.Name.LocalName == "ProjectTypeGuids");
+
+                if (projectGuids == null) return false;
 
                 return projectGuids.Value.ToUpper()
-                                   .Contains("3AC096D0-A1C2-E12C-1390-A8335801FDAB");
+                    .Contains("3AC096D0-A1C2-E12C-1390-A8335801FDAB");
             }
         }
 
@@ -84,6 +84,11 @@
             }
         }
 
+        public bool? HasStyleCopSettingsFile
+        {
+            get { return _didStyleCopSettingsFile; }
+        }
+
         public InspectCodeDefinition InspectCode
         {
             get
@@ -92,13 +97,14 @@
 
                 try
                 {
-                    var usingTask = ProjectRoot.FindElementThatContains("UsingTask", "AssemblyFile", "JetBrains.CommandLine.InspectCode.MsBuild.dll");
+                    var usingTask = ProjectRoot.FindElementThatContains("UsingTask", "AssemblyFile",
+                        "JetBrains.CommandLine.InspectCode.MsBuild.dll");
                     if (usingTask == null) return null;
 
                     var inspectElement =
                         ProjectRoot.FindElementThatContains(usingTask.Attributes()
-                                                                     .Single(a => a.Name.LocalName == "TaskName")
-                                                                     .Value);
+                            .Single(a => a.Name.LocalName == "TaskName")
+                            .Value);
 
                     _inspectCode = _inspectCodeFactory.Create(usingTask, inspectElement);
                 }
@@ -112,27 +118,23 @@
             }
         }
 
-        public StyleCopSettingsFile StyleCopSettings
+        public void ParseStyleCopSettings()
         {
-            get
+            if (_didStyleCopSettingsFile) return;
+
+            try
             {
-                if (_didStyleCopSettingsFile) return _styleCopSettingsFile;
+                var pathElement = ProjectRoot.FindElementThatContains("None", "Include", "Settings.StyleCop");
+                if (pathElement == null) return;
 
-                try
-                {
-                    var pathElement = ProjectRoot.FindElementThatContains("None", "Include", "Settings.StyleCop");
-                    if (pathElement == null) return null;
-
-                    _styleCopSettingsFile = _settingsFileFactory.Create(Path.Combine(ProjectPath, pathElement.Value));
-                }
-                catch (Exception)
-                {
-                    _styleCopSettingsFile = null;
-                }
-
-                _didStyleCopSettingsFile = true;
-                return _styleCopSettingsFile;
+                _styleCopSettingsFile = _settingsFileFactory.Create(Path.Combine(ProjectPath, pathElement.Value));
             }
+            catch (Exception)
+            {
+                _styleCopSettingsFile = null;
+            }
+
+            _didStyleCopSettingsFile = true;
         }
 
         public ProjectFile(
@@ -150,6 +152,8 @@
             _inspectCodeFactory = inspectCodeFactory;
 
             ProjectRoot = XElement.Load(ProjectPath);
+
+            ParseStyleCopSettings();
         }
     }
 
