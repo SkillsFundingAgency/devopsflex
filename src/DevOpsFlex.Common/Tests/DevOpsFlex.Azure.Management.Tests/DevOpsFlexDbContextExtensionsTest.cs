@@ -1,8 +1,13 @@
 ﻿namespace DevOpsFlex.Azure.Management.Tests
 {
+    using System;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Reactive.Concurrency;
+    using System.Reactive.Linq;
     using System.Threading.Tasks;
     using Data;
+    using Data.Events;
     using Data.Naming;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -131,8 +136,9 @@
         [TestMethod, TestCategory("Integration")]
         public async Task Test_DbContext_ProvisionAll_End2End()
         {
-            FlexDataConfiguration.Branch = "Dev";
-            FlexDataConfiguration.Configuration = "DJ";
+            FlexDataConfiguration.Branch = "Main";
+            FlexDataConfiguration.Configuration = "PS";
+            FlexStreams.BuildEventsObservable.Subscribe(e => Debug.WriteLine($"[DevOpsFlex] {e.Message}"));
 
             using (var context = new DevOpsFlexDbContext())
             {
