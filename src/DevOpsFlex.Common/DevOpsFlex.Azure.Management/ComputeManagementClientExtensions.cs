@@ -72,6 +72,7 @@
         public static async Task<DeploymentGetResponse> GetAzureDeyploymentAsync(this ComputeManagementClient client, string serviceName, DeploymentSlot slot)
         {
             Contract.Requires(client != null);
+            Contract.Requires(!string.IsNullOrWhiteSpace(serviceName));
 
             try
             {

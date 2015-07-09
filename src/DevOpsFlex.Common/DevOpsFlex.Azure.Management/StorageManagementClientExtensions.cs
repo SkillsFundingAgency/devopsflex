@@ -30,7 +30,7 @@
         /// <param name="publicAccess">The public access level for the container.</param>
         /// <param name="permissions">The set of permissions that the ACL for this container must have.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task CreateContainerIfNotExistsAsync(
+        public static async Task<CloudStorageAccount> CreateContainerIfNotExistsAsync(
             this StorageManagementClient client,
             string accountName,
             string containerName,
@@ -54,6 +54,8 @@
 
             var acl = container.GetSharedAccessSignature(new SharedAccessBlobPolicy { Permissions = permissions });
             FlexStreams.BuildEventsObserver.OnNext(new StorageKeyEvent(accountName, containerName, acl));
+
+            return storageAccount;
         }
 
         /// <summary>

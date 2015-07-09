@@ -14,19 +14,13 @@ namespace DevOpsFlex.Azure.Management.Tests
     public class RxSchedulerProof
     {
         private readonly Subject<int> _subject = new Subject<int>();
-        private readonly Subject<object> _routeSubject = new Subject<object>();
 
         [TestMethod]
         public void Foo()
         {
             Debug.WriteLine($"MAINID {Thread.CurrentThread.ManagedThreadId}");
 
-            var adapter = new ThreadQueue();
-
-            // ReSharper disable once ImplicitlyCapturedClosure
-            _subject.Subscribe(i => adapter.QueueObject(i));
-
-            _routeSubject.Subscribe(o => Debug.WriteLine($"THISID {Thread.CurrentThread.ManagedThreadId} TID {o}"));
+            _subject.Subscribe(o => Debug.WriteLine($"THISID {Thread.CurrentThread.ManagedThreadId} TID {o}"));
 
             var t1 = DoSomething();
             var t2 = DoSomething();
@@ -35,29 +29,20 @@ namespace DevOpsFlex.Azure.Management.Tests
             var t5 = DoSomething();
             var t6 = DoSomething();
 
-            AsyncPump.Run(
-
-// Async method lacks 'await' operators and will run synchronously
-#pragma warning disable CS1998
-                async delegate
-#pragma warning restore CS1998
-
-                {
-                    Debug.WriteLine($"PUMPID {Thread.CurrentThread.ManagedThreadId}");
-
-// Because this call is not awaited, execution of the current method continues before the call is completed
-#pragma warning disable CS4014
-                    adapter.Listen(o => _routeSubject.OnNext(o));
-#pragma warning restore CS4014
-
-                    Task.WaitAll(t1, t2, t3, t4, t5, t6);
-                    adapter.Complete();
-                });
+            Task.WaitAll(t1, t2, t3, t4, t5, t6);
         }
 
         private async Task DoSomething()
         {
             Debug.WriteLine($"TID {Thread.CurrentThread.ManagedThreadId}");
+
+            _subject.OnNext(Thread.CurrentThread.ManagedThreadId);
+            await DoSomethingElse();
+        }
+
+        private async Task DoSomethingElse()
+        {
+            Debug.WriteLine($"ELSE TID {Thread.CurrentThread.ManagedThreadId}");
 
             _subject.OnNext(Thread.CurrentThread.ManagedThreadId);
             await Task.Delay(10000);
