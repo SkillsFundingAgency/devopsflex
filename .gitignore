@@ -33,6 +33,7 @@ Thumbs.db
 bin
 obj
 TestResults
+*.user
 
 # Sensitive information files #
 ######################
