@@ -1,4 +1,4 @@
-﻿namespace DevOpsFlex.PowerShell
+﻿namespace DevOpsFlex.Core
 {
     using System;
     using System.Collections.Concurrent;
