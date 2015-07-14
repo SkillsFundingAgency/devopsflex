@@ -278,9 +278,9 @@
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />
     <Compile Include="FlexStreams.cs" />
-    <Compile Include="Migrations\201506090828327_InitialCreate.cs" />
-    <Compile Include="Migrations\201506090828327_InitialCreate.Designer.cs">
-      <DependentUpon>201506090828327_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201507140624071_InitialCreate.cs" />
+    <Compile Include="Migrations\201507140624071_InitialCreate.Designer.cs">
+      <DependentUpon>201507140624071_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Naming\DefaultNaming.cs" />
@@ -330,8 +330,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506090828327_InitialCreate.resx">
-      <DependentUpon>201506090828327_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507140624071_InitialCreate.resx">
+      <DependentUpon>201507140624071_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

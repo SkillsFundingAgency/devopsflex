@@ -131,6 +131,7 @@ namespace DevOpsFlex.Data.Migrations
                         Type = c.Short(nullable: false),
                         Importance = c.Short(nullable: false),
                         Message = c.String(nullable: false, maxLength: 500),
+                        Context = c.String(maxLength: 500),
                         ResourceType = c.Int(),
                         ResourceName = c.String(),
                         ResourceType1 = c.Int(),
