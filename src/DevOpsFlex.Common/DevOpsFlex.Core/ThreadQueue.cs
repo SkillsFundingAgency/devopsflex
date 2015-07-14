@@ -1,4 +1,4 @@
-﻿namespace DevOpsFlex.PowerShell
+﻿namespace DevOpsFlex.Core
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +29,7 @@
         /// </remarks>
         /// <param name="action">The <see cref="Action{T}"/> delegate we want to run for each queued object.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public async Task Listen(Action<object> action)
+        public async Task ListenAsync(Action<object> action)
         {
             while (!_completed || _queue.Count > 0)
             {

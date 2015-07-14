@@ -40,6 +40,9 @@
         /// </summary>
         [Required, MaxLength(500)]
         public string Message { get; private set; }
+
+        [MaxLength(500)]
+        public string Context { get; set; }
     }
 
     /// <summary>
@@ -47,6 +50,7 @@
     /// </summary>
     public enum BuildEventType : short
     {
+        Verbose,
         Information,
         Warning,
         Error,

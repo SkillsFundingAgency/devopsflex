@@ -1,7 +1,13 @@
 ﻿namespace DevOpsFlex.PowerShell
 {
+    using System;
     using System.Management.Automation;
+    using System.Reactive.Linq;
+    using System.Reactive.Subjects;
     using System.Threading.Tasks;
+    using Core;
+    using Data;
+    using Data.Events;
 
     /// <summary>
     /// Serves as a base class for derived cmdlets that need to run async work and that do not
@@ -9,10 +15,14 @@
     /// </summary>
     public class AsyncCmdlet : Cmdlet
     {
+        private readonly Subject<BuildEvent> _threadSafeSubject = new Subject<BuildEvent>();
+
         /// <summary>
         /// The adapter that queues work to be done on the main thread.
         /// </summary>
         protected readonly ThreadQueue ThreadAdapter = new ThreadQueue();
+
+        protected IObservable<BuildEvent> EventStream => _threadSafeSubject.AsObservable();
 
         /// <summary>
         /// Process a block of asynchronous work coming in as an array of <see cref="Task"/>.
@@ -20,16 +30,19 @@
         /// <param name="tasks">The block of asyncronous work to be performed.</param>
         protected void ProcessAsyncWork(Task[] tasks)
         {
-            var workers = tasks.Length;
-
-            foreach (var task in tasks)
+            using (FlexStreams.BuildEventsObservable.Subscribe(ThreadAdapter.QueueObject))
             {
-                task.ContinueWith(_ => { if (--workers == 0) ThreadAdapter.Complete(); });
+                var workers = tasks.Length;
+
+                foreach (var task in tasks)
+                {
+                    task.ContinueWith(_ => { if (--workers == 0) ThreadAdapter.Complete(); });
+                }
+
+                AsyncPump.Run(async () => await ThreadAdapter.ListenAsync(o => _threadSafeSubject.OnNext((BuildEvent) o)));
+
+                Task.WaitAll(tasks);
             }
-
-            AsyncPump.Run(async () => await ThreadAdapter.Listen(o => WriteVerbose((string)o)));
-
-            Task.WaitAll(tasks);
         }
     }
 }
