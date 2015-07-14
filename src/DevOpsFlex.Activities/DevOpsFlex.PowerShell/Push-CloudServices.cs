@@ -60,17 +60,17 @@
         [Parameter(
             Mandatory = false,
             HelpMessage = "True if we want to deploy to staging and do a VIP swap when it's done, false if we just want to deploy to production.")]
-        public bool VipSwap { get; set; } = false;
+        public SwitchParameter VipSwap { get; set; } = false;
 
         [Parameter(
             Mandatory = false,
             HelpMessage = "True if we want to delete the Staging deployment after we do the VIP swap, false if we just want to let the staging (old production) deployment active after the swap.")]
-        public bool DeleteStaging { get; set; } = false;
+        public SwitchParameter DeleteStaging { get; set; } = false;
 
         [Parameter(
             Mandatory = false,
             HelpMessage = "True if we want to force a delete of the previous deployments and a new deployment instead of an upgrade if an existing deployment exists.")]
-        public bool ForceDelete { get; set; } = false;
+        public SwitchParameter ForceDelete { get; set; } = false;
 
         /// <summary>
         /// Processes the Deploy-CloudServices commandlet synchronously.
