@@ -1,6 +1,7 @@
 namespace DevOpsFlex.Data.Migrations
 {
     using System.Data.Entity.Migrations;
+    using System.Linq;
     using Microsoft.WindowsAzure.Storage.Blob;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DevOpsFlexDbContext>
@@ -32,7 +33,7 @@ namespace DevOpsFlex.Data.Migrations
 
             context.Systems.AddOrUpdate(s => s.LogicalName, system);
 
-            return system;
+            return context.Systems.Single(s => s.LogicalName == system.LogicalName);
         }
 
         private static void SeedComponents(DevOpsFlexDbContext context, DevOpsSystem system)
@@ -42,6 +43,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureCloudService
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "ServiceBus",
                     Name = "CrossDomain.Integration NServiceBus role",
                     Label = "Main NServiceBus role with most of the endpoints",
@@ -52,6 +54,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureCloudService
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "OrgService",
                     Name = "Organisation service",
                     Label = "Organisation service",
@@ -62,6 +65,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureCloudService
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "FSC",
                     Name = "Funding Stream Config service",
                     Label = "Funding Stream Config service",
@@ -69,9 +73,21 @@ namespace DevOpsFlex.Data.Migrations
                     PublishProjectTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.publish.proj",
                     SolutionTfsPath = "$/FCT/Main/FundingStreamConfigDomain/FundingStreamConfigDomain.sln"
                 },
+                new AzureCloudService
+                {
+                    System = system,
+                    SystemId = system.Id,
+                    LogicalName = "ContractService",
+                    Name = "Contract Management service",
+                    Label = "Contract Management service",
+                    ReserveIp = true,
+                    PublishProjectTfsPath = "$/FCT/Main/ContractManagementDomain/ContractManagementDomain.publish.proj",
+                    SolutionTfsPath = "$/FCT/Main/ContractManagementDomain/ContractManagementDomain.sln"
+                },
                 new SqlAzureDb
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "ServiceBusDb",
                     Name = "NServiceBus persistency database",
                     Edition = SqlAzureEdition.Standard,
@@ -83,6 +99,7 @@ namespace DevOpsFlex.Data.Migrations
                 new SqlAzureDb
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "OrganisationDb",
                     Name = "Organisation service persistency database",
                     Edition = SqlAzureEdition.Standard,
@@ -94,6 +111,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureWebSite
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "Mocks",
                     Name = "Mocks services (Stubs)",
                     PublishProjectTfsPath = "$/FCT/Main/Mocks/FctServices/FctServices.publish.proj",
@@ -102,6 +120,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureWebSite
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "WebJobs",
                     Name = "Web Jobs hosting",
                     PublishProjectTfsPath = "$/FCT/Main/CrossDomain.Integration/CrossDomain.Integration.Azure.WebJobsHostSite.publish.proj",
@@ -110,6 +129,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureServiceBusNamespace
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "IntegrationSb",
                     Name = "NServiceBus main namespace",
                     Region = ServiceBusRegions.NorthEurope
@@ -117,6 +137,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureStorageContainer
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "DataBus",
                     Name = "NServiceBus DataBus storage",
                     PublicAccess = BlobContainerPublicAccessType.Off,
@@ -125,6 +146,7 @@ namespace DevOpsFlex.Data.Migrations
                 new AzureStorageContainer
                 {
                     System = system,
+                    SystemId = system.Id,
                     LogicalName = "DocTemplates",
                     Name = "Document Templates for the document domain",
                     PublicAccess = BlobContainerPublicAccessType.Off,
@@ -138,6 +160,7 @@ namespace DevOpsFlex.Data.Migrations
                 new SqlFirewallRule
                 {
                     System = system,
+                    SystemId = system.Id,
                     Name = "SFA LAN",
                     StartIp = "193.240.137.225",
                     EndIp = "193.240.137.254"
@@ -147,6 +170,7 @@ namespace DevOpsFlex.Data.Migrations
                 new SqlFirewallRule
                 {
                     System = system,
+                    SystemId = system.Id,
                     Name = "Cap UK",
                     StartIp = "212.167.5.1",
                     EndIp = "212.167.5.255"
