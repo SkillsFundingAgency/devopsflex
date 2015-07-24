@@ -73,7 +73,7 @@
         public SwitchParameter ForceDelete { get; set; } = false;
 
         /// <summary>
-        /// Processes the Deploy-CloudServices commandlet synchronously.
+        /// Processes the Push-CloudServices commandlet synchronously.
         /// </summary>
         protected override void ProcessRecord()
         {

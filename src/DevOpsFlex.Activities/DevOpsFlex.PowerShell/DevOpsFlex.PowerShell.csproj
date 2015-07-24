@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncCmdlet.cs" />
+    <Compile Include="Set-EnvironmentReservedIps.cs" />
     <Compile Include="Push-CloudServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
