@@ -51,7 +51,7 @@
             Contract.Requires(sizeInGb > 0 && sizeInGb <= 250);
 
             DatabaseGetResponse ns = null;
-            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.SqlDatabase, databaseName));
+            FlexStreams.Publish(new CheckIfExistsEvent(AzureResource.SqlDatabase, databaseName));
 
             try
             {
@@ -64,7 +64,7 @@
 
             if (ns != null)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.SqlDatabase, databaseName));
+                FlexStreams.Publish(new FoundExistingEvent(AzureResource.SqlDatabase, databaseName));
                 return;
             }
 
@@ -78,7 +78,7 @@
                     MaximumDatabaseSizeInGB = sizeInGb,
                 });
 
-            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.SqlDatabase, databaseName));
+            FlexStreams.Publish(new ProvisionEvent(AzureResource.SqlDatabase, databaseName));
 
             if (!createAppUser) return;
 
@@ -103,7 +103,7 @@
 
             lock (SqlServerGate)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new CheckForParentResourceEvent(AzureResource.SqlServer, AzureResource.SqlDatabase, model.Name));
+                FlexStreams.Publish(new CheckForParentResourceEvent(AzureResource.SqlServer, AzureResource.SqlDatabase, model.Name));
                 serverName = FlexConfiguration.SqlServerChooser.Choose(client, model.System.Location.GetEnumDescription()).Result;
 
                 if (serverName == null)
@@ -144,11 +144,11 @@
                             Version = serverMaxVersion
                         }).ServerName;
 
-                    FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.SqlServer, serverName));
+                    FlexStreams.Publish(new ProvisionEvent(AzureResource.SqlServer, serverName));
                 }
                 else
                 {
-                    FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.SqlServer, serverName));
+                    FlexStreams.Publish(new FoundExistingEvent(AzureResource.SqlServer, serverName));
                 }
             }
 
@@ -178,7 +178,7 @@
             Contract.Requires(!string.IsNullOrWhiteSpace(parameters.EndIPAddress));
 
             FirewallRuleGetResponse rule = null;
-            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.FirewallRule, parameters.Name));
+            FlexStreams.Publish(new CheckIfExistsEvent(AzureResource.FirewallRule, parameters.Name));
 
             try
             {
@@ -191,12 +191,12 @@
 
             if (rule != null)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.FirewallRule, parameters.Name));
+                FlexStreams.Publish(new FoundExistingEvent(AzureResource.FirewallRule, parameters.Name));
                 return;
             }
 
             await client.FirewallRules.CreateAsync(serverName, parameters);
-            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.FirewallRule, parameters.Name));
+            FlexStreams.Publish(new ProvisionEvent(AzureResource.FirewallRule, parameters.Name));
         }
 
         /// <summary>

@@ -1,12 +1,15 @@
 ﻿namespace DevOpsFlex.PowerShell
 {
+    using System;
     using System.Management.Automation;
+    using Azure.Management;
+    using Data;
 
     /// <summary>
-    /// Set-EnvironmentReservedIps commandlet implementation.
+    /// Push-DevOpsFlexConfiguration commandlet implementation.
     /// </summary>
-    [Cmdlet(VerbsCommon.Set, "EnvironmentReservedIps")]
-    public class SetEnvironmentReservedIps : AsyncCmdlet
+    [Cmdlet(VerbsCommon.Push, "DevOpsFlexConfiguration")]
+    public class PushDevOpsFlexConfiguration : AsyncCmdlet
     {
         [Parameter(
             Mandatory = true,
@@ -20,6 +23,11 @@
 
         [Parameter(
             Mandatory = true,
+            HelpMessage = "The SqlConnectionString to the DevOpsFlex database.")]
+        public string SqlConnectionString { get; set; }
+
+        [Parameter(
+            Mandatory = true,
             HelpMessage = "The name of the branch we want to target.")]
         public string Branch { get; set; }
 
@@ -29,10 +37,19 @@
         public string Configuration { get; set; }
 
         /// <summary>
-        /// Processes the Set-EnvironmentReservedIps commandlet synchronously.
+        /// Processes the Push-DevOpsFlexConfiguration commandlet synchronously.
         /// </summary>
         protected override void ProcessRecord()
         {
+            FlexDataConfiguration.Branch = Branch;
+            FlexDataConfiguration.Configuration = Configuration;
+            FlexStreams.UseThreadQueue(ThreadAdapter);
+
+            using (EventStream.Subscribe(e => WriteObject(e.Message)))
+            using (var context = new DevOpsFlexDbContext(SqlConnectionString))
+            {
+                ProcessAsyncWork(context.ProvisionAll(SubscriptionId, SettingsPath));
+            }
         }
     }
 }

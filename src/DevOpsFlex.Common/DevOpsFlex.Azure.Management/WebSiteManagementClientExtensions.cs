@@ -34,7 +34,7 @@
             Contract.Requires(parameters != null);
 
             WebSiteGetResponse service = null;
-            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.WebSite, parameters.Name));
+            FlexStreams.Publish(new CheckIfExistsEvent(AzureResource.WebSite, parameters.Name));
 
             try
             {
@@ -47,12 +47,12 @@
 
             if (service != null)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.WebSite, parameters.Name));
+                FlexStreams.Publish(new FoundExistingEvent(AzureResource.WebSite, parameters.Name));
                 return;
             }
 
             await client.WebSites.CreateAsync(webSpace, parameters);
-            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.WebSite, parameters.Name));
+            FlexStreams.Publish(new ProvisionEvent(AzureResource.WebSite, parameters.Name));
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
 
             lock (HostingPlanGate)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new CheckForParentResourceEvent(AzureResource.HostingPlan, AzureResource.WebSite, model.Name));
+                FlexStreams.Publish(new CheckForParentResourceEvent(AzureResource.HostingPlan, AzureResource.WebSite, model.Name));
                 webPlan = FlexConfiguration.WebPlanChooser.Choose(client, webSpace).Result;
 
                 if (webPlan == null)
@@ -86,11 +86,11 @@
                         });
 
                     webPlan = response.WebHostingPlan.Name;
-                    FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.HostingPlan, webPlan));
+                    FlexStreams.Publish(new ProvisionEvent(AzureResource.HostingPlan, webPlan));
                 }
                 else
                 {
-                    FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.HostingPlan, webPlan));
+                    FlexStreams.Publish(new FoundExistingEvent(AzureResource.HostingPlan, webPlan));
                 }
             }
 

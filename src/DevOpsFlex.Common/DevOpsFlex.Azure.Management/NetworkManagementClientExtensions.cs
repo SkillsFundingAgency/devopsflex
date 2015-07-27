@@ -29,7 +29,7 @@
             Contract.Requires(!string.IsNullOrWhiteSpace(location));
 
             NetworkReservedIPGetResponse service = null;
-            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.ReservedIp, ipName));
+            FlexStreams.Publish(new CheckIfExistsEvent(AzureResource.ReservedIp, ipName));
 
             try
             {
@@ -42,7 +42,7 @@
 
             if (service != null)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.ReservedIp, ipName));
+                FlexStreams.Publish(new FoundExistingEvent(AzureResource.ReservedIp, ipName));
                 return;
             }
 
@@ -53,7 +53,7 @@
                     Location = location
                 });
 
-            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.ReservedIp, ipName));
+            FlexStreams.Publish(new ProvisionEvent(AzureResource.ReservedIp, ipName));
         }
 
         /// <summary>

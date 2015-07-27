@@ -122,7 +122,7 @@
             Contract.Requires(parameters != null);
 
             HostedServiceGetResponse service = null;
-            FlexStreams.BuildEventsObserver.OnNext(new CheckIfExistsEvent(AzureResource.CloudService, parameters.ServiceName));
+            FlexStreams.Publish(new CheckIfExistsEvent(AzureResource.CloudService, parameters.ServiceName));
 
             try
             {
@@ -135,12 +135,12 @@
 
             if (service != null)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.CloudService, parameters.ServiceName));
+                FlexStreams.Publish(new FoundExistingEvent(AzureResource.CloudService, parameters.ServiceName));
                 return;
             }
 
             await client.HostedServices.CreateAsync(parameters);
-            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.CloudService, parameters.ServiceName));
+            FlexStreams.Publish(new ProvisionEvent(AzureResource.CloudService, parameters.ServiceName));
         }
 
         /// <summary>

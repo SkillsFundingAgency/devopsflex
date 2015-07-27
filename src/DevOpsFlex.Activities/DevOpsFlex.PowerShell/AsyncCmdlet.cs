@@ -2,6 +2,7 @@
 {
     using System;
     using System.Management.Automation;
+    using System.Reactive.Concurrency;
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
     using System.Threading.Tasks;
@@ -30,19 +31,16 @@
         /// <param name="tasks">The block of asyncronous work to be performed.</param>
         protected void ProcessAsyncWork(Task[] tasks)
         {
-            using (FlexStreams.BuildEventsObservable.Subscribe(ThreadAdapter.QueueObject))
+            var workers = tasks.Length;
+
+            foreach (var task in tasks)
             {
-                var workers = tasks.Length;
-
-                foreach (var task in tasks)
-                {
-                    task.ContinueWith(_ => { if (--workers == 0) ThreadAdapter.Complete(); });
-                }
-
-                AsyncPump.Run(async () => await ThreadAdapter.ListenAsync(o => _threadSafeSubject.OnNext((BuildEvent) o)));
-
-                Task.WaitAll(tasks);
+                task.ContinueWith(_ => { if (--workers == 0) ThreadAdapter.Complete(); });
             }
+
+            AsyncPump.Run(async () => await ThreadAdapter.ListenAsync(o => _threadSafeSubject.OnNext((BuildEvent)o)));
+
+            Task.WaitAll(tasks);
         }
     }
 }
