@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
     using Azure.Management;
     using Core;
+    using Data;
     using Data.Events;
     using Data.PublishSettings;
     using Microsoft.Azure;
@@ -80,9 +81,9 @@
             var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
             var azureCert = new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate));
             var credentials = new CertificateCloudCredentials(SubscriptionId, azureCert);
+            FlexStreams.UseThreadQueue(ThreadAdapter);
 
-            EventStream.Subscribe(e => WriteObject(e.Message));
-
+            using (EventStream.Subscribe(e => WriteObject(e.Message)))
             using (var computeClient = new ComputeManagementClient(credentials))
             using (var storageClient = new StorageManagementClient(credentials))
             {

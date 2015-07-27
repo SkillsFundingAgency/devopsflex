@@ -5,6 +5,15 @@
 
     public class DevOpsFlexDbContext : DbContext
     {
+        public DevOpsFlexDbContext()
+        {
+        }
+
+        public DevOpsFlexDbContext(string connectionString)
+            :base(connectionString)
+        {
+        }
+
         public DbSet<BuildConfiguration> Configurations { get; set; }
 
         public DbSet<BuildEvent> BuildEvents { get; set; }

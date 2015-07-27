@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Security.Cryptography.X509Certificates;
@@ -32,18 +33,13 @@
         /// <param name="services">The list of <see cref="AzureCloudService"/> to provision.</param>
         /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ProvisionAllAsync(this IEnumerable<AzureCloudService> services, ComputeManagementClient client)
+        public static IEnumerable<Task> ProvisionAllAsync(this IEnumerable<AzureCloudService> services, ComputeManagementClient client)
         {
             Contract.Requires(services != null);
             Contract.Requires(client != null);
 
-            var tasks = services.Select(
-                async s =>
-                {
-                    await client.CreateServiceIfNotExistsAsync(s);
-                });
-
-            await Task.WhenAll(tasks);
+            return services.Select(s =>
+                Task.Factory.StartNew(() => client.CreateServiceIfNotExistsAsync(s).Wait()));
         }
 
         /// <summary>
@@ -52,19 +48,14 @@
         /// <param name="services">The list of <see cref="AzureCloudService"/> to reserve IPs for.</param>
         /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ReserveAllIpsAsync(this IEnumerable<AzureCloudService> services, NetworkManagementClient client)
+        public static IEnumerable<Task> ReserveAllIpsAsync(this IEnumerable<AzureCloudService> services, NetworkManagementClient client)
         {
             Contract.Requires(services != null);
             Contract.Requires(client != null);
 
-            var tasks = services.Where(s => s.ReserveIp)
-                                .Select(
-                                    async s =>
-                                    {
-                                        await client.ReserveIpIfNotReservedAsync(s);
-                                    });
-
-            await Task.WhenAll(tasks);
+            return services.Where(s => s.ReserveIp)
+                           .Select(s =>
+                               Task.Factory.StartNew(() => client.ReserveIpIfNotReservedAsync(s).Wait()));
         }
 
         /// <summary>
@@ -73,18 +64,13 @@
         /// <param name="namespaces">The list of <see cref="AzureServiceBusNamespace"/> to provision.</param>
         /// <param name="client">The <see cref="ServiceBusManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ProvisionAllAsync(this IEnumerable<AzureServiceBusNamespace> namespaces, ServiceBusManagementClient client)
+        public static IEnumerable<Task> ProvisionAllAsync(this IEnumerable<AzureServiceBusNamespace> namespaces, ServiceBusManagementClient client)
         {
             Contract.Requires(namespaces != null);
             Contract.Requires(client != null);
 
-            var tasks = namespaces.Select(
-                async n =>
-                {
-                    await client.CreateNamespaceIfNotExistsAsync(n);
-                });
-
-            await Task.WhenAll(tasks);
+            return namespaces.Select(n =>
+                Task.Factory.StartNew(() => client.CreateNamespaceIfNotExistsAsync(n).Wait()));
         }
 
         /// <summary>
@@ -93,18 +79,13 @@
         /// <param name="databases">The list of <see cref="SqlAzureDb"/> to provision.</param>
         /// <param name="client">The <see cref="SqlManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ProvisionAllAsync(this IEnumerable<SqlAzureDb> databases, SqlManagementClient client)
+        public static IEnumerable<Task> ProvisionAllAsync(this IEnumerable<SqlAzureDb> databases, SqlManagementClient client)
         {
             Contract.Requires(databases != null);
             Contract.Requires(client != null);
 
-            var tasks = databases.Select(
-                async d =>
-                {
-                    await client.CreateDatabaseIfNotExistsAsync(d);
-                });
-
-            await Task.WhenAll(tasks);
+            return databases.Select(d =>
+                Task.Factory.StartNew(() => client.CreateDatabaseIfNotExistsAsync(d).Wait()));
         }
 
         /// <summary>
@@ -113,18 +94,13 @@
         /// <param name="rules">The list of <see cref="SqlFirewallRule"/> to provision.</param>
         /// <param name="client">The <see cref="SqlManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ProvisionAllAsync(this IEnumerable<SqlFirewallRule> rules, SqlManagementClient client)
+        public static IEnumerable<Task> ProvisionAllAsync(this IEnumerable<SqlFirewallRule> rules, SqlManagementClient client)
         {
             Contract.Requires(rules != null);
             Contract.Requires(client != null);
 
-            var tasks = rules.Select(
-                async r =>
-                {
-                    await client.CreateFirewallRuleIfNotExistsAsync(r);
-                });
-
-            await Task.WhenAll(tasks);
+            return rules.Select(r =>
+                Task.Factory.StartNew(() => client.CreateFirewallRuleIfNotExistsAsync(r).Wait()));
         }
 
         /// <summary>
@@ -133,18 +109,13 @@
         /// <param name="containers">The list of <see cref="AzureStorageContainer"/> to provision.</param>
         /// <param name="client">The <see cref="StorageManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ProvisionAllAsync(this IEnumerable<AzureStorageContainer> containers, StorageManagementClient client)
+        public static IEnumerable<Task> ProvisionAllAsync(this IEnumerable<AzureStorageContainer> containers, StorageManagementClient client)
         {
             Contract.Requires(containers != null);
             Contract.Requires(client != null);
 
-            var tasks = containers.Select(
-                async c =>
-                {
-                    await client.CreateContainerIfNotExistsAsync(c);
-                });
-
-            await Task.WhenAll(tasks);
+            return containers.Select(c =>
+                Task.Factory.StartNew(() => client.CreateContainerIfNotExistsAsync(c).Wait()));
         }
 
         /// <summary>
@@ -153,18 +124,13 @@
         /// <param name="sites">The list of <see cref="AzureWebSite"/> to provision.</param>
         /// <param name="client">The <see cref="WebSiteManagementClient"/> that is performing the operation.</param>
         /// <returns>The async <see cref="Task"/> wrapper.</returns>
-        public static async Task ProvisionAllAsync(this IEnumerable<AzureWebSite> sites, WebSiteManagementClient client)
+        public static IEnumerable<Task> ProvisionAllAsync(this IEnumerable<AzureWebSite> sites, WebSiteManagementClient client)
         {
             Contract.Requires(sites != null);
             Contract.Requires(client != null);
 
-            var tasks = sites.Select(
-                async s =>
-                {
-                    await client.CreateWebSiteIfNotExistsAsync(s);
-                });
-
-            await Task.WhenAll(tasks);
+            return sites.Select(s =>
+                Task.Factory.StartNew(() => client.CreateWebSiteIfNotExistsAsync(s).Wait()));
         }
 
         /// <summary>
@@ -177,31 +143,44 @@
         public static async Task ProvisionAllAsync(this DevOpsFlexDbContext context, string subscriptionId, string settingsPath)
         {
             Contract.Requires(context != null);
-            Contract.Requires(string.IsNullOrEmpty(subscriptionId));
-            Contract.Requires(string.IsNullOrEmpty(settingsPath));
+            Contract.Requires(!string.IsNullOrEmpty(subscriptionId));
+            Contract.Requires(!string.IsNullOrEmpty(settingsPath));
+
+            await Task.WhenAll(context.ProvisionAll(subscriptionId, settingsPath));
+        }
+
+        /// <summary>
+        /// Provisions all the components in the <see cref="DevOpsFlexDbContext"/>.
+        /// </summary>
+        /// <param name="context">The database context that we want to provision components from.</param>
+        /// <param name="subscriptionId">The subscription Id where we want to provision in.</param>
+        /// <param name="settingsPath">The path to the settings file with the management certificate.</param>
+        /// <returns>The async <see cref="Task"/> wrapper.</returns>
+        public static Task[] ProvisionAll(this DevOpsFlexDbContext context, string subscriptionId, string settingsPath)
+        {
+            Contract.Requires(context != null);
+            Contract.Requires(!string.IsNullOrEmpty(subscriptionId));
+            Contract.Requires(!string.IsNullOrEmpty(settingsPath));
 
             var azureSubscription = new AzureSubscription(settingsPath, subscriptionId);
             var azureCert = new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate));
 
-            using (var computeClient = new ComputeManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert)))
-            using (var networkClient = new NetworkManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert)))
-            using (var sbClient = new ServiceBusManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert)))
-            using (var sqlClient = new SqlManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert)))
-            using (var storageClient = new StorageManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert)))
-            using (var webSiteClient = new WebSiteManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert)))
-            {
-                var tasks = new[]
-                {
-                    context.Components.OfType<AzureCloudService>().ToList().ProvisionAllAsync(computeClient),
-                    context.Components.OfType<AzureCloudService>().ToList().ReserveAllIpsAsync(networkClient),
-                    context.Components.OfType<AzureServiceBusNamespace>().ToList().ProvisionAllAsync(sbClient),
-                    context.Components.OfType<SqlAzureDb>().ToList().ProvisionAllAsync(sqlClient),
-                    context.Components.OfType<AzureStorageContainer>().ToList().ProvisionAllAsync(storageClient),
-                    context.Components.OfType<AzureWebSite>().ToList().ProvisionAllAsync(webSiteClient)
-                };
+            var computeClient = new ComputeManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert));
+            var networkClient = new NetworkManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert));
+            var sbClient = new ServiceBusManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert));
+            var sqlClient = new SqlManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert));
+            var storageClient = new StorageManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert));
+            var webSiteClient = new WebSiteManagementClient(new CertificateCloudCredentials(subscriptionId, azureCert));
 
-                await Task.WhenAll(tasks);
-            }
+            var foo = context.Components.Include(o => o.System).OfType<AzureCloudService>().ToList().ProvisionAllAsync(computeClient)
+                             .Concat(context.Components.Include(o => o.System).OfType<AzureCloudService>().ToList().ReserveAllIpsAsync(networkClient))
+                             .Concat(context.Components.Include(o => o.System).OfType<AzureServiceBusNamespace>().ToList().ProvisionAllAsync(sbClient))
+                             .Concat(context.Components.Include(o => o.System).OfType<SqlAzureDb>().ToList().ProvisionAllAsync(sqlClient))
+                             .Concat(context.Components.Include(o => o.System).OfType<AzureStorageContainer>().ToList().ProvisionAllAsync(storageClient))
+                             .Concat(context.Components.Include(o => o.System).OfType<AzureWebSite>().ToList().ProvisionAllAsync(webSiteClient))
+                             .ToArray();
+
+            return foo;
         }
     }
 }

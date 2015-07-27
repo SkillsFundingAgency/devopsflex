@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public abstract class DevOpsComponent
+    public class DevOpsComponent
     {
         [Key]
         public int Id { get; set; }

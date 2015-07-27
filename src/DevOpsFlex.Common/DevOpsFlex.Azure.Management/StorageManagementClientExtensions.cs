@@ -50,10 +50,10 @@
 
             await container.CreateIfNotExistsAsync();
             await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = publicAccess });
-            FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.StorageContainer, containerName));
+            FlexStreams.Publish(new ProvisionEvent(AzureResource.StorageContainer, containerName));
 
             var acl = container.GetSharedAccessSignature(new SharedAccessBlobPolicy { Permissions = permissions });
-            FlexStreams.BuildEventsObserver.OnNext(new StorageKeyEvent(accountName, containerName, acl));
+            FlexStreams.Publish(new StorageKeyEvent(accountName, containerName, acl));
 
             return storageAccount;
         }
@@ -76,7 +76,7 @@
 
             lock (StorageAccountGate)
             {
-                FlexStreams.BuildEventsObserver.OnNext(new CheckForParentResourceEvent(AzureResource.StorageAccount, AzureResource.StorageContainer, model.Name));
+                FlexStreams.Publish(new CheckForParentResourceEvent(AzureResource.StorageAccount, AzureResource.StorageContainer, model.Name));
                 accountName = FlexConfiguration.StorageAccountChooser.Choose(client, model.System.StorageType.GetEnumDescription()).Result;
                 StorageAccountGetResponse account = null;
 
@@ -101,12 +101,12 @@
                             AccountType = model.System.StorageType.GetEnumDescription()
                         });
 
-                    FlexStreams.BuildEventsObserver.OnNext(new ProvisionEvent(AzureResource.StorageAccount, accountName));
+                    FlexStreams.Publish(new ProvisionEvent(AzureResource.StorageAccount, accountName));
                 }
                 else
                 {
                     accountName = account.StorageAccount.Name;
-                    FlexStreams.BuildEventsObserver.OnNext(new FoundExistingEvent(AzureResource.StorageAccount, accountName));
+                    FlexStreams.Publish(new FoundExistingEvent(AzureResource.StorageAccount, accountName));
                 }
             }
 
