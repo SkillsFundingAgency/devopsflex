@@ -113,18 +113,14 @@
             string configurationPath,
             DeploymentSlot targetSlot)
         {
-            ThreadAdapter.QueueObject(new BuildEvent(
-                BuildEventType.Information,
-                BuildEventImportance.Medium,
+            ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                 $"[{serviceName}] Checking the existence of an existing deployment"));
 
             var deployment = await computeClient.GetAzureDeyploymentAsync(serviceName, targetSlot);
 
             if (ForceDelete && deployment != null)
             {
-                ThreadAdapter.QueueObject(new BuildEvent(
-                    BuildEventType.Information,
-                    BuildEventImportance.Medium,
+                ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                     $"[{serviceName}] ForceDelete is true and found an existing deployment: Deleting it."));
 
                 await computeClient.Deployments.DeleteBySlotAsync(serviceName, targetSlot);
@@ -133,16 +129,12 @@
 
             var blob = container.GetBlockBlobReference(DateTime.Now.ToString("yyyyMMdd_HHmmss_") + Path.GetFileName(packagePath));
 
-            ThreadAdapter.QueueObject(new BuildEvent(
-                BuildEventType.Information,
-                BuildEventImportance.Medium,
+            ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                 $"[{serviceName}] Uploading the cloud service package to storage account {StorageAccountName} in the {StorageContainer} container."));
 
             await blob.UploadFromFileAsync(packagePath, FileMode.Open);
 
-            ThreadAdapter.QueueObject(new BuildEvent(
-                BuildEventType.Information,
-                BuildEventImportance.Medium,
+            ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                 $"[{serviceName}] Checking the Cloud Service for the PaaS Diagnostics extension -> Creating it if it doesn't exist."));
 
             var serviceConfiguration = File.ReadAllText(configurationPath);
@@ -150,9 +142,7 @@
 
             if (deployment == null)
             {
-                ThreadAdapter.QueueObject(new BuildEvent(
-                    BuildEventType.Information,
-                    BuildEventImportance.Medium,
+                ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                     $"[{serviceName}] Found no previous deployments -> Creating a new deployment into {targetSlot.GetEnumDescription()}."));
 
                 await computeClient.Deployments.CreateAsync(
@@ -169,9 +159,7 @@
             }
             else
             {
-                ThreadAdapter.QueueObject(new BuildEvent(
-                    BuildEventType.Information,
-                    BuildEventImportance.Medium,
+                ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                     $"[{serviceName}] Found a previous deployment -> Updating the current deployment in {targetSlot.GetEnumDescription()}."));
 
                 await computeClient.Deployments.UpgradeBySlotAsync(
@@ -187,9 +175,7 @@
 
             if (VipSwap)
             {
-                ThreadAdapter.QueueObject(new BuildEvent(
-                    BuildEventType.Information,
-                    BuildEventImportance.Medium,
+                ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                     $"[{serviceName}] Swapping the deployments."));
 
                 await computeClient.Deployments.SwapAsync(
@@ -201,18 +187,14 @@
 
                 if (DeleteStaging)
                 {
-                    ThreadAdapter.QueueObject(new BuildEvent(
-                        BuildEventType.Information,
-                        BuildEventImportance.Medium,
+                    ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                         $"[{serviceName}] Deleting the staging deployment after the swap."));
 
                     await computeClient.Deployments.DeleteBySlotAsync(serviceName, DeploymentSlot.Staging);
                 }
             }
 
-            ThreadAdapter.QueueObject(new BuildEvent(
-                BuildEventType.Information,
-                BuildEventImportance.Medium,
+            ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                 $"[{serviceName}] Deployment complete."));
         }
     }
