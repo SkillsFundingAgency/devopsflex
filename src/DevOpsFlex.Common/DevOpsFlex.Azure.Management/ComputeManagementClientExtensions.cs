@@ -167,13 +167,19 @@
         /// <returns></returns>
         public static async Task AddDiagnosticsExtensionIfNotExistsAsync(this ComputeManagementClient client, string serviceName, string publicConfiguration)
         {
-            var diagnosticsExtension = (await client.HostedServices.ListExtensionsAsync(serviceName)).FirstOrDefault(e => e.Id == FlexConfiguration.FlexDiagnosticsExtensionId);
+            var diagnosticsExtensions = (await client.HostedServices.ListExtensionsAsync(serviceName)).Where(e => e.Type == "PaaSDiagnostics").ToList();
+            var extension = diagnosticsExtensions.FirstOrDefault(e => e.Id == FlexConfiguration.FlexDiagnosticsExtensionId);
 
-            if (diagnosticsExtension == null)
+            if (extension == null)
             {
+                foreach (var ext in diagnosticsExtensions)
+                {
+                    await client.HostedServices.DeleteExtensionAsync(serviceName, ext.Id);
+                }
+
                 var storageAccount = Regex.Match(publicConfiguration, "<StorageAccount>([^<]*)</StorageAccount>", RegexOptions.Multiline)
                                           .Groups.OfType<Group>()
-                                          .First(g => g.GetType() == typeof (Group))
+                                          .First(g => g.GetType() == typeof(Group))
                                           .Value;
 
                 client.HostedServices.AddExtension(serviceName, new HostedServiceAddExtensionParameters
