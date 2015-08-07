@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Data;
     using Data.Events;
@@ -67,7 +68,7 @@
         /// </summary>
         /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
         /// <param name="serviceName">The name of the cloud service.</param>
-        /// <param name="slot">The name of the Cloud Service slot.</param>
+        /// <param name="slot">The Cloud Service slot.</param>
         /// <returns>The cloud service deployment.</returns>
         public static async Task<DeploymentGetResponse> GetAzureDeyploymentAsync(this ComputeManagementClient client, string serviceName, DeploymentSlot slot)
         {
@@ -155,6 +156,36 @@
             Contract.Requires(model != null);
 
             await client.CreateServiceIfNotExistsAsync(model.AzureParameters);
+        }
+
+        /// <summary>
+        /// Adds the DevOpsFlex PaaS Diagnostics extension if it doesn't exist yet on the service.
+        /// </summary>
+        /// <param name="client">The <see cref="ComputeManagementClient"/> that is performing the operation.</param>
+        /// <param name="serviceName">The name of the cloud service.</param>
+        /// <param name="publicConfiguration">The public configuration XML that is to be applied to the extension.</param>
+        /// <returns></returns>
+        public static async Task AddDiagnosticsExtensionIfNotExistsAsync(this ComputeManagementClient client, string serviceName, string publicConfiguration)
+        {
+            var diagnosticsExtension = (await client.HostedServices.ListExtensionsAsync(serviceName)).FirstOrDefault(e => e.Id == FlexConfiguration.FlexDiagnosticsExtensionId);
+
+            if (diagnosticsExtension == null)
+            {
+                var storageAccount = Regex.Match(publicConfiguration, "<StorageAccount>([^<]*)</StorageAccount>", RegexOptions.Multiline)
+                                          .Groups.OfType<Group>()
+                                          .First(g => g.GetType() == typeof (Group))
+                                          .Value;
+
+                client.HostedServices.AddExtension(serviceName, new HostedServiceAddExtensionParameters
+                {
+                    Id = FlexConfiguration.FlexDiagnosticsExtensionId,
+                    PublicConfiguration = publicConfiguration,
+                    PrivateConfiguration = $"<?xml version=\"1.0\" encoding=\"utf - 8\"?><PrivateConfig xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"><StorageAccount name=\"{storageAccount}\" /></PrivateConfig>",
+                    ProviderNamespace = "Microsoft.Azure.Diagnostics",
+                    Type = "PaaSDiagnostics", // TODO: PaaSAntimalware
+                    Version = "1.*"
+                });
+            }
         }
     }
 }

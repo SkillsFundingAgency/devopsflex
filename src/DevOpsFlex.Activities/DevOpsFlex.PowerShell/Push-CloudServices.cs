@@ -140,6 +140,14 @@
 
             await blob.UploadFromFileAsync(packagePath, FileMode.Open);
 
+            ThreadAdapter.QueueObject(new BuildEvent(
+                BuildEventType.Information,
+                BuildEventImportance.Medium,
+                $"[{serviceName}] Checking the Cloud Service for the PaaS Diagnostics extension -> Creating it if it doesn't exist."));
+
+            var serviceConfiguration = File.ReadAllText(configurationPath);
+            await computeClient.AddDiagnosticsExtensionIfNotExistsAsync(serviceName, serviceConfiguration);
+
             if (deployment == null)
             {
                 ThreadAdapter.QueueObject(new BuildEvent(
@@ -155,7 +163,7 @@
                         Label = serviceName,
                         Name = $"{serviceName}{targetSlot.GetEnumDescription()}",
                         PackageUri = blob.Uri,
-                        Configuration = File.ReadAllText(configurationPath),
+                        Configuration = serviceConfiguration,
                         StartDeployment = true
                     });
             }
