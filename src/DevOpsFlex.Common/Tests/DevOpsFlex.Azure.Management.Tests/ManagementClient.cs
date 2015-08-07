@@ -19,13 +19,13 @@
         /// <summary>
         /// Specifies the relative or absolute path to the publish settings file for the target subscription.
         /// </summary>
-        internal const string SettingsPath = @"C:\PublishSettings\djfr.publishsettings";
+        internal const string SettingsPath = @"C:\PublishSettings\sfa_beta.publishsettings";
 
         /// <summary>
         /// Specifies the subscription Id that we want to target.
         /// This subscription needs to be defined and found in the publish settings file.
         /// </summary>
-        internal const string SubscriptionId = "c991f126-2b16-4a92-af05-85a68e4b9719";
+        internal const string SubscriptionId = "102d951b-78c0-4e48-80d4-a9c13baca2ad";
 
         /// <summary>
         /// Creates a standard <see cref="ComputeManagementClient"/> that targets the Azure subscription

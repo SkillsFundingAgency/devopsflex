@@ -1,6 +1,14 @@
 ﻿namespace DevOpsFlex.PowerShell
 {
+    using System;
+    using System.Linq;
     using System.Management.Automation;
+    using System.Security.Cryptography.X509Certificates;
+    using Azure.Management;
+    using Data.PublishSettings;
+    using Microsoft.Azure;
+    using Microsoft.WindowsAzure.Management.Compute;
+    using Microsoft.WindowsAzure.Management.Network;
 
     /// <summary>
     /// Set-ReservedIpConfiguration commandlet implementation.
@@ -43,15 +51,30 @@
         /// </summary>
         protected override void ProcessRecord()
         {
-            //#1 Find all the Cloud Servies
+            var azureSubscription = new AzureSubscription(SettingsPath, SubscriptionId);
+            var azureCert = new X509Certificate2(Convert.FromBase64String(azureSubscription.ManagementCertificate));
+            var credentials = new CertificateCloudCredentials(SubscriptionId, azureCert);
 
-            //#2 Find all the Reserved IPs and match them to Cloud Services using the naming conventions
+            using (var computeClient = new ComputeManagementClient(credentials))
+            using (var networkClient = new NetworkManagementClient(credentials))
+            {
+                //#1 Find all the Cloud Servies
+                var services = computeClient.HostedServices.List().Select(s => s.ServiceName);
 
-            //#3 Foreach match
+                //#2 Find all the Reserved IPs
+                var reservedIps = networkClient.ReservedIPs.List().Select(i => i.Name);
 
-                //#A Look at the proper service configuration and check if the Reserved IP assignment is there
+                // and match them to Cloud Services using the naming conventions
+                var serviceMatches = services.Where(s => reservedIps.Contains(s + "-rip"));
 
-                //#B If the 
+                //#3 Foreach match
+
+                    //#A Look at the proper service configuration and check if the Reserved IP assignment is there
+
+                    //#B If the assignment isn't there, open the XML service configuration and add it
+
+                    //[NOTE] Do NOT DO anything TFS wise, it is then up to the user to checkin the changes or not, this code shouldn't do anything against TFS
+            }
         }
     }
 }

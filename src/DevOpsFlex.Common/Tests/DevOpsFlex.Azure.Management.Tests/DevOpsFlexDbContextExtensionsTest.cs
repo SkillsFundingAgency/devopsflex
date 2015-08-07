@@ -21,7 +21,7 @@
         /// Tests the ProvisionAllAsync on <see cref="AzureCloudService"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_AzureCloudService_ProvisionAll_End2End()
+        public void Test_AzureCloudService_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "MO";
@@ -29,7 +29,8 @@
             using (var client = ManagementClient.CreateComputeClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureCloudService>().ProvisionAllAsync(client);
+                var tasks = context.Components.OfType<AzureCloudService>().ProvisionAllAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 
@@ -37,7 +38,7 @@
         /// Tests the ReserveAllIpsAsync on <see cref="AzureCloudService"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_AzureCloudService_ReserveAllIps_End2End()
+        public void Test_AzureCloudService_ReserveAllIps_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "MO";
@@ -45,7 +46,8 @@
             using (var client = ManagementClient.CreateNetworkClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureCloudService>().ReserveAllIpsAsync(client);
+                var tasks = context.Components.OfType<AzureCloudService>().ReserveAllIpsAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 
@@ -53,7 +55,7 @@
         /// Tests the ProvisionAllAsync on <see cref="AzureServiceBusNamespace"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_AzureServiceBusNamespace_ProvisionAll_End2End()
+        public void Test_AzureServiceBusNamespace_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "MO";
@@ -62,7 +64,8 @@
             using (var client = ManagementClient.CreateServiceBusClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureServiceBusNamespace>().ProvisionAllAsync(client);
+                var tasks = context.Components.OfType<AzureServiceBusNamespace>().ProvisionAllAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 
@@ -70,7 +73,7 @@
         /// Tests the ProvisionAllAsync on <see cref="SqlFirewallRule"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_SqlFirewallRule_ProvisionAll_End2End()
+        public void Test_SqlFirewallRule_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "MO";
@@ -78,7 +81,8 @@
             using (var client = ManagementClient.CreateSqlClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.SqlFirewallRules.ProvisionAllAsync(client);
+                var tasks = context.SqlFirewallRules.ProvisionAllAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 
@@ -86,7 +90,7 @@
         /// Tests the ProvisionAllAsync on <see cref="SqlAzureDb"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_SqlAzureDb_ProvisionAll_End2End()
+        public void Test_SqlAzureDb_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "djfr";
@@ -94,7 +98,8 @@
             using (var client = ManagementClient.CreateSqlClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<SqlAzureDb>().ProvisionAllAsync(client);
+                var tasks = context.Components.OfType<SqlAzureDb>().ProvisionAllAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 
@@ -102,7 +107,7 @@
         /// Tests the ProvisionAllAsync on <see cref="AzureStorageContainer"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_AzureStorageContainer_ProvisionAll_End2End()
+        public void Test_AzureStorageContainer_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "djfr";
@@ -110,7 +115,8 @@
             using (var client = ManagementClient.CreateStorageClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureStorageContainer>().ProvisionAllAsync(client);
+                var tasks = context.Components.OfType<AzureStorageContainer>().ProvisionAllAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 
@@ -118,7 +124,7 @@
         /// Tests the ProvisionAllAsync on <see cref="AzureWebSite"/> with real SQL Db data (seed).
         /// </summary>
         [TestMethod, TestCategory("Integration")]
-        public async Task Test_AzureWebSite_ProvisionAll_End2End()
+        public void Test_AzureWebSite_ProvisionAll_End2End()
         {
             FlexDataConfiguration.Branch = "Main";
             FlexDataConfiguration.Configuration = "djfr";
@@ -126,7 +132,8 @@
             using (var client = ManagementClient.CreateWebSiteClient())
             using (var context = new DevOpsFlexDbContext())
             {
-                await context.Components.OfType<AzureWebSite>().ProvisionAllAsync(client);
+                var tasks = context.Components.OfType<AzureWebSite>().ProvisionAllAsync(client);
+                Task.WaitAll(tasks.ToArray());
             }
         }
 

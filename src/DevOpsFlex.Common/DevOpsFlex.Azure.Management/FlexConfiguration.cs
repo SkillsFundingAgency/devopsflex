@@ -31,6 +31,12 @@
         internal const string EnvFlexAppPwd = "FlexAppPwd";
 
         /// <summary>
+        /// Holds the Extension Id that is created and used when checking for the PaaS Diagnostics extension
+        /// on a Cloud Service that's being deployed by DevOpsFlex.
+        /// </summary>
+        public const string FlexDiagnosticsExtensionId = "DevOpsFlex-PaaSDiagnostics";
+
+        /// <summary>
         /// Gets the Azure SQL database SA username.
         /// </summary>
         public static string FlexSaUser => Environment.GetEnvironmentVariable(EnvFlexSaUser);
