@@ -165,23 +165,25 @@
         /// <param name="serviceName">The name of the cloud service.</param>
         /// <param name="publicConfiguration">The public configuration XML that is to be applied to the extension.</param>
         /// <returns></returns>
-        public static async Task AddDiagnosticsExtensionIfNotExistsAsync(this ComputeManagementClient client, string serviceName, string publicConfiguration)
+        public static async Task<bool> AddDiagnosticsExtensionIfNotExistsAsync(this ComputeManagementClient client, string serviceName, string publicConfiguration)
         {
             var diagnosticsExtensions = (await client.HostedServices.ListExtensionsAsync(serviceName)).Where(e => e.Type == "PaaSDiagnostics").ToList();
             var extension = diagnosticsExtensions.FirstOrDefault(e => e.Id == FlexConfiguration.FlexDiagnosticsExtensionId);
 
-            if (extension == null)
+            if (extension != null) return true;
+
+            foreach (var ext in diagnosticsExtensions)
             {
-                foreach (var ext in diagnosticsExtensions)
-                {
-                    await client.HostedServices.DeleteExtensionAsync(serviceName, ext.Id);
-                }
+                await client.HostedServices.DeleteExtensionAsync(serviceName, ext.Id);
+            }
 
-                var storageAccount = Regex.Match(publicConfiguration, "<StorageAccount>([^<]*)</StorageAccount>", RegexOptions.Multiline)
-                                          .Groups.OfType<Group>()
-                                          .First(g => g.GetType() == typeof(Group))
-                                          .Value;
+            var storageAccount = Regex.Match(publicConfiguration, "<StorageAccount>([^<]*)</StorageAccount>", RegexOptions.Multiline)
+                                      .Groups.OfType<Group>()
+                                      .FirstOrDefault(g => g.GetType() == typeof(Group))?
+                                      .Value;
 
+            if(storageAccount != null)
+            {
                 client.HostedServices.AddExtension(serviceName, new HostedServiceAddExtensionParameters
                 {
                     Id = FlexConfiguration.FlexDiagnosticsExtensionId,
@@ -192,6 +194,8 @@
                     Version = "1.*"
                 });
             }
+
+            return storageAccount != null;
         }
     }
 }

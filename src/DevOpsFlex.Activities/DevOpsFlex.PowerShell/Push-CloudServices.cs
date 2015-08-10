@@ -45,13 +45,18 @@
 
         [Parameter(
             Mandatory = true,
-            HelpMessage = "The absolute path to the service package that we want to deploy.")]
+            HelpMessage = "The absolute path to the service packages that we want to deploy.")]
         public string[] PackagePaths { get; set; }
 
         [Parameter(
             Mandatory = true,
-            HelpMessage = "The absolute path to the service configuration file that we want to deploy.")]
+            HelpMessage = "The absolute path to the service configuration files that we want to deploy.")]
         public string[] ConfigurationPaths { get; set; }
+
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The absolute path to the WAD definition files that we want to deploy.")]
+        public string[] DiagnosticsConfigurationPaths { get; set; }
 
         [Parameter(
             Mandatory = true,
@@ -97,7 +102,7 @@
                 var blobClient = storageAccount.CreateCloudBlobClient();
                 var container = blobClient.GetContainerReference(StorageContainer);
 
-                ProcessAsyncWork(ServiceNames.Select((t, i) => DeployCloudServiceAsync(computeClient, container, t, PackagePaths[i], ConfigurationPaths[i], targetSlot))
+                ProcessAsyncWork(ServiceNames.Select((t, i) => DeployCloudServiceAsync(computeClient, container, t, PackagePaths[i], ConfigurationPaths[i], DiagnosticsConfigurationPaths?[i], targetSlot))
                                              .ToArray());
             }
 
@@ -111,6 +116,7 @@
             string serviceName,
             string packagePath,
             string configurationPath,
+            string diagnosticsConfigurationPath,
             DeploymentSlot targetSlot)
         {
             ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
@@ -134,28 +140,40 @@
 
             await blob.UploadFromFileAsync(packagePath, FileMode.Open);
 
-            ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
-                $"[{serviceName}] Checking the Cloud Service for the PaaS Diagnostics extension -> Creating it if it doesn't exist."));
+            if (diagnosticsConfigurationPath != null)
+            {
+                ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
+                    $"[{serviceName}] Checking the Cloud Service for the PaaS Diagnostics extension -> Creating it if it doesn't exist."));
 
-            var serviceConfiguration = File.ReadAllText(configurationPath);
-            await computeClient.AddDiagnosticsExtensionIfNotExistsAsync(serviceName, serviceConfiguration);
+                var diagnosticsConfiguration = File.ReadAllText(diagnosticsConfigurationPath);
+                var diagnosticsCreated = await computeClient.AddDiagnosticsExtensionIfNotExistsAsync(serviceName, diagnosticsConfiguration);
+
+                if (!diagnosticsCreated)
+                {
+                    diagnosticsConfigurationPath = null;
+                }
+            }
 
             if (deployment == null)
             {
                 ThreadAdapter.QueueObject(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium,
                     $"[{serviceName}] Found no previous deployments -> Creating a new deployment into {targetSlot.GetEnumDescription()}."));
 
-                await computeClient.Deployments.CreateAsync(
-                    serviceName,
-                    targetSlot,
-                    new DeploymentCreateParameters
-                    {
-                        Label = serviceName,
-                        Name = $"{serviceName}{targetSlot.GetEnumDescription()}",
-                        PackageUri = blob.Uri,
-                        Configuration = serviceConfiguration,
-                        StartDeployment = true
-                    });
+                var createParams = new DeploymentCreateParameters
+                {
+                    Label = serviceName,
+                    Name = $"{serviceName}{targetSlot.GetEnumDescription()}",
+                    PackageUri = blob.Uri,
+                    Configuration = File.ReadAllText(configurationPath),
+                    StartDeployment = true
+                };
+
+                if (diagnosticsConfigurationPath != null)
+                {
+                    createParams.ExtensionConfiguration = new ExtensionConfiguration {AllRoles = new[] {new ExtensionConfiguration.Extension {Id = FlexConfiguration.FlexDiagnosticsExtensionId}}};
+                }
+
+                await computeClient.Deployments.CreateAsync(serviceName, targetSlot, createParams);
             }
             else
             {

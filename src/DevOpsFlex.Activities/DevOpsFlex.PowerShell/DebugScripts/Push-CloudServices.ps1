@@ -10,4 +10,7 @@ Push-CloudServices -SubscriptionId "102d951b-78c0-4e48-80d4-a9c13baca2ad" `
                    -ConfigurationPath @("C:\Projects\Training\TemplateWebRole\TemplateWebRole\bin\Release\app.publish\ServiceConfiguration1.Cloud.cscfg", `
                                         "C:\Projects\Training\TemplateWebRole\TemplateWebRole\bin\Release\app.publish\ServiceConfiguration2.Cloud.cscfg", `
                                         "C:\Projects\Training\TemplateWebRole\TemplateWebRole\bin\Release\app.publish\ServiceConfiguration3.Cloud.cscfg") `
+                   -DiagnosticsConfigurationPath @("C:\Projects\Training\TemplateWebRole\TemplateWebRole\bin\Release\app.publish\Extensions\PaaSDiagnostics.TemplateWebRole.Web1.PubConfig.xml", `
+                                                   "C:\Projects\Training\TemplateWebRole\TemplateWebRole\bin\Release\app.publish\Extensions\PaaSDiagnostics.TemplateWebRole.Web2.PubConfig.xml", `
+                                                   "C:\Projects\Training\TemplateWebRole\TemplateWebRole\bin\Release\app.publish\Extensions\PaaSDiagnostics.TemplateWebRole.Web3.PubConfig.xml") `
                    -Verbose
