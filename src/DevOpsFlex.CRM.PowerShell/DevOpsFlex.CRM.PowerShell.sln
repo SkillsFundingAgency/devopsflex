@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.CRM.PowerShell", "DevOpsFlex.CRM.PowerShell\DevOpsFlex.CRM.PowerShell.csproj", "{423DE60F-E3A5-4F57-8D16-82D5677780D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{96007EC0-C320-4036-9983-EC6A8505B37F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C9CD4186-428A-407D-B7A1-4AE7B8A4E7C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.CRM.Management", "..\DevOpsFlex.Common\DevOpsFlex.CRM.Management\DevOpsFlex.CRM.Management.csproj", "{34C97AA5-4E7E-4A21-8D40-2CD111F4BD43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.Core", "..\DevOpsFlex.Common\DevOpsFlex.Core\DevOpsFlex.Core.csproj", "{FFEAB96F-1600-4853-A30D-3200B239212E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsFlex.CRM.Management.Tests", "..\DevOpsFlex.Common\Tests\DevOpsFlex.CRM.Management.Tests\DevOpsFlex.CRM.Management.Tests.csproj", "{BE71020B-4A55-4A64-AFB1-078A5C33825B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{423DE60F-E3A5-4F57-8D16-82D5677780D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423DE60F-E3A5-4F57-8D16-82D5677780D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423DE60F-E3A5-4F57-8D16-82D5677780D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423DE60F-E3A5-4F57-8D16-82D5677780D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C97AA5-4E7E-4A21-8D40-2CD111F4BD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C97AA5-4E7E-4A21-8D40-2CD111F4BD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C97AA5-4E7E-4A21-8D40-2CD111F4BD43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C97AA5-4E7E-4A21-8D40-2CD111F4BD43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFEAB96F-1600-4853-A30D-3200B239212E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFEAB96F-1600-4853-A30D-3200B239212E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFEAB96F-1600-4853-A30D-3200B239212E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFEAB96F-1600-4853-A30D-3200B239212E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE71020B-4A55-4A64-AFB1-078A5C33825B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE71020B-4A55-4A64-AFB1-078A5C33825B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE71020B-4A55-4A64-AFB1-078A5C33825B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE71020B-4A55-4A64-AFB1-078A5C33825B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{34C97AA5-4E7E-4A21-8D40-2CD111F4BD43} = {96007EC0-C320-4036-9983-EC6A8505B37F}
+		{FFEAB96F-1600-4853-A30D-3200B239212E} = {96007EC0-C320-4036-9983-EC6A8505B37F}
+		{BE71020B-4A55-4A64-AFB1-078A5C33825B} = {C9CD4186-428A-407D-B7A1-4AE7B8A4E7C6}
+	EndGlobalSection
+EndGlobal
