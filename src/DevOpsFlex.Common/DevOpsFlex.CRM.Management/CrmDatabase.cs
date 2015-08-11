@@ -4,6 +4,7 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Core.Events;
 
@@ -83,6 +84,8 @@
         /// <param name="eventStream">The Rx event stream used to push build events onto.</param>
         public async Task DropDatabaseAsync(string crmDatabaseName, IObserver<BuildEvent> eventStream)
         {
+            Contract.Requires(DatabaseName.ToLower() == "master", "The CrmDatabase object needs to be created pointing to the master database when before this method can be called");
+
             using (_sqlConnection)
             {
                 eventStream.OnNext(new BuildEvent(BuildEventType.Information, BuildEventImportance.Medium, "Connecting to CRM SQL Server"));
