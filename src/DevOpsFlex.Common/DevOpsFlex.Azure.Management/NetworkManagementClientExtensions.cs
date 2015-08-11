@@ -3,8 +3,8 @@
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Core;
+    using Core.Events;
     using Data;
-    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Network;
     using Microsoft.WindowsAzure.Management.Network.Models;

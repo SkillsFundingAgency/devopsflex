@@ -267,13 +267,6 @@
     <Compile Include="AzureWebSite.cs" />
     <Compile Include="BuildConfiguration.cs" />
     <Compile Include="CodeBranch.cs" />
-    <Compile Include="Events\BuildEvent.cs" />
-    <Compile Include="Events\CheckForParentResourceEvent.cs" />
-    <Compile Include="Events\FoundExistingEvent.cs" />
-    <Compile Include="Events\CheckIfExistsEvent.cs" />
-    <Compile Include="Events\ProgressBuildEvent.cs" />
-    <Compile Include="Events\ProvisionEvent.cs" />
-    <Compile Include="Events\StorageKeyEvent.cs" />
     <Compile Include="FlexDataConfiguration.cs" />
     <Compile Include="DevOpsComponent.cs" />
     <Compile Include="DevOpsFlexDbContext.cs" />

@@ -5,6 +5,7 @@
     using System.Management.Automation;
     using System.Security.Cryptography.X509Certificates;
     using Azure.Management;
+    using Core;
     using Data.PublishSettings;
     using Microsoft.Azure;
     using Microsoft.WindowsAzure.Management.Compute;

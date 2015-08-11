@@ -8,8 +8,8 @@
     using System.Threading.Tasks;
     using Azure.Management;
     using Core;
+    using Core.Events;
     using Data;
-    using Data.Events;
     using Data.PublishSettings;
     using Microsoft.Azure;
     using Microsoft.WindowsAzure.Management.Compute;

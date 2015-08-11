@@ -1,7 +1,7 @@
 ﻿namespace DevOpsFlex.Data
 {
     using System.Data.Entity;
-    using Events;
+    using Core.Events;
 
     public class DevOpsFlexDbContext : DbContext
     {

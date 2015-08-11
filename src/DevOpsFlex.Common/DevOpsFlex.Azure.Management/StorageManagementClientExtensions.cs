@@ -3,8 +3,8 @@
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Core;
+    using Core.Events;
     using Data;
-    using Data.Events;
     using Microsoft.WindowsAzure.Management.Storage;
     using Microsoft.WindowsAzure.Management.Storage.Models;
     using Microsoft.WindowsAzure.Storage;

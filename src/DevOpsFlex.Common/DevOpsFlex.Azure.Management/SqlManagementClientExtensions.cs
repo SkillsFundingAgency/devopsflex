@@ -6,8 +6,8 @@
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core;
+    using Core.Events;
     using Data;
-    using Data.Events;
     using Hyak.Common;
     using Microsoft.WindowsAzure.Management.Sql;
     using Microsoft.WindowsAzure.Management.Sql.Models;

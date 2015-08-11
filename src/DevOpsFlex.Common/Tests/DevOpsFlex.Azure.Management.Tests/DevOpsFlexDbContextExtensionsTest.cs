@@ -7,7 +7,6 @@
     using System.Reactive.Linq;
     using System.Threading.Tasks;
     using Data;
-    using Data.Events;
     using Data.Naming;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

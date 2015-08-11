@@ -3,6 +3,7 @@
     using System;
     using System.Management.Automation;
     using Azure.Management;
+    using Core;
     using Data;
 
     /// <summary>
