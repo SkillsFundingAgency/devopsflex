@@ -4,7 +4,7 @@
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
     using Core;
-    using Events;
+    using Core.Events;
 
     /// <summary>
     /// Central point in DevOpsFlex to hold all the event streams.

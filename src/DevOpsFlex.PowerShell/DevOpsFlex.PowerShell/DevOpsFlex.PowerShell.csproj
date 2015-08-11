@@ -164,7 +164,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncCmdlet.cs" />
     <Compile Include="Set-ReservedIpConfiguration.cs" />
     <Compile Include="Push-DevOpsFlexConfiguration.cs" />
     <Compile Include="Push-CloudServices.cs" />

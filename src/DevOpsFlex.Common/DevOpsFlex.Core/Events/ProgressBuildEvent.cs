@@ -1,4 +1,4 @@
-﻿namespace DevOpsFlex.Data.Events
+﻿namespace DevOpsFlex.Core.Events
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;

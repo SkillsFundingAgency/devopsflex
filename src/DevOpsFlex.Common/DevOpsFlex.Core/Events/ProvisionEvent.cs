@@ -1,7 +1,5 @@
-﻿namespace DevOpsFlex.Data.Events
+﻿namespace DevOpsFlex.Core.Events
 {
-    using Core;
-
     public class ProvisionEvent : BuildEvent
     {
         public AzureResource ResourceType { get; private set; }

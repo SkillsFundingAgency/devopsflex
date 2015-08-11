@@ -1,14 +1,12 @@
-﻿namespace DevOpsFlex.PowerShell
+﻿namespace DevOpsFlex.Core
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Management.Automation;
-    using System.Reactive.Concurrency;
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
     using System.Threading.Tasks;
-    using Core;
-    using Data;
-    using Data.Events;
+    using Events;
 
     /// <summary>
     /// Serves as a base class for derived cmdlets that need to run async work and that do not
@@ -31,6 +29,8 @@
         /// <param name="tasks">The block of asyncronous work to be performed.</param>
         protected void ProcessAsyncWork(Task[] tasks)
         {
+            Contract.Requires(tasks != null);
+
             var workers = tasks.Length;
 
             foreach (var task in tasks)
