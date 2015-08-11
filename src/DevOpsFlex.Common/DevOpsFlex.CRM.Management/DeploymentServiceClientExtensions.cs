@@ -39,15 +39,14 @@
                 };
 
             DeferredOperationStatus deferredOperationStatus = null;
-            var progressEvent = new ProgressBuildEvent($"Trying to Create the Organisation {organization.FriendlyName} [In Progress]");
-            eventStream.OnNext(progressEvent);
+            eventStream.OnNext(new BuildEvent(BuildEventType.Information, BuildEventImportance.Low, $"Trying to Create the Organisation {organization.FriendlyName} [In Progress]"));
 
             do
             {
                 await Task.Factory.StartNew(() => deferredOperationStatus = (DeferredOperationStatus)((RetrieveResponse)client.Execute(retrieveOperationStatus)).Entity);
                 await Task.Delay(CrmPoolingInterval);
 
-                progressEvent.Tick(5);
+                eventStream.OnNext(new BuildEvent(BuildEventType.Information, BuildEventImportance.Low, $"Waiting for {organization.FriendlyName} to be created."));
             } while (deferredOperationStatus.State != DeferredOperationState.Processing &&
                      deferredOperationStatus.State != DeferredOperationState.Completed);
 
@@ -59,17 +58,15 @@
                 };
 
             var orgState = OrganizationState.Pending;
-            progressEvent = new ProgressBuildEvent($"Checking that the Organisation {organization.FriendlyName} is Enabled [In Progress]");
-            eventStream.OnNext(progressEvent);
+            eventStream.OnNext(new BuildEvent(BuildEventType.Information, BuildEventImportance.Low, $"Checking that the Organisation {organization.FriendlyName} is Enabled [In Progress]"));
 
             do
             {
                 await Task.Factory.StartNew(() => orgState = ((Organization)((RetrieveResponse)client.Execute(retrieveReqServer)).Entity).State);
                 await Task.Delay(CrmPoolingInterval);
 
-                progressEvent.Tick(10);
+                eventStream.OnNext(new BuildEvent(BuildEventType.Information, BuildEventImportance.Low, $"Waiting for {organization.FriendlyName} to be enabled."));
             } while (orgState != OrganizationState.Enabled);
-
         }
 
         /// <summary>

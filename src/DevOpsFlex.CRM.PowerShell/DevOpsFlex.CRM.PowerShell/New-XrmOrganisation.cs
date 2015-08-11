@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Management.Automation;
     using System.Net;
@@ -117,6 +118,7 @@
         /// <summary>
         /// Processes the New-XrmOrganisation commandlet synchronously.
         /// </summary>
+        [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
         protected override void ProcessRecord()
         {
             using (var eventStream = new Subject<BuildEvent>())
@@ -130,21 +132,13 @@
                     new CrmDatabase(SqlServerName + ",443");
 
                 eventStream.Where(e => e.Type == BuildEventType.Information)
-                           .Subscribe(e => WriteVerbose(e.Message));
+                           .Subscribe(e => WriteVerbose($"[{DateTime.Now:HH:mm:ss.FFFF}] {e.Message}"));
 
                 eventStream.Where(e => e.Type == BuildEventType.Warning)
-                           .Subscribe(e => WriteWarning(e.Message));
+                           .Subscribe(e => WriteWarning($"[{DateTime.Now:HH:mm:ss.FFFF}] {e.Message}"));
 
                 eventStream.Where(e => e.Type == BuildEventType.Error)
                            .Subscribe(e => WriteError(new ErrorRecord(new Exception(e.Message), e.Message, ErrorCategory.InvalidOperation, this)));
-
-                eventStream.OfType<ProgressBuildEvent>()
-                           .Subscribe(
-                               e =>
-                               {
-                                   WriteVerbose(e.Message);
-                                   e.ProgressStream.Subscribe(p => WriteProgress(new ProgressRecord(e.GetHashCode(), e.Message, p.ToString())));
-                               });
 
                 try
                 {
