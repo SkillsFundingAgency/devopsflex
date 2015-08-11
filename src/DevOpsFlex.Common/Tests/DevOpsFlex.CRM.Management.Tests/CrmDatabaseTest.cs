@@ -1,9 +1,10 @@
-﻿namespace Ciber.Xrm.Ci.Common.Tests
+﻿namespace DevOpsFlex.CRM.Management.Tests
 {
     using System;
-    //using System.Reactive;
-    //using System.Reactive.Subjects;
-    using DevOpsFlex.CRM.Management;
+    using System.Reactive;
+    using System.Reactive.Subjects;
+    using Core.Events;
+    using Management;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -25,13 +26,13 @@
         {
             const string databaseName = "TestIntegration2_MSCRM";
 
-            //using (var eventStream = new Subject<BuildEvent>())
-            //using (var db = new CrmDatabase("fct-ci-crm-01.cloudapp.net", "integration_test", "Password.1234"))
-            //{
-            //    eventStream.Subscribe(e => TestContext.WriteLine("[{0}] [{1}] {2}", e.Type.ToString(), e.Importance.ToString(), e.Message));
+            using (var eventStream = new Subject<BuildEvent>())
+            using (var db = new CrmDatabase("fct-ci-crm-01.cloudapp.net", "integration_test", "Password.1234"))
+            {
+                eventStream.Subscribe(e => TestContext.WriteLine($"[{e.Type.ToString()}] [{e.Importance.ToString()}] {e.Message}"));
 
-            //    db.DropDatabaseAsync(databaseName, eventStream.AsObserver()).Wait();
-            //}
+                db.DropDatabaseAsync(databaseName, eventStream.AsObserver()).Wait();
+            }
         }
 
         /// <summary>
