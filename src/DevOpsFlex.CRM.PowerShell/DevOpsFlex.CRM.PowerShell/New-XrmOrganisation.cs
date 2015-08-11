@@ -186,10 +186,7 @@
                     }
                     else
                     {
-                        eventStream.OnNext(new BuildEvent(
-                            BuildEventType.Warning,
-                            BuildEventImportance.Medium,
-                            string.Format("The Organization {0} doesn't exist in the CRM server. Is this intentional?", OrganizationUniqueName)));
+                        eventStream.OnNext(new BuildEvent(BuildEventType.Warning, BuildEventImportance.Medium, $"The Organization {OrganizationUniqueName} doesn't exist in the CRM server. Is this intentional?"));
                     }
 
                     if (await crmDb.DatabaseExists(crmDatabaseName))
@@ -198,10 +195,7 @@
                     }
                     else
                     {
-                        eventStream.OnNext(new BuildEvent(
-                            BuildEventType.Warning,
-                            BuildEventImportance.Medium,
-                            string.Format("The Organization Database {0} doesn't exist in the SQL Server. Is this intentional?", crmDatabaseName)));
+                        eventStream.OnNext(new BuildEvent(BuildEventType.Warning, BuildEventImportance.Medium, $"The Organization Database {crmDatabaseName} doesn't exist in the SQL Server. Is this intentional?"));
                     }
 
                     await client.CreateOrganizationAsync(
@@ -229,10 +223,7 @@
                     dynamic clunkyCast = fault.Detail.ErrorDetails;
                     foreach (KeyValuePair<string, object> p in clunkyCast)
                     {
-                        eventStream.OnNext(new BuildEvent(
-                            BuildEventType.Error,
-                            BuildEventImportance.High,
-                            string.Format("{0} : {1}", p.Key, p.Value)));
+                        eventStream.OnNext(new BuildEvent(BuildEventType.Error, BuildEventImportance.High, $"{p.Key} : {p.Value}"));
                     }
                 }
             }
