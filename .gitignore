@@ -34,6 +34,7 @@ bin
 obj
 TestResults
 *.user
+.vs
 
 # Sensitive information files #
 ######################
