@@ -164,7 +164,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Set-ReservedIpConfiguration.cs" />
     <Compile Include="Push-DevOpsFlexConfiguration.cs" />
     <Compile Include="Push-CloudServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,8 +190,8 @@
     <Content Include="DebugScripts\Push-DevOpsFlexConfiguration.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DebugScripts\Set-ReservedIpConfiguration.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="DevOpsFlex.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
   </ItemGroup>

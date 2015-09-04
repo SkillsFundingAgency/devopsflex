@@ -132,6 +132,29 @@
             }
         }
 
+        [TestMethod, TestCategory("Administration")]
+        public async Task Fix_Unused_PaaSDiagnostics_Extensions()
+        {
+            const string serviceName = "fct-servicebus-oat";
+
+            using (var computeClient = ManagementClient.CreateComputeClient())
+            {
+                var diagnosticsExtensions = (await computeClient.HostedServices.ListExtensionsAsync(serviceName)).Where(e => e.Type == "PaaSDiagnostics").ToList();
+
+                foreach (var ext in diagnosticsExtensions)
+                {
+                    try
+                    {
+                        await computeClient.HostedServices.DeleteExtensionAsync(serviceName, ext.Id);
+                    }
+                    catch (Exception)
+                    {
+                        // ignored - soaking used extension exceptions intentionally.
+                    }
+                }
+            }
+        }
+
         #endregion
 
     }

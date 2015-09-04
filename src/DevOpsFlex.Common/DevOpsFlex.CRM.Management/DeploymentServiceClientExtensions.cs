@@ -24,8 +24,6 @@
         /// <param name="eventStream">The Rx event stream used to push build events onto.</param>
         public static async Task CreateOrganizationAsync(this DeploymentServiceClient client, Organization organization, IObserver<BuildEvent> eventStream)
         {
-            organization.SqlServerName = organization.SqlServerName.Replace(".cloudapp.net", ""); // TODO: FIX THIS HACK
-
             var operationId = await Task.Factory.StartNew(() =>
                 ((BeginCreateOrganizationResponse)client.Execute(new BeginCreateOrganizationRequest { Organization = organization })).OperationId);
 
