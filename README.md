@@ -1,17 +1,36 @@
 devopsflex
 ==========
 
-DevOps support for TFS driven teams using TFS Build, Release Management and other components on the Microsoft Stack.
+DevOps support for TFS driven teams using TFS Build and Deploying to Azure.
 
-<br />
-## Current TFS Build activities
+Although not it's primary purpose, it also contains a solution with a module for deployment commandlets that facilitate CRM deployments.
 
-### AzureVmScale
-Allows the scaling of multiple VMs in Azure through a TFS build definition.
-The end goal is to allow developers to control build definitions that are normally scheduled builds to downscale and upscale environments outside
-working hours to reduce costs and at the same time because the VMs are still up, do continuous deployments during the night.
+## Commandlets in the main module
 
-<br />
-<br />
-### Code Quality Stack
-* [Integration Tests](https://github.com/sfa-gov-uk/devopsflex/wiki/Integration-Tests)
+### Push-CloudServices
+- Deploys Azure Cloud Services in parallel.
+- Supports VIP swaps during deployment and supports the deletion of the staging deployment after swapping.
+- Can apply WAD definitions automatically to deployments, even if there's no deployment present.
+
+### Push-DevOpsFlexConfiguration
+Provisions PaaS resources on the fly based on a system spec defined in an EntityFramework database, a system configuration and a development branch.
+
+The idea is to automate PaaS provisioning during common development activities like branching in order to facilitate the creation of continuous deployment release pipelines.
+
+Works for:
+
+- Azure Cloud Services (supports provisioning of ReservedIPs)
+- Azure SQL Databases (supports adding database users during provisioning)
+- Azure Storage Containers (creates specific access keys during provisioning)
+- Azure Service Bus namespaces
+- Azure Web Apps
+
+## Commandlets in the CRM module
+
+### New-XrmOrganisation
+
+Re-creates a CRM organisation. If it previously exists, before recreating it will:
+
+- Disable the Organisation
+- Delete the Organisation
+- Delete the Organisation database in the SQL server
