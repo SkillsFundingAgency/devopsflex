@@ -18,9 +18,7 @@
 
     /// <summary>
     /// Represents the PowerShell commandlet implementation for the New-XrmOrganization in the
-    /// Ciber toolkit. This is the sibling of the TFS Build activity that achieves the same.
-    /// Basically the sole responsability of this class is to expose parameters and handle the
-    /// <see cref="IObserver{T}"/> stream and transform events in it into PowerShell writes.
+    /// Ciber toolkit.
     /// </summary>
     [Cmdlet("New", "XrmOrganisation")]
     public class NewXrmOrganisationCmdlet : Cmdlet
@@ -128,8 +126,8 @@
                     CredentialCache.DefaultNetworkCredentials;
 
                 var crmDb = SqlUsername != null && SqlPassword != null ?
-                    new CrmDatabase(SqlServerName + ",443", SqlUsername, SqlPassword) :
-                    new CrmDatabase(SqlServerName + ",443");
+                    new CrmDatabase(SqlServerName, SqlUsername, SqlPassword) :
+                    new CrmDatabase(SqlServerName);
 
                 eventStream.Where(e => e.Type == BuildEventType.Information)
                            .Subscribe(e => WriteVerbose($"[{DateTime.Now:HH:mm:ss.FFFF}] {e.Message}"));
@@ -203,7 +201,7 @@
                             UniqueName = OrganizationUniqueName,
                             FriendlyName = OrganizationFriendlyName,
                             SqlCollation = SqlCollation,
-                            SqlServerName = SqlServerName,
+                            SqlServerName = SqlServerName.Replace(".cloudapp.net", ""),
                             SrsUrl = SsrsUrl,
                             SqmIsEnabled = SqmIsEnabled
                         },
