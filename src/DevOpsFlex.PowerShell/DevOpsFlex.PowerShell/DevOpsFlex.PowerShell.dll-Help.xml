@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+
+  <!--Push-DevOpsFlexConfiguration-->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Push-DevOpsFlexConfiguration</command:name>
+      <command:verb>Push</command:verb>
+      <command:noun>DevOpsFlexConfiguration</command:noun>
+      <maml:description>
+        <maml:para>Creates PaaS components based on a system spec, a branch and a configuration.</maml:para>
+      </maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>Provisions PaaS resources on the fly based on a system spec defined in an EntityFramework database, a system configuration and a development branch.</maml:para>
+      <maml:para>The idea is to automate PaaS provisioning during common development activities like branching in order to facilitate the creation of continuous deployment release pipelines.</maml:para>
+      <maml:para>Works for:</maml:para>
+      <maml:list>
+        <maml:listItem><maml:para>Azure Cloud Services (supports provisioning of ReservedIPs)</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Azure SQL Databases (supports adding database users during provisioning)</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Azure Storage Containers (creates specific access keys during provisioning)</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Azure Service Bus namespaces</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Azure Web Apps</maml:para></maml:listItem>
+      </maml:list>
+    </maml:description>
+
+    <command:syntax><maml:para>Push-DevOpsFlexConfiguration</maml:para></command:syntax>
+
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SubscriptionId</maml:name>
+        <maml:description><maml:para>The Subscription Id that we are targetting for the deployments.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SettingsPath</maml:name>
+        <maml:description><maml:para>The absolute path to the Azure publish settings file.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SqlConnectionString</maml:name>
+        <maml:description><maml:para>The SqlConnectionString to the DevOpsFlex database.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Branch</maml:name>
+        <maml:description><maml:para>The name of the branch we want to target.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Configuration</maml:name>
+        <maml:description><maml:para>The .Net project configuration we want to target.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+    </command:parameters>
+
+    <command:inputTypes>
+      <!--Add input type information here-->
+    </command:inputTypes>
+    <command:returnValues>
+      <!--Add return value information here-->
+    </command:returnValues>
+    <maml:alertSet>
+      <!--Add Note information here-->
+    </maml:alertSet>
+    <command:examples>
+      <!--Add cmdlet examples here-->
+    </command:examples>
+    <maml:relatedLinks>
+      <!--Add links to related content here-->
+    </maml:relatedLinks>
+  </command:command>
+
+  <!--Push-DevOpsFlexConfiguration-->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Push-CloudServices</command:name>
+      <command:verb>Push</command:verb>
+      <command:noun>CloudServices</command:noun>
+      <maml:description>
+        <maml:para>Deploys a group of Azure Cloud services in parallel.</maml:para>
+      </maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>Deploys a group of Azure Cloud services asyncronously (in parallel). Has support for the following deployments goodies:</maml:para>
+      <maml:list>
+        <maml:listItem><maml:para>VIP swaps.</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Staging deployment delete after a VIP swap.</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Applying the WAD definition on each deployment.</maml:para></maml:listItem>
+      </maml:list>
+    </maml:description>
+
+    <command:syntax><maml:para>Push-CloudServices</maml:para></command:syntax>
+
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SubscriptionId</maml:name>
+        <maml:description><maml:para>The Subscription Id that we are targetting for the deployments.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SettingsPath</maml:name>
+        <maml:description><maml:para>The absolute path to the Azure publish settings file.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ServiceNames</maml:name>
+        <maml:description><maml:para>The names of the service that we are targetting for the deployments.</maml:para></maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>String[]</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>PackagePaths</maml:name>
+        <maml:description><maml:para>The absolute paths to the service package that we want to deploy.</maml:para></maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>String[]</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ConfigurationPaths</maml:name>
+        <maml:description><maml:para>The absolute paths to the service configuration file that we want to deploy.</maml:para></maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>String[]</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DiagnosticsConfigurationPaths</maml:name>
+        <maml:description><maml:para>The absolute paths to the WAD definition file that we want to deploy.</maml:para></maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>String[]</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>StorageAccountName</maml:name>
+        <maml:description><maml:para>The name of the storage account where we want to send the deployments to.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>VipSwap</maml:name>
+        <maml:description><maml:para>If we want to deploy to staging and do a VIP swap when it's done, false if we just want to deploy to production.</maml:para></maml:description>
+        <dev:type>SwitchParameter</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeleteStaging</maml:name>
+        <maml:description><maml:para>If we want to delete the Staging deployment after we do the VIP swap, false if we just want to let the staging (old production) deployment active after the swap.</maml:para></maml:description>
+        <dev:type>SwitchParameter</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ForceDelete</maml:name>
+        <maml:description><maml:para>If we want to force a delete of the previous deployments and a new deployment instead of an upgrade if an existing deployment exists.</maml:para></maml:description>
+        <dev:type>SwitchParameter</dev:type>
+      </command:parameter>
+    </command:parameters>
+
+    <command:inputTypes>
+      <!--Add input type information here-->
+    </command:inputTypes>
+    <command:returnValues>
+      <!--Add return value information here-->
+    </command:returnValues>
+    <maml:alertSet>
+      <!--Add Note information here-->
+    </maml:alertSet>
+    <command:examples>
+      <!--Add cmdlet examples here-->
+    </command:examples>
+    <maml:relatedLinks>
+      <!--Add links to related content here-->
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>
