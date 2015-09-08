@@ -88,7 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="New-XrmOrganisation.cs" />
+    <Compile Include="New-XrmOrganization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +102,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DevOpsFlex.CRM.PowerShell.dll-Help.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="DevOpsFlex.CRM.psd1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
