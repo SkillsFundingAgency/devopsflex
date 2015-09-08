@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>New-XrmOrganization</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>XrmOrganization</command:noun>
+      <maml:description>
+        <maml:para>Creates or re-creates a CRM organization.</maml:para>
+      </maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>
+        Re-creates a CRM organization. If it previously exists, before recreating it will:
+      </maml:para>
+      <maml:list>
+        <maml:listItem>
+          <maml:para>Disable the Organization</maml:para>
+        </maml:listItem>
+        <maml:listItem>
+          <maml:para>Delete the Organization</maml:para>
+        </maml:listItem>
+        <maml:listItem>
+          <maml:para>Delete the Organization database in the SQL server</maml:para>
+        </maml:listItem>
+      </maml:list>
+    </maml:description>
+
+    <command:syntax>
+      <maml:para>
+        New-XrmOrganization 
+      </maml:para>
+    </command:syntax>
+
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DeploymentServiceUrl</maml:name>
+        <maml:description><maml:para>The URL location of the CRM deployment service.</maml:para></maml:description>
+        <command:parameterValue required="true">URL</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SqlServerName</maml:name>
+        <maml:description><maml:para>The name of the SQL server on which the organization database is installed.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SsrsUrl</maml:name>
+        <maml:description><maml:para>The URL of the Reporting Services that CRM is connected to.</maml:para></maml:description>
+        <command:parameterValue required="true">URL</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SqlCollation</maml:name>
+        <maml:description><maml:para>The SQL collation property that the organization will use to sort and compare data characters.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SqmIsEnabled</maml:name>
+        <maml:description><maml:para>Whether information is being collected for the customer experience improvement program.</maml:para></maml:description>
+        <command:parameterValue required="true">True|False</command:parameterValue>
+        <dev:type>Boolean</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OrganizationUniqueName</maml:name>
+        <maml:description><maml:para>The unique name for the organization.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OrganizationFriendlyName</maml:name>
+        <maml:description><maml:para>The display name, or long name, of the organization.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OrganizationBaseCurrencyCode</maml:name>
+        <maml:description><maml:para>The base currency code for the organization.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OrganizationBaseCurrencyPrecision</maml:name>
+        <maml:description><maml:para>The number of decimal places that can be used for the base currency.</maml:para></maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>Int32</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OrganizationBaseCurrencySymbol</maml:name>
+        <maml:description><maml:para>The base currency symbol for the organization.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OrganizationBaseLanguageCode</maml:name>
+        <maml:description><maml:para>The base language code for the organization.</maml:para></maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>Int32</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SqlUsername</maml:name>
+        <maml:description><maml:para>The username for the Sql user if integrated security is off.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>SqlPassword</maml:name>
+        <maml:description><maml:para>The password for the Sql user if integrated security is off.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Credential</maml:name>
+        <maml:description><maml:para>The PSCredential identity account to relay to the CRM Deployment service.</maml:para></maml:description>
+        <command:parameterValue required="true">PSCredential</command:parameterValue>
+        <dev:type>PSCredential</dev:type>
+      </command:parameter>
+    </command:parameters>
+
+    <command:inputTypes>
+      <!--Add input type information here-->
+    </command:inputTypes>
+    <command:returnValues>
+      <!--Add return value information here-->
+    </command:returnValues>
+    <maml:alertSet>
+      <!--Add Note information here-->
+    </maml:alertSet>
+    <command:examples>
+      <!--Add cmdlet examples here-->
+    </command:examples>
+    <maml:relatedLinks>
+      <!--Add links to related content here-->
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>

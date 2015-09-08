@@ -20,11 +20,11 @@
     /// Represents the PowerShell commandlet implementation for the New-XrmOrganization in the
     /// Ciber toolkit.
     /// </summary>
-    [Cmdlet("New", "XrmOrganisation")]
-    public class NewXrmOrganisationCmdlet : Cmdlet
+    [Cmdlet("New", "XrmOrganization")]
+    public class NewXrmOrganizationCmdlet : Cmdlet
     {
         /// <summary>
-        /// Gets or sets the url location of the CRM deployment service.
+        /// Gets or sets the URL location of the CRM deployment service.
         /// </summary>
         [Parameter(Mandatory = true)]
         public string DeploymentServiceUrl { get; set; }
