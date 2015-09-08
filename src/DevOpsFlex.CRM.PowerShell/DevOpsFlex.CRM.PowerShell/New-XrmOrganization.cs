@@ -23,94 +23,79 @@
     [Cmdlet("New", "XrmOrganization")]
     public class NewXrmOrganizationCmdlet : Cmdlet
     {
-        /// <summary>
-        /// Gets or sets the URL location of the CRM deployment service.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "The URL location of the CRM deployment service.")]
         public string DeploymentServiceUrl { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name of the SQL server on which the organization database is installed.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "The name of the SQL server on which the organization database is installed.")]
         public string SqlServerName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the URL of the Reporting Services that CRM is connected to.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "The URL of the Reporting Services that CRM is connected to.")]
         public string SsrsUrl { get; set; }
 
-        /// <summary>
-        /// Gets or sets the SQL collation property that the organization will use to sort and compare data characters.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "The SQL collation property that the organization will use to sort and compare data characters.")]
         public string SqlCollation { get; set; }
 
-        /// <summary>
-        /// Gets or sets whether information is being collected for the customer experience improvement program.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "Whether information is being collected for the customer experience improvement program.")]
         public bool SqmIsEnabled { get; set; }
 
-        /// <summary>
-        /// Gets or sets the unique name for the organization.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "The unique name for the organization.")]
         public string OrganizationUniqueName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the display name, or long name, of the organization database.
-        /// </summary>
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Mandatory = true,
+            HelpMessage = "The display name, or long name, of the organization database.")]
         public string OrganizationFriendlyName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the base currency code for the organization.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The base currency code for the organization.")]
         public string OrganizationBaseCurrencyCode { get; set; }
 
-        /// <summary>
-        /// Gets or sets the base currency name for the organization.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The base currency name for the organization.")]
         public string OrganizationBaseCurrencyName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the number of decimal places that can be used for the base currency.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The number of decimal places that can be used for the base currency.")]
         public int OrganizationBaseCurrencyPrecision { get; set; }
 
-        /// <summary>
-        /// Gets or sets the base currency symbol for the organization.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The base currency symbol for the organization.")]
         public string OrganizationBaseCurrencySymbol { get; set; }
 
-        /// <summary>
-        /// Gets or sets the base language code for the organization.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The base language code for the organization.")]
         public int OrganizationBaseLanguageCode { get; set; }
 
-        /// <summary>
-        /// Gets or sets the username for the Sql user if integrated security is off.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The username for the Sql user if integrated security is off.")]
         public string SqlUsername { get; set; }
 
-        /// <summary>
-        /// Gets or sets the password for the Sql user if integrated security is off.
-        /// </summary>
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The password for the Sql user if integrated security is off.")]
         public string SqlPassword { get; set; }
 
-        /// <summary>
-        /// Gets or sets the <see cref="PSCredential"/> identity account to relay to the CRM Deployment service.
-        /// </summary>
-        [Parameter(Mandatory = false), Credential]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The PSCredential identity account to relay to the CRM Deployment service.")]
         public PSCredential Credential { get; set; }
 
         /// <summary>
