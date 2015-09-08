@@ -40,22 +40,22 @@
 
         [Parameter(
             Mandatory = true,
-            HelpMessage = "The name of the service that we are targetting for the deployments.")]
+            HelpMessage = "The names of the service that we are targetting for the deployments.")]
         public string[] ServiceNames { get; set; }
 
         [Parameter(
             Mandatory = true,
-            HelpMessage = "The absolute path to the service packages that we want to deploy.")]
+            HelpMessage = "The absolute paths to the service package that we want to deploy.")]
         public string[] PackagePaths { get; set; }
 
         [Parameter(
             Mandatory = true,
-            HelpMessage = "The absolute path to the service configuration files that we want to deploy.")]
+            HelpMessage = "The absolute paths to the service configuration file that we want to deploy.")]
         public string[] ConfigurationPaths { get; set; }
 
         [Parameter(
             Mandatory = false,
-            HelpMessage = "The absolute path to the WAD definition files that we want to deploy.")]
+            HelpMessage = "The absolute paths to the WAD definition file that we want to deploy.")]
         public string[] DiagnosticsConfigurationPaths { get; set; }
 
         [Parameter(
@@ -65,17 +65,17 @@
 
         [Parameter(
             Mandatory = false,
-            HelpMessage = "True if we want to deploy to staging and do a VIP swap when it's done, false if we just want to deploy to production.")]
+            HelpMessage = "If we want to deploy to Staging and do a VIP swap when it's done, false if we just want to deploy to production.")]
         public SwitchParameter VipSwap { get; set; } = false;
 
         [Parameter(
             Mandatory = false,
-            HelpMessage = "True if we want to delete the Staging deployment after we do the VIP swap, false if we just want to let the staging (old production) deployment active after the swap.")]
+            HelpMessage = "If we want to delete the Staging deployment after we do the VIP swap, false if we just want to let the staging (old production) deployment active after the swap.")]
         public SwitchParameter DeleteStaging { get; set; } = false;
 
         [Parameter(
             Mandatory = false,
-            HelpMessage = "True if we want to force a delete of the previous deployments and a new deployment instead of an upgrade if an existing deployment exists.")]
+            HelpMessage = "If we want to force a delete of the previous deployments and a new deployment instead of an upgrade if an existing deployment exists.")]
         public SwitchParameter ForceDelete { get; set; } = false;
 
         /// <summary>

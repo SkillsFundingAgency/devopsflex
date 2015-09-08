@@ -190,6 +190,7 @@
     <Content Include="DebugScripts\Push-DevOpsFlexConfiguration.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="DevOpsFlex.PowerShell.dll-Help.xml" />
     <Content Include="DevOpsFlex.psd1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
