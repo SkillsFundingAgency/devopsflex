@@ -44,7 +44,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetUpperConcat_ValidatesNull()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => StringCamelExtensions.GetUpperConcat(null));
@@ -56,7 +56,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetUpperConcat_ValidatesEmpty()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => "".GetUpperConcat());
@@ -68,7 +68,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetUpperConcat_ValidatesWhiteSpace()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => " ".GetUpperConcat());
@@ -80,7 +80,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetUpperConcat_ValidatesBlankReturn()
         {
             FluentAssertionExtensions.ShouldThrowPostContract(() => "fsc".GetUpperConcat());
@@ -135,7 +135,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetOneCharOneDigit_ValidatesNull()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => StringCamelExtensions.GetOneCharOneDigit(null));
@@ -147,7 +147,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetOneCharOneDigit_ValidatesEmpty()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => "".GetOneCharOneDigit());
@@ -159,7 +159,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetOneCharOneDigit_ValidatesWhiteSpace()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => " ".GetOneCharOneDigit());
@@ -237,7 +237,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetSqlServiceObjective_ValidatesNull()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => StringCamelExtensions.GetSqlServiceObjective(null));
@@ -249,7 +249,7 @@
         /// <remarks>
         /// This test validates a Code Contract, so it will only pass if run with Code Contracts rewrite (usually Debug).
         /// </remarks>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("CodeContract")]
         public void Ensure_GetSqlServiceObjective_ValidatesEmpty()
         {
             FluentAssertionExtensions.ShouldThrowPreContract(() => "".GetSqlServiceObjective());
