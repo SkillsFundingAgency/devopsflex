@@ -106,7 +106,7 @@
                                              .ToArray());
             }
 
-            WriteObject("All done!");
+            WriteObject("Push-CloudServices completed!");
             base.ProcessRecord();
         }
 

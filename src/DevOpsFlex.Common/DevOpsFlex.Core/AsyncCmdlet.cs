@@ -24,6 +24,15 @@
         protected IObservable<BuildEvent> EventStream => _threadSafeSubject.AsObservable();
 
         /// <summary>
+        /// Static initialization for all <see cref="AsyncCmdlet"/> classes.
+        /// Currently it just ensures assembly redirects are properly applied.
+        /// </summary>
+        static AsyncCmdlet()
+        {
+            AppDomain.CurrentDomain.ApplyRedirects();
+        }
+
+        /// <summary>
         /// Process a block of asynchronous work coming in as an array of <see cref="Task"/>.
         /// </summary>
         /// <param name="tasks">The block of asyncronous work to be performed.</param>

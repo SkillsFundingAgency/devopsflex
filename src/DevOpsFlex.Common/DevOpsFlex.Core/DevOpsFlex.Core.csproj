@@ -155,6 +155,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDomainExtensions.cs" />
     <Compile Include="AsyncCmdlet.cs" />
     <Compile Include="AsyncPump.cs" />
     <Compile Include="EnumExtensions.cs" />

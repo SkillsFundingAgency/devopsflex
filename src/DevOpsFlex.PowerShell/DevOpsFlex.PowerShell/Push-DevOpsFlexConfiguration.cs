@@ -51,6 +51,9 @@
             {
                 ProcessAsyncWork(context.ProvisionAll(SubscriptionId, SettingsPath));
             }
+
+            WriteObject("Push-DevOpsFlexConfiguration completed!");
+            base.ProcessRecord();
         }
     }
 }
