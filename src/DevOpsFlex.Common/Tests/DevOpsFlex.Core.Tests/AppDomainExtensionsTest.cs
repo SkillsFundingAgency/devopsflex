@@ -18,7 +18,7 @@
         /// of a referenced assembly. The reference is for the older version and what gets loaded into the <see cref="AppDomain"/>
         /// is the newer version.
         /// </summary>
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory("Unit"), TestCategory("Roslyn")]
         public void Test_RedirectAssembly_ProperlyRedirects()
         {
             var assemblyName = $"{nameof(Test_RedirectAssembly_ProperlyRedirects).Replace("_", "")}";
@@ -97,7 +97,7 @@
                     }}");
 
                 var compilationTarget = CSharpCompilation.Create(
-                    $"{assemblyName}.dll",
+                    $"{assemblyName}",
                     new[] {syntaxTree},
                     new[]
                     {
