@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Linq;
     using System.Reflection;
 
     /// <summary>
@@ -25,7 +26,6 @@
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(shortName));
             Contract.Requires(targetVersion != null);
-            Contract.Requires(!string.IsNullOrWhiteSpace(publicKeyToken));
 
             ResolveEventHandler handler = null;
 
@@ -38,12 +38,16 @@
                 Debug.WriteLine($"Redirecting assembly load of {args.Name},\tloaded by {requestingName}");
 
                 requestedAssembly.Version = targetVersion;
-                requestedAssembly.SetPublicKeyToken(new AssemblyName("x, PublicKeyToken=" + publicKeyToken).GetPublicKeyToken());
+                if (!string.IsNullOrWhiteSpace(publicKeyToken))
+                {
+                    requestedAssembly.SetPublicKeyToken(new AssemblyName("x, PublicKeyToken=" + publicKeyToken).GetPublicKeyToken());
+                }
                 requestedAssembly.CultureInfo = CultureInfo.InvariantCulture;
 
                 appDomain.AssemblyResolve -= handler;
 
-                return Assembly.Load(requestedAssembly);
+                var asm = appDomain.GetAssemblies().SingleOrDefault(a => a.GetName().FullName == requestedAssembly.FullName);
+                return asm ?? Assembly.Load(requestedAssembly);
             };
 
             appDomain.AssemblyResolve += handler;
@@ -57,7 +61,7 @@
         {
             if (RedirectsApplied.ContainsKey(appDomain.Id) && RedirectsApplied[appDomain.Id]) return;
 
-            AppDomain.CurrentDomain.RedirectAssembly("Newtonsoft.Json", new Version(7, 0, 0), "30ad4fe6b2a6aeed");
+            AppDomain.CurrentDomain.RedirectAssembly("Newtonsoft.Json", new Version(7, 0, 0, 0), "30ad4fe6b2a6aeed");
 
             RedirectsApplied.Add(appDomain.Id, true);
         }
