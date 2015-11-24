@@ -7,12 +7,12 @@ Although not it's primary purpose, it also contains a solution with a module for
 
 ## Commandlets in the main module
 
-### Push-CloudServices
+#### Push-CloudServices
 - Deploys Azure Cloud Services in parallel.
 - Supports VIP swaps during deployment and supports the deletion of the staging deployment after swapping.
 - Can apply WAD definitions automatically to deployments, even if there's no deployment present.
 
-### Push-DevOpsFlexConfiguration
+#### Push-DevOpsFlexConfiguration
 Provisions PaaS resources on the fly based on a system spec defined in an EntityFramework database, a system configuration and a development branch.
 
 The idea is to automate PaaS provisioning during common development activities like branching in order to facilitate the creation of continuous deployment release pipelines.
@@ -27,7 +27,7 @@ Works for:
 
 ## Commandlets in the CRM module
 
-### New-XrmOrganisation
+#### New-XrmOrganisation
 
 Re-creates a CRM organisation. If it previously exists, before recreating it will:
 
@@ -40,7 +40,7 @@ Re-creates a CRM organisation. If it previously exists, before recreating it wil
 These are Roslyn analyzers that focus on problems that code creates for DevOps teams.
 They are not in any way best coding practices.
 
-### NuGet Packages consolidation
+#### NuGet Packages consolidation
 
 This analyzer tests two things in the same pass:
 
