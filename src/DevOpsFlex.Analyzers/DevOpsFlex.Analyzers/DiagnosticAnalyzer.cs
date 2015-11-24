@@ -8,6 +8,10 @@ namespace DevOpsFlex.Analyzers
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.Diagnostics;
 
+    /// <summary>
+    /// Represents the Analyzer that enforces package consolidation (unique reference per package) and a unique packages folder
+    /// for each assembly being compiled.
+    /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class PackageConsolidationAnalyzer : DiagnosticAnalyzer
     {
@@ -35,13 +39,26 @@ namespace DevOpsFlex.Analyzers
                 isEnabledByDefault: true,
                 description: new LocalizableResourceString(nameof(Resources.UniqueVersionDescription), Resources.ResourceManager, typeof(Resources)));
 
+        /// <summary>
+        /// Returns a set of descriptors for the diagnostics that this analyzer is capable of producing.
+        /// </summary>
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(SinglePackagesFolderRule, UniqueVersionRule);
 
+        /// <summary>
+        /// Called once at session start to register actions in the analysis context.
+        /// </summary>
+        /// <param name="context">The <see cref="AnalysisContext"/> context used to register actions.</param>
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterCompilationAction(AnalyzePackageConsolidation);
         }
 
+        /// <summary>
+        /// Analyzes that package consolidation (unique reference per package) and a unique packages folder
+        /// are in place for each assembly being compiled. Because this is being run per assembly you might
+        /// see a repetition of the same error.
+        /// </summary>
+        /// <param name="context">The <see cref="CompilationAnalysisContext"/> context that parents all analysis elements.</param>
         private static void AnalyzePackageConsolidation(CompilationAnalysisContext context)
         {
             var packageReferences = context.Compilation
