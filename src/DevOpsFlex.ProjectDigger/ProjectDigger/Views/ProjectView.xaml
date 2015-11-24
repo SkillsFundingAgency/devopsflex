@@ -11,6 +11,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -22,7 +23,7 @@
 
         <core:OutlinedTextBlock Grid.Column="1"
                                 Text="SCop"
-                                Margin="0 0 10 0"
+                                Margin="0 0 0 0"
                                 Fill="{Binding Path=StyleCopFill}"
                                 Stroke="Black"
                                 StrokeThickness="1"
@@ -30,6 +31,15 @@
                                 FontWeight="Bold" />
 
         <core:OutlinedTextBlock Grid.Column="2"
+                                Text="!"
+                                Margin="0 0 10 0"
+                                Fill="{Binding Path=StyleCopFileFill}"
+                                Stroke="{Binding Path=StyleCopFileStroke}"
+                                StrokeThickness="1"
+                                FontSize="20"
+                                FontWeight="Bold" />
+
+        <core:OutlinedTextBlock Grid.Column="3"
                                 Text="R#"
                                 Margin="0 0 10 0"
                                 Fill="{Binding Path=ResharperFill}"
@@ -39,7 +49,7 @@
                                 FontWeight="Bold" />
 
         <TextBlock x:Name="ProjectName"
-                   Grid.Column="3"
+                   Grid.Column="4"
                    FontSize="16"
                    FontWeight="Bold"
                    Foreground="DarkBlue"

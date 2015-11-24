@@ -29,6 +29,38 @@
             }
         }
 
+        public Brush StyleCopFileFill
+        {
+            get
+            {
+                switch (_projectFile.HasStyleCopSettingsFile)
+                {
+                    case false:
+                        return Brushes.Orange;
+                    case true:
+                        return Brushes.Transparent;
+                    default:
+                        return Brushes.Transparent;
+                }
+            }
+        }
+
+        public Brush StyleCopFileStroke
+        {
+            get
+            {
+                switch (_projectFile.HasStyleCopSettingsFile)
+                {
+                    case false:
+                        return Brushes.Black;
+                    case true:
+                        return Brushes.Transparent;
+                    default:
+                        return Brushes.Transparent;
+                }
+            }
+        }
+
         public Brush ResharperFill
         {
             get
