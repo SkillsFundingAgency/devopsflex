@@ -34,3 +34,15 @@ Re-creates a CRM organisation. If it previously exists, before recreating it wil
 - Disable the Organisation
 - Delete the Organisation
 - Delete the Organisation database in the SQL server
+
+## Roslyn Analyzers
+
+These are Roslyn analyzers that focus on problems that code creates for DevOps teams.
+They are not in any way best coding practices.
+
+### NuGet Packages consolidation
+
+This analyzer tests two things in the same pass:
+
+- That the assembly only contains references to a single packages folder.
+- That all references in the assembly only contain a unique version in the packages folder.
