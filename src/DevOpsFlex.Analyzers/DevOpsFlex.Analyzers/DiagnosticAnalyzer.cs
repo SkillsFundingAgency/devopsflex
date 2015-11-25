@@ -16,8 +16,8 @@ namespace DevOpsFlex.Analyzers
     public class PackageConsolidationAnalyzer : DiagnosticAnalyzer
     {
         private const string PackagesFolderName = "\\packages\\"; // convention
-        private static readonly string PackageVersionRegex = PackagesFolderName.Replace("\\", "\\\\") + "[^0-9]*([0-9]+(?:\\.[0-9]+)+)\\\\";
-        private static readonly string PackageNameRegex = PackagesFolderName.Replace("\\", "\\\\") + "([a-zA-Z]+(?:\\.[a-zA-Z]+)*)[^\\\\]*\\\\";
+        private static readonly string PackageVersionRegex = PackagesFolderName.Replace("\\", "\\\\") + "[^0-9]*([0-9]+(?:\\.[0-9]+)+)(?:\\\\)?";
+        private static readonly string PackageNameRegex = PackagesFolderName.Replace("\\", "\\\\") + "([a-zA-Z]+(?:\\.[a-zA-Z]+)*)[^\\\\]*(?:\\\\)?";
 
         private static readonly DiagnosticDescriptor SinglePackagesFolderRule =
             new DiagnosticDescriptor(
@@ -91,13 +91,22 @@ namespace DevOpsFlex.Analyzers
 
                 if (allPackages.Count(p => p.Contains(packageName)) > 1)
                 {
-                    context.ReportDiagnostic(
-                        Diagnostic.Create(
-                            UniqueVersionRule,
-                            context.Compilation.Assembly.Locations[0],
-                            context.Compilation.AssemblyName, // {0} MessageFormat
-                            packageName // {1} MessageFormat
-                            ));
+                    if ((from identicalReference in allPackages.Where(p => p.Contains(packageName))
+                         let packageVersion = Regex.Match(reference, PackageVersionRegex, RegexOptions.Singleline).Groups[1].Value
+                         let identicalPackageName = Regex.Match(identicalReference, PackageNameRegex, RegexOptions.Singleline).Groups[1].Value
+                         let identicalPackageVersion = Regex.Match(identicalReference, PackageVersionRegex, RegexOptions.Singleline).Groups[1].Value
+                         where packageName == identicalPackageName && packageVersion != identicalPackageVersion
+                         select packageVersion
+                         ).Any())
+                    {
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                UniqueVersionRule,
+                                context.Compilation.Assembly.Locations[0],
+                                context.Compilation.AssemblyName, // {0} MessageFormat
+                                packageName // {1} MessageFormat
+                                ));
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@ namespace DebugConsoleApplication
         static void Main(string[] args)
         {
             var asd = 0;
+            var i = 0;
         }
     }
 }
