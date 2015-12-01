@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SinglePackagesFolderDescription" xml:space="preserve">
-    <value>Dude, you are a SCRUB! An assembly should only contain references to a single packages folder.</value>
+    <value>An assembly should only contain references to a single packages folder.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="SinglePackagesFolderMessageFormat" xml:space="preserve">
@@ -130,7 +130,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="UniqueVersionDescription" xml:space="preserve">
-    <value>Dude, you are a SCRUB! An assembly packages folder should only contain a unique version of each package referenced.</value>
+    <value>An assembly packages folder should only contain a unique version of each package referenced.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="UniqueVersionMessageFormat" xml:space="preserve">

@@ -61,7 +61,7 @@ namespace DevOpsFlex.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dude, you are a SCRUB! An assembly should only contain references to a single packages folder..
+        ///   Looks up a localized string similar to An assembly should only contain references to a single packages folder..
         /// </summary>
         internal static string SinglePackagesFolderDescription {
             get {
@@ -88,7 +88,7 @@ namespace DevOpsFlex.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dude, you are a SCRUB! An assembly packages folder should only contain a unique version of each package referenced..
+        ///   Looks up a localized string similar to An assembly packages folder should only contain a unique version of each package referenced..
         /// </summary>
         internal static string UniqueVersionDescription {
             get {

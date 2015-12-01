@@ -119,6 +119,7 @@
                                 AdministratorPassword = FlexConfiguration.FlexSaPwd,
                                 Location = model.System.Location.GetEnumDescription(),
                                 Version = "100.0" // This needs to be an invalid version number
+                                // TODO: START USING DATABASE SIZE.
                             });
                     }
                     catch (CloudException ex)
