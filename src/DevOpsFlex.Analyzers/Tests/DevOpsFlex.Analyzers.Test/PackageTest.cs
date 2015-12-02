@@ -6,7 +6,7 @@
     public class PackageTest
     {
         [TestMethod, TestCategory("Unit")]
-        public void Foo()
+        public void Placeholder()
         {
         }
     }

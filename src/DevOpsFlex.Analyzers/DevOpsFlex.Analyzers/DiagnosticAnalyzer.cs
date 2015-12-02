@@ -93,9 +93,6 @@ namespace DevOpsFlex.Analyzers
             var packagesNotConsolidated = packageReferences.Select(r => new Package(r.FilePath))
                                                            .Where(r => Packages.Count(p => p.Name == r.Name) > 1);
 
-            var foo = packageReferences.Select(r => new Package(r.FilePath)).Select(p => p.Name);
-            var foo2 = Packages.Select(p => p.Name);
-
             foreach (var referencePackage in packagesNotConsolidated)
             {
                 context.ReportDiagnostic(
