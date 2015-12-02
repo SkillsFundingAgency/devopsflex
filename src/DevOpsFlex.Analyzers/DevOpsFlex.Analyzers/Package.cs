@@ -1,6 +1,5 @@
 namespace DevOpsFlex.Analyzers
 {
-    using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Text.RegularExpressions;
@@ -9,7 +8,7 @@ namespace DevOpsFlex.Analyzers
     /// Wraps logic around Name, Version and generic regular expression lazy initializations to support
     /// the package consolidation analyzer.
     /// </summary>
-    public class Package : IEqualityComparer<Package>
+    public class Package
     {
         private static readonly string PackageVersionRegex = PackagesFolderName.Replace("\\", "\\\\") + "[^0-9]*([0-9]+(?:\\.[0-9]+)+)(?:\\\\)?";
         private static readonly string PackageNameRegex = PackagesFolderName.Replace("\\", "\\\\") + "([a-zA-Z]+(?:\\.[a-zA-Z]+)*)[^\\\\]*(?:\\\\)?";
@@ -56,27 +55,23 @@ namespace DevOpsFlex.Analyzers
         /// <summary>
         /// Determines whether the specified objects are equal.
         /// </summary>
-        /// <param name="x">The first <see cref="Package"/> object to compare.</param>
         /// <param name="y">The second <see cref="Package"/> object to compare.</param>
         /// <returns>true if the specified objects are equal; otherwise, false.</returns>
-        public bool Equals(Package x, Package y)
+        public override bool Equals(object y)
         {
-            Contract.Requires(x != null);
             Contract.Requires(y != null);
+            Contract.Requires(y.GetType() == typeof(Package));
 
-            return x.Folder == y.Folder;
+            return Folder == (y as Package)?.Folder;
         }
 
         /// <summary>
         /// Returns a hash code for the specified object.
         /// </summary>
-        /// <param name="package">The <see cref="Package"/> for which a hash code is to be returned.</param>
         /// <returns>A hash code for the specified object.</returns>
-        public int GetHashCode(Package package)
+        public override int GetHashCode()
         {
-            Contract.Requires(package != null);
-
-            return package.Folder.GetHashCode();
+            return Folder.GetHashCode();
         }
     }
 }
