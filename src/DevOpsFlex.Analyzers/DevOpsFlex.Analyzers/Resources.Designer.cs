@@ -61,6 +61,33 @@ namespace DevOpsFlex.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An Mvc controller should never return BadRequest inside a catch..
+        /// </summary>
+        internal static string MvcReturnBadHttpCodeDescription {
+            get {
+                return ResourceManager.GetString("MvcReturnBadHttpCodeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BadRequest return inside a catch on an Mvc controller..
+        /// </summary>
+        internal static string MvcReturnBadHttpCodeMessageFormat {
+            get {
+                return ResourceManager.GetString("MvcReturnBadHttpCodeMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mvc controller: return BadRequest inside a catch..
+        /// </summary>
+        internal static string MvcReturnBadHttpCodeTitle {
+            get {
+                return ResourceManager.GetString("MvcReturnBadHttpCodeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An assembly should only contain references to a single packages folder..
         /// </summary>
         internal static string SinglePackagesFolderDescription {

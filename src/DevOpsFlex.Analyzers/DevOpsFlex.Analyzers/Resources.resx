@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MvcReturnBadHttpCodeDescription" xml:space="preserve">
+    <value>An Mvc controller should never return BadRequest inside a catch.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="MvcReturnBadHttpCodeMessageFormat" xml:space="preserve">
+    <value>BadRequest return inside a catch on an Mvc controller.</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="MvcReturnBadHttpCodeTitle" xml:space="preserve">
+    <value>Mvc controller: return BadRequest inside a catch.</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
   <data name="SinglePackagesFolderDescription" xml:space="preserve">
     <value>An assembly should only contain references to a single packages folder.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
