@@ -14,7 +14,7 @@
             catch (Exception)
             // catch (Exception ex) // What this should be instead - Check for uniqueness of exception variable name
             {
-                return BadRequest("ops!"); // only IF return BadRequest is in place
+                return BadRequest(string.Format("asd {0}", 123)); // only IF return BadRequest is in place
                 //throw new HttpException(400, "ops!", ex); // What this should do instead
                 // also need to include using System.Web; if it's not included yet or prepend that to the Exception and let R# do the rest
             }

@@ -18,9 +18,11 @@
         /// </summary>
         private const string ControllerName = "Controller"; // convention
 
+        internal const string DiagnosticId = "MvcReturnBadHttpCode";
+
         private static readonly DiagnosticDescriptor MvcReturnBadHttpCodeRule =
             new DiagnosticDescriptor(
-                id: "MvcReturnBadHttpCode",
+                id: DiagnosticId,
                 title: new LocalizableResourceString(nameof(Resources.MvcReturnBadHttpCodeTitle), Resources.ResourceManager, typeof(Resources)),
                 messageFormat: new LocalizableResourceString(nameof(Resources.MvcReturnBadHttpCodeMessageFormat), Resources.ResourceManager, typeof(Resources)),
                 category: "Mvc",
@@ -31,13 +33,13 @@
         /// <summary>
         /// Returns a set of descriptors for the diagnostics that this analyzer is capable of producing.
         /// </summary>
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MvcReturnBadHttpCodeRule);
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(MvcReturnBadHttpCodeRule);
 
         /// <summary>
         /// Called once at session start to register actions in the analysis context.
         /// </summary>
         /// <param name="context">The <see cref="AnalysisContext"/> context used to register actions.</param>
-        public override void Initialize(AnalysisContext context)
+        public sealed override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(AnalyzeMvcReturnBadHttpCode, SyntaxKind.CatchClause);
         }

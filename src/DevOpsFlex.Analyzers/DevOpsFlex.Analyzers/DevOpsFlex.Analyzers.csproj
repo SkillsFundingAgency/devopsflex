@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvcReturnBadHttpCodeAnalyzer.cs" />
+    <Compile Include="MvcReturnBadHttpCodeFixProvider.cs" />
     <Compile Include="PackageConsolidationAnalyzer.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
