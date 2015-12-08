@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dsl", "Dsl\Dsl.csproj", "{64614F03-077C-4237-8070-2F3B09B3C0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{E4E63C92-4E99-4F7E-8B6F-CBE23CFECC51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DslPackage", "DslPackage\DslPackage.csproj", "{6BC2A758-650D-4856-BE88-60298C764F47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64614F03-077C-4237-8070-2F3B09B3C0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64614F03-077C-4237-8070-2F3B09B3C0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64614F03-077C-4237-8070-2F3B09B3C0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64614F03-077C-4237-8070-2F3B09B3C0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4E63C92-4E99-4F7E-8B6F-CBE23CFECC51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E63C92-4E99-4F7E-8B6F-CBE23CFECC51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4E63C92-4E99-4F7E-8B6F-CBE23CFECC51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E63C92-4E99-4F7E-8B6F-CBE23CFECC51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BC2A758-650D-4856-BE88-60298C764F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC2A758-650D-4856-BE88-60298C764F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC2A758-650D-4856-BE88-60298C764F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC2A758-650D-4856-BE88-60298C764F47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

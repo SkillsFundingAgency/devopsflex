@@ -1,0 +1,53 @@
+﻿<#@ template inherits="Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation" debug="true"#>
+<#@ output extension=".htm" #>
+<#@ DevOpsFlex processor="DevOpsFlexDirectiveProcessor" requires="fileName='Sample.flex'" provides="ExampleModel=ExampleModel" #>
+<#
+		
+		// This template generates a report in HTML, derived from
+		// the model file Sample.wpf. To see the result,
+		// open its subsidiary file in the Solution Explorer.
+		//
+		// To regenerate the report after changing the model file, 
+		// select the "Run Custom Tool" command from this file's
+		// context menu in the Solution Explorer; or click the
+		// Transform All Templates command in the Solution Explorer header.
+		//
+		// You can also write templates to generate code, configuration files,
+		// or other documents from your users' models.  A complete Visual Studio 
+		// Solution can be created from one or more models.
+		//
+		// The code of the template (distinct from the text it generates)
+		// can be written in C# or VB.
+
+#>
+
+<html>
+ <head>
+  <title>Report for <#= ExampleModel.Name #></title>
+ </head>
+ <body>
+  <table>
+   <thead>
+    <tr>
+	 <td>Name</td>
+     <td>Description</td>
+     <td>Value</td>
+    </tr>
+   </thead>
+   <tbody>
+<# foreach(ExampleElement element in ExampleModel.ExampleElements)
+   {
+#>
+    <tr>
+     <td><#= element.Name#></td>
+     <td><#= element.Description#></td>
+     <td><#= element.Value#></td>
+    </tr>
+
+<#
+   }
+#>   
+   </tbody>
+  </table>
+ </body>
+</html>

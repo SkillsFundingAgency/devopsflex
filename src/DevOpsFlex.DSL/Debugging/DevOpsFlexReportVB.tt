@@ -1,0 +1,55 @@
+﻿<#@ template inherits="Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation" language="VB"#>
+<#@ output extension=".htm" #>
+<#@ DevOpsFlex processor="DevOpsFlexDirectiveProcessor" requires="fileName='Sample.flex'" provides="ExampleModel=ExampleModel" #>
+<#
+		
+		REM This template generates a report in HTML, derived from
+		REM the model file Sample.wpf. To see the result,
+		REM open its subsidiary file in the Solution Explorer.
+		REM 
+		REM To regenerate the report after changing the model file, 
+		REM select the "Run Custom Tool" command from this file's
+		REM context menu in the Solution Explorer; or click the
+		REM Transform All Templates command in the Solution Explorer header.
+		REM
+		REM You can also write templates to generate code, configuration files,
+		REM or other documents from your users' models.  A complete Visual Studio 
+		REM Solution can be created from one or more models.
+		REM
+		REM The code of the template (distinct from the text it generates)
+		REM can be written in C# or VB.
+
+#>
+
+<!-- To see the display form of the generated HTML file, click the 'Design' tab at bottom left of the window. -->
+<html>
+ <head>
+  <title>Report for <#= ExampleModel.Name #></title>
+ </head>
+ <body>
+  <table>
+   <thead>
+    <tr>
+	 <td>Name</td>
+     <td>Description</td>
+     <td>Value</td>
+    </tr>
+   </thead>
+   <tbody>
+<#
+	Dim element as ExampleElement
+	For Each element in Me.ExampleModel.ExampleElements
+#> 
+   <tr>
+     <td><#= element.Name#></td>
+     <td><#= element.Description#></td>
+     <td><#= element.Value#></td>
+    </tr>
+
+<# 
+	Next 
+#>
+   </tbody>
+  </table>
+ </body>
+</html>
