@@ -17,6 +17,7 @@
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MvcReturnBadHttpCodeFixProvider)), Shared]
     public class MvcReturnBadHttpCodeFixProvider : CodeFixProvider
     {
+        internal const string CapturedExceptionIdentifier = "requestEx";
         /// <summary>
         /// A list of diagnostic IDs that this provider can provider fixes for.
         /// </summary>
@@ -66,18 +67,10 @@
         private async Task<Document> ThrowInsteadOfReturnBadRequest(Document document, SyntaxNode node, CancellationToken token)
         {
             var editor = await DocumentEditor.CreateAsync(document, token);
-            var catchNode = node.FirstAncestorOrSelf<SyntaxNode>(n => n.Kind() == SyntaxKind.CatchClause);
+            var catchNode = (CatchClauseSyntax) node.FirstAncestorOrSelf<SyntaxNode>(n => n.Kind() == SyntaxKind.CatchClause);
+            var exceptionIdentifier = catchNode.Declaration?.Identifier.ValueText ?? CapturedExceptionIdentifier;
 
-            // 1. Check if the exception is being captured already. If it's not, start capturing it.
-            var declaration = ((CatchClauseSyntax)catchNode).Declaration;
-            if (declaration.Identifier.Value == null)
-            {
-                var capturedExceptionDeclaration = SyntaxFactory.CatchDeclaration(declaration.Type, SyntaxFactory.Identifier(declaration.Type.GetLeadingTrivia(), "requestEx", declaration.Type.GetTrailingTrivia()));
-                editor.ReplaceNode(declaration, capturedExceptionDeclaration);
-                declaration = capturedExceptionDeclaration;
-            }
-
-            // 2a. Capture the first argument of the BadRequest call if it's a valid one, otherwise populate with a "PUT SOMETHING MEANINGFUL HERE" string literal
+            // 1. Capture the first argument of the BadRequest call if it's a valid one, otherwise populate with a "PUT SOMETHING MEANINGFUL HERE" string literal
             var badRequestArg = (((ReturnStatementSyntax) node).Expression as InvocationExpressionSyntax)?.ArgumentList.Arguments.FirstOrDefault() ??
                                 SyntaxFactory.Argument(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression,
                                     SyntaxFactory.Literal(
@@ -86,7 +79,7 @@
                                         "PUT SOMETHING MEANINGFUL HERE",
                                         SyntaxFactory.TriviaList())));
 
-            // 2b. Convert the return BadRequest to a throw.
+            // 2. Convert the return BadRequest to a throw.
             var argsList = new SeparatedSyntaxList<ArgumentSyntax>();
             argsList = argsList.Add(
                 SyntaxFactory.Argument(
@@ -98,12 +91,42 @@
                         400,
                         SyntaxFactory.TriviaList()))));
             argsList = argsList.Add(badRequestArg);
-            argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(declaration.Identifier.ValueText)));
+            argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.IdentifierName(exceptionIdentifier)));
 
             var throwStatement = SyntaxFactory.ThrowStatement(SyntaxFactory.ObjectCreationExpression(SyntaxFactory.ParseTypeName("System.Web.HttpException"), SyntaxFactory.ArgumentList(argsList), null));
-            editor.ReplaceNode(node, throwStatement);
+            var newCatchNode = catchNode.ReplaceNode(node, throwStatement);
 
-            // 3. Return the changed document.
+            // 3. Check if the exception is being captured already. If it's not, start capturing it.
+            var declaration = catchNode.Declaration;
+
+            if (declaration?.Identifier.Value == null)
+            {
+                if (declaration == null)
+                {
+                    // 3a. This handles catch all clauses [catch { }]
+                    var capturedExceptionDeclaration = SyntaxFactory.CatchDeclaration(
+                        SyntaxFactory.ParseTypeName("System.Exception"),
+                        SyntaxFactory.Identifier(SyntaxFactory.ParseLeadingTrivia(" "), CapturedExceptionIdentifier, SyntaxFactory.TriviaList()));
+
+                    newCatchNode = newCatchNode.WithDeclaration(capturedExceptionDeclaration)
+                                               // if we don't rebuild the catch keyword we get the previous catch clause trailing trivia between the catch keyword and declaration
+                                               .WithCatchKeyword(SyntaxFactory.Token(newCatchNode.CatchKeyword.LeadingTrivia, SyntaxKind.CatchKeyword, SyntaxFactory.TriviaList()));
+
+                    editor.ReplaceNode(catchNode, newCatchNode);
+                }
+                else
+                {
+                    // 3b. This handles catch without capture clauses [catch (Exception) { }]
+                    var capturedExceptionDeclaration = SyntaxFactory.CatchDeclaration(
+                        declaration.Type,
+                        SyntaxFactory.Identifier(declaration.Type.GetLeadingTrivia(), CapturedExceptionIdentifier, declaration.Type.GetTrailingTrivia()));
+
+                    newCatchNode = newCatchNode.WithDeclaration(capturedExceptionDeclaration);
+                    editor.ReplaceNode(catchNode, newCatchNode);
+                }
+            }
+
+            // 4. Return the changed document
             return editor.GetChangedDocument();
         }
     }
