@@ -109,7 +109,7 @@
                         SyntaxFactory.Identifier(SyntaxFactory.ParseLeadingTrivia(" "), CapturedExceptionIdentifier, SyntaxFactory.TriviaList()));
 
                     newCatchNode = newCatchNode.WithDeclaration(capturedExceptionDeclaration)
-                                               // if we don't rebuild the catch keyword we get the previous catch clause trailing trivia between the catch keyword and declaration
+                                               // if we don't rebuild the catch keyword we get the previous catch clause trailing trivia between the catch keyword and declaration (usually a '/n')
                                                .WithCatchKeyword(SyntaxFactory.Token(newCatchNode.CatchKeyword.LeadingTrivia, SyntaxKind.CatchKeyword, SyntaxFactory.TriviaList()));
 
                     editor.ReplaceNode(catchNode, newCatchNode);
