@@ -18,6 +18,7 @@
     public class MvcReturnBadHttpCodeFixProvider : CodeFixProvider
     {
         internal const string CapturedExceptionIdentifier = "requestEx";
+
         /// <summary>
         /// A list of diagnostic IDs that this provider can provider fixes for.
         /// </summary>

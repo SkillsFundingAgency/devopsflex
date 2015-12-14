@@ -65,9 +65,12 @@ namespace DevOpsFlex.Analyzers
         {
             var packageReferences = context.Compilation
                                            .References
+                                           .Where(r => r is PortableExecutableReference)
                                            .Cast<PortableExecutableReference>()
                                            .Where(r => r.FilePath.ToLower().Contains(Package.PackagesFolderName))
                                            .ToList();
+
+            if (!packageReferences.Any()) return;
 
             var firstReferencePath = packageReferences.First().FilePath;
             var packagesFolder = firstReferencePath.Substring(0, firstReferencePath.IndexOf(Package.PackagesFolderName, StringComparison.Ordinal) + Package.PackagesFolderName.Length);
