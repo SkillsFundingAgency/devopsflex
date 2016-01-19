@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>DevOpsFlex.Analyzers</id>
-    <version>1.0.0.0</version>
+    <version>1.0.1.0</version>
     <title>DevOpsFlex.Analyzers</title>
     <authors>David Rodrigues</authors>
     <owners>Skills Funding Agency</owners>
@@ -11,7 +11,10 @@
     <iconUrl>https://devopsflex.blob.core.windows.net/icons/devopsflex_50_50.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>DevOpsFlex.Analyzers</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>
+      - Fixed an issue with the return BadRequest analyzer.
+      - Changed the IDs of all the analyzers.
+    </releaseNotes>
     <copyright>Copyright SFA 2015</copyright>
     <tags>DevOpsFlex.Analyzers, analyzers</tags>
   </metadata>
