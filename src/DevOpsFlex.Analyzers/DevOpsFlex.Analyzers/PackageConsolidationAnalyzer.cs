@@ -23,20 +23,20 @@ namespace DevOpsFlex.Analyzers
 
         private static readonly DiagnosticDescriptor SinglePackagesFolderRule =
             new DiagnosticDescriptor(
-                id: "PackageConsolidationSinglePackagesFolder",
+                id: "DOF0001",
                 title: new LocalizableResourceString(nameof(Resources.SinglePackagesFolderTitle), Resources.ResourceManager, typeof(Resources)),
                 messageFormat: new LocalizableResourceString(nameof(Resources.SinglePackagesFolderMessageFormat), Resources.ResourceManager, typeof(Resources)),
-                category: "Packages",
+                category: "NuGet",
                 defaultSeverity: DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
                 description: new LocalizableResourceString(nameof(Resources.SinglePackagesFolderDescription), Resources.ResourceManager, typeof(Resources)));
 
         private static readonly DiagnosticDescriptor UniqueVersionRule =
             new DiagnosticDescriptor(
-                id: "PackageConsolidationUniqueVersion",
+                id: "DOF0002",
                 title: new LocalizableResourceString(nameof(Resources.UniqueVersionTitle), Resources.ResourceManager, typeof(Resources)),
                 messageFormat: new LocalizableResourceString(nameof(Resources.UniqueVersionMessageFormat), Resources.ResourceManager, typeof(Resources)),
-                category: "Packages",
+                category: "NuGet",
                 defaultSeverity: DiagnosticSeverity.Error,
                 isEnabledByDefault: true,
                 description: new LocalizableResourceString(nameof(Resources.UniqueVersionDescription), Resources.ResourceManager, typeof(Resources)));

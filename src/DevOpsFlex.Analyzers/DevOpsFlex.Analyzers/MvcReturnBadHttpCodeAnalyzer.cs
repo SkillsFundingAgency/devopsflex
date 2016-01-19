@@ -18,7 +18,7 @@
         /// </summary>
         private const string ControllerName = "Controller"; // convention
 
-        internal const string DiagnosticId = "MvcReturnBadHttpCode";
+        internal const string DiagnosticId = "DOF0003";
 
         private static readonly DiagnosticDescriptor MvcReturnBadHttpCodeRule =
             new DiagnosticDescriptor(
@@ -59,7 +59,7 @@
 
             // 2. Skip if the class declaration doesn't inherit from something that contains the Controller convention in the name.
             var classDec = context.Node.FirstAncestorOrSelf<SyntaxNode>(n => n.Kind() == SyntaxKind.ClassDeclaration) as ClassDeclarationSyntax;
-            if (classDec == null || !classDec.BaseList.Types.Any(t => t.Type.ToString().Contains(ControllerName)))
+            if (classDec?.BaseList == null || !classDec.BaseList.Types.Any(t => t.Type.ToString().Contains(ControllerName)))
             {
                 return;
             }

@@ -112,8 +112,6 @@
                     newCatchNode = newCatchNode.WithDeclaration(capturedExceptionDeclaration)
                                                // if we don't rebuild the catch keyword we get the previous catch clause trailing trivia between the catch keyword and declaration (usually a '/n')
                                                .WithCatchKeyword(SyntaxFactory.Token(newCatchNode.CatchKeyword.LeadingTrivia, SyntaxKind.CatchKeyword, SyntaxFactory.TriviaList()));
-
-                    editor.ReplaceNode(catchNode, newCatchNode);
                 }
                 else
                 {
@@ -123,9 +121,10 @@
                         SyntaxFactory.Identifier(declaration.Type.GetLeadingTrivia(), CapturedExceptionIdentifier, declaration.Type.GetTrailingTrivia()));
 
                     newCatchNode = newCatchNode.WithDeclaration(capturedExceptionDeclaration);
-                    editor.ReplaceNode(catchNode, newCatchNode);
                 }
             }
+
+            editor.ReplaceNode(catchNode, newCatchNode);
 
             // 4. Return the changed document
             return editor.GetChangedDocument();
