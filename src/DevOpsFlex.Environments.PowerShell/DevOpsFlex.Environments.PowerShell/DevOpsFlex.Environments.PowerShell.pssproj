@@ -34,9 +34,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzurePrincipalWithCert.psm1" />
+    <Compile Include="Debug\AzurePrincipalWithCert.ps1" />
     <Compile Include="DevOpsFlex.Environments.PowerShell.psd1" />
     <Compile Include="DevOpsFlex.Environments.PowerShell.psm1" />
     <Compile Include="DevOpsFlex.Environments.PowerShell.tests.ps1" />
+    <Compile Include="ResizeASMDisk.psm1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

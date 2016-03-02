@@ -1,6 +1,8 @@
 <#
-	My Function
+    Root Empty module
 #>
-function Get-Function {
 
-}
+Import-Module .\AzurePrincipalWithCert.psm1
+Import-Module .\ResizeASMDisk.psm1
+
+Export-ModuleMember -Function @('New-AzurePrincipalWithCert', 'Remove-AzurePrincipalWithCert', 'Set-AzureVMOSDiskSize')
