@@ -145,6 +145,11 @@ function New-AzurePrincipalWithCert
     $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $certVaultName -SecretName $principalIdDashed
     $void = Set-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $principalIdDashed -SecretValue (ConvertTo-SecureString -String $CertPassword -AsPlainText –Force)
 
+    # Populate the system keyvault with all relevant principal configuration information
+    $void = Set-AzureKeyVaultSecret -VaultName $certVaultName -Name "$principalIdDashed-TenantId" -SecretValue (ConvertTo-SecureString -String $tenantId -AsPlainText –Force)
+    $void = Set-AzureKeyVaultSecret -VaultName $certVaultName -Name "$principalIdDashed-IdentifierUri" -SecretValue (ConvertTo-SecureString -String $identifierUri -AsPlainText –Force)
+    $void = Set-AzureKeyVaultSecret -VaultName $certVaultName -Name "$principalIdDashed-ApplicationId" -SecretValue (ConvertTo-SecureString -String $($azureAdApplication.ApplicationId) -AsPlainText –Force)
+
     # Swap back to the subscription the user was in
     if($currentSubId -ne $VaultSubscriptionId) {
         Select-AzureRmSubscription -SubscriptionId $currentSubId | Out-Null
@@ -225,7 +230,12 @@ function Remove-AzurePrincipalWithCert
     $certVaultName = "$systemName-keyvault"
     Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name $dashName -Force -Confirm:$false
 
-    # 2. Remove the cert password from the certs keyvault
+    # 2. Remove the principal configuration information from the system keyvault
+    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-TenantId" -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-IdentifierUri" -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-ApplicationId" -Force -Confirm:$false
+
+    # 3. Remove the cert password from the certs keyvault
     Remove-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $dashName -Force -Confirm:$false
 
     # Swap back to the subscription the user was in
@@ -233,7 +243,7 @@ function Remove-AzurePrincipalWithCert
         Select-AzureRmSubscription -SubscriptionId $currentSubId | Out-Null
     }
 
-    # 3. Remove the AD Service Principal
+    # 4. Remove the AD Service Principal
     $servicePrincipal = Get-AzureRmADServicePrincipal -SearchString $dotName -ErrorAction SilentlyContinue
     if($servicePrincipal) {
         Remove-AzureRmADServicePrincipal -ObjectId $servicePrincipal.Id -Force
@@ -242,7 +252,7 @@ function Remove-AzurePrincipalWithCert
         Write-Warning "Couldn't find any Service Principal using the search string [$dotName]"
     }
 
-    # 4. Remove the AD Application
+    # 5. Remove the AD Application
     $adApplication = Get-AzureRmADApplication -DisplayNameStartWith $dotName -ErrorAction SilentlyContinue
     if($adApplication) {
         Remove-AzureRmADApplication -ApplicationObjectId $adApplication.ApplicationObjectId -Force
