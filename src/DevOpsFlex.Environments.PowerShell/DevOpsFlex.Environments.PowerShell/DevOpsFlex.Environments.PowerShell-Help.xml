@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+
+  <!-- ******************************** -->
+  <!-- *  New-AzurePrincipalWithCert  * -->
+  <!-- ******************************** -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>New-AzurePrincipalWithCert</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>AzurePrincipalWithCert</command:noun>
+      <maml:description><maml:para>Creates an Azure Service Principal that uses an x509 certificate to authenticate against the Azure AD.</maml:para></maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>Creates an Azure Service Principal that uses an x509 certificate to authenticate against the Azure AD.:</maml:para>
+      <maml:para>In detail the script will:</maml:para>
+      <maml:list>
+        <maml:listItem><maml:para>Generate a self-signed x509 certificate in the local/my store that is executing the script</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Export the certificate into a specific folder</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Create the Azure AD Application, specifying the certificate as it's User Assertion method</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Create the Azure Service Principal for the AD Application we just created</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Upload the Cert as an encoded 64bit string into keyvault</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Upload the Cert password into the specific passwords keyvault</maml:para></maml:listItem>
+        <maml:listItem><maml:para>Populate the system keyvault with all the relevant configuration fields so that the system can find and use the service principal</maml:para></maml:listItem>
+      </maml:list>
+    </maml:description>
+
+    <command:syntax><maml:para>New-AzurePrincipalWithCert</maml:para></command:syntax>
+
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="0">
+        <maml:name>SystemName</maml:name>
+        <maml:description><maml:para>The name of the system that we are creating the service principal for.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="1">
+        <maml:name>CertPurpose</maml:name>
+        <maml:description><maml:para>The purpose of the certificate to be created. Can only be 'Configuration' or 'Authentication'.</maml:para></maml:description>
+        <command:parameterValue required="true">Configuration|Authentication</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="2">
+        <maml:name>EnvironmentName</maml:name>
+        <maml:description><maml:para>The name of the environment that the service principal is going to be used on.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="3">
+        <maml:name>CertFolderPath</maml:name>
+        <maml:description><maml:para>The folder path where we want to export the PFX certificate file to (for reference purpose only, since it will be uploaded to keyvault).</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="4">
+        <maml:name>CertPassword</maml:name>
+        <maml:description><maml:para>The password for the x509 certificate that we are creating.</maml:para></maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="5">
+        <maml:name>VaultSubscriptionId</maml:name>
+        <maml:description><maml:para>The GUID identifier of the Azure subscription where the keyvaults are deployed to.</maml:para></maml:description>
+        <command:parameterValue required="true">Guid</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>CertName</maml:name>
+        <maml:description>
+          <maml:para>The optional certificate name to prepend to all the generated naming conventions.</maml:para>
+          <maml:para>This is mostly to allow people from differentiating certificates for the same system/purpose/environment when they need to issue multiple.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+    </command:parameters>
+
+    <command:inputTypes>
+      <!--Add input type information here-->
+    </command:inputTypes>
+    <command:returnValues>
+      <!--Add return value information here-->
+    </command:returnValues>
+    <maml:alertSet>
+      <!--Add Note information here-->
+    </maml:alertSet>
+    <command:examples>
+      <!--Add cmdlet examples here-->
+    </command:examples>
+    <maml:relatedLinks>
+      <!--Add links to related content here-->
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>

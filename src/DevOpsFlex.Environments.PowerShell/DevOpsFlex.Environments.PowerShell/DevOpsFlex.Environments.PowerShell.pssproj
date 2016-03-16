@@ -44,6 +44,9 @@
   <ItemGroup>
     <Folder Include="Debug\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevOpsFlex.Environments.PowerShell-Help.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />
 </Project>

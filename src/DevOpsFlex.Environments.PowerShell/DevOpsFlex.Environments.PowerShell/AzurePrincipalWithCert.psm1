@@ -28,37 +28,55 @@
     Set-AzureKeyVaultSecret -VaultName $VaultName -Name $SecretName -SecretValue $secret -ContentType $secretContentType -Verbose
 }
 
+###########################################################
+#       New-AzurePrincipalWithCert
+###########################################################
+
 function New-AzurePrincipalWithCert
 {
     [CmdletBinding()]
     param
     (
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory=$true, Position=0)]
         [string] $SystemName,
 
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory=$true, Position=1)]
         [ValidateSet('Configuration','Authentication')]
         [string] $CertPurpose,
 
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory=$true, Position=2)]
         [string] $EnvironmentName,
 
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory=$true, Position=3)]
         [string] $CertFolderPath,
 
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory=$true, Position=4)]
         [string] $CertPassword,
 
-        [parameter(Mandatory=$true)]
-        [string] $CertSuffix,
+        [parameter(Mandatory=$true, Position=5)]
+        [string] $VaultSubscriptionId,
 
-        [parameter(Mandatory=$true)]
-        [string] $VaultSubscriptionId
+        [parameter(Mandatory=$false, Position=6)]
+        [string] $CertName
     )
 
+    # Uniform all the namings
+    if([string]::IsNullOrWhiteSpace($CertName)) {
+        $principalIdDashed = "$($SystemName.ToLower())-$($CertPurpose.ToLower())-$($EnvironmentName.ToLower())"
+        $principalIdDotted = "$($SystemName.ToLower()).$($CertPurpose.ToLower()).$($EnvironmentName.ToLower())"
+    }
+    else {
+        $principalIdDashed = "$($SystemName.ToLower())-$($CertPurpose.ToLower())-$($EnvironmentName.ToLower())-$($CertName.ToLower())"
+        $principalIdDotted = "$($SystemName.ToLower()).$($CertPurpose.ToLower()).$($EnvironmentName.ToLower()).$($CertName.ToLower())"
+    }
+
+    # GUARD: There are no non letter characters on the Cert Name
+    if(-not $CertName -match "^([A-Za-z])*$") {
+        throw 'The CertName must be letters only, either lower and upper case. Cannot contain any digits or any non-alpha-numeric characters.'
+    }
+
     # GUARD: AD application already exists
-    $displayName = "$SystemName.$CertPurpose.$EnvironmentName"
-    if((Get-AzureRmADApplication -DisplayNameStartWith $displayName) -ne $null) {
+    if((Get-AzureRmADApplication -DisplayNameStartWith $principalIdDotted) -ne $null) {
         throw 'An AD Application Already exists that looks identical to what you are trying to create'
     }
 
@@ -72,14 +90,13 @@ function New-AzurePrincipalWithCert
     $currentDate = Get-Date
     $endDate = $currentDate.AddYears(1)
     $notAfter = $endDate.AddYears(1)
-    $certCN = "$($SystemName.ToLower()).$($CertPurpose.ToLower()).$CertSuffix"
 
     if($CertFolderPath.EndsWith("\") -eq $false) {
         $CertFolderPath = $CertFolderPath + "\"
     }
 
     $cert = New-SelfSignedCertificate -CertStoreLocation cert:\localmachine\my `
-                                      -DnsName $certCN `
+                                      -DnsName $principalIdDotted `
                                       -KeyExportPolicy Exportable `
                                       -Provider "Microsoft Enhanced RSA and AES Cryptographic Provider" `
                                       -NotAfter $notAfter -ErrorAction Stop
@@ -100,10 +117,14 @@ function New-AzurePrincipalWithCert
     $keyCredential.Usage = 'Verify'
     $keyCredential.Value = [System.Convert]::ToBase64String($cert.GetRawCertData())
 
+    # Aquire the tenant ID on the subscription we are creating the principal on, not on the vault subscription!
+    $tenantId = (Get-AzureRmContext).Subscription.TenantId
+
     # Create the Azure Active Directory Application
-    $azureAdApplication = New-AzureRmADApplication -DisplayName $displayName `
-                                                   -HomePage "https://$($SystemName.ToLower()).$($CertPurpose.ToLower()).$($EnvironmentName.ToLower())" `
-                                                   -IdentifierUris "https://$($SystemName.ToLower()).$($CertPurpose.ToLower()).$($EnvironmentName.ToLower())" `
+    $identifierUri = "https://$principalIdDotted"
+    $azureAdApplication = New-AzureRmADApplication -DisplayName $principalIdDotted `
+                                                   -HomePage $identifierUri `
+                                                   -IdentifierUris $identifierUri `
                                                    -KeyCredentials $keyCredential `
                                                    -Verbose
 
@@ -121,9 +142,8 @@ function New-AzurePrincipalWithCert
     }
 
     # Upload the cert and cert passwords to the right keyvaults
-    $secretName = "$SystemName-$CertPurpose-$EnvironmentName"
-    $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $certVaultName -SecretName $secretName
-    $void = Set-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $secretName -SecretValue (ConvertTo-SecureString -String $CertPassword -AsPlainText –Force)
+    $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $certVaultName -SecretName $principalIdDashed
+    $void = Set-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $principalIdDashed -SecretValue (ConvertTo-SecureString -String $CertPassword -AsPlainText –Force)
 
     # Swap back to the subscription the user was in
     if($currentSubId -ne $VaultSubscriptionId) {
@@ -133,23 +153,26 @@ function New-AzurePrincipalWithCert
     return $azureAdApplication
 }
 
-
+###########################################################
+#       Remove-AzurePrincipalWithCert
+###########################################################
 
 function Remove-AzurePrincipalWithCert
 {
     [CmdletBinding()]
     param
     (
-        [parameter(Mandatory=$false)]
+        [parameter(Mandatory=$false, Position=0)]
         [string] $ADApplicationId,
 
         [parameter(
             Mandatory=$false,
             ValueFromPipeline=$true,
-            ValueFromPipelineByPropertyName=$true)]
+            ValueFromPipelineByPropertyName=$true,
+            Position=1)]
         [Microsoft.Azure.Commands.Resources.Models.ActiveDirectory.PSADApplication] $ADApplication,
 
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory=$true, Position=2)]
         [string] $VaultSubscriptionId
     )
 
@@ -173,16 +196,24 @@ function Remove-AzurePrincipalWithCert
     }
 
     # Break the Identifier URI of the AD Application into it's individual components so that we can infer everything else.
-    if(-not $identifierUri -match "https:\/\/([^.]*).([^.]*).([^.]*)") {
+    if(-not $identifierUri -match 'https:\/\/(?<system>[^.]*).(?<purpose>[^.]*).(?<environment>[^.]*).*(?<certname>[^.]*)') {
         throw "Can't infer the correct system information from the identifier URI [$identifierUri] in the AD Application, was this service principal created with this Module?"
     }
 
-    $systemName = $Matches[1]
-    $certPurpose = $Matches[2]
-    $environmentName = $Matches[3]
+    $systemName = $Matches['system']
+    $certPurpose = $Matches['purpose']
+    $environmentName = $Matches['environment']
+    $certName = $Matches['certname']
 
-    $dotName = "$systemName.$certPurpose.$environmentName"
-    $dashName = "$systemName-$certPurpose-$environmentName"
+    # Uniform all the namings
+    if([string]::IsNullOrWhiteSpace($certName)) {
+        $dashName = "$systemName-$certPurpose-$environmentName"
+        $dotName = "$systemName.$certPurpose.$environmentName"
+    }
+    else {
+        $dashName = "$systemName-$certPurpose-$environmentName-$cerName"
+        $dotName = "$systemName.$certPurpose.$environmentName.$cerName"
+    }
 
     # Switch to the KeyVault Techops-Management subscription
     $currentSubId = (Get-AzureRmContext).Subscription.SubscriptionId
