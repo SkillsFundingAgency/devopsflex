@@ -71,7 +71,7 @@ function New-AzurePrincipalWithCert
     }
 
     # GUARD: There are no non letter characters on the Cert Name
-    if(-not $CertName -match "^([A-Za-z])*$") {
+    if(-not [string]::IsNullOrWhiteSpace($CertName) -and -not $CertName -match "^([A-Za-z])*$") {
         throw 'The CertName must be letters only, either lower and upper case. Cannot contain any digits or any non-alpha-numeric characters.'
     }
 
@@ -142,7 +142,7 @@ function New-AzurePrincipalWithCert
     }
 
     # Upload the cert and cert passwords to the right keyvaults
-    $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $certVaultName -SecretName $principalIdDashed
+    $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $certVaultName -SecretName "$principalIdDashed-Cert"
     $void = Set-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $principalIdDashed -SecretValue (ConvertTo-SecureString -String $CertPassword -AsPlainText –Force)
 
     # Populate the system keyvault with all relevant principal configuration information
@@ -201,7 +201,7 @@ function Remove-AzurePrincipalWithCert
     }
 
     # Break the Identifier URI of the AD Application into it's individual components so that we can infer everything else.
-    if(-not $identifierUri -match 'https:\/\/(?<system>[^.]*).(?<purpose>[^.]*).(?<environment>[^.]*).*(?<certname>[^.]*)') {
+    if(-not ($identifierUri -match 'https:\/\/(?<system>[^.]*).(?<purpose>[^.]*).(?<environment>[^.]*).*(?<certname>[^.]*)')) {
         throw "Can't infer the correct system information from the identifier URI [$identifierUri] in the AD Application, was this service principal created with this Module?"
     }
 
@@ -228,7 +228,7 @@ function Remove-AzurePrincipalWithCert
 
     # 1. Remove the cert from the system keyvault
     $certVaultName = "$systemName-keyvault"
-    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name $dashName -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-Cert" -Force -Confirm:$false
 
     # 2. Remove the principal configuration information from the system keyvault
     Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-TenantId" -Force -Confirm:$false
