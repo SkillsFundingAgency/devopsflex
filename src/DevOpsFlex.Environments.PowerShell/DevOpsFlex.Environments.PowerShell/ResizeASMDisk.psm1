@@ -6,7 +6,7 @@
         [Parameter(ValueFromPipeline=$true, Mandatory=$true)]
         [Microsoft.WindowsAzure.Commands.ServiceManagement.Model.ServiceOperationContext] $VM,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, Position=0)]
         [int] $SizeInGb
     )
 

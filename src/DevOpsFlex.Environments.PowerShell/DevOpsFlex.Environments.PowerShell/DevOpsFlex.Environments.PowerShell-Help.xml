@@ -15,7 +15,7 @@
     </command:details>
 
     <maml:description>
-      <maml:para>Creates an Azure Service Principal that uses an x509 certificate to authenticate against the Azure AD.:</maml:para>
+      <maml:para>Creates an Azure Service Principal that uses an x509 certificate to authenticate against the Azure AD.</maml:para>
       <maml:para>In detail the script will:</maml:para>
       <maml:list>
         <maml:listItem><maml:para>Generate a self-signed x509 certificate in the local/my store that is executing the script</maml:para></maml:listItem>
@@ -118,7 +118,7 @@
     </command:details>
 
     <maml:description>
-      <maml:para>Removes an Azure Service Principal that uses an x509 certificate to authenticate against the Azure AD.:</maml:para>
+      <maml:para>Removes an Azure Service Principal that uses an x509 certificate to authenticate against the Azure AD.</maml:para>
       <maml:para>In detail the script will:</maml:para>
       <maml:list>
         <maml:listItem><maml:para>Remove the encoded 64bit Cert string from keyvault</maml:para></maml:listItem>
@@ -159,6 +159,70 @@
         </maml:description>
         <command:parameterValue required="true">Guid</command:parameterValue>
         <dev:type>String</dev:type>
+      </command:parameter>
+    </command:parameters>
+
+    <command:inputTypes>
+      <!--Add input type information here-->
+    </command:inputTypes>
+    <command:returnValues>
+      <!--Add return value information here-->
+    </command:returnValues>
+    <maml:alertSet>
+      <!--Add Note information here-->
+    </maml:alertSet>
+    <command:examples>
+      <!--Add cmdlet examples here-->
+    </command:examples>
+    <maml:relatedLinks>
+      <!--Add links to related content here-->
+    </maml:relatedLinks>
+  </command:command>
+
+
+  <!-- *************************** -->
+  <!-- *  Set-AzureVMOSDiskSize  * -->
+  <!-- *************************** -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Set-AzureVMOSDiskSize</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>AzureVMOSDiskSize</command:noun>
+      <maml:description>
+        <maml:para>Resizes the operating system VHD on an Azure VM.</maml:para>
+      </maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>Resizes the operating system VHD on an Azure VM.</maml:para>
+      <maml:para>It contains a guard against shrinking the disk, although it will ultimately allow it if the user wants to.</maml:para>
+      <maml:para>This meets requirements where a disk was sized up by error and can be safely shrunk back if the partition wasn't increased.</maml:para>
+    </maml:description>
+
+    <command:syntax>
+      <maml:para>Set-AzureVMOSDiskSize</maml:para>
+    </command:syntax>
+
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="true" position="named">
+        <maml:name>VM</maml:name>
+        <maml:description>
+          <maml:para>The Azure VM object that we want to resize the OS disk on.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ServiceOperationContext</command:parameterValue>
+        <dev:type>Microsoft.WindowsAzure.Commands.ServiceManagement.Model.ServiceOperationContext</dev:type>
+      </command:parameter>
+
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="0">
+        <maml:name>SizeInGb</maml:name>
+        <maml:description>
+          <maml:para>The new OS disk size in Gb that we want to resize to.</maml:para>
+          <maml:para>This can be a smaller value then the current size for use cases where one actually wants to shrink the disk.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int</command:parameterValue>
+        <dev:type>Int32</dev:type>
       </command:parameter>
     </command:parameters>
 
