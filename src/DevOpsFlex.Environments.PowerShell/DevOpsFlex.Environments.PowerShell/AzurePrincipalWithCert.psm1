@@ -67,12 +67,14 @@ function New-AzurePrincipalWithCert
 
     # Uniform all the namings
     if([string]::IsNullOrWhiteSpace($PrincipalName)) {
-        $principalIdDashed = "$($SystemName.ToLower())-$($PrincipalPurpose.ToLower())-$($EnvironmentName.ToLower())"
-        $principalIdDotted = "$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower())"
+        $principalIdDashed = "$($SystemName.ToLower())-$($PrincipalPurpose.ToLower())"
+        $principalIdDotted = "$($SystemName.ToLower()).$($PrincipalPurpose.ToLower())"
+        $identifierUri = "https://$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower())"
     }
     else {
-        $principalIdDashed = "$($SystemName.ToLower())-$($PrincipalPurpose.ToLower())-$($EnvironmentName.ToLower())-$($PrincipalName.ToLower())"
-        $principalIdDotted = "$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower()).$($PrincipalName.ToLower())"
+        $principalIdDashed = "$($SystemName.ToLower())-$($PrincipalPurpose.ToLower())-$($PrincipalName.ToLower())"
+        $principalIdDotted = "$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($PrincipalName.ToLower())"
+        $identifierUri = "https://$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower()).$($PrincipalName.ToLower())"
     }
 
     # GUARD: AD application already exists
@@ -81,7 +83,7 @@ function New-AzurePrincipalWithCert
     }
 
     # GUARD: Certificate system vault exists
-    $certVaultName = "$SystemName-keyvault"
+    $certVaultName = "$($SystemName.ToLower())-$($EnvironmentName.ToLower())"
     if((Get-AzureRmKeyVault -VaultName $certVaultName) -eq $null) {
         throw "The system vault $certVaultName doesn't exist in the current subscription. Create it before running this cmdlet!"
     }
@@ -121,7 +123,6 @@ function New-AzurePrincipalWithCert
     $tenantId = (Get-AzureRmContext).Subscription.TenantId
 
     # Create the Azure Active Directory Application
-    $identifierUri = "https://$principalIdDotted"
     $azureAdApplication = New-AzureRmADApplication -DisplayName $principalIdDotted `
                                                    -HomePage $identifierUri `
                                                    -IdentifierUris $identifierUri `
@@ -212,12 +213,12 @@ function Remove-AzurePrincipalWithCert
 
     # Uniform all the namings
     if([string]::IsNullOrWhiteSpace($principalName)) {
-        $dashName = "$systemName-$principalPurpose-$environmentName"
-        $dotName = "$systemName.$principalPurpose.$environmentName"
+        $dashName = "$systemName-$principalPurpose"
+        $dotName = "$systemName.$principalPurpose"
     }
     else {
-        $dashName = "$systemName-$principalPurpose-$environmentName-$cerName"
-        $dotName = "$systemName.$principalPurpose.$environmentName.$cerName"
+        $dashName = "$systemName-$principalPurpose-$cerName"
+        $dotName = "$systemName.$principalPurpose.$cerName"
     }
 
     # Switch to the KeyVault Techops-Management subscription
@@ -226,8 +227,9 @@ function Remove-AzurePrincipalWithCert
         Select-AzureRmSubscription -SubscriptionId $VaultSubscriptionId -ErrorAction Stop
     }
 
+    $certVaultName = "$($systemName.ToLower())-$($environmentName.ToLower())"
+
     # 1. Remove the cert from the system keyvault
-    $certVaultName = "$systemName-keyvault"
     Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-Cert" -Force -Confirm:$false
 
     # 2. Remove the principal configuration information from the system keyvault

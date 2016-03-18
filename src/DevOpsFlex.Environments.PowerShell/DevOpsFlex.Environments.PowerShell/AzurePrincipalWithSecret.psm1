@@ -50,7 +50,7 @@ function New-AzurePrincipalWithSecret
     }
 
     # GUARD: Certificate system vault exists
-    $systemVaultName = "$SystemName-$EnvironmentName"
+    $systemVaultName = "$($SystemName.ToLower())-$($EnvironmentName.ToLower())"
     if((Get-AzureRmKeyVault -VaultName $systemVaultName) -eq $null) {
         throw "The system vault $systemVaultName doesn't exist in the current subscription. Create it before running this cmdlet!"
     }
@@ -160,7 +160,7 @@ function Remove-AzurePrincipalWithSecret
         Select-AzureRmSubscription -SubscriptionId $VaultSubscriptionId -ErrorAction Stop
     }
 
-    $systemVaultName = "$systemName-$environmentName"
+    $systemVaultName = "$($systemName.ToLower())-$($environmentName.ToLower())"
 
     # 1. Remove the principal configuration information from the system keyvault
     Remove-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$dashName-TenantId" -Force -Confirm:$false
@@ -173,7 +173,7 @@ function Remove-AzurePrincipalWithSecret
         Select-AzureRmSubscription -SubscriptionId $currentSubId | Out-Null
     }
 
-    # 4. Remove the AD Service Principal
+    # 2. Remove the AD Service Principal
     $servicePrincipal = Get-AzureRmADServicePrincipal -SearchString $dotName -ErrorAction SilentlyContinue
     if($servicePrincipal) {
         Remove-AzureRmADServicePrincipal -ObjectId $servicePrincipal.Id -Force
@@ -182,7 +182,7 @@ function Remove-AzurePrincipalWithSecret
         Write-Warning "Couldn't find any Service Principal using the search string [$dotName]"
     }
 
-    # 5. Remove the AD Application
+    # 3. Remove the AD Application
     $adApplication = Get-AzureRmADApplication -DisplayNameStartWith $dotName -ErrorAction SilentlyContinue
     if($adApplication) {
         Remove-AzureRmADApplication -ApplicationObjectId $adApplication.ApplicationObjectId -Force

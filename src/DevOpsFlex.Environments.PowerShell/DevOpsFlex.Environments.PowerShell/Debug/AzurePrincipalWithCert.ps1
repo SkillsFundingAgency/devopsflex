@@ -11,4 +11,4 @@ $azureAdApplication = New-AzurePrincipalWithCert -SystemName 'djfr' `
                                                  -VaultSubscriptionId $vaultSubscriptionId
 
 $azureAdApplication | Remove-AzurePrincipalWithCert -VaultSubscriptionId $vaultSubscriptionId
-#Remove-AzurePrincipalWithCert -ADApplicationId [ID HERE] -VaultSubscriptionId $vaultSubscriptionId
+#Remove-AzurePrincipalWithCert -ADApplicationId '[ID HERE]' -VaultSubscriptionId $vaultSubscriptionId
