@@ -4,7 +4,7 @@ Remove-Module -Name DevOpsFlex.Environments.PowerShell -ErrorAction SilentlyCont
 Import-Module $PSScriptRoot\..\DevOpsFlex.Environments.PowerShell.psd1 -Force -Verbose
 
 $azureAdApplication = New-AzurePrincipalWithCert -SystemName 'djfr' `
-                                                 -CertPurpose 'Authentication' `
+                                                 -PrincipalPurpose 'Authentication' `
                                                  -EnvironmentName 'test' `
                                                  -CertFolderPath 'D:\Certificates' `
                                                  -CertPassword 'djfrpwd' `

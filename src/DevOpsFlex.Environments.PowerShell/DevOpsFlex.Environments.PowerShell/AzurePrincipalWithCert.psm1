@@ -42,7 +42,7 @@ function New-AzurePrincipalWithCert
 
         [parameter(Mandatory=$true, Position=1)]
         [ValidateSet('Configuration','Authentication')]
-        [string] $CertPurpose,
+        [string] $PrincipalPurpose,
 
         [parameter(Mandatory=$true, Position=2)]
         [string] $EnvironmentName,
@@ -57,22 +57,22 @@ function New-AzurePrincipalWithCert
         [string] $VaultSubscriptionId,
 
         [parameter(Mandatory=$false, Position=6)]
-        [string] $CertName
+        [string] $PrincipalName
     )
 
-    # Uniform all the namings
-    if([string]::IsNullOrWhiteSpace($CertName)) {
-        $principalIdDashed = "$($SystemName.ToLower())-$($CertPurpose.ToLower())-$($EnvironmentName.ToLower())"
-        $principalIdDotted = "$($SystemName.ToLower()).$($CertPurpose.ToLower()).$($EnvironmentName.ToLower())"
-    }
-    else {
-        $principalIdDashed = "$($SystemName.ToLower())-$($CertPurpose.ToLower())-$($EnvironmentName.ToLower())-$($CertName.ToLower())"
-        $principalIdDotted = "$($SystemName.ToLower()).$($CertPurpose.ToLower()).$($EnvironmentName.ToLower()).$($CertName.ToLower())"
+    # GUARD: There are no non letter characters on the Cert Name
+    if(-not [string]::IsNullOrWhiteSpace($PrincipalName) -and -not $PrincipalName -match "^([A-Za-z])*$") {
+        throw 'The CertName must be letters only, either lower and upper case. Cannot contain any digits or any non-alpha-numeric characters.'
     }
 
-    # GUARD: There are no non letter characters on the Cert Name
-    if(-not [string]::IsNullOrWhiteSpace($CertName) -and -not $CertName -match "^([A-Za-z])*$") {
-        throw 'The CertName must be letters only, either lower and upper case. Cannot contain any digits or any non-alpha-numeric characters.'
+    # Uniform all the namings
+    if([string]::IsNullOrWhiteSpace($PrincipalName)) {
+        $principalIdDashed = "$($SystemName.ToLower())-$($PrincipalPurpose.ToLower())-$($EnvironmentName.ToLower())"
+        $principalIdDotted = "$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower())"
+    }
+    else {
+        $principalIdDashed = "$($SystemName.ToLower())-$($PrincipalPurpose.ToLower())-$($EnvironmentName.ToLower())-$($PrincipalName.ToLower())"
+        $principalIdDotted = "$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower()).$($PrincipalName.ToLower())"
     }
 
     # GUARD: AD application already exists
@@ -206,18 +206,18 @@ function Remove-AzurePrincipalWithCert
     }
 
     $systemName = $Matches['system']
-    $certPurpose = $Matches['purpose']
+    $principalPurpose = $Matches['purpose']
     $environmentName = $Matches['environment']
-    $certName = $Matches['certname']
+    $principalName = $Matches['certname']
 
     # Uniform all the namings
-    if([string]::IsNullOrWhiteSpace($certName)) {
-        $dashName = "$systemName-$certPurpose-$environmentName"
-        $dotName = "$systemName.$certPurpose.$environmentName"
+    if([string]::IsNullOrWhiteSpace($principalName)) {
+        $dashName = "$systemName-$principalPurpose-$environmentName"
+        $dotName = "$systemName.$principalPurpose.$environmentName"
     }
     else {
-        $dashName = "$systemName-$certPurpose-$environmentName-$cerName"
-        $dotName = "$systemName.$certPurpose.$environmentName.$cerName"
+        $dashName = "$systemName-$principalPurpose-$environmentName-$cerName"
+        $dotName = "$systemName.$principalPurpose.$environmentName.$cerName"
     }
 
     # Switch to the KeyVault Techops-Management subscription
