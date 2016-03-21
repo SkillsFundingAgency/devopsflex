@@ -4,7 +4,7 @@ param
     [string] $ApiKey
 )
 
-Install-PackageProvider -Name NuGet -Force
+Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
 
 $repo = Get-PSRepository -Name DevOpsFlex -ErrorAction SilentlyContinue
 if($repo -eq $null) {
