@@ -34,8 +34,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureADHelpers.psm1" />
     <Compile Include="AzurePrincipalWithSecret.psm1" />
     <Compile Include="AzurePrincipalWithCert.psm1" />
+    <Compile Include="Debug\ReloadModule.ps1" />
     <Compile Include="Debug\AzurePrincipalWithSecret.ps1" />
     <Compile Include="Debug\AzurePrincipalWithCert.ps1" />
     <Compile Include="DevOpsFlex.Environments.PowerShell.psd1" />
