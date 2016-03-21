@@ -1,10 +1,8 @@
 param
 (
-    [parameter(Mandatory=$true)]
+    [parameter(Mandatory=$true, Position=0)]
     [string] $ApiKey
 )
-
-Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
 
 $repo = Get-PSRepository -Name DevOpsFlex -ErrorAction SilentlyContinue
 if($repo -eq $null) {
