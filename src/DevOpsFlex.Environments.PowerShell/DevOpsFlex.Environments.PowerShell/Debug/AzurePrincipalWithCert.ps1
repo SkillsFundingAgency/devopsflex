@@ -8,7 +8,8 @@ $azureAdApplication = New-AzurePrincipalWithCert -SystemName 'djfr' `
                                                  -EnvironmentName 'test' `
                                                  -CertFolderPath 'D:\Certificates' `
                                                  -CertPassword 'djfrpwd' `
-                                                 -VaultSubscriptionId $vaultSubscriptionId
+                                                 -VaultSubscriptionId $vaultSubscriptionId `
+                                                 -PrincipalName 'Keyvault'
 
 $azureAdApplication | Remove-AzurePrincipalWithCert -VaultSubscriptionId $vaultSubscriptionId
 #Remove-AzurePrincipalWithCert -ADApplicationId '[ID HERE]' -VaultSubscriptionId $vaultSubscriptionId

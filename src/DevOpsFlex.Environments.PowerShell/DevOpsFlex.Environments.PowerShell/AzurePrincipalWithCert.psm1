@@ -61,7 +61,7 @@ function New-AzurePrincipalWithCert
     )
 
     # GUARD: There are no non letter characters on the Cert Name
-    if(-not [string]::IsNullOrWhiteSpace($PrincipalName) -and -not $PrincipalName -match "^([A-Za-z])*$") {
+    if(-not [string]::IsNullOrWhiteSpace($PrincipalName) -and -not ($PrincipalName -match "^([A-Za-z])*$")) {
         throw 'The CertName must be letters only, either lower and upper case. Cannot contain any digits or any non-alpha-numeric characters.'
     }
 
@@ -77,9 +77,11 @@ function New-AzurePrincipalWithCert
         $identifierUri = "https://$($SystemName.ToLower()).$($PrincipalPurpose.ToLower()).$($EnvironmentName.ToLower()).$($PrincipalName.ToLower())"
     }
 
-    # GUARD: AD application already exists
-    if((Get-AzureRmADApplication -DisplayNameStartWith $principalIdDotted) -ne $null) {
-        throw 'An AD Application Already exists that looks identical to what you are trying to create'
+    # GUARD: AD application already exists, return the existing ad application
+    $previousApplication = Get-AzureRmADApplication -DisplayNameStartWith $principalIdDotted
+    if($previousApplication -ne $null) {
+        Write-Warning 'An AD Application Already exists that looks identical to what you are trying to create'
+        return $previousApplication
     }
 
     # GUARD: Certificate system vault exists
@@ -202,14 +204,14 @@ function Remove-AzurePrincipalWithCert
     }
 
     # Break the Identifier URI of the AD Application into it's individual components so that we can infer everything else.
-    if(-not ($identifierUri -match 'https:\/\/(?<system>[^.]*).(?<purpose>[^.]*).(?<environment>[^.]*).*(?<certname>[^.]*)')) {
+    if(-not ($identifierUri -match 'https:\/\/(?<system>[^.]*).(?<purpose>[^.]*).(?<environment>[^.]*).*(?<principalName>[^.]*)')) {
         throw "Can't infer the correct system information from the identifier URI [$identifierUri] in the AD Application, was this service principal created with this Module?"
     }
 
     $systemName = $Matches['system']
     $principalPurpose = $Matches['purpose']
     $environmentName = $Matches['environment']
-    $principalName = $Matches['certname']
+    $principalName = $Matches['principalName']
 
     # Uniform all the namings
     if([string]::IsNullOrWhiteSpace($principalName)) {

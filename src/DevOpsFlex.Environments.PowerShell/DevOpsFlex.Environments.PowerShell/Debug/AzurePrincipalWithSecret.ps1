@@ -7,7 +7,8 @@ $azureAdApplication = New-AzurePrincipalWithSecret -SystemName 'djfr' `
                                                    -PrincipalPurpose 'Authentication' `
                                                    -EnvironmentName 'test' `
                                                    -PrincipalPassword 'djfrpwd' `
-                                                   -VaultSubscriptionId $vaultSubscriptionId
+                                                   -VaultSubscriptionId $vaultSubscriptionId `
+                                                   -PrincipalName 'Keyvault'
 
 $azureAdApplication | Remove-AzurePrincipalWithSecret -VaultSubscriptionId $vaultSubscriptionId
 #Remove-AzurePrincipalWithSecret -ADApplicationId '[ID HERE]' -VaultSubscriptionId $vaultSubscriptionId
