@@ -37,3 +37,4 @@ function Add-MeToKeyvault
     $userId = Get-MyUserObjectId
     Set-AzureRmKeyVaultAccessPolicy -VaultName $KeyvaultName -ObjectId $userId -PermissionsToKeys all -PermissionsToSecrets all
 }
+
