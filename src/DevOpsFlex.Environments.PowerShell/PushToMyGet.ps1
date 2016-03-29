@@ -6,8 +6,9 @@ param
 
 Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
 Import-PackageProvider -Name NuGet -Force -ForceBootstrap
+Invoke-WebRequest -Uri "http://go.microsoft.com/fwlink/?LinkID=690216&clcid=0x409" -OutFile "C:\ProgramData\Microsoft\Windows\PowerShell\PowerShellGet\NuGet.exe"
 
-$repo = Get-PSRepository -Name DevOpsFlex -ErrorAction SilentlyContinue
+$repo = Get-PSRepository -Name DevOpsFlex -ErrorAction SilentlyContinue -Debug
 if($repo -eq $null) {
     Register-PSRepository -Name DevOpsFlex -SourceLocation "https://www.myget.org/F/devopsflex/api/v2" -InstallationPolicy Trusted
 }
