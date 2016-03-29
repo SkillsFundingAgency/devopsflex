@@ -85,9 +85,9 @@ function New-AzurePrincipalWithCert
     }
 
     # GUARD: Certificate system vault exists
-    $certVaultName = "$($SystemName.ToLower())-$($EnvironmentName.ToLower())"
-    if((Get-AzureRmKeyVault -VaultName $certVaultName) -eq $null) {
-        throw "The system vault $certVaultName doesn't exist in the current subscription. Create it before running this cmdlet!"
+    $systemVaultName = "$($SystemName.ToLower())-$($EnvironmentName.ToLower())"
+    if((Get-AzureRmKeyVault -VaultName $systemVaultName) -eq $null) {
+        throw "The system vault $systemVaultName doesn't exist in the current subscription. Create it before running this cmdlet!"
     }
 
     # Create the self signed cert
@@ -145,13 +145,13 @@ function New-AzurePrincipalWithCert
     }
 
     # Upload the cert and cert passwords to the right keyvaults
-    $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $certVaultName -SecretName "$principalIdDashed-Cert"
+    $void = Set-KeyVaultCertSecret -CertFolderPath $certPath -CertPassword $CertPassword -VaultName $systemVaultName -SecretName "$principalIdDashed-Cert"
     $void = Set-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $principalIdDashed -SecretValue (ConvertTo-SecureString -String $CertPassword -AsPlainText –Force)
 
     # Populate the system keyvault with all relevant principal configuration information
-    $void = Set-AzureKeyVaultSecret -VaultName $certVaultName -Name "$principalIdDashed-TenantId" -SecretValue (ConvertTo-SecureString -String $tenantId -AsPlainText –Force)
-    $void = Set-AzureKeyVaultSecret -VaultName $certVaultName -Name "$principalIdDashed-IdentifierUri" -SecretValue (ConvertTo-SecureString -String $identifierUri -AsPlainText –Force)
-    $void = Set-AzureKeyVaultSecret -VaultName $certVaultName -Name "$principalIdDashed-ApplicationId" -SecretValue (ConvertTo-SecureString -String $($azureAdApplication.ApplicationId) -AsPlainText –Force)
+    $void = Set-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$principalIdDashed-TenantId" -SecretValue (ConvertTo-SecureString -String $tenantId -AsPlainText –Force)
+    $void = Set-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$principalIdDashed-IdentifierUri" -SecretValue (ConvertTo-SecureString -String $identifierUri -AsPlainText –Force)
+    $void = Set-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$principalIdDashed-ApplicationId" -SecretValue (ConvertTo-SecureString -String $($azureAdApplication.ApplicationId) -AsPlainText –Force)
 
     # Swap back to the subscription the user was in
     if($currentSubId -ne $VaultSubscriptionId) {
@@ -229,15 +229,15 @@ function Remove-AzurePrincipalWithCert
         Select-AzureRmSubscription -SubscriptionId $VaultSubscriptionId -ErrorAction Stop
     }
 
-    $certVaultName = "$($systemName.ToLower())-$($environmentName.ToLower())"
+    $systemVaultName = "$($systemName.ToLower())-$($environmentName.ToLower())"
 
     # 1. Remove the cert from the system keyvault
-    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-Cert" -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$dashName-Cert" -Force -Confirm:$false
 
     # 2. Remove the principal configuration information from the system keyvault
-    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-TenantId" -Force -Confirm:$false
-    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-IdentifierUri" -Force -Confirm:$false
-    Remove-AzureKeyVaultSecret -VaultName $certVaultName -Name "$dashName-ApplicationId" -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$dashName-TenantId" -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$dashName-IdentifierUri" -Force -Confirm:$false
+    Remove-AzureKeyVaultSecret -VaultName $systemVaultName -Name "$dashName-ApplicationId" -Force -Confirm:$false
 
     # 3. Remove the cert password from the certs keyvault
     Remove-AzureKeyVaultSecret -VaultName 'sfa-certpwds' -Name $dashName -Force -Confirm:$false

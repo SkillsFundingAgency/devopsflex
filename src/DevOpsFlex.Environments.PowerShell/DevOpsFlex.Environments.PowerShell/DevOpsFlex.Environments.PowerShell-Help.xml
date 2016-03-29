@@ -85,19 +85,19 @@
     </command:parameters>
 
     <command:inputTypes>
-      <!--Add input type information here-->
+      <!-- Add input type information here -->
     </command:inputTypes>
     <command:returnValues>
-      <!--Add return value information here-->
+      <!-- Add return value information here -->
     </command:returnValues>
     <maml:alertSet>
-      <!--Add Note information here-->
+      <!-- Add Note information here -->
     </maml:alertSet>
     <command:examples>
-      <!--Add cmdlet examples here-->
+      <!-- Add cmdlet examples here -->
     </command:examples>
     <maml:relatedLinks>
-      <!--Add links to related content here-->
+      <!-- Add links to related content here -->
     </maml:relatedLinks>
   </command:command>
 
@@ -163,19 +163,19 @@
     </command:parameters>
 
     <command:inputTypes>
-      <!--Add input type information here-->
+      <!-- Add input type information here -->
     </command:inputTypes>
     <command:returnValues>
-      <!--Add return value information here-->
+      <!-- Add return value information here -->
     </command:returnValues>
     <maml:alertSet>
-      <!--Add Note information here-->
+      <!-- Add Note information here -->
     </maml:alertSet>
     <command:examples>
-      <!--Add cmdlet examples here-->
+      <!-- Add cmdlet examples here -->
     </command:examples>
     <maml:relatedLinks>
-      <!--Add links to related content here-->
+      <!-- Add links to related content here -->
     </maml:relatedLinks>
   </command:command>
 
@@ -267,19 +267,19 @@
     </command:parameters>
 
     <command:inputTypes>
-      <!--Add input type information here-->
+      <!-- Add input type information here -->
     </command:inputTypes>
     <command:returnValues>
-      <!--Add return value information here-->
+      <!-- Add return value information here -->
     </command:returnValues>
     <maml:alertSet>
-      <!--Add Note information here-->
+      <!-- Add Note information here -->
     </maml:alertSet>
     <command:examples>
-      <!--Add cmdlet examples here-->
+      <!-- Add cmdlet examples here -->
     </command:examples>
     <maml:relatedLinks>
-      <!--Add links to related content here-->
+      <!-- Add links to related content here -->
     </maml:relatedLinks>
   </command:command>
 
@@ -343,19 +343,19 @@
     </command:parameters>
 
     <command:inputTypes>
-      <!--Add input type information here-->
+      <!-- Add input type information here -->
     </command:inputTypes>
     <command:returnValues>
-      <!--Add return value information here-->
+      <!-- Add return value information here -->
     </command:returnValues>
     <maml:alertSet>
-      <!--Add Note information here-->
+      <!-- Add Note information here -->
     </maml:alertSet>
     <command:examples>
-      <!--Add cmdlet examples here-->
+      <!-- Add cmdlet examples here -->
     </command:examples>
     <maml:relatedLinks>
-      <!--Add links to related content here-->
+      <!-- Add links to related content here -->
     </maml:relatedLinks>
   </command:command>
 
@@ -407,19 +407,119 @@
     </command:parameters>
 
     <command:inputTypes>
-      <!--Add input type information here-->
+      <!-- Add input type information here -->
     </command:inputTypes>
     <command:returnValues>
-      <!--Add return value information here-->
+      <!-- Add return value information here -->
     </command:returnValues>
     <maml:alertSet>
-      <!--Add Note information here-->
+      <!-- Add Note information here-->
     </maml:alertSet>
     <command:examples>
-      <!--Add cmdlet examples here-->
+      <!-- Add cmdlet examples here -->
     </command:examples>
     <maml:relatedLinks>
-      <!--Add links to related content here-->
+      <!-- Add links to related content here -->
+    </maml:relatedLinks>
+  </command:command>
+
+
+  <!-- *************************** -->
+  <!-- *  Get-MyUserObjectId  * -->
+  <!-- *************************** -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-MyUserObjectId</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>MyUserObjectId</command:noun>
+      <maml:description>
+        <maml:para>Gets the current user (from Get-AzureRmContext) AD object ID.</maml:para>
+      </maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>Gets the current user (from Get-AzureRmContext) AD object ID.</maml:para>
+      <maml:para>This ObjectId is the baseline for any function that adds AAD principals or users to anything in Azure, making this a very handy method to have nearby.</maml:para>
+    </maml:description>
+
+    <command:syntax>
+      <maml:para>Get-MyUserObjectId</maml:para>
+    </command:syntax>
+
+    <command:parameters>
+      <!-- This method contains no parameters -->
+    </command:parameters>
+
+    <command:inputTypes>
+      <!-- Add input type information here -->
+    </command:inputTypes>
+    <command:returnValues>
+      <!-- Add return value information here -->
+    </command:returnValues>
+    <maml:alertSet>
+      <!-- Add Note information here -->
+    </maml:alertSet>
+    <command:examples>
+      <!-- Add cmdlet examples here -->
+    </command:examples>
+    <maml:relatedLinks>
+      <!-- Add links to related content here -->
+    </maml:relatedLinks>
+  </command:command>
+
+
+  <!-- *************************** -->
+  <!-- *  Add-MeToKeyvault  * -->
+  <!-- *************************** -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10"
+                   xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10"
+                   xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Add-MeToKeyvault</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>MeToKeyvault</command:noun>
+      <maml:description>
+        <maml:para>Adds the current user (from Get-AzureRmContext) to a specific keyvault with all permissions on both secrets and keys.</maml:para>
+      </maml:description>
+    </command:details>
+
+    <maml:description>
+      <maml:para>Adds the current user (from Get-AzureRmContext) to a specific keyvault with all permissions on both secrets and keys.</maml:para>
+      <maml:para>Subscription co-admins won't have default permissions in keyvaults, only the person that created them will have default permissions.</maml:para>
+      <maml:para>So it is handy to have a simple way to adding yourself with all permissions to a specific keyvault!</maml:para>
+    </maml:description>
+
+    <command:syntax>
+      <maml:para>Add-MeToKeyvault</maml:para>
+    </command:syntax>
+
+    <command:parameters>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="0">
+        <maml:name>KeyvaultName</maml:name>
+        <maml:description>
+          <maml:para>The name of the keyvault that you want to add yourself to.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>String</dev:type>
+      </command:parameter>
+    </command:parameters>
+
+    <command:inputTypes>
+      <!-- Add input type information here -->
+    </command:inputTypes>
+    <command:returnValues>
+      <!-- Add return value information here -->
+    </command:returnValues>
+    <maml:alertSet>
+      <!-- Add Note information here -->
+    </maml:alertSet>
+    <command:examples>
+      <!-- Add cmdlet examples here -->
+    </command:examples>
+    <maml:relatedLinks>
+      <!-- Add links to related content here -->
     </maml:relatedLinks>
   </command:command>
 

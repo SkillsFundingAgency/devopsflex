@@ -4,13 +4,9 @@
 
 function Get-MyUserObjectId
 {
-    [CmdletBinding()]
-    param
-    (
-    )
+    [CmdletBinding()] param()
 
     $user = (Get-AzureRmContext).Account
-
     $adUser = Get-AzureRmADUser | where { $_.UserPrincipalName -match $user.Id }
 
     if($adUser -eq $null) {
