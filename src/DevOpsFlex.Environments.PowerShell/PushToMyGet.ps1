@@ -13,4 +13,4 @@ if($repo -eq $null) {
     Register-PSRepository -Name DevOpsFlex -SourceLocation "https://www.myget.org/F/devopsflex/api/v2" -InstallationPolicy Trusted
 }
 
-Publish-Module -Repository DevOpsFlex -Name .\DevOpsFlex.Environments.PowerShell\DevOpsFlex.Environments.PowerShell.psd1 -NuGetApiKey $ApiKey
+Publish-Module -Repository DevOpsFlex -Name $PSScriptRoot\DevOpsFlex.Environments.PowerShell\DevOpsFlex.Environments.PowerShell.psd1 -NuGetApiKey $ApiKey
